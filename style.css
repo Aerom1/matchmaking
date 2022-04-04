@@ -1,0 +1,425 @@
+/* @import "style3.scss"; */
+
+/* AFFICHAGE PC */
+@media screen and (min-width: 500px) {
+  body{
+    /* overflow: hidden; */
+    position: absolute;
+    left:15vw;
+    top:0px;
+    right:0px;
+    /* bottom: 90vh; */
+    /* border: 1px solid black; */
+    text-align: left;
+  }
+  h1 { 
+    position: absolute;
+    left:15vw;
+
+    font-size: 1.5rem; 
+    text-align: right;
+    margin:0;
+  }
+  #questionPresents{
+    position:absolute;
+    top:7vh;
+    left:20vw;
+  }
+  footer {
+    /* background-color:#ccc; */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position:absolute;
+    /* border: 1px solid black; */
+    top: 0px;
+    /* bottom:100%; */
+    left: 3vw; 
+    width: 10vw;
+  }
+  #btBack,#btAjouter,#btEquipes{
+    overflow: hidden;
+    display:block;
+    width: 100%;
+    max-width: 100px;;
+    height: 15vh;
+    margin-top:3vh;
+    border-radius: 500px;
+  }
+  #btBack,#btAjouter{font-size: 8vh;}
+  .containerButtonMenu {
+    /* #btBack,#btAjouter,#btEquipes */
+    /* margin: 100 auto; */
+    padding-top: 10px;
+    position:relative;
+    width:100%;
+    text-align: center;
+    font-size:3vh;
+    z-index: 1;
+  }
+  #btRandom {
+    z-index: 2;
+    width:100%;
+    height: 20vh;
+    /* font-size:8vw; */
+    padding:5px;
+    border-color: orange;
+    border-radius: 30px;
+  }
+  .containerEquipes {
+    /* margin: auto; */
+    position:absolute;
+    text-align: center;
+    padding-right: 6px;
+    display:inline;
+    right:0px;
+    left:15vw;
+    top:15vh;
+    bottom:0px;
+    /* width:100%; */
+    vertical-align: middle;
+    /* border: 1px solid black; */
+  }
+  .logo{
+    /* display: inline-block; */
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    height :100%;
+    max-width:100%;
+    max-height:100%;
+    width:auto;
+    height:auto;
+  }
+  .player {
+    display:inline-block;
+    font-size: 8vh;
+    margin-left: 10px;
+    margin-bottom: 4px;
+    height:100%;
+    /* width:15%; */
+
+    /* padding:3px */
+  }
+  .container {
+    width: 49%;
+    /* height:100%; */
+    display: flex;
+    margin-bottom: 5px;
+    /* padding: 3px; */
+    flex-wrap: wrap;
+    /* border:1px solid black; */
+    flex-grow: 1;
+  }
+  #div3{
+    width:100%;
+  }
+}
+
+/* AFFICHAGE MOBILE */
+@media screen and (max-width: 500px) {
+  h1 { 
+    font-size: 3rem; 
+    text-align: center;
+    margin:0;
+  }
+  footer{
+    /* padding-top: 10px; */
+    padding-bottom: 10px;
+    /* background-color:#ccc; */
+    position:absolute;
+    /* width:100%; */
+    /* height:100%; */
+  
+    bottom: 70px; 
+    left: 0; 
+    right: 0;
+  }
+  #btBack,#btAjouter{font-size:6vh;}
+  #btBack,#btAjouter,#btEquipes{
+    overflow:hidden;
+    width: 30%;
+    height: 6vh;
+    font-size:3vh;
+  }
+  .containerButtonMenu {
+    /* #btBack,#btAjouter,#btEquipes */
+    /* margin: 100 auto; */
+    padding-top: 10px;
+    position:relative;
+    width:100%;
+    text-align: center;
+    z-index: 1;
+  }
+  #btRandom {
+    z-index: 2;
+    display:inline-block ;
+    width:50%;
+    height: 10vh;
+    /* font-size:8vw; */
+    padding:5px;
+    border-color: orange;
+    border-radius: 500px;
+  }
+  .containerEquipes {
+    margin: auto;
+    text-align: center;
+    /* max-width: 500px; */
+    /* max-height: 300px; */
+    position:relative;
+    vertical-align: middle;
+    /* border: 1px solid black; */
+  }
+  .logo{
+    height :100%;
+    max-width:100%;
+    /* display: inline-block; */
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    /* max-height:10vw; */
+    /* width:auto;  */
+    /* height:auto;  */
+  }
+  .player {
+    font-size: 7vw;
+    margin: 3px;
+
+  }
+  .container {
+    width: 49%;
+  }
+
+  #div3.player{
+    display: inline-block;
+    width:10%;
+  }
+}
+
+
+
+body { 
+  font-family: fantasy; 
+  /* font-stretch:semi-condensed; */
+  /* font-weight: 600; */
+  /* font-size-adjust: inherit; */
+  /* transition-delay: 1s; */
+}
+
+.hide {
+  display: none;
+}
+
+.drag-over {
+  border: 3px dashed white;
+}
+
+#btModifForce,#btModifNom{
+  background-color: seagreen;
+  color:white;
+  font-size:1rem;
+
+  /* display:none ;  */
+  display: inline-block;
+  border-radius: 100px;
+  
+  /* background-color: white; */
+  /* color:rgb(21, 94, 52);*/
+  border-color: lightseagreen;
+  
+  /* height:4vh; */
+  /* width:40%; */
+}
+
+button:active {
+  /* animation: bounce-in .3s linear; */
+  /* transform: rotate(1080deg); */
+  animation: zoom 0.3s linear ;
+
+}
+
+#btRandom:active, #btRandom:focus{
+  animation: tourne 1s linear;
+}
+
+
+@keyframes zoom {
+  0% {    transform: scale(1, 1);  }
+  50% {    transform: scale(1.2, 1.6);  }  
+  100% {    transform: scale(1, 1);  }  
+}
+
+@keyframes tourne {
+  0% {
+    transform: rotate(0deg);
+    opacity:0.5;
+  }
+  /* 50% {
+    transform: rotate(1080deg);
+    height:30vh;
+    opacity:0.5;
+  }   */
+  100% {
+    transform: rotate(360deg);
+    height:10vh;
+    opacity:1;
+  }
+ }
+ 
+ 
+
+
+
+
+
+/* Make content area fill the entire browser window */
+html, .fullscreen {
+  /* display: flex; */
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+
+  max-width:1280px;
+  min-height:100%;
+  margin:0 auto;
+  position:relative;
+}
+.containerTitle{
+  text-align: center;
+  color: blue;
+  font-weight: bold;
+}
+
+.container {
+  /* margin: 10px; */
+  /* text-align: center; */
+  /* margin: auto; */
+  /* padding: 5px; */
+  margin-bottom: 5px;
+  /* border: 0.5px solid lightgrey; */
+  /* background-color: lightgray; */
+  /* border-radius: 10px; */
+  /* float: none; */
+  /* width: 40vw; */
+  display:inline-block;
+  /* height:100%; */
+  /* background-color: lightgrey; */
+  /* line-height: 100%;  */
+  /* display: table-cell; */
+  vertical-align: middle;
+}
+
+
+@keyframes bounce-in {
+ from {
+		transform: scale(0);
+		opacity: 0;
+	}
+	to {
+		transform: scale(1);
+		opacity: 1;	
+	} 
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+
+
+.player {
+  animation: bounce-in .3s linear;
+  text-align: center;
+  /* padding-left: 10px; */
+  /* display: inline-block; */
+  padding: 2px;
+  border-radius: 10px;
+  /* width: 30vw; */
+  font-family: fantasy;
+  /*font-size:25px;*/
+  position: relative;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+#div0{
+  color:green;
+  display: flex;
+  flex-wrap: wrap;
+  width:100%
+}
+
+#div9{
+  background-color: lightgrey;
+  display:none;
+}
+
+#div0>.player {
+  background-color: green;
+  color:white;
+  /* width: 40%; */
+}
+
+/* #div1{background-color: black;}
+#div2{background-color: yellow;} */
+/* #div3{background-color: lightgrey;} */
+
+
+#div1>.player {
+  background-color: rgb(255, 251, 0);
+  color: black;
+  /* border: 1px solid #01014d; */
+}
+#div2>.player {
+  background-color: orangered;
+  color: black;
+  /* border: 1px solid black; */
+}
+#div3>.player {
+  background-color: black;
+  color: white;
+  /* border: 1px solid grey; */
+}
+#div9>.player {
+  background-color: white;
+  color: white;
+  border: 1px solid grey;
+}
+#div0>.player.selected, #div1>.player.selected, #div2>.player.selected, #div3>.player.selected {
+  background-color: white;
+  color:seagreen;
+  font-size:4vw;
+  border: 3px dashed lightseagreen;
+  border-radius: 100px;
+}
+#div0>.player.inactif{
+  color: white;
+  background-color: red;
+}
+
+div.span {
+  background-color: #999;
+  width: 200px;
+  height: 180px;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: middle;
+}
+.imgforce {
+  /* width: auto; */
+  /*to maintain aspect ratio. You can use 100% if you don't care about that */
+  /* height: 100%; */
+  width: 4vw;
+  height: 4vw;
+}
+
+.player.selected ~ .player {
+  background: pink
+  /* #a:hover ~ #b  */
+
+}
+

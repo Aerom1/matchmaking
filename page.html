@@ -1,0 +1,82 @@
+<!--A FAIRE :
+	BK: database
+
+	UI: si je sélectionne un joueur, tous les autres joueurs change pour montrer qu'on peut échanger les 2 choueurs
+	BK: swipe à gauche pour déplacer joueur dans les dispos
+	
+	Drag'n'drop:
+		https://stackoverflow.com/questions/3172100/html-drag-and-drop-on-mobile-devices
+		https://medium.com/@deepakkadarivel/drag-and-drop-dnd-for-mobile-browsers-fc9bcd1ad3c5
+		https://github.com/deepakkadarivel/DnDWithTouch/blob/master/index.html
+		https://deepakkadarivel.github.io/DnDWithTouch/
+		
+ -->
+
+ 
+<!DOCTYPE HTML>
+<html lang="fr">
+	 
+<head>
+	<title>Matchmaking</title>
+	<script type="module" src="main.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<link rel="shortcut icon" href="images/favicon.png"/>
+	<link rel="apple-touch-icon" href="images/favicon.png"/>
+	<link rel="stylesheet" href="style.css">
+	<!-- <?!= include('style'); ?> -->
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=false;" />
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
+	<link rel="manifest" href="/manifest.json">
+</head>
+
+<body>
+	
+	<header>
+		<h1 id="team" name="" onClick="changeTeam()">
+			<!-- <img class="logo" id="logoEquipe2" src="" style = "width:100px; height: 100px";/> -->
+		</h1>
+		<!-- <h1>🏒 Sun Ride</h1> -->
+		<!-- <img src="images/favicon.png"> -->
+	</header>
+	<br> 
+	<span id="questionPresents" style="display:block; text-align: center;">Qui est absent ?</span>
+	<div class="containerEquipes">
+		<div class="containerOptionsJoueur" style="display:none;">
+			<button type="button" id="btModifForce" onclick="modifForce()">Changer Force</button>
+			<button type="button" id="btModifNom" onclick="modifNom()">Changer Nom</button>
+			<div id="textEchange" >Sélectionner un autre joueur pour échanger</div>
+		</div>
+		<!-- <h1>Choix des équipes</h1> -->
+		<div id="div1" class="container" onclick="selectManuel()" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+		<div id="div2" class="container" onclick="selectManuel()" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+		<div id="div3" class="container" onclick="selectManuel()" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+		<div id="div0" class="container" onclick="selectManuel()" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+		<div id="div9" class="container" onclick="selectManuel()" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+	</div>
+
+	<footer>
+		<div id="ContainerNav">
+		<div style="text-align: center; ">
+			<button type="button" class="droplet" id="btRandom" onclick="random()">
+				<img class="logo" id="logoEquipe" src="" />
+			</button>
+		</div>
+		<div class="containerButtonMenu">
+			<button type="button" id="btBack" onclick="back()">🔙</button>
+			<button type="button" id="btAjouter" onclick="addPlayer()">➕</button>
+			<button type="button" id="btEquipes" onclick="modifNbEquipes()">👩🏻‍🤝‍👩🏿👨🏽‍🤝‍👨🏻🧑🏽‍🤝‍🧑🏻</button>
+		</div>
+		<div id="ContainerNav">
+	</footer>
+	<script src="javascript.js"></script>
+	<!-- <?!= include('javascript'); ?> -->
+
+</body>
+
+</html>
