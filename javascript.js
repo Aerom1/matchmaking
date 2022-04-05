@@ -234,11 +234,11 @@ function reinit() {
 function random() {
     console.log("=============début random");
     $("#questionPresents").slideUp();
-    $("#btRandom").animate({
-        height:"10px",
-        width: "+=100px",
-        opacity: 0.5
-    }, 1000)
+    // $("#btRandom").animate({
+    //     height:"10px",
+    //     width: "+=100px",
+    //     opacity: 0.5
+    // }, 1000)
 
     enleveMenuTousJoueurs();
     var dispos = document.getElementById('div0');
