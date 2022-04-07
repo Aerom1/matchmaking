@@ -23,10 +23,6 @@ function dragLeave(e) {
     e.target.parentNode.classList.remove('drag-over');
 }
 
-
-
-
-
 function allowDrop(ev) {
     ev.preventDefault();
 }
@@ -45,10 +41,7 @@ function drop(ev) {
     var source = document.getElementById(data);
     var sourceVoisin = source.nextElementSibling;
     var sourceContainer = source.parentNode;
-
     // source.classList.remove('hide');
-
-    
     var target = ev.target
     
     if (!target.classList.contains("player")) {
@@ -77,5 +70,5 @@ function drop(ev) {
         sourceContainer.insertBefore(target,sourceVoisin);
     }
 
-    // majForceEquipes();
+    majForceEquipes();
 }

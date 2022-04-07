@@ -1,5 +1,9 @@
 /* AFFICHAGE PAYSAGE */
 @media screen and (max-height: 500px) {
+  /* html{
+    width:100vh;
+    height: 100vh;
+  } */
   body{
     /* overflow: hidden; */
     /* position: absolute; */
@@ -10,6 +14,9 @@
     /* bottom: 90vh; */
     /* border: 1px solid black; */
     text-align: left;
+    /* width:100vh;
+    height: 100vh; */
+
   }
   h1 { 
     position: absolute;
@@ -19,6 +26,14 @@
     text-align: right;
     margin:0;
   }
+  #forceEquipes{
+    position: absolute;
+    top:0px;
+    /* left:50%; */
+    /* border-radius: 10px; */
+    padding: 2px;
+  }
+
   #questionPresents{
     position:absolute;
     top:7vh;
@@ -95,7 +110,7 @@
   }
   .player {
     /* display:inline-block; */
-    font-size: 8vh;
+    font-size: 2em;
     /* margin-left: 10px; */
     margin-bottom: 4px;
     height:100%;
@@ -122,8 +137,8 @@
 @media screen and (min-height: 500px) {
   h1 { 
     font-size: 3rem; 
-    text-align: center;
-    margin:0;
+    text-align: right;
+    margin:0px;
   }
   footer{
     /* padding-top: 10px; */
@@ -205,6 +220,13 @@ body {
   /* font-weight: 600; */
   /* font-size-adjust: inherit; */
   /* transition-delay: 1s; */
+}
+
+.forceEquipe{
+  display: none;
+  /* border-radius: 10px; */
+  padding: 2px;
+
 }
 
 .hide {
@@ -385,17 +407,17 @@ html, .fullscreen {
 /* #div3{background-color: lightgrey;} */
 
 
-#div1>.player {
+#div1>.player,#forceEq1 {
   background-color: rgb(255, 251, 0);
   color: black;
   /* border: 1px solid #01014d; */
 }
-#div2>.player {
+#div2>.player,#forceEq2 {
   background-color: orangered;
   color: black;
   /* border: 1px solid black; */
 }
-#div3>.player {
+#div3>.player,#forceEq3 {
   background-color: black;
   color: white;
   /* border: 1px solid grey; */

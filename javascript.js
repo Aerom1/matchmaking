@@ -27,7 +27,7 @@ $(document).ready(function () {
 
     console.log("Hello world")
     
-    localStorage.clear();   console.log("SUPPRESSION LOCALSTORAGE----------");
+    // localStorage.clear();   console.log("SUPPRESSION LOCALSTORAGE----------");
 
     $("#div1").hide();
     $("#div2").hide();
@@ -43,12 +43,12 @@ function changeTeam(){
     var team1sun = {
         newName: "SUN",
         logoEquipe: imgSunride,
-        newText: "🏒 Sun Ride"
+        newText: "Sun Ride"
     }
     var team2vik = {
         newName: "VIK",
         logoEquipe: imgViking,
-        newText: "🏒 Viking"
+        newText: "Viking" //🏒
     }
 
     console.log("change team")
@@ -67,7 +67,7 @@ function changeTeam(){
     teamActuelle.setAttribute("name",team.newName);
     teamActuelle.innerText = team.newText;
     document.getElementById("logoEquipe").setAttribute("src",team.logoEquipe);
-    // document.getElementById("logoEquipe2").setAttribute("src",team.logoEquipe);
+    document.getElementById("logoEquipe2").setAttribute("src",team.logoEquipe);
 
     console.log("New team : " + teamActuelle.getAttribute("name"));
 
@@ -228,10 +228,10 @@ function reinit() {
     while (equipe3.children.length) { dispos.appendChild(equipe3.firstChild); }
     while (absents.children.length) { dispos.appendChild(absents.firstChild); }
     if ($(".selected").length>0) {unselect($(".selected")[0])}
-    //majForceEquipes()
+    majForceEquipes()
 }
 
-function random() {
+function RANDOM() {
     console.log("=============début random");
     // $("#questionPresents").slideUp();
     document.getElementById("questionPresents").style.display = "none"
@@ -286,7 +286,7 @@ function random() {
             }
             bascule++;
         }
-        ecartmax = Math.round(0.2 * (forceEq1 + forceEq2 + forceEq3) /nbEquipe, 2); //10% de différence de force max
+        ecartmax = Math.round(0.1 * (forceEq1 + forceEq2 + forceEq3) /nbEquipe, 2); //10% de différence de force max
         var max = Math.max(forceEq1,forceEq2,forceEq3);
         var min = 0;
         if (nbEquipe==2) {
@@ -302,8 +302,8 @@ function random() {
 
     } while (difference > ecartmax);
     majForceEquipes();
+   
     // $("#div0").hide();
-
     $("#div1").show();
     $("#div2").show();
     
@@ -402,7 +402,7 @@ function modifNbEquipes() {
     }else{
         bouton.innerText = "👩🏻‍🤝‍👩🏿🧑🏽‍🤝‍🧑🏻"
     }
-    random()
+    RANDOM()
     
     // if (nbEquipe==2) { 
     //     bouton.innerText = "Equipes: 3";
@@ -465,7 +465,7 @@ function createPlayer(force, name, inactif, UID) {
             .addClass("player")
             .prepend($('<span ></span>') // .prepend($('<img src=' + img + ' style="filter: opacity(' + ((force - 1) * 20) + '%)" ></img>')
                 .addClass("emoforce")
-                .attr({onclick: "selectIcone(this)"})
+                .attr({onclick: ""})
                 .text(emo)
             )
             .append($('<span></span>')
@@ -584,10 +584,26 @@ function majForceEquipes() {
             case "div3": forceEq3 += parseInt(force); break;
         }
     }
-    $("#eq1").text("Equipe 1 [" + forceEq1 + "]");
-    $("#eq2").text("Equipe 2 [" + forceEq2 + "]");
-    $("#eq3").text("Equipe 3 [" + forceEq3 + "]");
-    $("#eq0").text("(dispo) [" + forceDispos + "]");
+
+    $("#forceEq1").text(forceEq1);
+    $("#forceEq2").text(forceEq2);
+    $("#forceEq3").text(forceEq3);
+
+    if (forceEq1==0)  { $("#forceEq1").css({"display":"none"});
+        } else        { $("#forceEq1").css({"display":"inline-block"}); }
+    if (forceEq2==0)  { $("#forceEq2").css({"display":"none"});
+        } else        { $("#forceEq2").css({"display":"inline-block"}); }
+    if (forceEq3==0)  { $("#forceEq3").css({"display":"none"});
+        } else        { $("#forceEq3").css({"display":"inline-block"}); }
+    
+    // $("#forceEq2").css({"display":"inline-block"});
+    // if (nbEquipe=3){
+    //     $("#forceEq3").css({"display":"inline-block"});
+    // }else {
+    //     $("#forceEq3").css({"display":"none"});
+    // }
+
+    // $("#forceEq0").text("(dispo) [" + forceDispos + "]");
 }
 
 function back(){
@@ -750,6 +766,7 @@ function select(clicked) {
     // CLIQUE DU BOUTON FORCE - modif force
     if(window.event.target.classList.contains("btModifForce")) {
         clickBtForce(clicked);
+        majForceEquipes()
         return;
     }
     // CLIQUE DU BOUTON NOM - modif nom
@@ -766,9 +783,7 @@ function select(clicked) {
     if(window.event.target.classList.contains("btSupprPlayer")) {
         document.getElementById("div9").appendChild(clicked);
         $(clicked.children[2]).remove();
-        // targetContainer.appendChild(source);
-
-        // $(clicked.children[2]).remove();
+        majForceEquipes()
         return;
     }
 
