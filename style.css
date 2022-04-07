@@ -1,12 +1,11 @@
-/* @import "style3.scss"; */
-
-/* AFFICHAGE PC */
-@media screen and (min-width: 500px) {
+/* AFFICHAGE PAYSAGE */
+@media screen and (max-height: 500px) {
   body{
     /* overflow: hidden; */
-    position: absolute;
-    left:15vw;
-    top:0px;
+    /* position: absolute; */
+    /* left:1vw; */
+    /* left:0px; */
+    /* top:0px; */
     right:0px;
     /* bottom: 90vh; */
     /* border: 1px solid black; */
@@ -25,7 +24,12 @@
     top:7vh;
     left:20vw;
   }
+  header {
+    display: none;
+  }
   footer {
+    display: none;
+
     /* background-color:#ccc; */
     padding-top: 10px;
     padding-bottom: 10px;
@@ -33,14 +37,14 @@
     /* border: 1px solid black; */
     top: 0px;
     /* bottom:100%; */
-    left: 3vw; 
-    width: 10vw;
+    left: 0vw; 
+    width: 8vw;
   }
   #btBack,#btAjouter,#btEquipes{
     overflow: hidden;
     display:block;
     width: 100%;
-    max-width: 100px;;
+    /* max-width: 100px;; */
     height: 15vh;
     margin-top:3vh;
     border-radius: 500px;
@@ -63,21 +67,21 @@
     /* font-size:8vw; */
     padding:5px;
     border-color: orange;
-    border-radius: 30px;
+    border-radius: 500px;
   }
   .containerEquipes {
     /* margin: auto; */
-    position:absolute;
+    /* position:absolute; */
     text-align: center;
     padding-right: 6px;
-    display:inline;
-    right:0px;
-    left:15vw;
-    top:15vh;
-    bottom:0px;
+    /* display:inline; */
+    /* right:0px; */
+    /* left:15vw;
+    top:15vh; */
+    /* bottom:0px; */
     /* width:100%; */
     vertical-align: middle;
-    /* border: 1px solid black; */
+    border: 1px solid black;
   }
   .logo{
     /* display: inline-block; */
@@ -90,9 +94,9 @@
     height:auto;
   }
   .player {
-    display:inline-block;
+    /* display:inline-block; */
     font-size: 8vh;
-    margin-left: 10px;
+    /* margin-left: 10px; */
     margin-bottom: 4px;
     height:100%;
     /* width:15%; */
@@ -100,22 +104,22 @@
     /* padding:3px */
   }
   .container {
-    width: 49%;
+    /* width: 49%; */
     /* height:100%; */
     display: flex;
     margin-bottom: 5px;
     /* padding: 3px; */
     flex-wrap: wrap;
-    /* border:1px solid black; */
+    border:1px solid red;
     flex-grow: 1;
   }
   #div3{
-    width:100%;
+    /* width:100%; */
   }
 }
 
-/* AFFICHAGE MOBILE */
-@media screen and (max-width: 500px) {
+/* AFFICHAGE PORTRAIT */
+@media screen and (min-height: 500px) {
   h1 { 
     font-size: 3rem; 
     text-align: center;
@@ -129,7 +133,7 @@
     /* width:100%; */
     /* height:100%; */
   
-    bottom: 70px; 
+    bottom: 10px; 
     left: 0; 
     right: 0;
   }
@@ -209,6 +213,18 @@ body {
 
 .drag-over {
   border: 3px dashed white;
+}
+
+.btModifForce {
+  font-size: 2rem;
+}
+
+.btModifNom,.btCloseMenu,.btSupprPlayer{
+  font-size: 2rem;
+  background-color : lightgreen;
+  padding: 0px 10%;
+  /* margin: 2%; */
+  border-radius: 100px;
 }
 
 #btModifForce,#btModifNom{
@@ -336,7 +352,7 @@ html, .fullscreen {
   text-align: center;
   /* padding-left: 10px; */
   /* display: inline-block; */
-  padding: 2px;
+  /* padding: 2px; */
   border-radius: 10px;
   /* width: 30vw; */
   font-family: fantasy;

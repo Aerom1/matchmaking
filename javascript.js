@@ -113,7 +113,7 @@ function loadData(team){
             [2,"Laurent"],
             [2,"Romain"],
             [1,"Raphael"],
-            [1,"MariLo"],
+            [1,"MariLoL"],
             [1,"Aurélie"],
             [1,"Céline"],
             [1,"Laurence"],
@@ -130,7 +130,7 @@ function loadData(team){
             [2,"Flo"],
             [2,"Romain"],
             [1,"Raphael"],
-            [2,"MariLo"],
+            [2,"MariLoL"],
             [1,"Aurélie"],
             [1,"Céline"],
             [1,"Laurence"],
@@ -233,7 +233,8 @@ function reinit() {
 
 function random() {
     console.log("=============début random");
-    $("#questionPresents").slideUp();
+    // $("#questionPresents").slideUp();
+    document.getElementById("questionPresents").style.display = "none"
     // $("#btRandom").animate({
     //     height:"10px",
     //     width: "+=100px",
@@ -389,86 +390,6 @@ connection.end(function(){
 
 
 
-function dragEnter(e) {
-    e.preventDefault();
-    if (e.target.parentNode.classList.contains("player")) {
-        e.target.parentNode.classList.add('drag-over');
-    } else {
-        e.target.classList.add('drag-over');
-    }
-}
-
-function dragOver(e) {
-    e.preventDefault();
-
-    if (e.target.parentNode.classList.contains("player")) {
-        e.target.parentNode.classList.add('drag-over');
-    } else {
-        e.target.classList.add('drag-over');
-    }
-}
-
-function dragLeave(e) {
-    e.target.classList.remove('drag-over');
-    e.target.parentNode.classList.remove('drag-over');
-}
-
-
-
-
-
-function allowDrop(ev) {
-    ev.preventDefault();
-}
-function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
-    setTimeout(() => {
-        ev.target.classList.add('hide');
-    }, 0);
-}
-function drop(ev) {
-    ev.target.classList.remove('drag-over');
-    ev.target.parentNode.classList.remove('drag-over');
-
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    var source = document.getElementById(data);
-    var sourceVoisin = source.nextElementSibling;
-    var sourceContainer = source.parentNode;
-
-    source.classList.remove('hide');
-
-    
-    var target = ev.target
-    
-    if (!target.classList.contains("player")) {
-        target = target.parentNode;
-        if (!target.classList.contains("player")) {
-            target = target.parentNode;
-            if (!target.classList.contains("player")) {
-                console.log("aucun parent joueur trouvé")
-                return
-            }
-        }
-    }
-    var targetVoisin = target.nextElementSibling;
-    var targetContainer = target.parentNode;
-
-    unselect(source)
-
-    if (targetVoisin===null){
-        targetContainer.appendChild(source);
-    }else{
-        targetContainer.insertBefore(source,targetVoisin);
-    }
-    if (sourceVoisin===null){
-        sourceContainer.appendChild(target);
-    }else{
-        sourceContainer.insertBefore(target,sourceVoisin);
-    }
-
-    // majForceEquipes();
-}
 
 function modifNbEquipes() {
     // $("#btEquipes").animate({"":""},1000)
@@ -701,21 +622,18 @@ function clickIcone(clicked) {
         var newBt4 = document.createElement("button"); // FORCE 1
         newBt4.setAttribute("id", "emoForce1");
         newBt4.classList.add("btModifForce");
-        // newBt4.style.fontSize = "1rem"
         newBt4.textContent = emoForce1
         containerBt.append(newBt4)
 
         var newBt2 = document.createElement("button"); // FORCE 2
         newBt2.setAttribute("id", "emoForce2");
         newBt2.classList.add("btModifForce");
-        // newBt2.style.fontSize = "1rem"
         newBt2.textContent = emoForce2
         containerBt.append(newBt2)
         
         var newBt3 = document.createElement("button"); // FORCE 3
         newBt3.setAttribute("id", "emoForce3");
         newBt3.classList.add("btModifForce");
-        // newBt3.style.fontSize = "1rem"
         newBt3.textContent = emoForce3
         containerBt.append(newBt3)
         
@@ -726,25 +644,20 @@ function clickIcone(clicked) {
         var newBt1 = document.createElement("button"); // MODIF NOM
         newBt1.textContent = "✏️"
         newBt1.classList.add("btModifNom");
-        newBt1.style.backgroundColor = "lightgreen"
-        newBt1.style.padding = "0px 5%"
-        newBt1.style.margin = "2%"
-        newBt1.style.borderRadius = "100px"
+        //newBt1.style.backgroundColor = "lightgreen"
         // newBt1.style.border = "0px"
         // newBt1.style.marginLeft = "3px"
         // newBt1.style.fontSize = "1.2rem"
         containerBt.append(newBt1)
 
+        var newBt6 = document.createElement("button");  // SUPPR JOUEUR
+        newBt6.textContent = "❌"
+        newBt6.classList.add("btSupprPlayer");
+        containerBt.append(newBt6)
+
         var newBt5 = document.createElement("button");  // CACHE MENU TRIANGLE
         newBt5.textContent = "🔺"
         newBt5.classList.add("btCloseMenu");
-        newBt5.style.padding = "0px 5%"
-        newBt5.style.margin = "2%"
-        newBt5.style.backgroundColor = "lightgreen"
-        newBt5.style.borderRadius = "100px"
-
-        // newBt5.style.border = "1px solid white"
-        // newBt5.style.fontSize = "1.2rem"
         containerBt.append(newBt5)
 
 
@@ -847,6 +760,15 @@ function select(clicked) {
     // CLIQUE DU BOUTON CLOSE - ferme le menu
     if(window.event.target.classList.contains("btCloseMenu")) {
         $(clicked.children[2]).remove();
+        return;
+    }
+    // CLIQUE DU BOUTON SUPPR - supprime le joueur
+    if(window.event.target.classList.contains("btSupprPlayer")) {
+        document.getElementById("div9").appendChild(clicked);
+        $(clicked.children[2]).remove();
+        // targetContainer.appendChild(source);
+
+        // $(clicked.children[2]).remove();
         return;
     }
 
