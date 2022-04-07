@@ -215,6 +215,7 @@ function loadCookie(){
 
 function reinit() {
     console.log("réinit joueurs")
+    supprDivPlus();
     // $("#div0").show();
     $("#div1").hide();
     $("#div2").hide();
