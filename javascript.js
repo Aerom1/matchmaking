@@ -34,6 +34,7 @@ $(document).ready(function () {
     $("#div3").hide();
 
     changeTeam();
+    creerDivPlus();
 
     console.log("<<<<<<<<<<<< END >>>>>>>>>>>>")
 });
@@ -228,8 +229,21 @@ function reinit() {
     while (equipe3.children.length) { dispos.appendChild(equipe3.firstChild); }
     while (absents.children.length) { dispos.appendChild(absents.firstChild); }
     if ($(".selected").length>0) {unselect($(".selected")[0])}
-    majForceEquipes()
+    majForceEquipes();
+    creerDivPlus();
 }
+
+function creerDivPlus(){
+    var nouveau = document.createElement("div")
+    nouveau.textContent = "+" //➕
+    nouveau.id = "divPlus"
+    nouveau.setAttribute("onclick","addPlayer()");
+    document.getElementById('div0').prepend(nouveau);
+}
+function supprDivPlus(){
+    $("#divPlus").remove()
+}
+
 
 function RANDOM() {
     console.log("=============début random");
@@ -240,7 +254,6 @@ function RANDOM() {
     //     width: "+=100px",
     //     opacity: 0.5
     // }, 1000)
-
     enleveMenuTousJoueurs();
     var dispos = document.getElementById('div0');
     var equipe1 = document.getElementById('div1');
@@ -251,13 +264,15 @@ function RANDOM() {
     //console.log("txtBtEq:"+txtBtEq.substring(txtBtEq.length-2))
     var nbEquipe;
     if(txtBtEq=="👩🏻‍🤝‍👩🏿🧑🏽‍🤝‍🧑🏻"){nbEquipe=3}else{nbEquipe=2}
-
+    
     //parseInt(txtBtEq.substring(txtBtEq.length-2));
     console.log("nbEquipe:"+nbEquipe);
     var ecart = 0, ecartmax = 0, difference = 0;
     do {
+        supprDivPlus();
         reinit();
-        var forceEq1 = 0, forceEq2 = 0; forceEq3 = 0;
+        supprDivPlus();
+        var forceEq1 = 0, forceEq2 = 0, forceEq3 = 0;
         var bascule = 0;
         while (dispos.children.length) {
             var i = getRandomInt(dispos.children.length);
@@ -677,7 +692,7 @@ function clickIcone(clicked) {
         containerBt.append(newBt5)
 
 
-            tree.appendChild(containerBt)
+        tree.appendChild(containerBt)
         clicked.appendChild(tree);
     }
 }
@@ -783,15 +798,12 @@ function select(clicked) {
     if(window.event.target.classList.contains("btSupprPlayer")) {
         document.getElementById("div9").appendChild(clicked);
         $(clicked.children[2]).remove();
-        majForceEquipes()
+        clicked.classList.add("inactif");
+        majForceEquipes();
         return;
     }
 
-
-    
-
     enleveMenuTousJoueurs();
-
 
     // gère les présents/absents dans la div joueursDispos (div0)
     if (clicked.parentNode.id=="div0"){

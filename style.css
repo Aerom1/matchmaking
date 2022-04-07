@@ -26,18 +26,24 @@
     text-align: right;
     margin:0;
   }
+
+
   #forceEquipes{
     position: absolute;
     top:0px;
     /* left:50%; */
     /* border-radius: 10px; */
     padding: 2px;
+    /* border: 1px solid black; */
   }
 
   #questionPresents{
+    display: none;
     position:absolute;
-    top:7vh;
-    left:20vw;
+    /* top:7vh;
+    left:20vw; */
+    bottom: 10px;
+    font-size: 2rem;
   }
   header {
     display: none;
@@ -57,8 +63,8 @@
   }
   #btBack,#btAjouter,#btEquipes{
     overflow: hidden;
-    display:block;
-    width: 100%;
+    /* display:block; */
+    /* width: 100%; */
     /* max-width: 100px;; */
     height: 15vh;
     margin-top:3vh;
@@ -76,7 +82,6 @@
     z-index: 1;
   }
   #btRandom {
-    z-index: 2;
     width:100%;
     height: 20vh;
     /* font-size:8vw; */
@@ -111,8 +116,8 @@
   .player {
     /* display:inline-block; */
     font-size: 2em;
-    /* margin-left: 10px; */
-    margin-bottom: 4px;
+    margin-left: 0.5vw;
+    margin-bottom: 1vh;
     height:100%;
     /* width:15%; */
 
@@ -153,9 +158,9 @@
   #btBack,#btAjouter{font-size:6vh;}
   #btBack,#btAjouter,#btEquipes{
     overflow:hidden;
-    width: 30%;
+    width: 47%;
     height: 6vh;
-    font-size:3vh;
+    font-size:2rem;
   }
   .containerButtonMenu {
     /* #btBack,#btAjouter,#btEquipes */
@@ -224,8 +229,11 @@ body {
   display: none;
   /* border-radius: 10px; */
   padding: 2px;
+  border: 1px solid black;
 
 }
+
+
 
 .hide {
   display: none;
@@ -377,7 +385,7 @@ html, .fullscreen {
   /* width: 30vw; */
   font-family: fantasy;
   /*font-size:25px;*/
-  position: relative;
+  /* position: relative; */
   overflow: hidden;
   flex-grow: 1;
 }
@@ -392,6 +400,18 @@ html, .fullscreen {
 #div9{
   background-color: lightgrey;
   display:none;
+}
+
+#divPlus{
+  border-radius: 100px;
+  border: 3px solid green;
+  padding: 0px 20px ;
+  /* margin:5px; */
+  font-size: 2rem;
+  font-weight: bolder;
+  /* align-items: center; */
+  background-color: white;
+  color:green;
 }
 
 #div0>.player {
