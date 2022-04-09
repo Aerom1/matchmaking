@@ -134,6 +134,9 @@
     flex-grow: 1;
   }
 
+  #divPlus{
+    font-size: 5vw;
+  }
 }
 
 /* AFFICHAGE PORTRAIT */
@@ -213,6 +216,9 @@
   #div3.player{
     display: inline-block;
     width:10%;
+  }
+  #divPlus{
+    font-size: 7vw;
   }
 }
 
@@ -424,7 +430,6 @@ html, .fullscreen {
   border-bottom: 0px;
   padding: 0px 20px ;
   /* margin:5px; */
-  font-size: 1.8rem;
   font-weight: bolder;
   /* align-items: center; */
   background-color: white;
@@ -503,5 +508,8 @@ div.span {
   }
   .container {
     width: 30%;
+  }
+  #divPlus{
+    font-size: 3vw;
   }
 }
