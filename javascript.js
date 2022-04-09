@@ -639,63 +639,66 @@ function unselect(player){
 
 
 function clickIcone(clicked) {
-    if(window.event.target.classList.contains("emoforce")) {
-        console.log("Click Icone : modif du joueur");
-        if(clicked.children.length > 2){
-            console.log(clicked.children)
-            console.log("menu existant : suppression")
-            $(clicked.children[2]).remove();
-            return
-        }
-        var tree = document.createDocumentFragment();
-        var containerBt = document.createElement("div");
-        containerBt.setAttribute("id", "divOptionsJoueurs");
-        
-        var newBt4 = document.createElement("button"); // FORCE 1
-        newBt4.setAttribute("id", "emoForce1");
-        newBt4.classList.add("btModifForce");
-        newBt4.textContent = emoForce1
-        containerBt.append(newBt4)
+    console.log("Click Icone : modif du joueur");
 
-        var newBt2 = document.createElement("button"); // FORCE 2
-        newBt2.setAttribute("id", "emoForce2");
-        newBt2.classList.add("btModifForce");
-        newBt2.textContent = emoForce2
-        containerBt.append(newBt2)
-        
-        var newBt3 = document.createElement("button"); // FORCE 3
-        newBt3.setAttribute("id", "emoForce3");
-        newBt3.classList.add("btModifForce");
-        newBt3.textContent = emoForce3
-        containerBt.append(newBt3)
-        
-        var hr = document.createElement("br")
-        // hr.style.margin = "0px"
-        containerBt.append(hr);
-        
-        var newBt1 = document.createElement("button"); // MODIF NOM
-        newBt1.textContent = "✏️"
-        newBt1.classList.add("btModifNom");
-        //newBt1.style.backgroundColor = "lightgreen"
-        // newBt1.style.border = "0px"
-        // newBt1.style.marginLeft = "3px"
-        // newBt1.style.fontSize = "1.2rem"
-        containerBt.append(newBt1)
+    $("#divOptionsJoueurs").remove();
 
-        var newBt6 = document.createElement("button");  // SUPPR JOUEUR
-        newBt6.textContent = "❌"
-        newBt6.classList.add("btSupprPlayer");
-        containerBt.append(newBt6)
-
-        var newBt5 = document.createElement("button");  // CACHE MENU TRIANGLE
-        newBt5.textContent = "🔺"
-        newBt5.classList.add("btCloseMenu");
-        containerBt.append(newBt5)
-
-
-        tree.appendChild(containerBt)
-        clicked.appendChild(tree);
+    if(clicked.children.length > 2){
+        console.log(clicked.children)
+        console.log("menu existant : suppression")
+        $(clicked.children[2]).remove();
+        return
     }
+
+    var tree = document.createDocumentFragment();
+    var containerBt = document.createElement("div");
+    containerBt.setAttribute("id", "divOptionsJoueurs");
+    containerBt.style.display = "inline-flex";
+
+    var newBt4 = document.createElement("button"); // FORCE 1
+    newBt4.setAttribute("id", "emoForce1");
+    newBt4.classList.add("btModifForce");
+    newBt4.textContent = emoForce1
+    containerBt.append(newBt4)
+
+    var newBt2 = document.createElement("button"); // FORCE 2
+    newBt2.setAttribute("id", "emoForce2");
+    newBt2.classList.add("btModifForce");
+    newBt2.textContent = emoForce2
+    containerBt.append(newBt2)
+
+    var newBt3 = document.createElement("button"); // FORCE 3
+    newBt3.setAttribute("id", "emoForce3");
+    newBt3.classList.add("btModifForce");
+    newBt3.textContent = emoForce3
+    containerBt.append(newBt3)
+
+    var hr = document.createElement("br")
+    // hr.style.margin = "0px"
+    containerBt.append(hr);
+
+    var newBt1 = document.createElement("button"); // MODIF NOM
+    newBt1.textContent = "✏️"
+    newBt1.classList.add("btModifNom");
+    //newBt1.style.backgroundColor = "lightgreen"
+    // newBt1.style.border = "0px"
+    // newBt1.style.marginLeft = "3px"
+    // newBt1.style.fontSize = "1.2rem"
+    containerBt.append(newBt1)
+
+    var newBt6 = document.createElement("button");  // SUPPR JOUEUR
+    newBt6.textContent = "❌"
+    newBt6.classList.add("btSupprPlayer");
+    containerBt.append(newBt6)
+
+    var newBt5 = document.createElement("button");  // CACHE MENU TRIANGLE
+    newBt5.textContent = "🔺"
+    newBt5.classList.add("btCloseMenu");
+    containerBt.append(newBt5)
+
+
+    tree.appendChild(containerBt)
+    clicked.appendChild(tree);
 }
 
 function clickBtForce(clicked) {
@@ -797,10 +800,18 @@ function select(clicked) {
     }
     // CLIQUE DU BOUTON SUPPR - supprime le joueur
     if(window.event.target.classList.contains("btSupprPlayer")) {
-        document.getElementById("div9").appendChild(clicked);
-        $(clicked.children[2]).remove();
-        clicked.classList.add("inactif");
-        majForceEquipes();
+        if (clicked.parentNode.id == "div0") {
+            if (confirm("Supprimer définitivement ?")) {    
+                $(clicked).remove();
+                localStorage.removeItem(clicked.id)
+            }
+            
+        } else {
+            $(clicked.children[2]).remove();
+            document.getElementById("div9").appendChild(clicked);
+            clicked.classList.add("inactif");
+            majForceEquipes();
+        }
         return;
     }
 
