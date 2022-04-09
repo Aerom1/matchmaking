@@ -2,6 +2,8 @@
 // const { create } = require('domain');
 // const { cp } = require('fs');
 // const { cp } = require('fs');
+// const { cp } = require('fs');
+// const { cp } = require('fs');
 
 //test new branch
 
@@ -25,7 +27,8 @@ $(document).ready(function () {
 
     changeTeam();
     creerDivPlus_();
-
+    // connectBdd();
+    
     console.log("<<<<<<<<<<<< END >>>>>>>>>>>>")
 });
 
@@ -258,8 +261,8 @@ function btModifNbEquipes() {
 }
 
 function btRandom(){
-    var bouton = document.getElementById('btEquipes');
-    var nbEquipe = bouton.getAttribute("nb");   
+
+    var nbEquipe = document.getElementById('btEquipes').getAttribute("nb");   
     $("#btBack").show(); 
     $("#btEquipes").show(); 
 
@@ -363,13 +366,15 @@ function RANDOM(nbEquipe) {
 
 }
 
-function save(){
+function connectBdd(){
+    var mysql = require('mysql');
+
     const pool  = mysql.createPool({
         connectionLimit : 10,
-        host     : 'localhost',
-        user     : 'Admin',
-        password : '/b%E?Q)0/ossF4GL',
-        database : 'id18677336_players'
+        host     : 'fdb32.atspace.me',
+        database : '4081187_matchmaking',
+        user     : '4081187_matchmaking',
+        password : 'M4tchmaking'
     });
 
     // Get all beers
@@ -396,43 +401,41 @@ function save(){
 
 function save2(){
     // Get the mysql service
-var mysql = require('mysql');
+    var mysql = require('mysql');
 
-// Add the credentials to access your database
-var connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'Admin',
-    password : '/b%E?Q)0/ossF4GL',
-    database : 'id18677336_players'
-});
+    // Add the credentials to access your database
+    var connection = mysql.createConnection({
+        host     : 'fdb32.atspace.me',
+        database : '4081187_matchmaking',
+        user     : '4081187_matchmaking',
+        password : 'M4tchmaking'
+    });
 
-// connect to mysql
-connection.connect(function(err) {
-    // in case of error
-    if(err){
-        console.log(err.code);
-        console.log(err.fatal);
-    }
-});
+    // connect to mysql
+    connection.connect(function(err) {
+        // in case of error
+        if(err){
+            console.log(err.code);
+            console.log(err.fatal);
+        }
+    });
 
-// Perform a query
-$query = 'SELECT * from players LIMIT 10';
+    // Perform a query
+    $query = 'SELECT * from players LIMIT 10';
 
-connection.query($query, function(err, rows, fields) {
-    if(err){
-        console.log("An error ocurred performing the query.");
-        return;
-    }
+    connection.query($query, function(err, rows, fields) {
+        if(err){
+            console.log("An error ocurred performing the query.");
+            return;
+        }
 
-    console.log("Query succesfully executed: ", rows);
-});
+        console.log("Query succesfully executed: ", rows);
+    });
 
-// Close the connection
-connection.end(function(){
-    // The connection has been closed
-});
-
-
+    // Close the connection
+    connection.end(function(){
+        // The connection has been closed
+    });
 }
 
 function clickAddPlayer() {
@@ -564,6 +567,97 @@ function unselect_(player){
     $(".containerOptionsJoueur").slideUp()
 }
 
+function creerMenuJoueur_(clicked){
+    clicked.classList.add("menu")
+
+    var pos = clicked.getBoundingClientRect();
+
+    var tree = document.createDocumentFragment();
+    var containerBt = document.createElement("div");
+    containerBt.setAttribute("id", "divOptionsJoueurs");
+    containerBt.style.display = "inline";
+    containerBt.style.backgroundColor = "rgba(0,0,0, 0.8)"
+    containerBt.style.borderRadius = "30px"
+    containerBt.style.border = "2px solid grey"
+    containerBt.style.padding = "20px"
+    containerBt.style.boxShadow = "rgba(0, 0, 0, 0.56) 0px 22px 70px 4px"
+    
+    containerBt.style.position = "absolute";
+    
+    // console.log(clicked)
+    // console.log(pos.top)
+    // console.log((pos.top + pos.height))
+
+    // containerBt.style.left = "42%";
+    containerBt.style.top = "30%";
+    containerBt.style.left = "10%";
+
+    // containerBt.style.left = pos.left + 'px';
+    // containerBt.style.top = (pos.top + pos.height) + 'px';
+
+    // containerBt.style.boxShadow = "rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px"
+    // containerBt.top = clicked.top + clicked.height;
+    // containerBt.style.left = pos.left;
+    // containerBt.style.top = pos.top+pos.height
+    // console.log(clicked.style.left)
+    // console.log(clicked.style.left-100)
+    
+    var newBt6 = document.createElement("button");  // SUPPR JOUEUR
+    newBt6.textContent = "❌"
+    newBt6.classList.add("btSupprPlayer");
+    containerBt.append(newBt6)
+
+    var nom = document.createElement("span")       // AFFICHAGE NOM
+    nom.innerText = clicked.children[1].innerText+" ✏️";
+    // nom.classList.add("btSupprPlayer");
+    nom.classList.add("btModifNom");
+    containerBt.append(nom);
+
+    
+    // var newBt1 = document.createElement("button"); // MODIF NOM
+    // newBt1.textContent = "✏️"
+    // newBt1.classList.add("btModifNom");
+    // containerBt.append(newBt1)
+
+
+    
+    var hr = document.createElement("br")
+    // hr.style.margin = "0px"
+    containerBt.append(hr);
+    
+    var newBt4 = document.createElement("button"); // FORCE 1
+    newBt4.setAttribute("id", "emoForce1");
+    newBt4.classList.add("btModifForce");
+    newBt4.textContent = emoForce1
+    containerBt.append(newBt4)
+    
+    var newBt2 = document.createElement("button"); // FORCE 2
+    newBt2.setAttribute("id", "emoForce2");
+    newBt2.classList.add("btModifForce");
+    newBt2.textContent = emoForce2
+    containerBt.append(newBt2)
+    
+    var newBt3 = document.createElement("button"); // FORCE 3
+    newBt3.setAttribute("id", "emoForce3");
+    newBt3.classList.add("btModifForce");
+    newBt3.textContent = emoForce3
+    containerBt.append(newBt3)
+    
+    var hr = document.createElement("br")
+    containerBt.append(hr);
+    
+    //✅ 🈯️ 💹 ❇️ ✳️ ❎❌
+    
+    var newBt5 = document.createElement("button");  // CLOSE
+    newBt5.textContent = "✅"
+    newBt5.classList.add("btCloseMenu");
+    containerBt.append(newBt5)
+
+
+    tree.appendChild(containerBt)
+    clicked.appendChild(tree);
+}
+
 function clickIcone(clicked) {
     console.log("Click Icone : modif du joueur");
 
@@ -578,61 +672,8 @@ function clickIcone(clicked) {
         return
     }
     console.log("le menu n'existe pas")
-    clicked.classList.add("menu")
 
-    var tree = document.createDocumentFragment();
-    var containerBt = document.createElement("div");
-    containerBt.setAttribute("id", "divOptionsJoueurs");
-    containerBt.style.display = "inline";
-
-    var hr = document.createElement("br")
-    // hr.style.margin = "0px"
-    containerBt.append(hr);
-
-    var newBt4 = document.createElement("button"); // FORCE 1
-    newBt4.setAttribute("id", "emoForce1");
-    newBt4.classList.add("btModifForce");
-    newBt4.textContent = emoForce1
-    containerBt.append(newBt4)
-
-    var newBt2 = document.createElement("button"); // FORCE 2
-    newBt2.setAttribute("id", "emoForce2");
-    newBt2.classList.add("btModifForce");
-    newBt2.textContent = emoForce2
-    containerBt.append(newBt2)
-
-    var newBt3 = document.createElement("button"); // FORCE 3
-    newBt3.setAttribute("id", "emoForce3");
-    newBt3.classList.add("btModifForce");
-    newBt3.textContent = emoForce3
-    containerBt.append(newBt3)
-
-    var hr = document.createElement("br")
-    // hr.style.margin = "0px"
-    containerBt.append(hr);
-
-    var newBt1 = document.createElement("button"); // MODIF NOM
-    newBt1.textContent = "✏️"
-    newBt1.classList.add("btModifNom");
-    //newBt1.style.backgroundColor = "lightgreen"
-    // newBt1.style.border = "0px"
-    // newBt1.style.marginLeft = "3px"
-    // newBt1.style.fontSize = "1.2rem"
-    containerBt.append(newBt1)
-
-    var newBt6 = document.createElement("button");  // SUPPR JOUEUR
-    newBt6.textContent = "❌"
-    newBt6.classList.add("btSupprPlayer");
-    containerBt.append(newBt6)
-
-    var newBt5 = document.createElement("button");  // CACHE MENU TRIANGLE
-    newBt5.textContent = "🔺"
-    newBt5.classList.add("btCloseMenu");
-    containerBt.append(newBt5)
-
-
-    tree.appendChild(containerBt)
-    clicked.appendChild(tree);
+    creerMenuJoueur_(clicked);
 }
 
 function clickBtForce(clicked) {
@@ -668,8 +709,6 @@ function clickBtNom(clicked) {
     var player = clicked
     var nouveauNom = prompt("Nouveau nom ?",player.children[1].innerText)
     if (nouveauNom == "" || nouveauNom == null) { 
-        $(clicked.children[2]).remove();
-        clicked.classList.remove("menu")
         return }
     console.log("changment de nom: "+player.innerText+" -> "+nouveauNom)
     // STOCKAGE DANS LE DOM :

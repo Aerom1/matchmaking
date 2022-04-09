@@ -239,18 +239,24 @@ body {
   margin-right: 2px;
   }
 
-.btModifNom,.btCloseMenu,.btSupprPlayer{
-  font-size: 1.5rem;
+.btModifNom,.btSupprPlayer, .btCloseMenu{
+  font-size: 2rem;
+  background-color: transparent;
+  border:0px;
   /* background-color : transparent; */
   /* padding: 0px 10%; */
   /* margin: 2%; */
-  border-radius: 100px;
+  /* border-radius: 100px; */
+}
+  
+.btCloseMenu{
+  font-size: 3rem;
 }
 
-.btModifForce {
-  font-size: 1.5rem;
+  .btModifForce {
+  font-size: 3rem;
   border-radius: 100px;
-  background-color: transparent;
+  background-color: rgba(255,255,255,0.2);
 }
 
 #btModifForce,#btModifNom{
@@ -466,6 +472,7 @@ html, .fullscreen {
 #div0>.player.inactif{
   color: white;
   background-color: red;
+  box-shadow: ;
 }
 
 div.span {
