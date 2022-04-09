@@ -47,8 +47,8 @@
 	</center></span>
 	<div class="containerEquipes">
 		<div class="containerOptionsJoueur" style="display:none;">
-			<button type="button" id="btModifForce" onclick="modifForce()">Changer Force</button>
-			<button type="button" id="btModifNom" onclick="modifNom()">Changer Nom</button>
+			<button type="button" id="btModifForce" onclick="oldBtModifForce()">Changer Force</button>
+			<button type="button" id="btModifNom" onclick="oldBtModifNom()">Changer Nom</button>
 			<div id="textEchange" >Sélectionner un autre joueur pour échanger</div>
 		</div>
 		<!-- <h1>Choix des équipes</h1> -->
@@ -62,15 +62,15 @@
 	<footer>
 		<div id="ContainerNav">
 		<div style="text-align: center; ">
-			<button type="button" class="droplet" id="btRandom" onclick="RANDOM()">
+			<button type="button" class="droplet" id="btRandom" onclick="btRandom()">
 				<img class="logo" id="logoEquipe" src="" />
 			</button>
 		</div>
 		<div class="containerButtonMenu">
-			<button type="button" id="btBack" onclick="back()">⚙️</button>
+			<button type="button" id="btBack" onclick="btBack()">⚙️</button>
 			<!-- 🧩🏒⚙️📃🔙 -->
 			<!-- <button type="button" id="btAjouter" onclick="addPlayer()">➕</button> -->
-			<button type="button" id="btEquipes" onclick="modifNbEquipes()">👩🏻‍🤝‍👩🏿👨🏽‍🤝‍👨🏻🧑🏽‍🤝‍🧑🏻</button>
+			<button type="button" id="btEquipes" nb=0 onclick="btModifNbEquipes()">👨🏼‍🤝‍👨🏻🧑🏻‍🤝‍🧑🏾</button>
 		</div>
 		<div id="ContainerNav">
 	</footer>

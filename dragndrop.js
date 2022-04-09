@@ -57,7 +57,7 @@ function drop(ev) {
     var targetVoisin = target.nextElementSibling;
     var targetContainer = target.parentNode;
 
-    unselect(source)
+    unselect_(source)
 
     if (targetVoisin===null){
         targetContainer.appendChild(source);
@@ -70,5 +70,5 @@ function drop(ev) {
         sourceContainer.insertBefore(target,sourceVoisin);
     }
 
-    majForceEquipes();
+    majForceEquipes_();
 }

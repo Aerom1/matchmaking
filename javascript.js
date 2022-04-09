@@ -3,24 +3,12 @@
 // const { cp } = require('fs');
 // const { cp } = require('fs');
 
-const imgMouse = "images/mouse.png";
-const imgCat = "images/cat.png";
-const imgTiger = "images/tiger.png";
 const imgSunride = "images/sunride.png";
 const imgViking = "images/viking.png";
-
 const emoForce1 = "🐭";
 const emoForce2 = "😼";
 const emoForce3 = "🐻";
 //😼😺🦁🐯🐭🐹🐻😺🐶
-
-/*
-const imgMouse = "images/mouse.png";
-const imgCat = "https://drive.google.com/file/d/1MpsDVOPqd6xbJSx8WqaESBTXkYg_pFOd/view?usp=sharing";
-const imgTiger = "images/tiger.png";
-const imgSunride = "images/sunride.png";
-*/
-
 
 
 $(document).ready(function () {
@@ -34,7 +22,7 @@ $(document).ready(function () {
     $("#div3").hide();
 
     changeTeam();
-    creerDivPlus();
+    creerDivPlus_();
 
     console.log("<<<<<<<<<<<< END >>>>>>>>>>>>")
 });
@@ -72,12 +60,12 @@ function changeTeam(){
 
     console.log("New team : " + teamActuelle.getAttribute("name"));
 
-    enleverTousJoueurs();
+    enleverTousJoueurs_();
 
     loadData(team.newName);
 }
 
-function compteJoueursDeLequipe(team){
+function compteJoueursDeLequipe_(team){
     const items = { ...localStorage };
     // console.log(items)
     var cpt=0
@@ -87,13 +75,13 @@ function compteJoueursDeLequipe(team){
             cpt++
         }      
     }
-    console.log("compteJoueursDeLequipe " + team + " : " + cpt)
+    console.log("compteJoueursDeLequipe_ " + team + " : " + cpt)
     return cpt
 }
 
 function loadData(team){
     console.log("Load Data pour : " + team)
-    var nbPlayers = compteJoueursDeLequipe(team);
+    var nbPlayers = compteJoueursDeLequipe_(team);
 
     // if(localStorage.length<3){
     
@@ -158,7 +146,7 @@ function loadData(team){
             var UID = team+"-PLAYER-"+player.name+"-"+date
             console.log("Ajout de: "+JSON.stringify(player) +" | UID:"+UID);
             // AJOUT DU JOUEUR DANS LE DOM :
-            createPlayer(equipe[i][0],equipe[i][1],false,UID)
+            createPlayer_(equipe[i][0],equipe[i][1],false,UID)
             // STOCKAGE DU JOUEUR DANS LE COOKIE :
             localStorage.setItem(
                 UID,
@@ -176,7 +164,7 @@ function loadData(team){
             if (uid.substring(0,3)==team) {
                 logPlayersCreated.push(uid + "/" + items[uid])
                 var player = JSON.parse(items[uid])
-                createPlayer(player.force,player.name,player.absent,uid)
+                createPlayer_(player.force,player.name,player.absent,uid)
             }
         }
         // console.log(logPlayersCreated)
@@ -207,19 +195,24 @@ function loadData(team){
 
 }
 
-function loadCookie(){
-    var texte = localStorage.getItem('cookie');
-    var obj = JSON.parse(texte);
-    alert(obj.a + "|"+obj.b)
-}
-
-function reinit() {
-    console.log("réinit joueurs")
-    supprDivPlus();
-    // $("#div0").show();
+function btBack(){
+    console.log("bouton BACK")
+    enleveMenuTousJoueurs_();
+    $("#questionPresents").slideDown();
+    supprDivPlus_();
     $("#div1").hide();
     $("#div2").hide();
     $("#div3").hide();
+    if ($(".selected").length>0) {unselect_($(".selected")[0])}
+
+
+    reinit_();
+    creerDivPlus_();
+}
+
+function reinit_() {
+    console.log("reinit_")
+    // $("#div0").show();
     var dispos = document.getElementById('div0');
     var equipe1 = document.getElementById('div1');
     var equipe2 = document.getElementById('div2');
@@ -229,33 +222,69 @@ function reinit() {
     while (equipe2.children.length) { dispos.appendChild(equipe2.firstChild); }
     while (equipe3.children.length) { dispos.appendChild(equipe3.firstChild); }
     while (absents.children.length) { dispos.appendChild(absents.firstChild); }
-    if ($(".selected").length>0) {unselect($(".selected")[0])}
-    majForceEquipes();
-    creerDivPlus();
+    majForceEquipes_();
 }
 
-function creerDivPlus(){
+function creerDivPlus_(){
     var nouveau = document.createElement("div")
     nouveau.textContent = "+" //➕
     nouveau.id = "divPlus"
-    nouveau.setAttribute("onclick","addPlayer()");
+    nouveau.setAttribute("onclick","clickAddPlayer()");
     document.getElementById('div0').prepend(nouveau);
 }
-function supprDivPlus(){
+function supprDivPlus_(){
     $("#divPlus").remove()
 }
 
+function btModifNbEquipes() {
+    // $("#btEquipes").animate({"":""},1000)
+    enleveMenuTousJoueurs_();
+    var bouton = document.getElementById('btEquipes');
+    var nbEquipe = bouton.getAttribute("nb");
+    //var txtBtEq = bouton.innerText;
+    
+    if (nbEquipe==2){
+        nbEquipe = 3;
+    }else{
+        nbEquipe = 2;
+    }
+    console.log("NB EQUIPE : " + nbEquipe)
+    bouton.setAttribute("nb",nbEquipe);
+    RANDOM(nbEquipe)
+}
 
-function RANDOM() {
+function btRandom(){
+    var bouton = document.getElementById('btEquipes');
+    var nbEquipe = bouton.getAttribute("nb");    
+    if (nbEquipe==0) {
+        // Pas de nombre d'équipe choisi -> selon nombre de joueurs
+        var nbJoueurs = document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length
+        //if(txtBtEq=="👩🏻‍🤝‍👩🏿🧑🏽‍🤝‍🧑🏻"){nbEquipe=3}else{nbEquipe=2}
+        if(nbJoueurs>=12){
+            nbEquipe=3;
+            document.getElementById('btEquipes').innerText = "👩🏻‍🤝‍👩🏿🧑🏽‍🤝‍🧑🏻"
+            console.log(nbJoueurs + " JOUEURS : 3 equipes !")
+        }else{
+            nbEquipe=2
+            document.getElementById('btEquipes').innerText = "👩🏻‍🤝‍👩🏿👨🏽‍🤝‍👨🏻🧑🏽‍🤝‍🧑🏻"
+            console.log(nbJoueurs + " JOUEURS : 2 equipes !")
+        }
+    }
+    RANDOM(nbEquipe);
+}
+
+function RANDOM(nbEquipe) {
     console.log("=============début random");
-    // $("#questionPresents").slideUp();
     document.getElementById("questionPresents").style.display = "none"
     // $("#btRandom").animate({
     //     height:"10px",
     //     width: "+=100px",
     //     opacity: 0.5
     // }, 1000)
-    enleveMenuTousJoueurs();
+
+    supprDivPlus_();
+    
+    enleveMenuTousJoueurs_();
     var dispos = document.getElementById('div0');
     var equipe1 = document.getElementById('div1');
     var equipe2 = document.getElementById('div2');
@@ -263,23 +292,21 @@ function RANDOM() {
     var absents = document.getElementById('div9');
     var txtBtEq = document.getElementById('btEquipes').innerText;
     //console.log("txtBtEq:"+txtBtEq.substring(txtBtEq.length-2))
-    var nbEquipe;
-    if(txtBtEq=="👩🏻‍🤝‍👩🏿🧑🏽‍🤝‍🧑🏻"){nbEquipe=3}else{nbEquipe=2}
+
     
     //parseInt(txtBtEq.substring(txtBtEq.length-2));
     console.log("nbEquipe:"+nbEquipe);
     var ecart = 0, ecartmax = 0, difference = 0;
     do {
-        supprDivPlus();
-        reinit();
-        supprDivPlus();
+        reinit_();
+        // supprDivPlus_();
         var forceEq1 = 0, forceEq2 = 0, forceEq3 = 0;
         var bascule = 0;
         while (dispos.children.length) {
-            var i = getRandomInt(dispos.children.length);
+            var i = getRandomInt_(dispos.children.length);
             var player = dispos.children[i];
             var force = parseInt(player.getAttribute("force"));
-            console.log(player.innerText+" va bouger...");
+            // console.log(player.innerText+" va bouger...");
             if (player.classList.contains("inactif")) {
                 absents.appendChild(player);
                 continue;
@@ -288,15 +315,15 @@ function RANDOM() {
             // console.log("bascule:"+bascule +" mod:"+(bascule%3))
             switch (bascule%nbEquipe) {
                 case 0:
-                    movePlayer(player, force, equipe1);
+                    movePlayer_(player, force, equipe1);
                     forceEq1 += parseInt(force);
                     break;
                 case 1:
-                    movePlayer(player, force, equipe2);
+                    movePlayer_(player, force, equipe2);
                     forceEq2 += parseInt(force);
                     break;
                 case 2:
-                    movePlayer(player, force, equipe3);
+                    movePlayer_(player, force, equipe3);
                     forceEq3 += parseInt(force);
                     break;
             }
@@ -311,25 +338,26 @@ function RANDOM() {
             min = Math.min(forceEq1,forceEq2,forceEq3);
         }
         difference = max-min;
-        console.log("ecartmax:"+ecartmax);
-        console.log("difference:"+difference);
-        console.log("Répartition: "+forceEq1+" / "+forceEq2+" / "+ forceEq3);
-        if (difference > ecartmax) { console.log("------------ON RECOMMENCE"); } else { console.log("------------ON ACCEPTE"); }
+        console.log("ecartmax:"+ecartmax+", diff:"+difference+", Répartition: "+forceEq1+" / "+forceEq2+" / "+ forceEq3);
+        if (difference > ecartmax) { 
+            console.log("------------ON RECOMMENCE"); 
+        } else { console.log("------------ON ACCEPTE"); }
 
     } while (difference > ecartmax);
-    majForceEquipes();
+    majForceEquipes_();
    
     // $("#div0").hide();
     $("#div1").show();
     $("#div2").show();
     
-    console.log("NB JOUEURS EQ 3 : "+ equipe3.children.length)
+    // console.log("NB JOUEURS EQ 3 : "+ equipe3.children.length)
     if(equipe3.children.length){
         $("#div3").show();
+    }else{
+        $("#div3").hide();
     }
 
 }
-
 
 function save(){
     const pool  = mysql.createPool({
@@ -361,7 +389,6 @@ function save(){
     });
 
 }
-
 
 function save2(){
     // Get the mysql service
@@ -404,42 +431,8 @@ connection.end(function(){
 
 }
 
-
-
-
-function modifNbEquipes() {
-    // $("#btEquipes").animate({"":""},1000)
-    enleveMenuTousJoueurs();
-    var bouton = document.getElementById('btEquipes');
-    var txtBtEq = bouton.innerText;
-    var nbEquipe //= parseInt(txtBtEq.substring(txtBtEq.length-2));
-    if (txtBtEq=="👩🏻‍🤝‍👩🏿🧑🏽‍🤝‍🧑🏻"){
-        bouton.innerText = "👩🏻‍🤝‍👩🏿👨🏽‍🤝‍👨🏻🧑🏽‍🤝‍🧑🏻"
-    }else{
-        bouton.innerText = "👩🏻‍🤝‍👩🏿🧑🏽‍🤝‍🧑🏻"
-    }
-    RANDOM()
-    
-    // if (nbEquipe==2) { 
-    //     bouton.innerText = "Equipes: 3";
-    // } else {
-    //     bouton.innerText = "Equipes: 2";
-    // }
-
-    // var txt = prompt("Choisissez le nombre d'équipes", "3");
-    // if (txt == null) { return }
-    // var nb = parseInt(txt);
-    // if ((typeof nb === "number") && (nb > 0)) {
-    //     $("#btEquipes").text(nb + " équipes");
-    //     $("#btEquipes").attr("class", nb)
-    //     console.log($("#btEquipes").attr("class"));
-    // } else {
-    //     alert("Erreur : le nombre d'équipe doit être un entier positif", "Erreur")
-    // }
-}
-
-function addPlayer() {
-    enleveMenuTousJoueurs();
+function clickAddPlayer() {
+    enleveMenuTousJoueurs_();
     var name = prompt("Nom du joueur :")
     if (name == "" || name == null) { return }
     var force = prompt("Force du joueur de 1 (faible) à 3 (fort)")
@@ -463,10 +456,10 @@ function addPlayer() {
         UID,
         JSON.stringify(player)
         );
-    createPlayer(intForce, name, false, UID)
+    createPlayer_(intForce, name, false, UID)
 }
 
-function createPlayer(force, name, inactif, UID) {
+function createPlayer_(force, name, inactif, UID) {
     var img, opacity,emo
     switch (force) {
         case 1: emo = emoForce1; break;
@@ -500,71 +493,11 @@ function createPlayer(force, name, inactif, UID) {
 }
 
 
-
-function modifForce(){
-    var player = document.getElementsByClassName("selected")[0]
-    console.log("ancienne force: "+player.getAttribute("Force") + player.firstChild.innerText)
-    var force = prompt("Force du joueur de 1 (faible) à 3 (fort)")
-    if (force == "" || force == null) { return }
-    var intForce = parseInt(force)
-    if ((intForce < 1) || (intForce > 3)) {
-        alert("La force du joueur doit être comprise entre 1 et 3 (vous avez écrit " + force + ")");
-        return;
-    }
-    var emo, img
-    switch (intForce) {
-        case 1: emo = emoForce1; break;
-        case 2: emo = emoForce2; break;
-        case 3: emo = emoForce3; break;
-    }
-
-    // STOCKAGE DANS LE DOM :
-    player.setAttribute("force",intForce);
-    player.firstChild.innerText = ""+emo;
-    var team = document.getElementById("team").getAttribute("name");
-    // STOCKAGE DANS EN LOCAL :
-    localStorage.setItem(
-        player.getAttribute("name"),
-        JSON.stringify({
-            "team":team,
-            "force":intForce,
-            "absent": player.classList.contains("inactif"),
-            "name":player.children[1].innerText
-        })
-        );
-
-    unselect(player);
-    console.log(player.innerText+" a une nouvelle force: "+player.getAttribute("Force") + ""+emo)
-}
-
-function modifNom(){
-    var player = document.getElementsByClassName("selected")[0]
-    var team = document.getElementById("team").getAttribute("name");
-    var nouveauNom = prompt("Nouveau nom ?",player.children[1].innerText)
-    if (nouveauNom == "" || nouveauNom == null) { return }
-    console.log("changment de nom: "+player.innerText+" -> "+nouveauNom)
-    // STOCKAGE DANS LE DOM :
-    player.children[1].innerText = nouveauNom
-    // STOCKAGE DANS LE COOKIE :
-
-    localStorage.setItem(
-        player.getAttribute("name"),
-        JSON.stringify({
-            "team":team,
-            "force":parseInt(player.getAttribute("force")),
-            "absent": player.classList.contains("inactif"),
-            "name":nouveauNom
-        })
-        );
-}
-
-function getRandomInt(max) {
+function getRandomInt_(max) {
     return Math.floor(Math.random() * max);
 }
 
-
-
-function movePlayer(player, force, equipe) {
+function movePlayer_(player, force, equipe) {
     var nbEnfants = equipe.children.length
     if (nbEnfants>0) {
         //console.log("equip1 : "+ nbEnfants + " joueurs. Début parcours equipe")
@@ -573,7 +506,7 @@ function movePlayer(player, force, equipe) {
             //console.log(equipe.children[j])
             if (force >= equipe.children[j].getAttribute("force")){
                 //console.log("force Child:"+equipe.children[j].getAttribute("force"))
-                console.log(equipe.id + " reçoit "+player.innerText+" ("+force+") avant "+equipe.children[j].innerText+" ("+equipe.children[j].getAttribute("force")+")")
+                // console.log(equipe.id + " reçoit "+player.innerText+" ("+force+") avant "+equipe.children[j].innerText+" ("+equipe.children[j].getAttribute("force")+")")
                 equipe.insertBefore(player,equipe.children[j]);
                 sortie = true;
                 break;
@@ -581,13 +514,13 @@ function movePlayer(player, force, equipe) {
         }
         if (!sortie){equipe.appendChild(player);}
     } else {
-        console.log(equipe.id + " vide, ajout de "+player.innerText+" ("+force+")")
+        // console.log(equipe.id + " vide, ajout de "+player.innerText+" ("+force+")")
         equipe.appendChild(player);
     }
 }
 
-function majForceEquipes() {
-    console.log("majForceEquipes")
+function majForceEquipes_() {
+    console.log("majForceEquipes_")
     var forceEq1 = 0, forceEq2 = 0, forceEq3 = 0, forceDispos = 0;
     var joueurs = $(".player")
     for (let i = 0; i < joueurs.length; i++) {
@@ -622,38 +555,35 @@ function majForceEquipes() {
     // $("#forceEq0").text("(dispo) [" + forceDispos + "]");
 }
 
-function back(){
-    console.log("bouton BACK")
-    enleveMenuTousJoueurs();
-    $("#questionPresents").slideDown();
-    reinit();
-}
-
-
-
-
-function unselect(player){
+function unselect_(player){
     $(player).removeClass("selected"); //déselectionne
     $(".containerOptionsJoueur").slideUp()
 }
-
 
 function clickIcone(clicked) {
     console.log("Click Icone : modif du joueur");
 
     $("#divOptionsJoueurs").remove();
+    console.log(clicked.children)
 
-    if(clicked.children.length > 2){
+    if(clicked.classList.contains("menu")){
         console.log(clicked.children)
         console.log("menu existant : suppression")
+        clicked.classList.remove("menu")
         $(clicked.children[2]).remove();
         return
     }
+    console.log("le menu n'existe pas")
+    clicked.classList.add("menu")
 
     var tree = document.createDocumentFragment();
     var containerBt = document.createElement("div");
     containerBt.setAttribute("id", "divOptionsJoueurs");
-    containerBt.style.display = "inline-flex";
+    containerBt.style.display = "inline";
+
+    var hr = document.createElement("br")
+    // hr.style.margin = "0px"
+    containerBt.append(hr);
 
     var newBt4 = document.createElement("button"); // FORCE 1
     newBt4.setAttribute("id", "emoForce1");
@@ -727,6 +657,7 @@ function clickBtForce(clicked) {
     console.log(player.children[1].innerText+" a une nouvelle force: "+player.getAttribute("Force") + ' ' +emoForce)
     // Suppression du menu
     $(clicked.children[2]).remove();
+    clicked.classList.remove("menu")
 }
 
 function clickBtNom(clicked) {
@@ -734,6 +665,7 @@ function clickBtNom(clicked) {
     var nouveauNom = prompt("Nouveau nom ?",player.children[1].innerText)
     if (nouveauNom == "" || nouveauNom == null) { 
         $(clicked.children[2]).remove();
+        clicked.classList.remove("menu")
         return }
     console.log("changment de nom: "+player.innerText+" -> "+nouveauNom)
     // STOCKAGE DANS LE DOM :
@@ -750,8 +682,8 @@ function clickBtNom(clicked) {
     );
     // Suppression du menu
     $(clicked.children[2]).remove();
+    clicked.classList.remove("menu")
 }
-
 
 function clickSwitchInactif(clicked) {       
     // ACTION DANS LE DOM :
@@ -785,7 +717,7 @@ function select(clicked) {
     // CLIQUE DU BOUTON FORCE - modif force
     if(window.event.target.classList.contains("btModifForce")) {
         clickBtForce(clicked);
-        majForceEquipes()
+        majForceEquipes_()
         return;
     }
     // CLIQUE DU BOUTON NOM - modif nom
@@ -808,14 +740,15 @@ function select(clicked) {
             
         } else {
             $(clicked.children[2]).remove();
+            clicked.classList.remove("menu")
             document.getElementById("div9").appendChild(clicked);
             clicked.classList.add("inactif");
-            majForceEquipes();
+            majForceEquipes_();
         }
         return;
     }
 
-    enleveMenuTousJoueurs();
+    enleveMenuTousJoueurs_();
 
     // gère les présents/absents dans la div joueursDispos (div0)
     if (clicked.parentNode.id=="div0"){
@@ -827,7 +760,7 @@ function select(clicked) {
  
 }
 
-function enleverTousJoueurs(){
+function enleverTousJoueurs_(){
     console.log("Suppression de TOUS les joueurs")
     var players = document.getElementsByClassName("player")
     while (players.length>0) {
@@ -836,10 +769,11 @@ function enleverTousJoueurs(){
     }
 }
 
-function enleveMenuTousJoueurs(){
+function enleveMenuTousJoueurs_(){
     var players = document.getElementsByClassName("player")
     for (let i=0 ; i<players.length ; i++) {
         $(players[i].children[2]).remove();
+        players[i].classList.remove("menu")
     }
 }
 
@@ -862,40 +796,70 @@ function clickAfficheMenuOLD(clicked){
             cliquedContainer.insertBefore(selection[0], clicked);
             selectedContainer.insertBefore(clicked, destination);
             console.log("inverse "+selection[0].innerText+" avec "+clicked.innerText)
-            unselect(selection[0]); // Désélectionne
-            majForceEquipes()
+            unselect_(selection[0]); // Désélectionne
+            majForceEquipes_()
         }
     } else { 
         // Pour désélectionner :
         console.log("Annule la sélection");
         //$(clicked).toggleClass("selected");
-        unselect(clicked);
+        unselect_(clicked);
     }
 }
 
-function selectManuel(clicked) {
-    // var selected = $(".selected")
-    // console.log("selectManuel:clic sur div")
+function oldBtModifForce(){
+    var player = document.getElementsByClassName("selected")[0]
+    console.log("ancienne force: "+player.getAttribute("Force") + player.firstChild.innerText)
+    var force = prompt("Force du joueur de 1 (faible) à 3 (fort)")
+    if (force == "" || force == null) { return }
+    var intForce = parseInt(force)
+    if ((intForce < 1) || (intForce > 3)) {
+        alert("La force du joueur doit être comprise entre 1 et 3 (vous avez écrit " + force + ")");
+        return;
+    }
+    var emo, img
+    switch (intForce) {
+        case 1: emo = emoForce1; break;
+        case 2: emo = emoForce2; break;
+        case 3: emo = emoForce3; break;
+    }
 
-    // console.log("clicked")
-    // console.log(clicked)
-    // console.log("selected[0]")
-    // console.log(selected[0])
-    // console.log(selected.length)
-    // if (selected.length==1) // S'il y a bien un joueur sélectionné, on le déplace
-    // {	
-    //     console.log("un élément est sélectionné")
-    //     console.log(selected[0])
+    // STOCKAGE DANS LE DOM :
+    player.setAttribute("force",intForce);
+    player.firstChild.innerText = ""+emo;
+    var team = document.getElementById("team").getAttribute("name");
+    // STOCKAGE DANS EN LOCAL :
+    localStorage.setItem(
+        player.getAttribute("name"),
+        JSON.stringify({
+            "team":team,
+            "force":intForce,
+            "absent": player.classList.contains("inactif"),
+            "name":player.children[1].innerText
+        })
+        );
 
-    //     if (selected[0].parentNode==clicked) {
-    //         console.log("annulation:même div");
-    //         return;
-    //     }
-    //     //var selectedContainer = selected[0].parentNode;
+    unselect_(player);
+    console.log(player.innerText+" a une nouvelle force: "+player.getAttribute("Force") + ""+emo)
+}
 
-    //     clicked.appendChild(selected[0]);
+function oldBtModifNom(){
+    var player = document.getElementsByClassName("selected")[0]
+    var team = document.getElementById("team").getAttribute("name");
+    var nouveauNom = prompt("Nouveau nom ?",player.children[1].innerText)
+    if (nouveauNom == "" || nouveauNom == null) { return }
+    console.log("changment de nom: "+player.innerText+" -> "+nouveauNom)
+    // STOCKAGE DANS LE DOM :
+    player.children[1].innerText = nouveauNom
+    // STOCKAGE DANS LE COOKIE :
 
-    //     $(selected).toggleClass("selected") // Désélectionne
-    //     majForceEquipes()
-    // }
+    localStorage.setItem(
+        player.getAttribute("name"),
+        JSON.stringify({
+            "team":team,
+            "force":parseInt(player.getAttribute("force")),
+            "absent": player.classList.contains("inactif"),
+            "name":nouveauNom
+        })
+        );
 }

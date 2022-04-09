@@ -234,11 +234,11 @@ body {
 }
 
 .emoforce{
-border:1px solid white;
-border-radius: 100px;
-/* background-color: green; */
-}
-
+  border-inline:1px solid white;
+  border-radius: 100px;
+  /* background-color: green; */
+  margin-right: 2px;
+  }
 
 .btModifNom,.btCloseMenu,.btSupprPlayer{
   font-size: 1.5rem;
