@@ -1,6 +1,6 @@
 /* AFFICHAGE PAYSAGE */
 @media screen and (max-height: 500px) {
-  /* html{
+    /* html{
     width:100vh;
     height: 100vh;
   } */
@@ -158,9 +158,10 @@
   #btBack,#btAjouter{font-size:6vh;}
   #btBack,#btAjouter,#btEquipes{
     overflow:hidden;
-    width: 47%;
-    height: 6vh;
+    width: 23%;
+    height: 10vh;
     font-size:2rem;
+    border-radius: 500px;
   }
   .containerButtonMenu {
     /* #btBack,#btAjouter,#btEquipes */
@@ -175,7 +176,7 @@
     z-index: 2;
     display:inline-block ;
     width:50%;
-    height: 10vh;
+    height: 14vh;
     /* font-size:8vw; */
     padding:5px;
     border-color: orange;
@@ -214,8 +215,6 @@
     width:10%;
   }
 }
-
-
 
 body { 
   font-family: fantasy; 
@@ -329,6 +328,10 @@ html, .fullscreen {
   width: 100%;
 
   max-width:1280px;
+
+  /* max-width:800px; */
+  /* max-height:800px; */
+
   min-height:100%;
   margin:0 auto;
   position:relative;
@@ -487,3 +490,11 @@ div.span {
 
 }
 
+@media screen and (min-width: 800px) {
+  .player{
+    font-size: 3vw ;
+  }
+  .container {
+    width: 30%;
+  }
+}

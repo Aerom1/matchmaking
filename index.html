@@ -52,27 +52,22 @@
 			<div id="textEchange" >Sélectionner un autre joueur pour échanger</div>
 		</div>
 		<!-- <h1>Choix des équipes</h1> -->
-		<div id="div1" class="container" onclick="selectManuel()" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-		<div id="div3" class="container" onclick="selectManuel()" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-		<div id="div2" class="container" onclick="selectManuel()" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-		<div id="div0" class="container" onclick="selectManuel()" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-		<div id="div9" class="container" onclick="selectManuel()" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+		<div id="div1" class="container" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+		<div id="div3" class="container" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+		<div id="div2" class="container" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+		<div id="div0" class="container" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+		<div id="div9" class="container" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
 	</div>
 
 	<footer>
-		<div id="ContainerNav">
-		<div style="text-align: center; ">
-			<button type="button" class="droplet" id="btRandom" onclick="btRandom()">
-				<img class="logo" id="logoEquipe" src="" />
-			</button>
-		</div>
 		<div class="containerButtonMenu">
-			<button type="button" id="btBack" onclick="btBack()">⚙️</button>
-			<!-- 🧩🏒⚙️📃🔙 -->
+			<button type="button" id="btBack" class="hide" onclick="btBack()">🏒</button>
+			<button type="button" class="droplet" id="btRandom" onclick="btRandom()">
+				<img class="logo" id="logoEquipe" src="" />	</button>
+				<button type="button" id="btEquipes" class="hide" nb=0 onclick="btModifNbEquipes()">👨🏽‍🤝‍👨🏻</button>
+				<!-- 🧩🏒⚙️📃🔙 -->
 			<!-- <button type="button" id="btAjouter" onclick="addPlayer()">➕</button> -->
-			<button type="button" id="btEquipes" nb=0 onclick="btModifNbEquipes()">👨🏼‍🤝‍👨🏻🧑🏻‍🤝‍🧑🏾</button>
 		</div>
-		<div id="ContainerNav">
 	</footer>
 	<script src="javascript.js"></script>
 	<script src="dragndrop.js"></script>

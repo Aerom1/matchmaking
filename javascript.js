@@ -203,6 +203,8 @@ function btBack(){
     $("#div1").hide();
     $("#div2").hide();
     $("#div3").hide();
+    $("#btBack").hide(); 
+    $("#btEquipes").hide(); 
     if ($(".selected").length>0) {unselect_($(".selected")[0])}
 
 
@@ -222,7 +224,7 @@ function reinit_() {
     while (equipe2.children.length) { dispos.appendChild(equipe2.firstChild); }
     while (equipe3.children.length) { dispos.appendChild(equipe3.firstChild); }
     while (absents.children.length) { dispos.appendChild(absents.firstChild); }
-    majForceEquipes_();
+    // majForceEquipes_();
 }
 
 function creerDivPlus_(){
@@ -255,20 +257,20 @@ function btModifNbEquipes() {
 
 function btRandom(){
     var bouton = document.getElementById('btEquipes');
-    var nbEquipe = bouton.getAttribute("nb");    
+    var nbEquipe = bouton.getAttribute("nb");   
+    $("#btBack").show(); 
+    $("#btEquipes").show(); 
+
     if (nbEquipe==0) {
         // Pas de nombre d'équipe choisi -> selon nombre de joueurs
         var nbJoueurs = document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length
         //if(txtBtEq=="👩🏻‍🤝‍👩🏿🧑🏽‍🤝‍🧑🏻"){nbEquipe=3}else{nbEquipe=2}
         if(nbJoueurs>=12){
             nbEquipe=3;
-            document.getElementById('btEquipes').innerText = "👩🏻‍🤝‍👩🏿🧑🏽‍🤝‍🧑🏻"
-            console.log(nbJoueurs + " JOUEURS : 3 equipes !")
         }else{
             nbEquipe=2
-            document.getElementById('btEquipes').innerText = "👩🏻‍🤝‍👩🏿👨🏽‍🤝‍👨🏻🧑🏽‍🤝‍🧑🏻"
-            console.log(nbJoueurs + " JOUEURS : 2 equipes !")
         }
+        console.log(nbJoueurs + " JOUEURS : " + nbEquipe + " equipes !")
     }
     RANDOM(nbEquipe);
 }
@@ -338,10 +340,10 @@ function RANDOM(nbEquipe) {
             min = Math.min(forceEq1,forceEq2,forceEq3);
         }
         difference = max-min;
-        console.log("ecartmax:"+ecartmax+", diff:"+difference+", Répartition: "+forceEq1+" / "+forceEq2+" / "+ forceEq3);
-        if (difference > ecartmax) { 
-            console.log("------------ON RECOMMENCE"); 
-        } else { console.log("------------ON ACCEPTE"); }
+        var resul 
+        if (difference > ecartmax) { resul="--> ON RECOMMENCE";
+        } else { resul="--> ON ACCEPTE"; }
+        console.log("ecartmax:"+ecartmax+", diff:"+difference+", Répartition: "+forceEq1+" / "+forceEq2+" / "+ forceEq3 + resul);
 
     } while (difference > ecartmax);
     majForceEquipes_();
