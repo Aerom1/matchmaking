@@ -18,6 +18,7 @@
 	<link rel="shortcut icon" href="images/favicon.png"/>
 	<link rel="apple-touch-icon" href="images/favicon.png"/>
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="animations.css">
 	<!-- <?!= include('style'); ?> -->
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,38 +32,38 @@
 </head>
 
 <body>
-	
 	<header>
 		<img class="logo" id="logoEquipe2" src="" style = "position:absolute ; max-width:100%; height: 80px; left:15px; top: 5px;";/>
 		<h1 id="team" name="" onClick="changeTeam()" > </h1>
 		<!-- <h1>🏒 Sun Ride</h1> -->
-		<!-- <img src="images/favicon.png"> -->
-		<br> 
+		<!-- <img src="images/favicon.png"> --> 
 	</header>
-	<center><span id="questionPresents" style="display:block; text-align: center;">Qui est absent ?</span></center>
+	<span id="questionPresents">Qui est présent ?</span>
 	<span id="forceEquipes"><center>
-		<div id="forceEq1" class="forceEquipe" style="border-top-left-radius: 10px;border-bottom-left-radius: 10px;"></div>
+		<div id="forceEq1" class="forceEquipe" style="border-top-left-radius: 20px;border-bottom-left-radius: 20px;"></div>
 		<div id="forceEq3" class="forceEquipe" ></div>
-		<div id="forceEq2" class="forceEquipe" style="border-top-right-radius: 10px;border-bottom-right-radius: 10px;"></div>
+		<div id="forceEq2" class="forceEquipe" style="border-top-right-radius: 20px;border-bottom-right-radius: 20px;"></div>
 	</center></span>
+	<br>
+
 	<div class="containerEquipes">
-		<div class="containerOptionsJoueur" style="display:none;">
-			<button type="button" id="btModifForce" onclick="oldBtModifForce()">Changer Force</button>
-			<button type="button" id="btModifNom" onclick="oldBtModifNom()">Changer Nom</button>
-			<div id="textEchange" >Sélectionner un autre joueur pour échanger</div>
+		<div id="textEchange" style="display:none;">
+			Clic joueur pour échanger 🔁 (glisse)
+			<br>
+			Clic image 🐭😼🐻 pour modifer ✏️
 		</div>
 		<!-- <h1>Choix des équipes</h1> -->
-		<div id="div1" class="container" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-		<div id="div3" class="container" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-		<div id="div2" class="container" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-		<div id="div0" class="container" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-		<div id="div9" class="container" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+		<div id="div1" class="container" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+		<div id="div3" class="container" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+		<div id="div2" class="container" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+		<div id="div0" class="container" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+		<div id="div9" class="container" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
 	</div>
-
+	
 	<footer>
 		<div class="containerButtonMenu">
 			<button type="button" id="btBack" class="hide" onclick="btBack()">🏒</button>
-			<button type="button" id="btRandom" onclick="btRandom()">
+			<button type="button" id="btRandom" class="btn" onclick="btRandom()">
 				<img class="logo" id="logoEquipe" src="" />	</button>
 			<button type="button" id="btEquipes" class="hide" nb=0 onclick="btModifNbEquipes()">👨🏽‍🤝‍👨🏻</button>
 			<!-- 🧩🏒⚙️📃🔙 -->

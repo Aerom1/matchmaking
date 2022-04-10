@@ -12,7 +12,7 @@ const imgViking = "images/viking.png";
 const emoForce1 = "🐭";
 const emoForce2 = "😼";
 const emoForce3 = "🐻";
-//😼😺🦁🐯🐭🐹🐻😺🐶
+//🐭😼🐻🦁🐯🐹😺😺🐶
 
 
 $(document).ready(function () {
@@ -44,10 +44,8 @@ function changeTeam(){
         logoEquipe: imgViking,
         newText: "Viking" //🏒
     }
-
     console.log("change team")
     var teamActuelle = document.getElementById("team")
-
     // <h1 id="team" name="SUN" onClick="changeTeam()">🏒 Sun Ride</h1>
     var newName
     var newText
@@ -64,10 +62,11 @@ function changeTeam(){
     document.getElementById("logoEquipe2").setAttribute("src",team.logoEquipe);
 
     console.log("New team : " + teamActuelle.getAttribute("name"));
-
     enleverTousJoueurs_();
-
     loadData(team.newName);
+    majForceEquipes_();
+    $("#questionPresents").slideDown();
+
 }
 
 function compteJoueursDeLequipe_(team){
@@ -191,7 +190,6 @@ function loadData(team){
     }
 
     const boxes = document.querySelectorAll('.player');
-
     boxes.forEach(box => {
         box.addEventListener('dragenter', dragEnter)
         box.addEventListener('dragover', dragOver);
@@ -229,14 +227,17 @@ function reinit_() {
     while (equipe2.children.length) { dispos.appendChild(equipe2.firstChild); }
     while (equipe3.children.length) { dispos.appendChild(equipe3.firstChild); }
     while (absents.children.length) { dispos.appendChild(absents.firstChild); }
-    // majForceEquipes_();
+    majForceEquipes_();
+    //màj nb joueurs :
+    document.getElementById("questionPresents").innerText = (document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length) +" présents"
 }
 
 function creerDivPlus_(){
     var nouveau = document.createElement("div")
-    nouveau.textContent = "+" //➕
+    nouveau.textContent = "➕" //➕🆕
     nouveau.id = "divPlus"
     nouveau.setAttribute("onclick","clickAddPlayer()");
+    // nouveau.setAttribute("class","player");
     document.getElementById('div0').prepend(nouveau);
 }
 function supprDivPlus_(){
@@ -499,7 +500,6 @@ function createPlayer_(force, name, inactif, UID) {
     
 }
 
-
 function getRandomInt_(max) {
     return Math.floor(Math.random() * max);
 }
@@ -564,7 +564,8 @@ function majForceEquipes_() {
 
 function unselect_(player){
     $(player).removeClass("selected"); //déselectionne
-    $(".containerOptionsJoueur").slideUp()
+    $("#textEchange").slideUp()
+    $("#cible").remove();
 }
 
 function creerMenuJoueur_(clicked){
@@ -611,6 +612,7 @@ function creerMenuJoueur_(clicked){
     nom.innerText = clicked.children[1].innerText+" ✏️";
     // nom.classList.add("btSupprPlayer");
     nom.classList.add("btModifNom");
+    nom.style.color = "white"
     containerBt.append(nom);
 
     
@@ -744,6 +746,8 @@ function clickSwitchInactif(clicked) {
         JSON.stringify(playerJson)
     );
     clicked.parentNode.appendChild(clicked);
+    //màj nb joueurs actifs :
+    document.getElementById("questionPresents").innerText = (document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length) +" joueurs présents"
 }
 
 function select(clicked) {
@@ -779,8 +783,9 @@ function select(clicked) {
             if (confirm("Supprimer définitivement ?")) {    
                 $(clicked).remove();
                 localStorage.removeItem(clicked.id)
+                //màj nb joueurs :
+                document.getElementById("questionPresents").innerText = (document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length) +" présents"
             }
-            
         } else {
             $(clicked.children[2]).remove();
             clicked.classList.remove("menu")
@@ -790,7 +795,6 @@ function select(clicked) {
         }
         return;
     }
-
     enleveMenuTousJoueurs_();
 
     // gère les présents/absents dans la div joueursDispos (div0)
@@ -798,9 +802,7 @@ function select(clicked) {
         clickSwitchInactif(clicked);
         return;
     } 
-    
-    clickAfficheMenuOLD(clicked);
- 
+    clickJoueurAfficheInfo(clicked);
 }
 
 function enleverTousJoueurs_(){
@@ -820,89 +822,38 @@ function enleveMenuTousJoueurs_(){
     }
 }
 
-function clickAfficheMenuOLD(clicked){
-    
+function clickJoueurAfficheInfo(clicked){
+    console.log(clicked)
+
     // gère la sélection dans les équipes
     var selection = $(".selected")
     // Vérifique que le joueur cliqué n'est pas le même que le joueur sélectionné
     if (clicked !== selection[0]) { 
         console.log("Sélection");
-        $(".containerOptionsJoueur").slideDown()
+        $("#textEchange").slideDown()
         if (selection.length == 0) {
             // S'il n'y avait pas de joueur sélectionné, on sélectionne (classe selected)
             $(clicked).toggleClass("selected")
+            ajoutCiblesToutesEquipes();
         } else {
-            // S'il y a déjà un joueur sélectionné, on échange les deux
+            // S'il y a déjà un joueur sélectionné, 
+            // Si la seconde selection est aussi un joueur, on échange les deux jouers
+            // Si la seconde selection est une cible, ça marche aussi (on échange puis on supprime la cible)
+
             var cliquedContainer = clicked.parentNode;
             var selectedContainer = selection[0].parentNode;
             var destination = selection[0].nextSibling
             cliquedContainer.insertBefore(selection[0], clicked);
             selectedContainer.insertBefore(clicked, destination);
             console.log("inverse "+selection[0].innerText+" avec "+clicked.innerText)
-            unselect_(selection[0]); // Désélectionne
+            unselect_(selection[0]); // Désélectionne en enlevant la classe selected
+            $(".cible").remove(); // on enlève les cibles des équipes
             majForceEquipes_()
         }
     } else { 
         // Pour désélectionner :
         console.log("Annule la sélection");
-        //$(clicked).toggleClass("selected");
-        unselect_(clicked);
+        $(".cible").remove(); // on enlève les cibles des équipes
+        unselect_(clicked); // déselectionne en enlevant la classe selected
     }
-}
-
-function oldBtModifForce(){
-    var player = document.getElementsByClassName("selected")[0]
-    console.log("ancienne force: "+player.getAttribute("Force") + player.firstChild.innerText)
-    var force = prompt("Force du joueur de 1 (faible) à 3 (fort)")
-    if (force == "" || force == null) { return }
-    var intForce = parseInt(force)
-    if ((intForce < 1) || (intForce > 3)) {
-        alert("La force du joueur doit être comprise entre 1 et 3 (vous avez écrit " + force + ")");
-        return;
-    }
-    var emo, img
-    switch (intForce) {
-        case 1: emo = emoForce1; break;
-        case 2: emo = emoForce2; break;
-        case 3: emo = emoForce3; break;
-    }
-
-    // STOCKAGE DANS LE DOM :
-    player.setAttribute("force",intForce);
-    player.firstChild.innerText = ""+emo;
-    var team = document.getElementById("team").getAttribute("name");
-    // STOCKAGE DANS EN LOCAL :
-    localStorage.setItem(
-        player.getAttribute("name"),
-        JSON.stringify({
-            "team":team,
-            "force":intForce,
-            "absent": player.classList.contains("inactif"),
-            "name":player.children[1].innerText
-        })
-        );
-
-    unselect_(player);
-    console.log(player.innerText+" a une nouvelle force: "+player.getAttribute("Force") + ""+emo)
-}
-
-function oldBtModifNom(){
-    var player = document.getElementsByClassName("selected")[0]
-    var team = document.getElementById("team").getAttribute("name");
-    var nouveauNom = prompt("Nouveau nom ?",player.children[1].innerText)
-    if (nouveauNom == "" || nouveauNom == null) { return }
-    console.log("changment de nom: "+player.innerText+" -> "+nouveauNom)
-    // STOCKAGE DANS LE DOM :
-    player.children[1].innerText = nouveauNom
-    // STOCKAGE DANS LE COOKIE :
-
-    localStorage.setItem(
-        player.getAttribute("name"),
-        JSON.stringify({
-            "team":team,
-            "force":parseInt(player.getAttribute("force")),
-            "absent": player.classList.contains("inactif"),
-            "name":nouveauNom
-        })
-        );
 }

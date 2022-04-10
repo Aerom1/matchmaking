@@ -1,0 +1,67 @@
+button:active {
+/* animation: bounce-in .3s linear; */
+/* transform: rotate(1080deg); */
+animation: zoom 0.3s linear ;
+}
+
+#btRandom:active {
+animation: zoom 0.3s linear;
+}
+
+
+@keyframes zoom {
+0% {    transform: scale(1, 1);  }
+50% {    transform: scale(1.2, 1.6);  }  
+100% {    transform: scale(1, 1);  }  
+}
+  
+@keyframes tourne {
+0% {
+    transform: rotate(0deg);
+    opacity:0.5;
+}
+/* 50% {
+    transform: rotate(1080deg);
+    height:30vh;
+    opacity:0.5;
+}   */
+100% {
+    transform: rotate(360deg);
+    height:10vh;
+    opacity:1;
+}
+}
+
+   
+@keyframes bounce-in {
+    /* APPARITION D'UN PLAYER */
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;	
+    } 
+    0% {
+    transform: scale(0);
+    }
+    50% {
+    transform: scale(1.1);
+    }
+    100% {
+    transform: scale(1);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+

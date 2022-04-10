@@ -49,7 +49,7 @@
     display: none;
   }
   footer {
-    display: none;
+    /* display: none; */
 
     /* background-color:#ccc; */
     padding-top: 10px;
@@ -61,16 +61,19 @@
     left: 0vw; 
     width: 8vw;
   }
-  #btBack,#btAjouter,#btEquipes{
-    overflow: hidden;
-    /* display:block; */
-    /* width: 100%; */
-    /* max-width: 100px;; */
+  #btBack,#btEquipes{
+    position: absolute;
+    top: 70vh;
     height: 15vh;
+    width: 7vw;
+    left: 2vw;
     margin-top:3vh;
     border-radius: 500px;
   }
-  #btBack,#btAjouter{font-size: 8vh;}
+  #btBack {
+    font-size: 8vh;
+    top:0vh;
+  }
   .containerButtonMenu {
     /* #btBack,#btAjouter,#btEquipes */
     /* margin: 100 auto; */
@@ -82,7 +85,13 @@
     z-index: 1;
   }
   #btRandom {
-    width:100%;
+    position:absolute;
+    /* bottom:5px; */
+    /* right: 20px; */
+    
+    top: 0vh;
+    right: -1130%;
+
     height: 20vh;
     /* font-size:8vw; */
     padding:5px;
@@ -230,12 +239,35 @@ body {
   /* transition-delay: 1s; */
 }
 
+#questionPresents {
+  display:block; 
+  text-align: right;
+  font-size:1.5rem;
+}
+
+h1 {
+  text-shadow: 2px 8px 3px rgba(0,0,0,0.2),    0px -5px 35px rgba(255,255,255,0.3);
+}
+
+#forceEquipes{
+  position:absolute;
+  bottom:3px;
+  
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+
+}
+
 .forceEquipe{
   display: none;
   /* border-radius: 10px; */
   padding: 2px;
-  border: 1px solid black;
-
+  border: 1px solid white;
+  font-size: 1.4rem;
+  box-shadow:  rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 .emoforce{
@@ -259,27 +291,24 @@ body {
   font-size: 3rem;
 }
 
-  .btModifForce {
+.btModifForce {
   font-size: 3rem;
   border-radius: 100px;
   background-color: rgba(255,255,255,0.2);
 }
 
-#btModifForce,#btModifNom{
-  background-color: seagreen;
-  color:white;
-  font-size:1rem;
-
-  /* display:none ;  */
-  display: inline-block;
+#textEchange{
+  margin: 3px;
+  padding: 5px;
+  /* background-color: lightgray; */
+  /* background-color: seagreen; */
+  color:black;
+  font-size:0.9rem;
+  /* border:1px solid lightseagreen; */
   border-radius: 100px;
-  
-  /* background-color: white; */
-  /* color:rgb(21, 94, 52);*/
-  border-color: lightseagreen;
-  
+  /* border-color: lightseagreen; */
   /* height:4vh; */
-  /* width:40%; */
+  box-shadow: rgb(38, 57, 77) 0px 2px 30px -10px;
 }
 
 .hide {
@@ -288,42 +317,11 @@ body {
 
 .drag-over {
   border: 3px dashed white;
-}
-
-button:active {
-  /* animation: bounce-in .3s linear; */
-  /* transform: rotate(1080deg); */
-  animation: zoom 0.3s linear ;
-  
-}
-
-#btRandom:active, #btRandom:focus{
-  animation: tourne 1s linear;
+  background-color: white;
 }
 
 
-@keyframes zoom {
-  0% {    transform: scale(1, 1);  }
-  50% {    transform: scale(1.2, 1.6);  }  
-  100% {    transform: scale(1, 1);  }  
-}
 
-@keyframes tourne {
-  0% {
-    transform: rotate(0deg);
-    opacity:0.5;
-  }
-  /* 50% {
-    transform: rotate(1080deg);
-    height:30vh;
-    opacity:0.5;
-  }   */
-  100% {
-    transform: rotate(360deg);
-    height:10vh;
-    opacity:1;
-  }
- }
  
  
 
@@ -374,32 +372,17 @@ html, .fullscreen {
 }
 
 
-@keyframes bounce-in {
- from {
-		transform: scale(0);
-		opacity: 0;
-	}
-	to {
-		transform: scale(1);
-		opacity: 1;	
-	} 
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
+
+button {
+  /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset; */
+  /* box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset, rgba(25, 59, 77, 0.4) 0px 25px 20px -20px; */
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 4px 0px, rgba(0, 0, 0, 0.05) 0px 1px 6px 0px, rgba(0, 0, 0, 0.1) 0px 8px 8px 0px, rgba(0, 0, 0, 0.1) 0px 16px 16px 0px, rgba(0, 0, 0, 0.15) 8px 32px 32px 0px, rgba(0, 0, 0, 0.15) 8px 64px 64px 0px;
 }
-
-
-
 
 .player {
   animation: bounce-in .3s linear;
   text-align: center;
+  padding:2px;
   /* padding-left: 10px; */
   /* display: inline-block; */
   /* padding: 2px; */
@@ -410,6 +393,7 @@ html, .fullscreen {
   /* position: relative; */
   overflow: hidden;
   flex-grow: 1;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px 0px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 1px 0px inset;
 }
 
 #div0{
@@ -425,15 +409,27 @@ html, .fullscreen {
 }
 
 #divPlus{
-  border-radius: 100px;
-  border: 3px solid green;
-  border-bottom: 0px;
-  padding: 0px 20px ;
+  margin:3px;
+  padding: 1px 20px ;
+  flex-grow: 1;
+  border-radius: 10px;
+  /* border-inline: 4px solid green; */
   /* margin:5px; */
-  font-weight: bolder;
+  /* font-weight: bolder; */
   /* align-items: center; */
-  background-color: white;
-  color:green;
+  /* background-color: green; */
+  /* color:white; */
+  box-shadow: 
+    rgba(0, 0, 0, 0.4) 0px 2px 4px 0px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+    rgba(0, 0, 0, 0.17) 0px -2px 25px 0px inset, 
+    rgba(0, 0, 0, 0.2) 0px -3px 1px 0px inset;
+
+  /* box-shadow:
+    rgba(61, 7, 111, 0.15) 0px -36px 30px 0px inset,
+    rgba(4, 126, 170, 0.1) 0px -79px 40px 0px inset, 
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, 
+    rgba(0, 0, 0, 0.09) 0px 32px 16px; */
 }
 
 #div0>.player {
@@ -469,15 +465,14 @@ html, .fullscreen {
 }
 #div0>.player.selected, #div1>.player.selected, #div2>.player.selected, #div3>.player.selected {
   background-color: white;
-  color:seagreen;
-  font-size:4vw;
-  border: 3px dashed lightseagreen;
-  border-radius: 100px;
+  color: tomato ;
+  /* font-size:7vw; */
+  /* border: 3px dashed lightseagreen; */
+  /* border-radius: 100px; */
 }
 #div0>.player.inactif{
   color: white;
   background-color: red;
-  box-shadow: ;
 }
 
 div.span {
@@ -489,18 +484,24 @@ div.span {
   vertical-align: middle;
 }
 .imgforce {
-  /* width: auto; */
-  /*to maintain aspect ratio. You can use 100% if you don't care about that */
-  /* height: 100%; */
   width: 4vw;
   height: 4vw;
 }
 
-.player.selected ~ .player {
-  background: pink
-  /* #a:hover ~ #b  */
+
+.cible{
+  background-color: lightgray;
+  animation: bounce-in .3s linear;
+  text-align: center;
+  border-radius: 10px;
+  font-family: fantasy;
+  overflow: hidden;
+  flex-grow: 1;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px 0px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px 0px inset;
+
 
 }
+
 
 @media screen and (min-width: 800px) {
   .player{
