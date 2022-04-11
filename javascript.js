@@ -26,7 +26,6 @@ $(document).ready(function () {
     $("#div3").hide();
 
     changeTeam();
-    creerDivPlus_();
     // connectBdd();
     
     console.log("<<<<<<<<<<<< END >>>>>>>>>>>>")
@@ -65,7 +64,9 @@ function changeTeam(){
     enleverTousJoueurs_();
     loadData(team.newName);
     majForceEquipes_();
+    creerDivPlus_();
     $("#questionPresents").slideDown();
+    
 
 }
 
