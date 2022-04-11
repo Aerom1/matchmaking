@@ -65,6 +65,7 @@ function changeTeam(){
     loadData(team.newName);
     majForceEquipes_();
     creerDivPlus_();
+    $(".cible").remove();
     $("#questionPresents").slideDown();
     
 
@@ -218,6 +219,8 @@ function btBack(){
 
 function reinit_() {
     console.log("reinit_")
+    $(".cible").remove();
+
     // $("#div0").show();
     var dispos = document.getElementById('div0');
     var equipe1 = document.getElementById('div1');

@@ -184,6 +184,7 @@
     text-align: center;
     z-index: 1;
   }
+  
   #btRandom {
     z-index: 2;
     display:inline-block ;
@@ -251,30 +252,53 @@ h1 {
 
 #forceEquipes{
   position:absolute;
-  bottom:3px;
-  
-  margin-left: auto;
+  top:81vh;
+  right:2vw;
+  /* border:1px solid black; */
+  /* margin-left: auto;
   margin-right: auto;
   left: 0;
   right: 0;
   text-align: center;
-
+  vertical-align: middle; */
 }
 
 .forceEquipe{
   display: none;
   /* border-radius: 10px; */
   padding: 2px;
-  border: 1px solid white;
+  /* border: 1px solid white; */
   font-size: 1.4rem;
   box-shadow:  rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  margin: -2px;
 }
 
+#forceEq1 { 
+	border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+	}
+#forceEq3 { 
+}
+#forceEq2 { 
+	border-top-right-radius: 20px;
+	border-bottom-right-radius: 20px;
+	}
+
 .emoforce{
-  border-inline:1px solid white;
+  /* border-inline:1px solid white; */
   border-radius: 100px;
-  /* background-color: green; */
-  margin-right: 2px;
+  margin-right: 5px;
+  /* background-color: rgba(0,0,0,0.1); */
+  /* padding-bottom: 40px; */
+  box-shadow: 
+    rgba(0, 0, 0, 0.4) 0px 2px 4px 0px, 
+    rgba(0, 0, 0, 0.3) 0px 0px 13px -3px,
+    rgba(255,255,255, 0.2) 0px -3px 1px 0px inset,
+    rgba(255,255,255, 0.2) 0px -3px 1px 0px inset;
+  /* box-shadow: -1px -2px 5px 1px rgba(0, 0, 0, 0.7),
+              1px -2px 20px rgba(255, 255, 255, 0.6) inset;  */
+  /* box-shadow: inset 2px 2px 5px rgba(154, 147, 140, 0.5), 1px 1px 5px rgba(255, 255, 255, 1); */
+
   }
 
 .btModifNom,.btSupprPlayer, .btCloseMenu{
@@ -323,11 +347,6 @@ h1 {
 
 
  
- 
-
-
-
-
 
 /* Make content area fill the entire browser window */
 html, .fullscreen {
@@ -365,24 +384,35 @@ html, .fullscreen {
   /* width: 40vw; */
   display:inline-block;
   /* height:100%; */
-  /* background-color: lightgrey; */
   /* line-height: 100%;  */
   /* display: table-cell; */
   vertical-align: middle;
 }
 
+#divOptionsJoueurs{
+  animation: bounce-in .3s linear;
+  text-align: center;
 
+}
 
 button {
   /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset; */
   /* box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset, rgba(25, 59, 77, 0.4) 0px 25px 20px -20px; */
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 4px 0px, rgba(0, 0, 0, 0.05) 0px 1px 6px 0px, rgba(0, 0, 0, 0.1) 0px 8px 8px 0px, rgba(0, 0, 0, 0.1) 0px 16px 16px 0px, rgba(0, 0, 0, 0.15) 8px 32px 32px 0px, rgba(0, 0, 0, 0.15) 8px 64px 64px 0px;
+  box-shadow: 
+  rgba(0, 0, 0, 0.05) 0px 1px 6px 0px, 
+  rgba(0, 0, 0, 0.1) 0px 4px 4px 0px, 
+  rgba(0, 0, 0, 0.1) 0px 8px 8px 0px, 
+  rgba(0, 0, 0, 0.1) 0px 16px 16px 0px, 
+  rgba(0, 0, 0, 0.15) 8px 32px 32px 0px,
+  rgba(0, 0, 0, 0.15) 8px 64px 64px 0px;
 }
 
 .player {
   animation: bounce-in .3s linear;
-  text-align: center;
+  text-align: left;
   padding:2px;
+  padding-bottom:3px;
+  padding-left:3px;
   /* padding-left: 10px; */
   /* display: inline-block; */
   /* padding: 2px; */
@@ -393,7 +423,9 @@ button {
   /* position: relative; */
   overflow: hidden;
   flex-grow: 1;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px 0px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 1px 0px inset;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px 0px, 
+              rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, 
+              rgba(0, 0, 0, 0.2) 0px -3px 1px 0px inset;
 }
 
 #div0{
@@ -454,7 +486,7 @@ button {
   /* border: 1px solid black; */
 }
 #div3>.player,#forceEq3 {
-  background-color: black;
+  background-color: rgb(61, 61, 61);
   color: white;
   /* border: 1px solid grey; */
 }
