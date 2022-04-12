@@ -61,6 +61,7 @@ function changeTeam(){
     document.getElementById("logoEquipe2").setAttribute("src",team.logoEquipe);
 
     console.log("New team : " + teamActuelle.getAttribute("name"));
+    supprDivPlus_();
     enleverTousJoueurs_();
     loadData(team.newName);
     majForceEquipes_();
@@ -280,6 +281,7 @@ function btRandom(){
         }else{
             nbEquipe=2
         }
+        document.getElementById('btEquipes').setAttribute("nb",nbEquipe);
         console.log(nbJoueurs + " JOUEURS : " + nbEquipe + " equipes !")
     }
     RANDOM(nbEquipe);
