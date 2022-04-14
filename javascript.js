@@ -32,6 +32,10 @@ $(document).ready(function () {
 });
 
 function changeTeam(){
+    $("#div0").show();
+    $("#div1").hide();
+    $("#div2").hide();
+    $("#div3").hide();
 
     var team1sun = {
         newName: "SUN",
@@ -59,7 +63,6 @@ function changeTeam(){
     teamActuelle.innerText = team.newText;
     document.getElementById("logoEquipe").setAttribute("src",team.logoEquipe);
     document.getElementById("logoEquipe2").setAttribute("src",team.logoEquipe);
-
     console.log("New team : " + teamActuelle.getAttribute("name"));
     supprDivPlus_();
     enleverTousJoueurs_();
@@ -206,6 +209,7 @@ function btBack(){
     enleveMenuTousJoueurs_();
     $("#questionPresents").slideDown();
     supprDivPlus_();
+    $("#div0").show();
     $("#div1").hide();
     $("#div2").hide();
     $("#div3").hide();
@@ -360,7 +364,7 @@ function RANDOM(nbEquipe) {
     } while (difference > ecartmax);
     majForceEquipes_();
    
-    // $("#div0").hide();
+    $("#div0").hide();
     $("#div1").show();
     $("#div2").show();
     
@@ -490,8 +494,9 @@ function createPlayer_(force, name, inactif, UID) {
                 .addClass("emoforce")
                 .attr({onclick: ""})
                 .text(emo)
-            )
+                )
             .append($('<span></span>')
+                .addClass("playerName")
                 .text(name)
             )
             // .prepend($('<img src='+img+'></img>') // .prepend($('<img src=' + img + ' style="filter: opacity(' + ((force - 1) * 20) + '%)" ></img>')
