@@ -36,7 +36,9 @@ function changeTeam(){
     $("#div1").hide();
     $("#div2").hide();
     $("#div3").hide();
-
+    $(".containerEquipes").css({"display":"grid"})
+    $(".container").css({"width":"100%"})
+    
     var team1sun = {
         newName: "SUN",
         logoEquipe: imgSunride,
