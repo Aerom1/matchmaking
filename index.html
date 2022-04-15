@@ -32,8 +32,12 @@
 </head>
 
 <body>
+	<!-- <div id="textEchange" style="display:none;">
+		Clic joueur pour échanger 🔁 (ou glisser-déposer)<br>
+		Clic image 🐭😼🐻 pour modifer ✏️
+	</div> -->
 	<header>
-		<img class="logo" id="logoEquipe2" src="" style = "position:absolute ; max-width:100%; height: 80px; left:15px; top: 5px;";/>
+		<img class="logo" id="logoEquipe2" onClick="changeTeam()" src="" style = "position:absolute ; max-width:100%; height: 80px; left:15px; top: 5px;";/>
 		<h1 id="team" name="" onClick="changeTeam()" > </h1>
 		<!-- <h1>🏒 Sun Ride</h1> -->
 		<!-- <img src="images/favicon.png"> --> 
@@ -46,11 +50,6 @@
 	</center></span>
 	<br>
 
-	<div id="textEchange" style="display:none;">
-		Clic joueur pour échanger 🔁 (ou glisser-déposer)
-		<br>
-		Clic image 🐭😼🐻 pour modifer ✏️
-	</div>
 	<div class="containerEquipes">
 		<!-- <h1>Choix des équipes</h1> -->
 		<div id="div1" class="container" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>

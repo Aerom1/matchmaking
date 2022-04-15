@@ -111,12 +111,14 @@ function loadData(team){
             [2,"Flo"],
             [2,"Laurent"],
             [2,"Romain"],
-            [1,"Raphael"],
+            [2,"Raphael"],
             [1,"MariLoL"],
             [1,"Aurélie"],
             [1,"Céline"],
             [1,"Laurence"],
-            [2,"Mateo"]
+            [1,"Cyril"],
+            [1,"JM"],
+            [1,"Lucas"]
         ]
 
         var VIK = [
@@ -125,13 +127,17 @@ function loadData(team){
             [3,"Manu"],
             [3,"Yann"],
             [3,"Richard"],
+            [3,"Julien"],
             [2,"Stéphane"],
             [2,"Flo"],
             [2,"Romain"],
-            [1,"Raphael"],
+            [2,"Raphael"],
             [2,"MariLoL"],
+            [2,"Evan"],
             [1,"Aurélie"],
             [1,"Céline"],
+            [1,"JM"],
+            [1,"Lucas"],
             [1,"Laurence"],
             [1,"Laure"],
         ]
@@ -195,6 +201,8 @@ function loadData(team){
 
     }
 
+    document.getElementById("questionPresents").innerText = (document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length) +" joueurs présents"
+
     const boxes = document.querySelectorAll('.player');
     boxes.forEach(box => {
         box.addEventListener('dragenter', dragEnter)
@@ -225,7 +233,8 @@ function btBack(){
 function reinit_() {
     console.log("reinit_")
     $(".cible").remove();
-
+    $(".containerEquipes").css({"display":"grid"})
+    $(".container").css({"width":"100%"})
     // $("#div0").show();
     var dispos = document.getElementById('div0');
     var equipe1 = document.getElementById('div1');
@@ -371,8 +380,13 @@ function RANDOM(nbEquipe) {
     // console.log("NB JOUEURS EQ 3 : "+ equipe3.children.length)
     if(equipe3.children.length){
         $("#div3").show();
+        $(".containerEquipes").css({"display":"grid"})
+        $(".container").css({"width":"100%"})
     }else{
         $("#div3").hide();
+        $(".containerEquipes").css({"display":"flex"})
+        $(".container").css({"width":"49%"})
+
     }
 
 }
@@ -587,6 +601,7 @@ function creerMenuJoueur_(clicked){
     var tree = document.createDocumentFragment();
     var containerBt = document.createElement("div");
     containerBt.setAttribute("id", "divOptionsJoueurs");
+    containerBt.setAttribute("class", "divOptionsJoueurs");
     containerBt.style.display = "inline";
     containerBt.style.backgroundColor = "rgba(0,0,0, 0.8)"
     containerBt.style.borderRadius = "30px"
@@ -764,6 +779,7 @@ function clickSwitchInactif(clicked) {
 function select(clicked) {
 
     console.log(clicked);
+    console.log(window.event.target);
     console.log("^-------------------------^");
 
     // CLIQUE DE L'ICONE DE FORCE - affichage du menu
@@ -807,6 +823,12 @@ function select(clicked) {
         return;
     }
     enleveMenuTousJoueurs_();
+
+    // CLIQUE NUL PART - ferme le menu
+    if(window.event.target.classList.contains("divOptionsJoueurs")) {
+        $(clicked.children[2]).remove();
+        return;
+    }
 
     // gère les présents/absents dans la div joueursDispos (div0)
     if (clicked.parentNode.id=="div0"){

@@ -245,10 +245,10 @@ body {
   /* border: 1px solid black; */
   /* display: flex; */
   position:absolute;
-  top:12vh;
-  bottom:19vh;
-  left: 0;
-  right: 0;
+  top:14vh;
+  bottom:21vh;
+  left: 5px;
+  right: 5px;
   display: flex;
   justify-content: space-around;
   /* text-align: center; */
@@ -302,7 +302,7 @@ h1 {
 
 .player {
   animation: bounce-in .3s linear;
-  text-align: left;
+  /* text-align: left; */
   padding:2px;
   padding-bottom:3px;
   padding-left:3px;
@@ -310,14 +310,19 @@ h1 {
   font-family: fantasy;
   overflow: hidden;
   flex-grow: 1;
+  display: flex;
+  grid-auto-flow: column;
+  align-items: center;
+  /* vertical-align: middle; */
+  /* flex-grow: 1; */
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px 0px, 
               rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, 
               rgba(0, 0, 0, 0.2) 0px -3px 1px 0px inset;
 }
   
-/* .playerName{
+.playerName{
   display: block;
-} */
+}
 
 .emoforce{
   /* border-inline:1px solid white; */
@@ -356,7 +361,13 @@ h1 {
   background-color: rgba(255,255,255,0.2);
 }
 
+h1{
+  z-index: 3;
+}
 #textEchange{
+  z-index: 4;
+  position: absolute;
+  top:5px;
   margin: 3px;
   padding: 5px;
   text-align: center;
@@ -415,16 +426,21 @@ html, .fullscreen {
   /* margin: auto; */
   /* padding: 5px; */
   margin-bottom: 5px;
-  border: 0.5px solid lightgrey;
+  /* border: 0.5px solid lightgrey; */
   /* background-color: lightgray; */
   /* border-radius: 10px; */
   /* float: none; */
   /* width: 40vw; */
-  display:inline-block;
   /* height:100%; */
   /* line-height: 100%;  */
   /* display: table-cell; */
   vertical-align: middle;
+  /* display:inline-block; */
+  display:flex;
+  flex-wrap: wrap;
+  vertical-align:middle;
+  text-align: center;
+
 }
 
 #divOptionsJoueurs{
@@ -461,7 +477,9 @@ button {
 #divPlus{
   margin:3px;
   padding: 1px 20px ;
-  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  /* flex-grow: 1; */
   border-radius: 10px;
   /* border-inline: 4px solid green; */
   /* margin:5px; */
