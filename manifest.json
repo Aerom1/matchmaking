@@ -1,0 +1,13 @@
+{
+    "name": "Matchmaking",
+    "short_name": "Matchmaking",
+    "start_url": ".",
+    "background_color": "#eef3f9",
+    "theme_color": "#6d7a84",
+    "display": "standalone",
+    "icons": [{
+      "src": "images/sunride.png",
+      "size": "500/500",
+      "type": "image/png"
+    }]
+  }

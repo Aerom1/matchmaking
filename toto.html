@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<script>
+    alert(1)
+    var mysql      = require('mysql');
+    var connection = mysql.createConnection({
+        host     : 'fdb32.atspace.me',
+        database : '4081187_matchmaking',
+        user     : '4081187_matchmaking',
+        password : 'M4tchmaking'
+    });
+    alert(2)
+    connection.connect();
+    
+    connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+    if (error) throw error;
+    console.log('The solution is: ', results[0].solution);
+    });
+    
+    connection.end();
+</script>
+
+</head>
+<body>
+    COUCOU
+</body>
+</html>

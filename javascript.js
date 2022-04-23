@@ -17,7 +17,7 @@ const emoForce3 = "🐻";
 
 $(document).ready(function () {
 
-    console.log("Hello world")
+    console.log("HELLO WORLD")
     
     // localStorage.clear();   console.log("SUPPRESSION LOCALSTORAGE----------");
 
@@ -26,7 +26,10 @@ $(document).ready(function () {
     $("#div3").hide();
 
     changeTeam();
-    // connectBdd();
+    
+    // Connexion BDD
+    console.log("connexion bdd")
+    connectBdd();
     
     console.log("<<<<<<<<<<<< END >>>>>>>>>>>>")
 });
@@ -394,6 +397,25 @@ function RANDOM(nbEquipe) {
 }
 
 function connectBdd(){
+    var mysql      = require('mysql');
+    var connection = mysql.createConnection({
+        host     : 'fdb32.atspace.me',
+        database : '4081187_matchmaking',
+        user     : '4081187_matchmaking',
+        password : 'M4tchmaking'
+    });
+     
+    connection.connect();
+    alert(1); 
+    connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+      if (error) throw error;
+      console.log('The solution is: ', results[0].solution);
+    });
+     
+    connection.end();
+}
+
+function connectBddOLD(){
     var mysql = require('mysql');
 
     const pool  = mysql.createPool({
@@ -404,12 +426,12 @@ function connectBdd(){
         password : 'M4tchmaking'
     });
 
-    // Get all beers
+    // Get all players
     app.get('', (req, res) => {
         pool.getConnection((err, connection) => {
             if(err) throw err;
             console.log('connected as id ' + connection.threadId);
-            connection.query('SELECT * from players', (err, rows) => {
+            connection.query('SELECT * from tJoueurs', (err, rows) => {
                 connection.release(); // return the connection to pool
 
                 if (!err) {
