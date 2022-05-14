@@ -311,7 +311,7 @@ h1 {
   padding:2px;
   padding-bottom:3px;
   padding-left:3px;
-  border-radius: 10px;
+  border-radius: 5vw;
   font-family: fantasy;
   overflow: hidden;
   flex-grow: 1;
