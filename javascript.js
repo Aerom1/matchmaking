@@ -858,8 +858,8 @@ function enleveMenuTousJoueurs_(){
 }
 
 function clickJoueurAfficheInfo(clicked){
-    console.log(clicked)
-
+    // console.log(clicked)
+        
     // gère la sélection dans les équipes
     var selection = $(".selected")
     // Vérifique que le joueur cliqué n'est pas le même que le joueur sélectionné
@@ -869,7 +869,8 @@ function clickJoueurAfficheInfo(clicked){
         if (selection.length == 0) {
             // S'il n'y avait pas de joueur sélectionné, on sélectionne (classe selected)
             $(clicked).toggleClass("selected")
-            ajoutCiblesToutesEquipes();
+            var divOrigine = clicked.parentNode.id
+            ajoutCiblesToutesEquipes(divOrigine);
         } else {
             // S'il y a déjà un joueur sélectionné, 
             // Si la seconde selection est aussi un joueur, on échange les deux jouers

@@ -39,18 +39,20 @@ function drag(ev) {
     // setTimeout(() => {
     //     ev.target.classList.add('hide');
     // }, 0);
-    ajoutCiblesToutesEquipes();
+    ajoutCiblesToutesEquipes(ev.target.parentNode.id);
 }
 
-function ajoutCiblesToutesEquipes(){
+function ajoutCiblesToutesEquipes(divOrigine){
     // Ajoute 3 cibles (une pour chaque équipe)
     for (let i=1;i<=3;i++) {
-        var cible = document.createElement("div");
-            cible.innerText = "🎯";
-            cible.setAttribute("class", "cible");
-            cible.classList.add("player");
-            cible.setAttribute("onclick","select(this)");
-        document.getElementById("div"+i).appendChild(cible);
+        if ("div"+i !== divOrigine) {
+            var cible = document.createElement("div");
+                cible.innerText = "🎯";
+                cible.setAttribute("class", "cible");
+                cible.classList.add("player");
+                cible.setAttribute("onclick","select(this)");
+            document.getElementById("div"+i).appendChild(cible);
+        }
     }
 }    
 
