@@ -485,7 +485,7 @@ button {
   display: flex;
   align-items: center;
   /* flex-grow: 1; */
-  border-radius: 10px;
+  border-radius: 5vw;
   /* border-inline: 4px solid green; */
   /* margin:5px; */
   /* font-weight: bolder; */

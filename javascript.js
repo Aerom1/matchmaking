@@ -325,8 +325,10 @@ function RANDOM(nbEquipe) {
     
     //parseInt(txtBtEq.substring(txtBtEq.length-2));
     console.log("nbEquipe:"+nbEquipe);
-    var ecart = 0, ecartmax = 0, difference = 0;
+    var ecart = 0.1 //10% de différence de force max
+    var ecartmax = 0, difference = 0; compteur = 0
     do {
+        compteur+=1
         reinit_();
         // supprDivPlus_();
         var forceEq1 = 0, forceEq2 = 0, forceEq3 = 0;
@@ -358,7 +360,12 @@ function RANDOM(nbEquipe) {
             }
             bascule++;
         }
-        ecartmax = Math.round(0.1 * (forceEq1 + forceEq2 + forceEq3) /nbEquipe, 2); //10% de différence de force max
+        if (compteur % 3 == 0) { 
+            ecart *= 1.1 // si on ne trouve pas au bout de 3 essais, on augmente la marge d'erreur de 10% et on réessaie 3 fois...
+            console.log("AUGMENTATION DE L'ECART MAX APRES 3 ESSAIS INFRUCTUEUX : " + ecart)
+        }
+        
+        ecartmax = Math.round(ecart * (forceEq1 + forceEq2 + forceEq3) /nbEquipe, 2); //10% de différence de force max
         var max = Math.max(forceEq1,forceEq2,forceEq3);
         var min = 0;
         if (nbEquipe==2) {
@@ -369,7 +376,8 @@ function RANDOM(nbEquipe) {
         difference = max-min;
         var resul 
         if (difference > ecartmax) { resul="--> ON RECOMMENCE";
-        } else { resul="--> ON ACCEPTE"; }
+            } else { resul="--> ON ACCEPTE"; }
+
         console.log("ecartmax:"+ecartmax+", diff:"+difference+", Répartition: "+forceEq1+" / "+forceEq2+" / "+ forceEq3 + resul);
 
     } while (difference > ecartmax);
