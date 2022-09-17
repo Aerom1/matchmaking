@@ -477,28 +477,85 @@ function clickAddPlayer() {
     enleveMenuTousJoueurs_();
     var name = prompt("Nom du joueur :")
     if (name == "" || name == null) { return }
-    var force = prompt("Force du joueur de 1 (faible) à 3 (fort)")
-    if (force == "" || force == null) { return }
-    var intForce = parseInt(force)
-    console.log(intForce)
-    if ((intForce <= 0) || (intForce > 3) || isNaN(intForce)) {
-        alert("La force du joueur doit être comprise entre 1 et 3 (vous avez écrit " + force + ")");
-        return;
+    creerMenuJoueur_(name)
+
+    function creerMenuJoueur_(name){
+        // clicked.classList.add("menu")
+        // var pos = clicked.getBoundingClientRect();
+    
+        var tree = document.createDocumentFragment();
+        var containerBt = document.createElement("div");
+            containerBt.setAttribute("id", "divOptionsJoueurs");
+            containerBt.setAttribute("class", "divOptionsJoueurs");
+            containerBt.style.display = "inline";
+            containerBt.style.backgroundColor = "rgba(0,0,0, 0.8)"
+            containerBt.style.borderRadius = "30px"
+            containerBt.style.border = "2px solid grey"
+            containerBt.style.padding = "100px 20px 100px 20px"
+            containerBt.style.boxShadow = "rgba(0, 0, 0, 0.56) 0px 22px 70px 4px"
+            containerBt.style.position = "absolute";
+            containerBt.style.top = "30%";
+            containerBt.style.left = "10%";
+        var nom = document.createElement("span")       // AFFICHAGE NOM
+            nom.innerText = name;
+            nom.setAttribute("id", "newPlayerName");
+            nom.style.color = "white"
+            nom.classList.add("btModifNom");
+            containerBt.append(nom);
+        var hr = document.createElement("br")
+            containerBt.append(hr);        
+        var hr = document.createElement("br")
+            containerBt.append(hr);
+        var hr = document.createElement("br")
+            containerBt.append(hr);
+        var newBt4 = document.createElement("button"); // FORCE 1
+            newBt4.setAttribute("id", "emoForce1");
+            newBt4.classList.add("btModifForceAddplayer");
+            newBt4.textContent = emoForce1
+            containerBt.append(newBt4)
+        var newBt2 = document.createElement("button"); // FORCE 2
+            newBt2.setAttribute("id", "emoForce2");
+            newBt2.classList.add("btModifForceAddplayer");
+            newBt2.textContent = emoForce2
+            containerBt.append(newBt2)
+        var newBt3 = document.createElement("button"); // FORCE 3
+            newBt3.setAttribute("id", "emoForce3");
+            newBt3.classList.add("btModifForceAddplayer");
+            newBt3.textContent = emoForce3
+            containerBt.append(newBt3)
+            containerBt.setAttribute("onclick", "clickBtForceAddPlayer(this)");
+
+        var hr = document.createElement("br")
+            containerBt.append(hr);
+        //✅ 🈯️ 💹 ❇️ ✳️ ❎❌    
+        tree.appendChild(containerBt)
+        document.getElementById("div0").appendChild(tree);
+        // document.insertBefore("divPlus").appendChild(tree);
     }
-    var team = document.getElementById("team").getAttribute("name");
-    var player = {
-        "team":team,
-        "name":name,
-        "absent":false,
-        "force":intForce}
-    var date = (new Date()).toLocaleDateString();
-    var UID = team+"-PLAYER-"+player.name+"-"+date
-    console.log("Ajout de: "+JSON.stringify(player) +" | UID:"+UID);
-    localStorage.setItem(
-        UID,
-        JSON.stringify(player)
-        );
-    createPlayer_(intForce, name, false, UID)
+
+    // // var force = prompt("Force du joueur de 1 (faible) à 3 (fort)")
+    // if (force == "" || force == null) { return }
+
+    // var intForce = parseInt(force)
+    // console.log(intForce)
+    // if ((intForce <= 0) || (intForce > 3) || isNaN(intForce)) {
+    //     alert("La force du joueur doit être comprise entre 1 et 3 (vous avez écrit " + force + ")");
+    //     return;
+    // }
+    // var team = document.getElementById("team").getAttribute("name");
+    // var player = {
+    //     "team":team,
+    //     "name":name,
+    //     "absent":false,
+    //     "force":intForce}
+    // var date = (new Date()).toLocaleDateString();
+    // var UID = team+"-PLAYER-"+player.name+"-"+date
+    // console.log("Ajout de: "+JSON.stringify(player) +" | UID:"+UID);
+    // localStorage.setItem(
+    //     UID,
+    //     JSON.stringify(player)
+    //     );
+    // createPlayer_(intForce, name, false, UID)
 }
 
 function createPlayer_(force, name, inactif, UID) {
@@ -640,7 +697,7 @@ function creerMenuJoueur_(clicked){
     // console.log(clicked.style.left-100)
     
     var newBt6 = document.createElement("button");  // SUPPR JOUEUR
-    newBt6.textContent = "❌"
+    newBt6.textContent = "🚮" //❌
     newBt6.classList.add("btSupprPlayer");
     containerBt.append(newBt6)
 
@@ -660,8 +717,10 @@ function creerMenuJoueur_(clicked){
 
     
     var hr = document.createElement("br")
-    // hr.style.margin = "0px"
     containerBt.append(hr);
+    var hr = document.createElement("br")
+    containerBt.append(hr);
+    // hr.style.margin = "0px"
     
     var newBt4 = document.createElement("button"); // FORCE 1
     newBt4.setAttribute("id", "emoForce1");
@@ -712,6 +771,40 @@ function clickIcone(clicked) {
     console.log("le menu n'existe pas")
 
     creerMenuJoueur_(clicked);
+}
+
+function clickBtForceAddPlayer(clicked){
+    var emoForce = window.event.target.getAttribute("id")
+    switch (emoForce) {
+        case 'emoForce1': force = 1; break;
+        case 'emoForce2': force = 2; break;
+        case 'emoForce3': force = 3; break;
+        default: force = 0;
+    }
+
+    if(force!==0){
+        console.log("emoForce:"+emoForce)
+        console.log("force:"+force)
+
+        var team = document.getElementById("team").getAttribute("name");
+        var name = document.getElementById("newPlayerName").textContent;
+        var player = {
+            "team":team,
+            "name":name,
+            "absent":false,
+            "force":parseInt(force)}
+        var date = (new Date()).toLocaleDateString();
+        var UID = team+"-PLAYER-"+player.name+"-"+date
+        console.log("Ajout de: "+JSON.stringify(player) +" | UID:"+UID);
+        localStorage.setItem(
+            UID,
+            JSON.stringify(player)
+            );
+        createPlayer_(force, name, false, UID)
+    }
+    // Suppression du menu
+    $(clicked.children[2]).remove();
+    clicked.remove("menu")
 }
 
 function clickBtForce(clicked) {
@@ -788,6 +881,7 @@ function clickSwitchInactif(clicked) {
 
 function select(clicked) {
 
+    console.log("SELECTED");
     console.log(clicked);
     console.log(window.event.target);
     console.log("^-------------------------^");
