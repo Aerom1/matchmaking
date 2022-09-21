@@ -61,6 +61,13 @@
     left: 0vw; 
     width: 8vw;
   }
+  #btChgTeam{
+    margin-top: -15px;
+    font-size:8vh;
+    border-radius: 500px;
+    overflow:hidden;
+    width: 7vw;
+  }
   #btBack,#btEquipes{
     position: absolute;
     top: 70vh;
@@ -157,6 +164,13 @@
     bottom: 10px; 
     left: 0; 
     right: 0;
+  }
+
+  #btChgTeam{
+    font-size:6vh;
+    border-radius: 500px;
+    overflow:hidden;
+    width: 35%;
   }
   #btBack,#btAjouter{font-size:6vh;}
   #btBack,#btAjouter,#btEquipes{
@@ -280,7 +294,7 @@ h1 {
   vertical-align: middle;
 }
 
-.forceEquipe::after {
+.forceEquipe::before {
   content: "💪";
 
 }

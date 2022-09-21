@@ -203,7 +203,7 @@ function loadData(team){
 
     }
 
-    document.getElementById("questionPresents").innerText = (document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length) +" joueurs présents"
+    document.getElementById("questionPresents").innerText = (document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length) +" présents /"+document.getElementsByClassName("player").length
 
     const boxes = document.querySelectorAll('.player');
     boxes.forEach(box => {
@@ -219,6 +219,7 @@ function btBack(){
     enleveMenuTousJoueurs_();
     $("#questionPresents").slideDown();
     supprDivPlus_();
+    $("#btChgTeam").show();
     $("#div0").show();
     $("#div1").hide();
     $("#div2").hide();
@@ -286,6 +287,7 @@ function btRandom(){
     var nbEquipe = document.getElementById('btEquipes').getAttribute("nb");   
     $("#btBack").show(); 
     $("#btEquipes").show(); 
+    $("#btChgTeam").hide();
 
     if (nbEquipe==0) {
         // Pas de nombre d'équipe choisi -> selon nombre de joueurs
@@ -876,7 +878,7 @@ function clickSwitchInactif(clicked) {
     );
     clicked.parentNode.appendChild(clicked);
     //màj nb joueurs actifs :
-    document.getElementById("questionPresents").innerText = (document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length) +" joueurs présents"
+    document.getElementById("questionPresents").innerText = (document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length) +" présents / " + document.getElementsByClassName("player").length
 }
 
 function select(clicked) {
