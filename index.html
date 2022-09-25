@@ -21,7 +21,6 @@
 
 	<link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" href="animations.css">
-	<!-- <?!= include('style'); ?> -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
@@ -30,7 +29,6 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="mobile-web-app-capable" content="yes">
 	<link rel="manifest" href="rompwa.webmanifest">
-
 </head>
 
 <body>
@@ -63,11 +61,13 @@
 	
 	<footer>
 		<div class="containerButtonMenu">
-			<button type="button" id="btBack" class="hide" onclick="btBack()">🏒</button>
+			<button type="button" id="btBack" 	 class="hide" onclick="btBack()">🏒</button>
 			<button type="button" id="btChgTeam" class="" onclick="changeTeam()">👨‍👩‍👦‍👦</button>
-			<button type="button" id="btRandom" class="btn" onclick="btRandom()">
-				<img class="logo" id="logoEquipe" src="" />	</button>
+			<button type="button" id="btRandom"  class="btn" onclick="btRandom()">
+				<img class="logo" id="logoEquipe" src="" />	
+			</button>
 			<button type="button" id="btEquipes" class="hide" nb=0 onclick="btModifNbEquipes()">👨🏽‍🤝‍👨🏻</button>
+			<button type="button" id="btAddTeam" class="" onclick="btAddTeam()">➕</button>
 			<!-- 🧩🏒⚙️📃🔙 -->
 			<!-- <button type="button" id="btAjouter" onclick="addPlayer()">➕</button> -->
 		</div>
@@ -76,7 +76,6 @@
 
 	<script src="javascript.js"></script>
 	<script src="dragndrop.js"></script>
-	<!-- <?!= include('javascript'); ?> -->
 
 </body>
 
