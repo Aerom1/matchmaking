@@ -68,6 +68,7 @@
     overflow:hidden;
     width: 7vw;
   }
+  
   #btBack,#btEquipes{
     position: absolute;
     top: 70vh;
@@ -170,8 +171,16 @@
     font-size:6vh;
     border-radius: 500px;
     overflow:hidden;
-    width: 35%;
+    width: 20%;
   }
+  #btAddTeam{
+    margin-top: -30px;
+    font-size:6vh;
+    border-radius: 500px;
+    overflow:hidden;
+    width: 20%;
+  }
+
   #btBack,#btAjouter{font-size:6vh;}
   #btBack,#btAjouter,#btEquipes{
     overflow:hidden;
@@ -341,6 +350,7 @@ h1 {
   
 .playerName{
   display: block;
+  max-width: 40vw;
 }
 
 .emoforce{
@@ -465,7 +475,7 @@ html, .fullscreen {
 #divOptionsJoueurs{
   animation: bounce-in .3s linear;
   text-align: center;
-
+  max-width: -moz-available;
 }
 
 button {
