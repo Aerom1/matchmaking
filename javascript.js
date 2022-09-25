@@ -74,8 +74,15 @@ function changeTeam(){
     $(".cible").remove();
     $("#questionPresents").slideDown();
     
-
 }
+
+function btAddTeam(){
+    enleveMenuTousJoueurs_();
+    var name = prompt("Quel est le nom de la nouvelle équipe ?")
+    if (name == "" || name == null) { return }
+    changeTeam()
+}
+
 
 function compteJoueursDeLequipe_(team){
     const items = { ...localStorage };
@@ -220,6 +227,7 @@ function btBack(){
     $("#questionPresents").slideDown();
     supprDivPlus_();
     $("#btChgTeam").show();
+    $("#btAddTeam").show();
     $("#div0").show();
     $("#div1").hide();
     $("#div2").hide();
@@ -250,7 +258,8 @@ function reinit_() {
     while (absents.children.length) { dispos.appendChild(absents.firstChild); }
     majForceEquipes_();
     //màj nb joueurs :
-    document.getElementById("questionPresents").innerText = (document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length) +" présents"
+    document.getElementById("questionPresents").innerText = (document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length) +" présents /"+document.getElementsByClassName("player").length
+
 }
 
 function creerDivPlus_(){
@@ -288,6 +297,7 @@ function btRandom(){
     $("#btBack").show(); 
     $("#btEquipes").show(); 
     $("#btChgTeam").hide();
+    $("#btAddTeam").hide();
 
     if (nbEquipe==0) {
         // Pas de nombre d'équipe choisi -> selon nombre de joueurs
@@ -477,7 +487,7 @@ function save2(){
 
 function clickAddPlayer() {
     enleveMenuTousJoueurs_();
-    var name = prompt("Nom du joueur :")
+    var name = prompt("Quel est le nom du joueur ?")
     if (name == "" || name == null) { return }
     creerMenuJoueur_(name)
 
@@ -843,7 +853,7 @@ function clickBtNom(clicked) {
     var nouveauNom = prompt("Nouveau nom ?",player.children[1].innerText)
     if (nouveauNom == "" || nouveauNom == null) { 
         return }
-    console.log("changment de nom: "+player.innerText+" -> "+nouveauNom)
+    console.log("changment de nom: "+player.children[1].innerText+" -> "+nouveauNom)
     // STOCKAGE DANS LE DOM :
     player.children[1].innerText = nouveauNom
     // STOCKAGE DANS LE COOKIE :
@@ -917,7 +927,7 @@ function select(clicked) {
                 $(clicked).remove();
                 localStorage.removeItem(clicked.id)
                 //màj nb joueurs :
-                document.getElementById("questionPresents").innerText = (document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length) +" présents"
+                document.getElementById("questionPresents").innerText = (document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length) +" présents /"+document.getElementsByClassName("player").length
             }
         } else {
             $(clicked.children[2]).remove();
