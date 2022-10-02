@@ -15,21 +15,19 @@ const emoForce3 = "🐻";
 //🐭😼🐻🦁🐯🐹😺😺🐶
 
 
-$(document).ready(function () {
-
-    console.log("Hello world")
-    
-    // localStorage.clear();   console.log("SUPPRESSION LOCALSTORAGE----------");
-
-    $("#div1").hide();
-    $("#div2").hide();
-    $("#div3").hide();
-
-    changeTeam();
-    // connectBdd();
-    
-    console.log("<<<<<<<<<<<< END >>>>>>>>>>>>")
-});
+// function hideAll(){
+//     if ($("#div0").is(":visible")) {
+//         $("#div0").hide();
+//         $("#div1").hide();
+//         $("#div2").hide();
+//         $("#div3").hide();
+//     } else {
+//         $("#div0").show();
+//         $("#div1").hide();
+//         $("#div2").hide();
+//         $("#div3").hide();
+//     }
+// }
 
 function changeTeam(){
     $("#div0").show();
@@ -52,8 +50,6 @@ function changeTeam(){
     console.log("change team")
     var teamActuelle = document.getElementById("team")
     // <h1 id="team" name="SUN" onClick="changeTeam()">🏒 Sun Ride</h1>
-    var newName
-    var newText
     var team
     switch(teamActuelle.getAttribute("name")) {
         case "VIK": team = team1sun ; break;
@@ -63,8 +59,8 @@ function changeTeam(){
     //team.innerHTML = '<h1 id="team" name="VIK" onClick="changeTeam()">🏒 Viking</h1>' ; break;
     teamActuelle.setAttribute("name",team.newName);
     teamActuelle.innerText = team.newText;
-    document.getElementById("logoEquipe").setAttribute("src",team.logoEquipe);
-    document.getElementById("logoEquipe2").setAttribute("src",team.logoEquipe);
+    document.getElementById("logoEquipe").setAttribute("src",team.logoEquipe); // logo du bouton (random)
+    document.getElementById("logoEquipe2").setAttribute("src",team.logoEquipe); // logo de l'appli (header)
     console.log("New team : " + teamActuelle.getAttribute("name"));
     supprDivPlus_();
     enleverTousJoueurs_();
@@ -77,11 +73,15 @@ function changeTeam(){
 }
 
 function btAddTeam(){
+
+    
+
     enleveMenuTousJoueurs_();
     var name = prompt("Quel est le nom de la nouvelle équipe ?")
     if (name == "" || name == null) { return }
     changeTeam()
 }
+
 
 
 function compteJoueursDeLequipe_(team){
@@ -209,7 +209,7 @@ function loadData(team){
         // console.log(logPlayersInactifs)
 
     }
-
+    // mise à jour du nombre de joueurs
     document.getElementById("questionPresents").innerText = (document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length) +" présents /"+document.getElementsByClassName("player").length
 
     const boxes = document.querySelectorAll('.player');
@@ -817,6 +817,10 @@ function clickBtForceAddPlayer(clicked){
     // Suppression du menu
     $(clicked.children[2]).remove();
     clicked.remove("menu")
+
+    // mise à jour du nombre de joueurs
+    document.getElementById("questionPresents").innerText = (document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length) +" présents /"+document.getElementsByClassName("player").length
+
 }
 
 function clickBtForce(clicked) {

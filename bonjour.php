@@ -5,13 +5,12 @@
  <body>
 
 <?php 
-    echo '<p>Bonjour le mondeuuhka 192.168.1.40</p>'; 
+    echo '<p>Bonjour le monde</p>'; 
     
     // phpinfo();
 
-    echo phpinfo();
     
-    $servername = "192.168.1.40";
+    $servername = "localhost";
     $username = "root";
     $password = "";
 
@@ -25,11 +24,12 @@
 
     $db = "dbplayer";
 
-    $conn = new mysqli($servername, $username, $password,$db) or die("Connect MySQLi Object-Oriented failed: %s\n". $conn -> error);
+    $conn = new mysqli($servername, $username, $password, $db) or die("Connect MySQLi Object-Oriented failed: %s\n". $conn -> error);
 
     echo "\n\n -> FIN DES TESTS DE CONNEXION";
 
 
+    echo phpinfo();
 
 
  ?>
