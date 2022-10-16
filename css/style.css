@@ -284,6 +284,8 @@ body {
   display:block; 
   text-align: right;
   font-size:1.5rem;
+  color:green; /*#bf0e1c;*/
+
 }
 
 h1 {
@@ -294,13 +296,13 @@ h1 {
   position:absolute;
   /* top:81vh;
   right:2vw; */
-  /* border:1px solid black; */
-  margin-left: auto;
-  margin-right: auto;
+  border-bottom:0px solid ddd;
+  /* margin-left: auto; */
+  padding-right: 5%;
   left: 0;
   right: 0;
-  text-align: center;
-  vertical-align: middle;
+  text-align: right;
+  /* vertical-align: middle; */
 }
 
 .forceEquipe::before {
@@ -385,9 +387,10 @@ h1 {
 }
 
 .btModifForce, .btModifForceAddplayer{
-  font-size: 3rem;
+  font-size: 3.5rem;
   border-radius: 100px;
   background-color: rgba(255,255,255,0.2);
+  margin: 2vw;
 }
 
 h1{
@@ -415,7 +418,7 @@ h1{
   display: none;
 }
 
-.drag-over {
+.player .drag-over {
   border: 3px dashed white;
   background-color: white;
 }
@@ -585,18 +588,29 @@ div.span {
   height: 4vw;
 }
 
+.cible span{
+  display:block;
+  margin:0 auto ;
+  /* display:block; */
+  /* margin:0 auto;  */
+      
+  /* display: inline-block; */
+  /* width: 49%; */
+  /* text-align: center; */
+}
 
 .cible{
   background-color: lightgray;
-  animation: bounce-in .3s linear;
+  animation: bounce-in 0.6s linear;
+  /* padding-left: 20px ;
+  padding-right: 20px ; */
   text-align: center;
-  border-radius: 10px;
+  border-radius: 500px;
   font-family: fantasy;
+  font-size: 40px;
   overflow: hidden;
   flex-grow: 1;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px 0px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px 0px inset;
-
-
 }
 
 

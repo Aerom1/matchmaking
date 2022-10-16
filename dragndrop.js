@@ -47,10 +47,12 @@ function ajoutCiblesToutesEquipes(divOrigine){
     for (let i=1;i<=3;i++) {
         if ("div"+i !== divOrigine) {
             var cible = document.createElement("div");
-                cible.innerText = "🎯";
                 cible.setAttribute("class", "cible");
                 cible.classList.add("player");
                 cible.setAttribute("onclick","select(this)");
+            var cibletxt = document.createElement("span");
+                cibletxt.innerText = "🎯";
+            cible.appendChild(cibletxt)
             document.getElementById("div"+i).appendChild(cible);
         }
     }

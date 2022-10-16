@@ -7,6 +7,9 @@
 
 //test new branch
 
+{/* <script src="appel_server.js"></script> */}
+
+
 const imgSunride = "images/sunride.png";
 const imgViking = "images/viking.png";
 const emoForce1 = "🐭";
@@ -29,7 +32,70 @@ const emoForce3 = "🐻";
 //     }
 // }
 
+
+function loadTeam(team, players){
+    console.log("load team : " + team.name)
+
+    // document.getElementById("logoEquipe2").setAttribute("src",team.logo); // logo de l'appli (header)
+    document.getElementById("logoEquipe1").setAttribute("src",team.logo); // logo du bouton (random)
+    var teamActuelle = document.getElementById("team")
+        teamActuelle.setAttribute("name", team.id);
+        teamActuelle.innerText = team.name;
+
+    $("#divPlus").remove();
+    enleverTousJoueurs_();
+
+    loadData(team, players);
+
+    majForceEquipes_();
+    majNbJoueurs_();
+    creerDivPlus_();
+
+    $("#div0").show();
+    $("#div1").hide();
+    $("#div2").hide();
+    $("#div3").hide();
+    $(".containerEquipes").css({"display":"grid"})
+    $(".container").css({"width":"100%"})
+    $(".cible").remove();
+    $("#questionPresents").slideDown();
+
+}
+
+function loadData(team, players){
+    console.log("Load Data pour " + team.name + " (" + players.length + " joueurs)");
+
+    var logPlayersCreated=[]
+    players.forEach( function(player) {
+        logPlayersCreated.push(player.name + " (xp:" + player.xp +")")
+        createPlayer_(Number(player.xp), player.name, Number(player.absent), Number(player.id))
+    })
+    console.log(logPlayersCreated)
+
+    // On met les joueurs inactifs à la fin
+    var logPlayersInactifs=[]
+    var container = document.getElementById("div0")
+    var joueurs = container.children
+    console.log("tri de "+joueurs.length + " joueurs selon présence")
+    for (let i = joueurs.length-1; i >= 0; i--) {
+        //console.log(joueurs[i].innerText + " doit-il bouger ?")
+        if (joueurs[i].classList.contains("inactif")) {
+            logPlayersInactifs.push(joueurs[i].innerText + " est inactif: bouge à la fin")
+            container.appendChild(joueurs[i])   
+        }
+    }
+    const boxes = document.querySelectorAll('.player');
+    boxes.forEach(box => {
+        box.addEventListener('dragenter', dragEnter)
+        box.addEventListener('dragover', dragOver);
+        box.addEventListener('dragleave', dragLeave);
+    });
+}
+
+
 function changeTeam(){
+    console.log("changeTeam()")
+
     $("#div0").show();
     $("#div1").hide();
     $("#div2").hide();
@@ -37,47 +103,33 @@ function changeTeam(){
     $(".containerEquipes").css({"display":"grid"})
     $(".container").css({"width":"100%"})
     
-    var team1sun = {
-        newName: "SUN",
-        logoEquipe: imgSunride,
-        newText: "Sun Ride"
+    var teamActuelleId = document.getElementById("team").getAttribute('name')
+    var newTeamIndex
+    var nbEquipes = Object.keys(all_teams).length
+
+    for (i=0 ; i<nbEquipes ; i++){
+        console.log("all_teams[i].id == team.id ?  ->  " + all_teams[i].id + " == " + teamActuelleId)
+        if (all_teams[i].id == teamActuelleId) {
+            if (i == nbEquipes-1) {
+                newTeamIndex = 0
+            } else {
+                newTeamIndex = i+1
+            }
+            console.info("nouvelle équipe trouvée" )
+            break;
+        }
     }
-    var team2vik = {
-        newName: "VIK",
-        logoEquipe: imgViking,
-        newText: "Viking" //🏒
-    }
-    console.log("change team")
-    var teamActuelle = document.getElementById("team")
-    // <h1 id="team" name="SUN" onClick="changeTeam()">🏒 Sun Ride</h1>
-    var team
-    switch(teamActuelle.getAttribute("name")) {
-        case "VIK": team = team1sun ; break;
-        case "SUN": team = team2vik ; break;
-        default: team = team1sun;
-    }
-    //team.innerHTML = '<h1 id="team" name="VIK" onClick="changeTeam()">🏒 Viking</h1>' ; break;
-    teamActuelle.setAttribute("name",team.newName);
-    teamActuelle.innerText = team.newText;
-    document.getElementById("logoEquipe").setAttribute("src",team.logoEquipe); // logo du bouton (random)
-    document.getElementById("logoEquipe2").setAttribute("src",team.logoEquipe); // logo de l'appli (header)
-    console.log("New team : " + teamActuelle.getAttribute("name"));
-    supprDivPlus_();
-    enleverTousJoueurs_();
-    loadData(team.newName);
-    majForceEquipes_();
-    creerDivPlus_();
-    $(".cible").remove();
-    $("#questionPresents").slideDown();
-    
+    var team = all_teams[newTeamIndex]
+    var players = Object.values(all_players).filter(item => item.team === team.id)
+
+    loadTeam(team, players)
 }
+
 
 function btAddTeam(){
 
-    
-
     enleveMenuTousJoueurs_();
-    var name = prompt("Quel est le nom de la nouvelle équipe ?")
+    var name = prompt("Nom de la nouvelle équipe ?")
     if (name == "" || name == null) { return }
     changeTeam()
 }
@@ -98,134 +150,12 @@ function compteJoueursDeLequipe_(team){
     return cpt
 }
 
-function loadData(team){
-    console.log("Load Data pour : " + team)
-    var nbPlayers = compteJoueursDeLequipe_(team);
-
-    // if(localStorage.length<3){
-    
-    if(nbPlayers<3){
-
-        // localStorage.clear();
-        console.log("base vide ou presque ("+ localStorage.length +"): création de la base")
-        console.log({ ...localStorage })
-
-        var SUN = [
-            [3,"Manu"],
-            [3,"Yann"],
-            [3,"Olivier"],
-            [3,"Richard"],
-            [3,"Philippe"],
-            [2,"Stéphane"],
-            [2,"Flo"],
-            [2,"Laurent"],
-            [2,"Romain"],
-            [2,"Raphael"],
-            [1,"MariLoL"],
-            [1,"Aurélie"],
-            [1,"Céline"],
-            [1,"Laurence"],
-            [1,"Cyril"],
-            [1,"JM"],
-            [1,"Lucas"]
-        ]
-
-        var VIK = [
-            [3,"Fabien"],
-            [3,"François"],
-            [3,"Manu"],
-            [3,"Yann"],
-            [3,"Richard"],
-            [3,"Julien"],
-            [2,"Stéphane"],
-            [2,"Flo"],
-            [2,"Romain"],
-            [2,"Raphael"],
-            [2,"MariLoL"],
-            [2,"Evan"],
-            [1,"Aurélie"],
-            [1,"Céline"],
-            [1,"JM"],
-            [1,"Lucas"],
-            [1,"Laurence"],
-            [1,"Laure"],
-        ]
-
-        var equipe // joueurs par défaut dans l'equipe
-        switch (team){
-            case "SUN": equipe = SUN;break;
-            case "VIK": equipe = VIK;break;
-        }
-
-        console.log("AJOUT DES JOUEURS DE L'EQUIPE "+ team)
-
-        var date = (new Date()).toLocaleDateString();
-
-        for (let i=0;i<equipe.length;i++) {
-            var player={
-                "team" : document.getElementById("team").getAttribute("name"),
-                "force" :equipe[i][0],
-                "absent":false,
-                "name" :equipe[i][1]
-            }
-            var UID = team+"-PLAYER-"+player.name+"-"+date
-            console.log("Ajout de: "+JSON.stringify(player) +" | UID:"+UID);
-            // AJOUT DU JOUEUR DANS LE DOM :
-            createPlayer_(equipe[i][0],equipe[i][1],false,UID)
-            // STOCKAGE DU JOUEUR DANS LE COOKIE :
-            localStorage.setItem(
-                UID,
-                JSON.stringify(player)
-            );
-        }
-
-    } else {
-
-        console.log("Base existante : chargement des données de ("+team+")")
-        const items = { ...localStorage };
-        // console.log(items)
-        var logPlayersCreated=[]
-        for (let uid of Object.keys(items)) {
-            if (uid.substring(0,3)==team) {
-                logPlayersCreated.push(uid + "/" + items[uid])
-                var player = JSON.parse(items[uid])
-                createPlayer_(player.force,player.name,player.absent,uid)
-            }
-        }
-        // console.log(logPlayersCreated)
-
-        // On met les joueurs inactifs à la fin
-        var logPlayersInactifs=[]
-        var container = document.getElementById("div0")
-        var joueurs = container.children
-        console.log("tri de "+joueurs.length + " joueurs selon activité")
-        for (let i = joueurs.length-1; i >= 0; i--) {
-            //console.log(joueurs[i].innerText + " doit-il bouger ?")
-            if (joueurs[i].classList.contains("inactif")) {
-                logPlayersInactifs.push(joueurs[i].innerText + " est inactif: bouge à la fin")
-                container.appendChild(joueurs[i])   
-            }
-        }
-        // console.log(logPlayersInactifs)
-
-    }
-    // mise à jour du nombre de joueurs
-    document.getElementById("questionPresents").innerText = (document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length) +" présents /"+document.getElementsByClassName("player").length
-
-    const boxes = document.querySelectorAll('.player');
-    boxes.forEach(box => {
-        box.addEventListener('dragenter', dragEnter)
-        box.addEventListener('dragover', dragOver);
-        box.addEventListener('dragleave', dragLeave);
-    });
-
-}
 
 function btBack(){
     console.log("bouton BACK")
     enleveMenuTousJoueurs_();
     $("#questionPresents").slideDown();
-    supprDivPlus_();
+    $("#divPlus").remove();
     $("#btChgTeam").show();
     $("#btAddTeam").show();
     $("#div0").show();
@@ -246,7 +176,6 @@ function reinit_() {
     $(".cible").remove();
     $(".containerEquipes").css({"display":"grid"})
     $(".container").css({"width":"100%"})
-    // $("#div0").show();
     var dispos = document.getElementById('div0');
     var equipe1 = document.getElementById('div1');
     var equipe2 = document.getElementById('div2');
@@ -257,9 +186,7 @@ function reinit_() {
     while (equipe3.children.length) { dispos.appendChild(equipe3.firstChild); }
     while (absents.children.length) { dispos.appendChild(absents.firstChild); }
     majForceEquipes_();
-    //màj nb joueurs :
-    document.getElementById("questionPresents").innerText = (document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length) +" présents /"+document.getElementsByClassName("player").length
-
+    majNbJoueurs_();
 }
 
 function creerDivPlus_(){
@@ -269,9 +196,6 @@ function creerDivPlus_(){
     nouveau.setAttribute("onclick","clickAddPlayer()");
     // nouveau.setAttribute("class","player");
     document.getElementById('div0').prepend(nouveau);
-}
-function supprDivPlus_(){
-    $("#divPlus").remove()
 }
 
 function btModifNbEquipes() {
@@ -323,8 +247,8 @@ function RANDOM(nbEquipe) {
     //     opacity: 0.5
     // }, 1000)
 
-    supprDivPlus_();
-    
+    $("#divPlus").remove();
+
     enleveMenuTousJoueurs_();
     var dispos = document.getElementById('div0');
     var equipe1 = document.getElementById('div1');
@@ -342,7 +266,6 @@ function RANDOM(nbEquipe) {
     do {
         compteur+=1
         reinit_();
-        // supprDivPlus_();
         var forceEq1 = 0, forceEq2 = 0, forceEq3 = 0;
         var bascule = 0;
         while (dispos.children.length) {
@@ -487,7 +410,7 @@ function save2(){
 
 function clickAddPlayer() {
     enleveMenuTousJoueurs_();
-    var name = prompt("Quel est le nom du joueur ?")
+    var name = prompt("Nom du nouveau joueur ?")
     if (name == "" || name == null) { return }
     creerMenuJoueur_(name)
 
@@ -503,75 +426,92 @@ function clickAddPlayer() {
             containerBt.style.backgroundColor = "rgba(0,0,0, 0.8)"
             containerBt.style.borderRadius = "30px"
             containerBt.style.border = "2px solid grey"
-            containerBt.style.padding = "100px 20px 100px 20px"
-            containerBt.style.boxShadow = "rgba(0, 0, 0, 0.56) 0px 22px 70px 4px"
+            containerBt.style.boxShadow = "rgba(0, 0, 0, 0.56) 0px 0px 70px 10px"
             containerBt.style.position = "absolute";
-            containerBt.style.top = "30%";
-            containerBt.style.left = "10%";
+            containerBt.style.top = "0";
+            containerBt.style.bottom = "0";
+            containerBt.style.left = "0";
+            containerBt.style.right = "0";
+        var btCloseMenu = document.createElement("span")   // BOUTON FERMER
+            btCloseMenu.innerText = '❌';
+            btCloseMenu.style.left = "80%";
+            btCloseMenu.style.top = "5%";
+            btCloseMenu.style.position = "absolute";
+            btCloseMenu.style.fontSize = "30px";
+            containerBt.append(btCloseMenu);
         var nom = document.createElement("span")       // AFFICHAGE NOM
             nom.innerText = name;
             nom.setAttribute("id", "newPlayerName");
             nom.style.color = "white"
+            nom.style.top = "35%";
+            nom.style.position = "relative";
+            // nom.style.display = "block"
             nom.classList.add("btModifNom");
             containerBt.append(nom);
-        var hr = document.createElement("br")
-            containerBt.append(hr);        
-        var hr = document.createElement("br")
-            containerBt.append(hr);
-        var hr = document.createElement("br")
-            containerBt.append(hr);
+        var frxp = document.createElement("div");
+            frxp.style.position = "absolute"
+            frxp.style.top = "45%"
+            frxp.style.width = "-moz-available"
         var newBt4 = document.createElement("button"); // FORCE 1
             newBt4.setAttribute("id", "emoForce1");
             newBt4.classList.add("btModifForceAddplayer");
             newBt4.textContent = emoForce1
-            containerBt.append(newBt4)
+            frxp.append(newBt4)
         var newBt2 = document.createElement("button"); // FORCE 2
             newBt2.setAttribute("id", "emoForce2");
             newBt2.classList.add("btModifForceAddplayer");
             newBt2.textContent = emoForce2
-            containerBt.append(newBt2)
+            frxp.append(newBt2)
         var newBt3 = document.createElement("button"); // FORCE 3
             newBt3.setAttribute("id", "emoForce3");
             newBt3.classList.add("btModifForceAddplayer");
             newBt3.textContent = emoForce3
-            containerBt.append(newBt3)
-            containerBt.setAttribute("onclick", "clickBtForceAddPlayer(this)");
-
+            frxp.append(newBt3)
         var hr = document.createElement("br")
             containerBt.append(hr);
-        //✅ 🈯️ 💹 ❇️ ✳️ ❎❌    
+            //✅ 🈯️ 💹 ❇️ ✳️ ❎❌    
+        containerBt.setAttribute("onclick", "clickBtForceAddPlayer(this)");
+        containerBt.appendChild(frxp)
         tree.appendChild(containerBt)
-        document.getElementById("div0").appendChild(tree);
-        // document.insertBefore("divPlus").appendChild(tree);
+        document.getElementById("containerEquipes").appendChild(tree);
     }
-
-    // // var force = prompt("Force du joueur de 1 (faible) à 3 (fort)")
-    // if (force == "" || force == null) { return }
-
-    // var intForce = parseInt(force)
-    // console.log(intForce)
-    // if ((intForce <= 0) || (intForce > 3) || isNaN(intForce)) {
-    //     alert("La force du joueur doit être comprise entre 1 et 3 (vous avez écrit " + force + ")");
-    //     return;
-    // }
-    // var team = document.getElementById("team").getAttribute("name");
-    // var player = {
-    //     "team":team,
-    //     "name":name,
-    //     "absent":false,
-    //     "force":intForce}
-    // var date = (new Date()).toLocaleDateString();
-    // var UID = team+"-PLAYER-"+player.name+"-"+date
-    // console.log("Ajout de: "+JSON.stringify(player) +" | UID:"+UID);
-    // localStorage.setItem(
-    //     UID,
-    //     JSON.stringify(player)
-    //     );
-    // createPlayer_(intForce, name, false, UID)
 }
 
-function createPlayer_(force, name, inactif, UID) {
+
+
+function clickBtForceAddPlayer(clicked){
+
+    var emoForce = window.event.target.getAttribute("id")
+    switch (emoForce) {
+        case 'emoForce1': force = 1; break;
+        case 'emoForce2': force = 2; break;
+        case 'emoForce3': force = 3; break;
+        default: force = 0;
+    }
+
+    if(force!==0){
+        console.log("emoForce:"+emoForce)
+        console.log("force:"+force)
+
+        var team = document.getElementById("team").getAttribute("name");
+        var name = document.getElementById("newPlayerName").textContent;
+        
+        createPlayer_(force, name, 0)
+        createPlayerInDatabase(force, name, team)
+			
+    }
+    // Suppression du menu
+    $(clicked.children[2]).remove();
+    clicked.remove("menu");
+
+    majNbJoueurs_();
+}
+
+
+function createPlayer_(force, name, absent, id) {
+    // console.log("Création de mr. " + name + " (force " + force + ") absent : " + absent)
     var img, opacity,emo
+
     switch (force) {
         case 1: emo = emoForce1; break;
         case 2: emo = emoForce2; break;
@@ -581,7 +521,8 @@ function createPlayer_(force, name, inactif, UID) {
     // var playerId = "player" + name.replace(" ", "") + force
     var nouveau = $("#div0")
         .append($('<div></div>')
-            .attr({ id: UID, force: force, 'name':UID, ondragstart: "drag(event)", draggable: "true", onclick: "select(this)" })
+            // .attr({ id: name, force: force, ondragstart: "drag(event)", draggable: "true", onclick: "select(this)" })
+            .attr({ ondragstart: "drag(event)", draggable: "true", onclick: "select(this)", id: id, force: force , name: name })
             .addClass("player")
             .prepend($('<span ></span>') // .prepend($('<img src=' + img + ' style="filter: opacity(' + ((force - 1) * 20) + '%)" ></img>')
                 .addClass("emoforce")
@@ -597,8 +538,9 @@ function createPlayer_(force, name, inactif, UID) {
             //     .addClass("force"+force)
             // )
         );
-    if (inactif) {
-        document.getElementById(UID).classList.add("inactif")
+    if (absent) {
+        document.getElementsByName(name)[0].classList.add('inactif');
+        // document.getElementById(name).classList.add("inactif")
         //console.log("AJOUT CLASSE INACTIF à : "+name)
     }
     
@@ -630,15 +572,21 @@ function movePlayer_(player, force, equipe) {
     }
 }
 
+
+function majNbJoueurs_() {
+    //mise à jour du nombre de joueurs sur l'interface principale
+    document.getElementById("questionPresents").innerText = "Présents: "+(document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length) +" / "+document.getElementsByClassName("player").length
+}
+
+
 function majForceEquipes_() {
     console.log("majForceEquipes_")
-    var forceEq1 = 0, forceEq2 = 0, forceEq3 = 0, forceDispos = 0;
+    var forceEq1 = 0, forceEq2 = 0, forceEq3 = 0;
     var joueurs = $(".player")
     for (let i = 0; i < joueurs.length; i++) {
         force = joueurs[i].getAttribute("force");
         nom = joueurs[i].id;
         switch (joueurs[i].parentNode.id) {
-            case "div0": forceDispos += parseInt(force); break;
             case "div1": forceEq1 += parseInt(force); break;
             case "div2": forceEq2 += parseInt(force); break;
             case "div3": forceEq3 += parseInt(force); break;
@@ -679,90 +627,53 @@ function creerMenuJoueur_(clicked){
 
     var tree = document.createDocumentFragment();
     var containerBt = document.createElement("div");
-    containerBt.setAttribute("id", "divOptionsJoueurs");
-    containerBt.setAttribute("class", "divOptionsJoueurs");
-    containerBt.style.display = "inline";
-    containerBt.style.backgroundColor = "rgba(0,0,0, 0.8)"
-    containerBt.style.borderRadius = "30px"
-    containerBt.style.border = "2px solid grey"
-    containerBt.style.padding = "20px"
-    containerBt.style.boxShadow = "rgba(0, 0, 0, 0.56) 0px 22px 70px 4px"
-    
-    containerBt.style.position = "absolute";
-    
-    // console.log(clicked)
-    // console.log(pos.top)
-    // console.log((pos.top + pos.height))
-
-    // containerBt.style.left = "42%";
-    containerBt.style.top = "30%";
-    containerBt.style.left = "10%";
-
-    // containerBt.style.left = pos.left + 'px';
-    // containerBt.style.top = (pos.top + pos.height) + 'px';
-
-    // containerBt.style.boxShadow = "rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px"
-    // containerBt.top = clicked.top + clicked.height;
-    // containerBt.style.left = pos.left;
-    // containerBt.style.top = pos.top+pos.height
-    // console.log(clicked.style.left)
-    // console.log(clicked.style.left-100)
-    
+        containerBt.setAttribute("id", "divOptionsJoueurs");
+        containerBt.setAttribute("class", "divOptionsJoueurs");
+        containerBt.style.display = "inline";
+        containerBt.style.backgroundColor = "rgba(0,0,0, 0.8)"
+        containerBt.style.borderRadius = "30px"
+        containerBt.style.border = "2px solid grey"
+        containerBt.style.padding = "20px"
+        containerBt.style.boxShadow = "rgba(0, 0, 0, 0.56) 0px 22px 70px 4px"
+        containerBt.style.position = "absolute";
+        containerBt.style.top = "0";
+        containerBt.style.bottom = "0";
+        containerBt.style.left = "0";
+        containerBt.style.right = "0";
     var newBt6 = document.createElement("button");  // SUPPR JOUEUR
-    newBt6.textContent = "🚮" //❌
-    newBt6.classList.add("btSupprPlayer");
-    containerBt.append(newBt6)
-
+        newBt6.textContent = "🚮" //❌
+        newBt6.classList.add("btSupprPlayer");
+        containerBt.append(newBt6)
     var nom = document.createElement("span")       // AFFICHAGE NOM
-    nom.innerText = clicked.children[1].innerText+" ✏️";
-    // nom.classList.add("btSupprPlayer");
-    nom.classList.add("btModifNom");
-    nom.style.color = "white"
-    containerBt.append(nom);
-
-    
-    // var newBt1 = document.createElement("button"); // MODIF NOM
-    // newBt1.textContent = "✏️"
-    // newBt1.classList.add("btModifNom");
-    // containerBt.append(newBt1)
-
-
-    
+        nom.innerText = clicked.children[1].innerText+" ✏️";
+        nom.classList.add("btModifNom");
+        nom.style.color = "white"
+        containerBt.append(nom);
     var hr = document.createElement("br")
-    containerBt.append(hr);
+        containerBt.append(hr);
     var hr = document.createElement("br")
-    containerBt.append(hr);
-    // hr.style.margin = "0px"
-    
+        containerBt.append(hr);
     var newBt4 = document.createElement("button"); // FORCE 1
-    newBt4.setAttribute("id", "emoForce1");
-    newBt4.classList.add("btModifForce");
-    newBt4.textContent = emoForce1
-    containerBt.append(newBt4)
-    
+        newBt4.setAttribute("id", "emoForce1");
+        newBt4.classList.add("btModifForce");
+        newBt4.textContent = emoForce1
+        containerBt.append(newBt4)
     var newBt2 = document.createElement("button"); // FORCE 2
-    newBt2.setAttribute("id", "emoForce2");
-    newBt2.classList.add("btModifForce");
-    newBt2.textContent = emoForce2
-    containerBt.append(newBt2)
-    
+        newBt2.setAttribute("id", "emoForce2");
+        newBt2.classList.add("btModifForce");
+        newBt2.textContent = emoForce2
+        containerBt.append(newBt2)
     var newBt3 = document.createElement("button"); // FORCE 3
-    newBt3.setAttribute("id", "emoForce3");
-    newBt3.classList.add("btModifForce");
-    newBt3.textContent = emoForce3
-    containerBt.append(newBt3)
-    
+        newBt3.setAttribute("id", "emoForce3");
+        newBt3.classList.add("btModifForce");
+        newBt3.textContent = emoForce3
+        containerBt.append(newBt3)
     var hr = document.createElement("br")
-    containerBt.append(hr);
-    
-    //✅ 🈯️ 💹 ❇️ ✳️ ❎❌
-    
-    var newBt5 = document.createElement("button");  // CLOSE
-    newBt5.textContent = "✅"
-    newBt5.classList.add("btCloseMenu");
-    containerBt.append(newBt5)
-
-
+        containerBt.append(hr);
+        var newBt5 = document.createElement("button");  // CLOSE
+        newBt5.textContent = "✅"        //✅ 🈯️ 💹 ❇️ ✳️ ❎❌
+        newBt5.classList.add("btCloseMenu");
+        containerBt.append(newBt5)
     tree.appendChild(containerBt)
     clicked.appendChild(tree);
 }
@@ -785,43 +696,6 @@ function clickIcone(clicked) {
     creerMenuJoueur_(clicked);
 }
 
-function clickBtForceAddPlayer(clicked){
-    var emoForce = window.event.target.getAttribute("id")
-    switch (emoForce) {
-        case 'emoForce1': force = 1; break;
-        case 'emoForce2': force = 2; break;
-        case 'emoForce3': force = 3; break;
-        default: force = 0;
-    }
-
-    if(force!==0){
-        console.log("emoForce:"+emoForce)
-        console.log("force:"+force)
-
-        var team = document.getElementById("team").getAttribute("name");
-        var name = document.getElementById("newPlayerName").textContent;
-        var player = {
-            "team":team,
-            "name":name,
-            "absent":false,
-            "force":parseInt(force)}
-        var date = (new Date()).toLocaleDateString();
-        var UID = team+"-PLAYER-"+player.name+"-"+date
-        console.log("Ajout de: "+JSON.stringify(player) +" | UID:"+UID);
-        localStorage.setItem(
-            UID,
-            JSON.stringify(player)
-            );
-        createPlayer_(force, name, false, UID)
-    }
-    // Suppression du menu
-    $(clicked.children[2]).remove();
-    clicked.remove("menu")
-
-    // mise à jour du nombre de joueurs
-    document.getElementById("questionPresents").innerText = (document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length) +" présents /"+document.getElementsByClassName("player").length
-
-}
 
 function clickBtForce(clicked) {
     var emoForce = window.event.target.textContent;
@@ -891,8 +765,7 @@ function clickSwitchInactif(clicked) {
         JSON.stringify(playerJson)
     );
     clicked.parentNode.appendChild(clicked);
-    //màj nb joueurs actifs :
-    document.getElementById("questionPresents").innerText = (document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length) +" présents / " + document.getElementsByClassName("player").length
+    majNbJoueurs_();
 }
 
 function select(clicked) {
@@ -929,9 +802,9 @@ function select(clicked) {
         if (clicked.parentNode.id == "div0") {
             if (confirm("Supprimer définitivement ?")) {    
                 $(clicked).remove();
+                deleteFromDatabase(clicked.id)
                 localStorage.removeItem(clicked.id)
-                //màj nb joueurs :
-                document.getElementById("questionPresents").innerText = (document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length) +" présents /"+document.getElementsByClassName("player").length
+                majNbJoueurs_();
             }
         } else {
             $(clicked.children[2]).remove();
@@ -1010,4 +883,11 @@ function clickJoueurAfficheInfo(clicked){
         $(".cible").remove(); // on enlève les cibles des équipes
         unselect_(clicked); // déselectionne en enlevant la classe selected
     }
+}
+
+function testTable(table){
+    console.log("table :");	console.log(table);
+    console.log("keys :");			console.log(Object.keys(table));
+    console.log("values :");		console.log(Object.values(table));
+    console.log("entries :");		console.log(Object.entries(table));
 }
