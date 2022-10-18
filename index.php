@@ -47,13 +47,14 @@
 				<script>	function testLogo() {
 					//$('#div9').hide()
 					var x = document.getElementById("snackbar"); // Get the snackbar DIV
-					x.innerHTML = "Nouveau text"
-					x.style.color = "chartreuse"
-					x.style.color = "orange"
-					x.className = "show"; // Add the "show" class to DIV
-					setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000); // After 3 seconds, remove the show class from DIV
+						x.innerHTML = "🤖 Coucou";
+						x.style.fontSize = "45px";
+						x.style.color = "white";
+						x.style.borderRadius = "100px";
+						x.className = "show"; // Add the "show" class to DIV
+						setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000); // After 3 seconds, remove the show class from DIV
 				}</script>
-				<!-- <div id="textEchange" style="display:none;"> Clic joueur pour échanger 🔁 (ou glisser-déposer) Clic image 🐭😼🐻 pour modifer ✏️ 	</div> -->
+				<div id="textEchange" style="display:none;"> Clic joueur pour échanger 🔁 ou glisser-déposer<br/>Clic image 🐭😼🐻 pour modifer ✏️ 	</div>
 	<header>
 		<h1 id="team" name="" onclick="changeTeam()" > </h1>
 		<img id="logoEquipe2" onclick="testLogo()" class="logo" src="images/logo/LogoHockey6.png" style = "position:absolute ; max-width:100%; height: 100px; left:15px; top: 5px;";/>
@@ -87,9 +88,10 @@
 	</footer>
 	<button class="add-button" style="position: absolute;bottom:0px;right:5px;">Ajouter à l'écran d'accueil</button>
 
-	<script src="javascript.js"></script>
-	<script src="dragndrop.js"></script>
-	<script src="appel_server.js"></script>
+	<script src="scripts/javascript.js"></script>
+	<script src="scripts/dragndrop.js"></script>
+	<script src="scripts/DragDropTouch.js"></script>
+	<script src="scripts/appel_server.js"></script>
 	
 	<script>
 		var all_teams = <?= $all_teams ?>;

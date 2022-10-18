@@ -19,22 +19,22 @@ $team   = $_POST['team'];
 $xp     = $_POST['xp'];
 $absent = $_POST['absent'];
 
-// Commence par vérifier s'il y a déjà un joueur qui porte ce nom dans l'équipe
-$sql = "SELECT * FROM tbplayer WHERE name='$name' and team=$team";
-$req = $conn->query($sql);
-// var_dump($req);
+// // Commence par vérifier s'il y a déjà un joueur qui porte ce nom dans l'équipe
+// $sql = "SELECT * FROM tbplayer WHERE name='$name' and team=$team";
+// $req = $conn->query($sql);
 
-// Return response to the browser
-if (!$req) {
-    // printf("<br/>Error message: %s\n", $conn->error);
-    $success = false;
-    $result = "Error message: $conn->error";
-} else {
-    if ($req->num_rows >= 1) {
-        // echo "Une personne porte déjà ce nom !";
-        $success = false;
-        $result = "Une personne porte déjà ce nom !";
-    } else {
+// // Return response to the browser
+// if (!$req) {
+//     // printf("<br/>Error message: %s\n", $conn->error);
+//     $success = false;
+//     $result = "Error message: $conn->error";
+// } else {
+//     if ($req->num_rows >= 1) {
+//         // echo "Une personne porte déjà ce nom !";
+//         $success = false;
+//         $result = "Une personne porte déjà ce nom !";
+//     } else {
+
         $sql = "INSERT INTO tbplayer (name, team, xp, absent) VALUES ('$name', $team, $xp, $absent)";
         $req = $conn->query($sql);
         
@@ -42,14 +42,14 @@ if (!$req) {
         if (!$req) {
             // printf("<br/>Error message: %s\n", $conn->error);
             $success = false;
-            $result = "Error message: $conn->error";
+            $result = "Error: $conn->error";
         } else {
             // printf("<br/>Le joueur a été ajouté");
             $success = true;
-            $result = "Le joueur a été ajouté";
+            $result = "$name a été ajouté 👍";
             $new_id = $conn->insert_id;
         }
-    }
+// }
     
 $tableauRetour = array(
     success => $success,
@@ -59,7 +59,7 @@ $tableauRetour = array(
 
 echo json_encode($tableauRetour, JSON_UNESCAPED_UNICODE);
 
-}
+// }
 
 
 

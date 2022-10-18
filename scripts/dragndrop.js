@@ -49,7 +49,7 @@ function ajoutCiblesToutesEquipes(divOrigine){
             var cible = document.createElement("div");
                 cible.setAttribute("class", "cible");
                 cible.classList.add("player");
-                cible.setAttribute("onclick","select(this)");
+                cible.setAttribute("onclick","ecranEquipe_SELECTPLAYER(this)");
             var cibletxt = document.createElement("span");
                 cibletxt.innerText = "🎯";
             cible.appendChild(cibletxt)
