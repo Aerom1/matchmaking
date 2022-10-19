@@ -132,7 +132,27 @@ function btAddTeam(){
     enleveMenuTousJoueurs_();
     var name = prompt("Nom de la nouvelle équipe ?")
     if (name == "" || name == null) { return }
-    changeTeam()
+
+    var wrapper = $('<div/>').css({height:0,width:0,'overflow':'hidden'});
+    var fileInput = $(':file').wrap(wrapper);
+
+    fileInput.change(function(){
+        $this = $(this);
+        alert($this.val());
+        // $('#file').text($this.val());
+    })
+
+    // $('#file').click(function(){
+    //     fileInput.click();
+    // });
+
+    fileInput.click();
+    
+    // var f = document.createElement('div')
+        // f.
+
+
+    // changeTeam()
 }
 
 
@@ -459,7 +479,8 @@ function changeName_MODIFPLAYER(e) {
         id = e.parentNode.parentNode.id
         DB_changePlayerNAME(id, newname)
         e.parentNode.parentNode.name = newname
-        e.parentNode.parentNode.children[1] = newname
+        console.log(e.parentNode.parentNode.children[1])
+        e.parentNode.parentNode.children[1].innerText = newname
     }
 
 }

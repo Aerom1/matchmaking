@@ -34,18 +34,23 @@
 	<link rel="manifest" href="pwa/rompwa.webmanifest">
 
 	<?php 
-		require "php/functions.php"; 
 		$conn = include 'php/connectToDB.php';
-		$all_teams = 	recup_table_ENTIERE($conn, "SELECT * FROM tbteam");
-        $all_players = 	recup_table_ENTIERE($conn, "SELECT * FROM tbplayer");
+		// require "php/functions.php"; 
+		// $all_teams = 	recup_table_ENTIERE($conn, "SELECT * FROM tbteam");
+        // $all_players = 	recup_table_ENTIERE($conn, "SELECT * FROM tbplayer");
+		$all_teams = 	json_encode( $conn->query("SELECT * FROM tbteam")  ->fetch_all( MYSQLI_ASSOC ) ,	JSON_FORCE_OBJECT|JSON_UNESCAPED_UNICODE);
+        $all_players = 	json_encode( $conn->query("SELECT * FROM tbplayer")->fetch_all( MYSQLI_ASSOC ) ,JSON_FORCE_OBJECT|JSON_UNESCAPED_UNICODE);
 		$conn -> close();
 	?>
 </head>
 
 <body>
 				<div id="snackbar">Snackbar text message</div> 
-				<script>	function testLogo() {
+				<script>	function testLogo(e) {
 					//$('#div9').hide()
+					$('#logoEquipe2').hide()
+					<?php $input = '<script> new\o/text <script>' ?>
+					alert('Result include: <?= include('php/input.php') ?>')
 					var x = document.getElementById("snackbar"); // Get the snackbar DIV
 						x.innerHTML = "🤖 Coucou";
 						x.style.fontSize = "45px";
@@ -55,6 +60,10 @@
 						setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000); // After 3 seconds, remove the show class from DIV
 				}</script>
 				<div id="textEchange" style="display:none;"> Clic joueur pour échanger 🔁 ou glisser-déposer<br/>Clic image 🐭😼🐻 pour modifer ✏️ 	</div>
+	
+	<!-- Champ caché ! Si création de nouvelle équipe, ce champ input permet de pour parcourir les fichiers pour choisir une image source-> https://gist.github.com/0xPr0xy/4060754-->
+	<input type="file" name="file" enctype="multipart/form-data" accept="image/png, image/gif, image/jpeg" style='display:none;'></input>
+
 	<header>
 		<h1 id="team" name="" onclick="changeTeam()" > </h1>
 		<img id="logoEquipe2" onclick="testLogo()" class="logo" src="images/logo/LogoHockey6.png" style = "position:absolute ; max-width:100%; height: 100px; left:15px; top: 5px;";/>
@@ -91,7 +100,7 @@
 	<script src="scripts/javascript.js"></script>
 	<script src="scripts/dragndrop.js"></script>
 	<script src="scripts/DragDropTouch.js"></script>
-	<script src="scripts/appel_server.js"></script>
+	<script src="scripts/appels_server.js"></script>
 	
 	<script>
 		var all_teams = <?= $all_teams ?>;

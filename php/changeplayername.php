@@ -1,22 +1,17 @@
 <?php 
-
-// echo "php-input:<br/>";
 // var_dump (file_get_contents('php://input'));
-// echo "<br/><br/>";
-// echo "post:<br/>";
-// var_dump($_POST);
-// echo "<br/><br/>";
 
 // Connection
 $conn = include 'connectToDB.php';
 
 // Recup les infos à sauvegarder
-$id   = $_POST['id'];
-$name = $_POST['name'];
+include 'input.php'; // pour la fonction clean_input qui évite les injections sql
+$id   = clean_input($_POST['id']);
+$name = clean_input($_POST['name']);
+
+// Requête au serveur
 $sql = "UPDATE tbplayer SET name = '$name' WHERE tbplayer.id = $id;";
-// $sql = "DELETE FROM tbplayer WHERE id = $id";
 $req = $conn->query($sql);
-// var_dump($req);
 
 // Return response to the browser
 if (!$req) {
@@ -24,7 +19,7 @@ if (!$req) {
     $result = "Error message: $conn->error";
 } else {
     $success = true;
-    $result = "Nom modifié 👍";
+    $result = "Nouveau nom : $name 👍";
 }
 
 echo json_encode(

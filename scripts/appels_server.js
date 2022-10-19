@@ -164,14 +164,14 @@ function DB_changePlayersInactifs(players) {
 		console.log("RESULTAT APPEL SERVEUR MODIF NOM JOUEUR");
 		console.log("DB -> " + response.result)
 
-		// Affichage du pop (snackbar)
-		var x = document.getElementById("snackbar"); // Get the snackbar DIV
-			x.className = "show"; // Add the "show" class to DIV
-			x.innerHTML = response.result;
-			x.style.color = response.success ? 'white' : 'orange'
-			setTimeout(	function(){ 
-					x.className = x.className.replace("show", ""); 
-				} , 3000); // After 3 seconds, remove the show class from DIV
+		// // Affichage du pop (snackbar)
+		// var x = document.getElementById("snackbar"); // Get the snackbar DIV
+		// 	x.className = "show"; // Add the "show" class to DIV
+		// 	x.innerHTML = response.result;
+		// 	x.style.color = response.success ? 'white' : 'orange'
+		// 	setTimeout(	function(){ 
+		// 			x.className = x.className.replace("show", ""); 
+		// 		} , 3000); // After 3 seconds, remove the show class from DIV
 
 	}).catch(error => console.log(error));
 }

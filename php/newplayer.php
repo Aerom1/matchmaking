@@ -12,12 +12,13 @@
 // include "functions.php"; 
 // $conn = connectToDB();
 $conn = include 'connectToDB.php';
+include 'input.php'; // pour la fonction clean_input qui évite les injections sql
 
 // Recup les infos à sauvegarder
-$name   = $_POST['name'];
-$team   = $_POST['team'];
-$xp     = $_POST['xp'];
-$absent = $_POST['absent'];
+$name   = clean_input($_POST['name']);
+$team   = clean_input($_POST['team']);
+$xp     = clean_input($_POST['xp']);
+$absent = clean_input($_POST['absent']);
 
 // // Commence par vérifier s'il y a déjà un joueur qui porte ce nom dans l'équipe
 // $sql = "SELECT * FROM tbplayer WHERE name='$name' and team=$team";

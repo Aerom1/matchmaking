@@ -4,8 +4,9 @@
 $conn = include 'connectToDB.php';
 
 // Recup les infos à sauvegarder
-$id   = $_POST['id'];
-$xp = $_POST['xp'];
+include 'input.php'; // pour la fonction clean_input qui évite les injections sql
+$id = clean_input($_POST['id']);
+$xp = clean_input($_POST['xp']);
 
 // Requete au serveur
 $sql = "UPDATE tbplayer SET xp = '$xp' WHERE tbplayer.id = $id;";
@@ -20,11 +21,10 @@ if (!$req) {
     $result = "La force du joueur a été modifiée";
 }
 
-echo json_encode(
-    array(
-        success => $success,
-        result => $result
-    ), JSON_UNESCAPED_UNICODE);
+echo  json_encode(  array(
+            success => $success,
+            result => $result
+        ), JSON_UNESCAPED_UNICODE);
 
 $conn -> close();
 ?>

@@ -3,6 +3,7 @@
 
 // Connection
 $conn = include 'connectToDB.php';
+include 'input.php'; // pour la fonction clean_input qui évite les injections sql
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
@@ -13,12 +14,8 @@ try{
         
         ($stmt = $conn->prepare($sql)) or trigger_error($conn->error, E_USER_ERROR);
         // $stmt->bind_param('i', $_POST['xp']); 
-        $stmt->bind_param('ii', $_POST['xp'], $_POST['id']); 
+        $stmt->bind_param('ii', clean_input($_POST['xp']), clean_input($_POST['id'])); 
         $stmt->execute() or trigger_error($stmt->error, E_USER_ERROR);
-        
-        // $stmt = $conn->prepare($sql);
-        // $stmt->bind_param('ii', $_POST['xp'], 1231456); 
-        // $stmt->execute(); 
         
         // Return response to the browser
         if ($stmt) {

@@ -2,6 +2,7 @@
 
 // Connection
 $conn = include 'connectToDB.php';
+include 'input.php'; // pour la fonction clean_input qui évite les injections sql
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
@@ -12,7 +13,7 @@ try{
     $sql = "UPDATE tbplayer SET absent = ? WHERE tbplayer.id = ?;";
     ($stmt = $conn->prepare($sql)) or trigger_error($conn->error, E_USER_ERROR);
     foreach($_POST as $id => $absent) {
-        $stmt->bind_param('ii', $absent, $id); 
+        $stmt->bind_param('ii', clean_input($absent), clean_input($id)); 
         $stmt->execute() or trigger_error($stmt->error, E_USER_ERROR);
         if ($stmt) 
             {$nbok++;} else 
