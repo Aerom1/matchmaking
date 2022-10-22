@@ -16,50 +16,32 @@ function formEncode(obj) {
 }
 
 
+
 function DB_deletePlayer(id, name) {
 	console.log("==============> DB_deletePlayer " + id);
-
-	fetch('php/deleteplayer.php', {
+	fetch('php/delete_Player.php', {
 		method: 'POST',
 		mode: 'cors',
 		headers: {'Content-type': 'application/x-www-form-urlencoded'},
 		body: 'id='+id+"&name="+name,
 	})
 	.then(response => response.json())
-	.then(response => {
-		
-		// exemple de response :  {"success":true,"result":"Le joueur a été ajouté","id":null}
+	.then(response => {						// exemple de response :  {"success":true,"result":"Le joueur a été ajouté","id":null}
 		console.log("RESULTAT APPEL SERVEUR SUPPRESSION JOUEUR");
 		console.log("DB -> " + response.result)
-
-		// Affichage du pop (snackbar)
-		var x = document.getElementById("snackbar"); // Get the snackbar DIV
-			x.className = "show"; // Add the "show" class to DIV
-			x.innerHTML = response.result;
-			x.style.color = response.success ? 'white' : 'orange'
-			setTimeout(function(){ 
-					x.className = x.className.replace("show", ""); 
-				}, 3000); // After 3 seconds, remove the show class from DIV
-
+		snackbar_DB(response) // Affichage du pop (snackbar)
 	}).catch(error => console.log(error));
 }
 
-
-
 function DB_createPlayer(force, name, team, player) {
-
 	console.log("==============> DB_createPlayer");
-
 	const data = {
 		team:parseInt(team),
 		name:name,
 		absent:0,
 		id:54,
 		xp:parseInt(force)}
-	// console.log(data);
-	// console.log("JSON.stringify(data) : " + JSON.stringify(data));
-
-	fetch('php/newplayer.php', {
+	fetch('php/create_Player.php', {
 		method: 'POST',
 		mode: 'cors',
 		// headers: {'Content-Type': 'application/json'},
@@ -67,38 +49,43 @@ function DB_createPlayer(force, name, team, player) {
 		body: formEncode(data),
 	})
 	.then(response => response.json())
-	.then(response => {
-		
-		// exemple de response :  {"success":true,"result":"Le joueur a été ajouté","id":null}
+	.then(response => {						// exemple de response :  {"success":true,"result":"Le joueur a été ajouté","id":null}
 		console.log("RESULTAT APPEL SERVEUR AJOUT JOUEUR");
 		console.log("DB -> " + response.result)
-
-		// Affichage du pop (snackbar)
-		var x = document.getElementById("snackbar"); // Get the snackbar DIV
-			x.className = "show"; // Add the "show" class to DIV
-			x.innerHTML = response.result;
-			x.style.color = response.success ? 'white' : 'orange'
-			setTimeout(function(){ 
-					x.className = x.className.replace("show", ""); 
-				}, 3000); // After 3 seconds, remove the show class from DIV
+		snackbar_DB(response) // Affichage du pop (snackbar)
 
 		if (response.success) {
 			player.id = response.id; // ajouter l'ID au joueur
-		} else {
-			player.remove();
-			var p = document.getElementsByName(name);
-			console.log(p[p.length-1])
+		// } else {
+		// 	player.remove();  // Empêcher le joueur 
+		// 	var p = document.getElementsByName(name);
+		// 	console.log(p[p.length-1])
 		}
-
 	}).catch(error => console.log(error));
-
 }
 
 
 function DB_changePlayerNAME(id, newname) {
 	console.log("==============> DB_changePlayerNAME " + newname + '('+id + ')');
 
-	fetch('php/changeplayername.php', {
+	fetch('php/changePlayer_NAME.php', {
+		method: 'POST',
+		mode: 'cors',
+		headers: {'Content-type': 'application/x-www-form-urlencoded'},
+		body: 'id='+id+'&name='+newname,
+	})
+	.then(response => response.json())
+	.then(response => {					
+		console.log("RESULTAT APPEL SERVEUR MODIF NOM JOUEUR");
+		console.log("DB -> " + response.result)
+		snackbar_DB(response) // Affichage du pop (snackbar)
+	}).catch(error => console.log(error));
+}
+
+function DB_changeTeamNAME(id, newname) {
+	console.log("==============> DB_changeTeamNAME " + newname + '('+id+')');
+
+	fetch('php/changeTeam_NAME.php', {
 		method: 'POST',
 		mode: 'cors',
 		headers: {'Content-type': 'application/x-www-form-urlencoded'},
@@ -106,26 +93,33 @@ function DB_changePlayerNAME(id, newname) {
 	})
 	.then(response => response.json())
 	.then(response => {
-		// exemple de response :  {"success":true,"result":"Le joueur a été ajouté","id":null}
-		console.log("RESULTAT APPEL SERVEUR MODIF NOM JOUEUR");
+		console.log("RESULTAT APPEL SERVEUR MODIF NOM EQUIPE");
 		console.log("DB -> " + response.result)
+		snackbar_DB(response) // Affichage du pop (snackbar)
+	}).catch(error => console.log(error));
+}
 
-		// Affichage du pop (snackbar)
-		var x = document.getElementById("snackbar"); // Get the snackbar DIV
-			x.className = "show"; // Add the "show" class to DIV
-			x.innerHTML = response.result;
-			x.style.color = response.success ? 'white' : 'orange'
-			setTimeout(	function(){ 
-					x.className = x.className.replace("show", ""); 
-				} , 3000); // After 3 seconds, remove the show class from DIV
+function DB_changeTeamLOGO(id, newlogo) {
+	console.log("==============> DB_changeTeamLOGO");
 
+	fetch('php/changeTeam_LOGO.php', {
+		method: 'POST',
+		mode: 'cors',
+		headers: {'Content-type': 'application/x-www-form-urlencoded'},
+		body: 'id='+id+'&logo='+newlogo,
+	})
+	.then(response => response.json())
+	.then(response => {
+		console.log("RESULTAT APPEL SERVEUR MODIF LOGO EQUIPE");
+		console.log("DB -> " + response.result)
+		snackbar_DB(response) // Affichage du pop (snackbar)
 	}).catch(error => console.log(error));
 }
 
 function DB_changePlayerXP(id, xp) {
 	console.log("==============> DB_changePlayerXP xp:" + xp + '(id:'+id+')');
 
-	fetch('php/changeplayerxp.php', {
+	fetch('php/changePlayer_XP.php', {
 		method: 'POST',
 		mode: 'cors',
 		headers: {'Content-type': 'application/x-www-form-urlencoded'},
@@ -133,26 +127,16 @@ function DB_changePlayerXP(id, xp) {
 	})
 	.then(response => response.json())
 	.then(response => {
-		// exemple de response :  {"success":true,"result":"Le joueur a été ajouté","id":null}
 		console.log("RESULTAT APPEL SERVEUR MODIF NOM JOUEUR");
 		console.log("DB -> " + response.result)
-
-		// Affichage du pop (snackbar)
-		var x = document.getElementById("snackbar"); // Get the snackbar DIV
-			x.className = "show"; // Add the "show" class to DIV
-			x.innerHTML = response.result;
-			x.style.color = response.success ? 'white' : 'orange'
-			setTimeout(	function(){ 
-					x.className = x.className.replace("show", ""); 
-				} , 3000); // After 3 seconds, remove the show class from DIV
-
+		snackbar_DB(response) // Affichage du pop (snackbar)
 	}).catch(error => console.log(error));
 }
 
 function DB_changePlayersInactifs(players) {
 	console.log("==============> DB_changePlayersInactifs");
 
-	fetch('php/changeplayersinactifs.php', {
+	fetch('php/changePlayers_INACTIFS.php', {
 		method: 'POST',
 		mode: 'cors',
 		headers: {'Content-type': 'application/x-www-form-urlencoded'},
@@ -160,19 +144,9 @@ function DB_changePlayersInactifs(players) {
 	})
 	.then(response => response.json())
 	.then(response => {
-		// exemple de response :  {"success":true,"result":"Le joueur a été ajouté","id":null}
 		console.log("RESULTAT APPEL SERVEUR MODIF NOM JOUEUR");
 		console.log("DB -> " + response.result)
-
-		// // Affichage du pop (snackbar)
-		// var x = document.getElementById("snackbar"); // Get the snackbar DIV
-		// 	x.className = "show"; // Add the "show" class to DIV
-		// 	x.innerHTML = response.result;
-		// 	x.style.color = response.success ? 'white' : 'orange'
-		// 	setTimeout(	function(){ 
-		// 			x.className = x.className.replace("show", ""); 
-		// 		} , 3000); // After 3 seconds, remove the show class from DIV
-
+		// snackbar_DB(response) // Affichage du pop (snackbar)
 	}).catch(error => console.log(error));
 }
 

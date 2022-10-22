@@ -19,7 +19,7 @@ if (!$req) {
     $result = "Error message: $conn->error";
 } else {
     $success = true;
-    $result = "Nouveau nom : $name 👍";
+    $result = "👍 Nouveau nom : $name";
 }
 
 echo json_encode(

@@ -20,7 +20,7 @@ try{
         // Return response to the browser
         if ($stmt) {
             $success = true;
-            $result = "Force du joueur modifiée 👍";
+            $result = "👍 Force modifiée";
         } else {
             $success = false;
             $result = "Error: $conn->error";

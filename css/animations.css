@@ -50,22 +50,16 @@ animation: zoom 0.3s linear;
    
 @keyframes bounce-in {
     /* APPARITION D'UN PLAYER */
-    from {
-        transform: scale(0);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;	
-    } 
     0% {
-    transform: scale(0);
+      transform: scale(0);
+      opacity: 0;
     }
     50% {
-    transform: scale(1.2);
+      transform: scale(1.2);
     }
     100% {
-    transform: scale(1);
+      transform: scale(1);
+      opacity: 1;	
     }
 }
 

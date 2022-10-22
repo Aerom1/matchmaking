@@ -1,115 +1,43 @@
+:root {
+  --font-size-player: 5em;
+}
+
+/* AFFICHAGE PORTRAIT */
+@media screen and (min-height: 480px) {
+
+
+  .player {
+    font-size: var(--font-size-player);
+    margin: 3px;
+
+  }
+  .container {
+    width: 49%;
+  }
+
+  #div3.player{
+    display: inline-block;
+    width:10%;
+  }
+  #divPlus{
+    font-size: 7vw;
+  }
+}
+
+
 /* AFFICHAGE PAYSAGE */
 @media screen and (max-height: 480px) {
-    /* html{
-    width:100vh;
-    height: 100vh;
-  } */
+
   body{
-    /* overflow: hidden; */
-    /* position: absolute; */
-    /* left:1vw; */
-    /* left:0px; */
-    /* top:0px; */
     right:0px;
-    /* bottom: 90vh; */
-    /* border: 1px solid black; */
     text-align: left;
-    /* width:100vh;
-    height: 100vh; */
-
-  }
-  h1 { 
-    position: absolute;
-    left:15vw;
-
-    font-size: 1.5rem; 
-    text-align: right;
-    margin:0;
   }
 
-
-  #forceEquipes{
-    position: absolute;
-    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;    /* top:4px; */
-    /* left:50%; */
-    /* border-radius: 10px; */
-    /* padding: 2px; */
-    /* border: 1px solid black; */
-  }
-
-  #questionPresents{
-    display: none;
-    position:absolute;
-    /* top:7vh;
-    left:20vw; */
-    bottom: 10px;
-    font-size: 2rem;
-  }
-  header {
-    display: none;
-  }
-  footer {
-    /* display: none; */
-
-    /* background-color:#ccc; */
-    padding-top: 10px;
-    padding-bottom: 10px;
-    position:absolute;
-    /* border: 1px solid black; */
-    top: 0px;
-    /* bottom:100%; */
-    left: 0vw; 
-    width: 8vw;
-  }
-  #btChgTeam{
-    margin-top: -15px;
-    font-size:8vh;
-    border-radius: 500px;
-    overflow:hidden;
-    width: 7vw;
-  }
-  
-  #btBack,#btEquipes{
-    position: absolute;
-    top: 70vh;
-    height: 15vh;
-    width: 7vw;
-    left: 2vw;
-    margin-top:3vh;
-    border-radius: 500px;
-  }
-  #btBack {
-    font-size: 8vh;
-    top:0vh;
-  }
-  .containerButtonMenu {
-    /* #btBack,#btAjouter,#btEquipes */
-    /* margin: 100 auto; */
-    padding-top: 10px;
-    position:relative;
-    width:100%;
-    text-align: center;
-    font-size:3vh;
-    z-index: 1;
-  }
-  #btRandom {
-    position:absolute;
-    /* bottom:5px; */
-    /* right: 20px; */
-    
-    top: 0vh;
-    right: -1130%;
-
-    height: 20vh;
-    /* font-size:8vw; */
-    padding:5px;
-    border-color: orange;
-    border-radius: 500px;
-  }
   .containerEquipes {
     text-align: center;
     /* padding-right: 6px; */
   }
+
   .logo{
     /* display: inline-block; */
     /* margin-left: auto; */
@@ -147,187 +75,72 @@
   }
 }
 
-/* AFFICHAGE PORTRAIT */
-@media screen and (min-height: 480px) {
-  h1 { 
-    font-size: 3rem; 
-    text-align: right;
-    margin:0px;
-  }
-  footer{
-    /* padding-top: 10px; */
-    padding-bottom: 10px;
-    /* background-color:#ccc; */
-    position:absolute;
-    /* width:100%; */
-    /* height:100%; */
-  
-    bottom: 10px; 
-    left: 0; 
-    right: 0;
-  }
 
-  #btChgTeam{
-    font-size:6vh;
-    border-radius: 500px;
-    overflow:hidden;
-    width: 20%;
-  }
-  #btAddTeam{
-    margin-top: -30px;
-    font-size:6vh;
-    border-radius: 500px;
-    overflow:hidden;
-    width: 20%;
-  }
-
-  #btBack,#btAjouter{font-size:6vh;}
-  #btBack,#btAjouter,#btEquipes{
-    overflow:hidden;
-    width: 23%;
-    height: 10vh;
-    font-size:2rem;
-    border-radius: 500px;
-  }
-  .containerButtonMenu {
-    /* #btBack,#btAjouter,#btEquipes */
-    /* margin: 100 auto; */
-    padding-top: 10px;
-    position:relative;
-    width:100%;
-    text-align: center;
-    z-index: 1;
-  }
-  
-  #btRandom {
-    z-index: 2;
-    display:inline-block ;
-    width:50%;
-    height: 14vh;
-    /* font-size:8vw; */
-    padding:5px;
-    border-color: orange;
-    border-radius: 500px;
-  }
-  .containerEquipes {
-    margin: auto;
-    text-align: center;
-    position:relative;
-  }
-  .logo{
-    height :100%;
-    max-width:100%;
-    /* display: inline-block; */
-    /* margin-left: auto; */
-    /* margin-right: auto; */
-    /* max-height:10vw; */
-    /* width:auto;  */
-    /* height:auto;  */
-  }
-  .player {
-    font-size: 6vw;
-    margin: 3px;
-
+/* Affichage PC ? */
+@media screen and (min-width: 800px) {
+  .player{
+    font-size: 3vw ;
   }
   .container {
-    width: 49%;
-  }
-
-  #div3.player{
-    display: inline-block;
-    width:10%;
+    width: 30%;
   }
   #divPlus{
-    font-size: 7vw;
+    font-size: 3vw;
   }
 }
 
-
-
 body { 
-  font-family: fantasy; 
-  /* font-stretch:semi-condensed; */
-  /* font-weight: 600; */
-  /* font-size-adjust: inherit; */
-  /* transition-delay: 1s; */
-}
-
-.containerEquipes {
-  /* height:500px; */
-  /* display:flex; */
-  /* flex-wrap: wrap; */
-  /* max-width: 500px; */
-  /* max-height: 300px; */
-  /* margin: auto; */
-  /* position:absolute; */
-  /* right:0px; */
-  /* left:15vw;
-  top:15vh; */
-  /* bottom:0px; */
-  /* width:100%; */
-  /* border: 1px solid black; */
-  /* display: flex; */
-  position:absolute;
-  top:14vh;
-  bottom:21vh;
-  left: 5px;
-  right: 5px;
-  display: flex;
-  justify-content: space-around;
-  /* text-align: center; */
-  /* vertical-align: middle; */
-  align-items: center;
-  justify-content: center;
-}
-
-#questionPresents {
-  display:block; 
-  text-align: right;
-  font-size:1.5rem;
-  color:green; /*#bf0e1c;*/
-
+  /* font-family: "Audiowide", sans-serif; */
+  font-family: sans-serif;
 }
 
 h1 {
-  text-shadow: 2px 8px 3px rgba(0,0,0,0.2),    0px -5px 35px rgba(255,255,255,0.3);
+  font-size: 3em;
+  font-family: "Audiowide";
 }
 
-#forceEquipes{
-  position:absolute;
-  /* top:81vh;
-  right:2vw; */
-  border-bottom:0px solid #ddd;
-  /* margin-left: auto; */
-  padding-right: 5%;
-  left: 0;
-  right: 0;
-  text-align: right;
-  /* vertical-align: middle; */
+/* Make content area fill the entire browser window */
+html, .fullscreen {
+  /* display: flex; */
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width:500px;
+  min-height:100%;
+  /* max-width:1280px;
+  min-height:100%; */
+  margin:0 auto;
+  position:relative;
 }
 
-.forceEquipe::before {
-  content: "💪";
 
+
+.containerEquipes {
+  /* position:absolute; */
+  /* top:14vh; */
+  /* bottom:21vh; */
+  margin-top: 5vh;
+  margin-bottom: 6vh;
+
+  left: 5px;
+  right: 5px;
+  display: flex;
+  height: 63vh;
+  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
 }
 
-.forceEquipe{
-  display: none;
-  /* border-radius: 10px; */
-  padding: 0px 1vw;
-  /* border: 1px solid white; */
-  font-size: 1.4rem;
-  box-shadow:  rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-  margin: -2px;
-}
-
-#forceEq1 { 
-	border-top-left-radius: 20px;
-	border-bottom-left-radius: 20px;
-}
-
-#forceEq2 { 
-	border-top-right-radius: 20px;
-	border-bottom-right-radius: 20px;
+.container {
+  height: 100%;
+  align-items: stretch;
+  margin-bottom: 5px;
+  vertical-align: middle;
+  display:flex;
+  flex-wrap: wrap;
+  vertical-align:middle;
+  text-align: center;
 }
 
 .player {
@@ -337,7 +150,6 @@ h1 {
   padding-bottom:3px;
   padding-left:3px;
   border-radius: 5vw;
-  font-family: fantasy;
   overflow: hidden;
   flex-grow: 1;
   display: flex;
@@ -361,51 +173,10 @@ h1 {
   height: 100%;
 }
 
-.emoforce{
-  /* border-inline:1px solid white; */
-  border-radius: 100px;
-  margin-right: 5px;
-  /* background-color: rgba(0,0,0,0.1); */
-  /* padding-bottom: 40px; */
-  box-shadow: 
-    rgba(0, 0, 0, 0.4) 0px 2px 4px 0px, 
-    rgba(0, 0, 0, 0.3) 0px 0px 13px -3px,
-    rgba(255,255,255, 0.2) 0px -3px 1px 0px inset,
-    rgba(255,255,255, 0.2) 0px -3px 1px 0px inset;
-  /* box-shadow: -1px -2px 5px 1px rgba(0, 0, 0, 0.7),
-              1px -2px 20px rgba(255, 255, 255, 0.6) inset;  */
-  /* box-shadow: inset 2px 2px 5px rgba(154, 147, 140, 0.5), 1px 1px 5px rgba(255, 255, 255, 1); */
 
-  }
 
-.btModifNom::after {content: '  🖋️';}
-
-.btModifNom,.btSupprPlayer, .btCloseMenu{
-  font-size: 2rem;
-  background-color: transparent;
-  border:0px;
-  /* background-color : transparent; */
-  /* padding: 0px 10%; */
-  /* margin: 2%; */
-  /* border-radius: 100px; */
-}
-  
-.btCloseMenu{
-  font-size: 3rem;
-}
-
-.btChooseXP, .btModifForce, .btModifForceAddplayer{
-  font-size: 3.5rem;
-  border-radius: 100px;
-  background-color: rgba(255,255,255,0.2);
-  margin: 2vw;
-}
-
-h1{
-  z-index: 3;
-}
 #textEchange{
-  z-index: 1;
+  z-index: 10;
   position: absolute;
   top:5px;
   margin: 3px;
@@ -433,65 +204,8 @@ h1{
 
 
 
- 
-
-/* Make content area fill the entire browser window */
-html, .fullscreen {
-  /* display: flex; */
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-
-  max-width:1280px;
-
-  /* max-width:800px; */
-  /* max-height:800px; */
-
-  min-height:100%;
-  margin:0 auto;
-  position:relative;
-}
-.containerTitle{
-  text-align: center;
-  color: blue;
-  font-weight: bold;
-}
-
-.container {
-  height: 100%;
-  align-items: stretch;
-  /* margin: 10px; */
-  /* text-align: center; */
-  /* margin: auto; */
-  /* padding: 5px; */
-  margin-bottom: 5px;
-  /* border: 0.5px solid lightgrey; */
-  /* background-color: lightgray; */
-  /* border-radius: 10px; */
-  /* float: none; */
-  /* width: 40vw; */
-  /* height:100%; */
-  /* line-height: 100%;  */
-  /* display: table-cell; */
-  vertical-align: middle;
-  /* display:inline-block; */
-  display:flex;
-  flex-wrap: wrap;
-  vertical-align:middle;
-  text-align: center;
-
-}
-
-#divOptionsJoueurs{
-  animation: bounce-in .3s linear;
-  text-align: center;
-  max-width: -moz-available;
-}
 
 button {
-  /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset; */
-  /* box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset, rgba(25, 59, 77, 0.4) 0px 25px 20px -20px; */
   box-shadow: 
   rgba(0, 0, 0, 0.05) 0px 1px 6px 0px, 
   rgba(0, 0, 0, 0.1) 0px 4px 4px 0px, 
@@ -515,41 +229,23 @@ button {
 }
 
 #divPlus{
+  max-height: 20vh;
   margin:3px;
   padding: 1px 20px ;
   display: flex;
   align-items: center;
-  /* flex-grow: 1; */
   border-radius: 5vw;
-  /* border-inline: 4px solid green; */
-  /* margin:5px; */
-  /* font-weight: bolder; */
-  /* align-items: center; */
-  /* background-color: green; */
-  /* color:white; */
   box-shadow: 
     rgba(0, 0, 0, 0.4) 0px 2px 4px 0px,
     rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
     rgba(0, 0, 0, 0.17) 0px -2px 25px 0px inset, 
     rgba(0, 0, 0, 0.2) 0px -3px 1px 0px inset;
-
-  /* box-shadow:
-    rgba(61, 7, 111, 0.15) 0px -36px 30px 0px inset,
-    rgba(4, 126, 170, 0.1) 0px -79px 40px 0px inset, 
-    rgba(0, 0, 0, 0.09) 0px 16px 8px, 
-    rgba(0, 0, 0, 0.09) 0px 32px 16px; */
 }
 
 #div0>.player {
   background-color: green;
   color:white;
-  /* width: 40%; */
 }
-
-/* #div1{background-color: black;}
-#div2{background-color: yellow;} */
-/* #div3{background-color: lightgrey;} */
-
 
 #div1>.player,#forceEq1 {
   background-color: rgb(255, 251, 0);
@@ -614,24 +310,10 @@ div.span {
   padding-right: 20px ; */
   text-align: center;
   border-radius: 500px;
-  font-family: fantasy;
   font-size: 23px;
   overflow: hidden;
   flex-grow: 1;
   /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px 0px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px 0px inset; */
   /* box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px; */
   box-shadow: rgb(44, 62, 80) 0px 15px 15px -15px inset, rgb(44, 62, 80) 0px -15px 15px -15px inset, rgb(31, 193, 27) 2px 2px, rgb(255, 217, 19) 4px 4px, rgb(255, 156, 85) 6px 6px, rgb(255, 85, 85) 8px 8px;
-}
-
-
-@media screen and (min-width: 800px) {
-  .player{
-    font-size: 3vw ;
-  }
-  .container {
-    width: 30%;
-  }
-  #divPlus{
-    font-size: 3vw;
-  }
 }

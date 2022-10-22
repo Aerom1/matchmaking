@@ -10,10 +10,9 @@ self.addEventListener('install', function(e) {
                 '/animation.css',
                 '/style.css',
                 '/rompwa.webmanifest',
-                '/images/favicon.png',
-                '/icons/icon-32.png', //Add any other assets your web page needs
-                '/icons/icon-192.png', //Add any other assets your web page needs
-                '/icons/icon-512.png' //Add any other assets your web page needs
+                '/img/favicon.png',
+                '/img/icons/icon-32.png', //Add any other assets your web page needs
+                '/img/icons/icon-512.png' //Add any other assets your web page needs
             ]);
         })
     );

@@ -11,8 +11,8 @@
 {/* <script src="appel_server.js"></script> */}
 
 
-const imgSunride = "images/sunride.png";
-const imgViking = "images/viking.png";
+const imgSunride = "img/sunride.png";
+const imgViking = "img/viking.png";
 const emoForce1 = "🐭";
 const emoForce2 = "😼";
 const emoForce3 = "🐻";
@@ -33,12 +33,58 @@ const emoForce3 = "🐻";
 //     }
 // }
 
+ // définit la prochaine équipe qui sera affichée, pour pouvoir afficher son logo sur le bouton de chgmt d'équipe
+function getNextTeamId(all_teams, team) {
 
-function loadTeam(team, players){
+    var teamActuelleId = team.id
+    var newTeamIndex
+    var nbEquipes = Object.keys(all_teams).length
+
+    for (i=0 ; i<nbEquipes ; i++){
+        console.log("all_teams[i].id == team.id ?  ->  " + all_teams[i].id + " == " + teamActuelleId)
+        if (all_teams[i].id == teamActuelleId) {
+            if (i == nbEquipes-1) {
+                newTeamIndex = 0
+            } else {
+                newTeamIndex = i+1
+            }
+            break;
+        }
+    }
+    var nextTeam = all_teams[newTeamIndex]
+    console.info("Prochaine équipe trouvée : " +  nextTeam.name)
+    return nextTeam
+}
+
+function changeTeam(){
+    console.log("changeTeam()")
+
+    $("#div0").show();
+    $("#div1").hide();
+    $("#div2").hide();
+    $("#div3").hide();
+    $(".containerEquipes").css({"display":"grid"})
+    $(".container").css({"width":"100%"})
+    
+    // var teamActuelleId = document.getElementById("team").getAttribute('name')
+    var nextTeamId = document.getElementById("btChgTeam").getAttribute('nextteamid')
+    var nextTeam =      Object.values(all_teams).filter(item => item.id === nextTeamId)[0]
+    var nextPlayers =   Object.values(all_players).filter(item => item.team === nextTeamId)
+    var nextNextTeam = getNextTeamId(all_teams, nextTeam)
+
+    loadTeam(nextTeam, nextPlayers, nextNextTeam)
+}
+
+
+function loadTeam(team, players, nextTeam){
     console.log("load team : " + team.name)
 
-    // document.getElementById("logoEquipe2").setAttribute("src",team.logo); // logo de l'appli (header)
-    document.getElementById("logoEquipe1").setAttribute("src",team.logo); // logo du bouton (random)
+    // document.getElementById("logoHeader").setAttribute("src",team.logo); // logo de l'appli (header)
+    document.getElementById("logoHeader").setAttribute("src",team.logo); // logo du bouton (random)
+    document.getElementById("logoEquipeNext").setAttribute("src",nextTeam.logo); // logo du bouton next Team
+    document.getElementById("btChgTeam").setAttribute("nextteamid",nextTeam.id); // affiche le logo de la prochaine équipe
+    
+    
     var teamActuelle = document.getElementById("team")
         teamActuelle.setAttribute("name", team.id);
         teamActuelle.innerText = team.name;
@@ -93,46 +139,27 @@ function loadData(team, players){
     });
 }
 
+function btEditTeam(){
+    enleveMenu_();
+    var team = document.getElementById('team').innerText
 
-function changeTeam(){
-    console.log("changeTeam()")
+    // Création du menu et ajout au DOM au niveau du containerEquipes
+    var menu = creerMenu(team, 'modifequipe')
+    document.getElementById("containerEquipes").appendChild(menu);
 
-    $("#div0").show();
-    $("#div1").hide();
-    $("#div2").hide();
-    $("#div3").hide();
-    $(".containerEquipes").css({"display":"grid"})
-    $(".container").css({"width":"100%"})
-    
-    var teamActuelleId = document.getElementById("team").getAttribute('name')
-    var newTeamIndex
-    var nbEquipes = Object.keys(all_teams).length
 
-    for (i=0 ; i<nbEquipes ; i++){
-        console.log("all_teams[i].id == team.id ?  ->  " + all_teams[i].id + " == " + teamActuelleId)
-        if (all_teams[i].id == teamActuelleId) {
-            if (i == nbEquipes-1) {
-                newTeamIndex = 0
-            } else {
-                newTeamIndex = i+1
-            }
-            console.info("nouvelle équipe trouvée" )
-            break;
-        }
-    }
-    var team = all_teams[newTeamIndex]
-    var players = Object.values(all_players).filter(item => item.team === team.id)
-
-    loadTeam(team, players)
 }
-
 
 function btAddTeam(){
 
-    enleveMenuTousJoueurs_();
+    enleveMenu_();
     var name = prompt("Nom de la nouvelle équipe ?")
     if (name == "" || name == null) { return }
-
+    if (name.length > nbcarTeam) {
+        snackbar('ℹ️ Le nom ne doit pas dépasser '+nbcarTeam+' caractères', 'orange')
+        return
+    }
+    
     var wrapper = $('<div/>').css({height:0,width:0,'overflow':'hidden'});
     var fileInput = $(':file').wrap(wrapper);
 
@@ -141,16 +168,18 @@ function btAddTeam(){
         alert($this.val());
         // $('#file').text($this.val());
     })
-
     // $('#file').click(function(){
     //     fileInput.click();
     // });
 
     fileInput.click();
-    
-    // var f = document.createElement('div')
-        // f.
 
+    alert(fileInput)
+
+    // Envoi du fichier vers le server
+    var id = team.id
+    var newlogo = fileInput.files[0]
+    DB_changeTeamLOGO(id, newlogo)
 
     // changeTeam()
 }
@@ -174,8 +203,8 @@ function compteJoueursDeLequipe_(team){
 
 function btBack(){
     console.log("bouton BACK")
-    enleveMenuTousJoueurs_();
-    $("#questionPresents").slideDown();
+    enleveMenu_();
+    $("#questionPresents").show();
     $("#divPlus").remove();
     $("#btChgTeam").show();
     $("#btAddTeam").show();
@@ -183,8 +212,8 @@ function btBack(){
     $("#div1").hide();
     $("#div2").hide();
     $("#div3").hide();
-    $("#btBack").hide(); 
-    $("#btEquipes").hide(); 
+    $("#btBack").slideUp(); 
+    $("#btEquipes").slideUp(); 
     if ($(".selected").length>0) {unselect_($(".selected")[0])}
 
 
@@ -202,6 +231,13 @@ function reinit_() {
     var equipe2 = document.getElementById('div2');
     var equipe3 = document.getElementById('div3');
     var absents = document.getElementById('div9');
+
+    // Enlever la possibilité de glisser-déposer dans l'accueil
+    for (let i = 0; i < equipe1.children.length; i++) {
+        equipe1.children[i].setAttribute('draggable' , '')
+        // equipe1.children[i].setAttribute('ondragstart', 'drag(event)')
+      }
+    
     while (equipe1.children.length) { dispos.appendChild(equipe1.firstChild); }
     while (equipe2.children.length) { dispos.appendChild(equipe2.firstChild); }
     while (equipe3.children.length) { dispos.appendChild(equipe3.firstChild); }
@@ -221,7 +257,7 @@ function creerDivPlus_(){
 
 function btModifNbEquipes() {
     // $("#btEquipes").animate({"":""},1000)
-    enleveMenuTousJoueurs_();
+    enleveMenu_();
     var bouton = document.getElementById('btEquipes');
     var nbEquipe = bouton.getAttribute("nb");
     //var txtBtEq = bouton.innerText;
@@ -239,8 +275,8 @@ function btModifNbEquipes() {
 function btRandom(){
 
     var nbEquipe = document.getElementById('btEquipes').getAttribute("nb");   
-    $("#btBack").show(); 
-    $("#btEquipes").show(); 
+    $("#btBack").slideDown(); 
+    $("#btEquipes").slideDown(); 
     $("#btChgTeam").hide();
     $("#btAddTeam").hide();
 
@@ -270,7 +306,7 @@ function RANDOM(nbEquipe) {
 
     $("#divPlus").remove();
 
-    enleveMenuTousJoueurs_();
+    enleveMenu_();
     var dispos = document.getElementById('div0');
     var equipe1 = document.getElementById('div1');
     var equipe2 = document.getElementById('div2');
@@ -376,70 +412,135 @@ function RANDOM(nbEquipe) {
 
 
 
-function creerMenuJoueur(name) {
+function creerMenu(name, menu) {
 
-    var containerBt = document.createElement("div");
-        containerBt.setAttribute("id", "divOptionsJoueurs");
-        containerBt.setAttribute("class", "divOptionsJoueurs");
-        containerBt.style.display = "inline";
-        containerBt.style.backgroundColor = "rgba(0,0,0, 0.8)"
-        containerBt.style.borderRadius = "20px"
-        containerBt.style.border = "2px solid grey"
-        containerBt.style.boxShadow = "rgba(0, 0, 0, 0.56) 0px 0px 70px 10px"
-        containerBt.style.position = "absolute";
-        containerBt.style.top = "0";
-        containerBt.style.bottom = "0";
-        containerBt.style.left = "0";
-        containerBt.style.right = "0";
-    var btCloseMenu = document.createElement("span")   // BOUTON FERMER
-        btCloseMenu.innerText = '❌';
-        btCloseMenu.setAttribute("onclick", "this.parentNode.remove()");
-        btCloseMenu.style.right = "5%";
-        btCloseMenu.style.top = "5%";
-        btCloseMenu.style.position = "absolute";
-        btCloseMenu.style.fontSize = "30px";
-        containerBt.append(btCloseMenu);
-    var nom = document.createElement("span")       // AFFICHAGE NOM
+    try {document.getElementById('divmenu').remove()} catch{} // On enlève un éventuel menu précédent
+
+    var menuContainer = document.createElement("div");  // BOX FOND NOIR
+        menuContainer.setAttribute("id", "divmenu");
+    var btClose = document.createElement("span")   // BOUTON FERMER
+        btClose.innerText = '╳'; //❌ ✖ ╳
+        btClose.setAttribute("id", "btCloseMenu");
+        btClose.setAttribute("onclick", "this.parentNode.remove()");
+        menuContainer.append(btClose);
+    var nom = document.createElement("button")       // AFFICHAGE NOM
         nom.innerText = name;
-        nom.setAttribute("id", "newPlayerName");
-        nom.classList.add("btModifNom");
-        nom.style.color = "white"
-        nom.style.top = "25%";
-        nom.style.position = "relative";
-        // nom.style.display = "block"
-        containerBt.append(nom);
-    var frxp = document.createElement("div");
-        frxp.style.position = "absolute"
-        frxp.style.top = "45%"
-        frxp.style.width = "-moz-available"
-    var newBt4 = document.createElement("button"); // FORCE 1
-        newBt4.setAttribute("id", "emoForce1");
-        // newBt4.classList.add("btModifForceAddplayer");
-        newBt4.classList.add("btChooseXP");
-        newBt4.textContent = emoForce1
-        frxp.append(newBt4)
-    var newBt2 = document.createElement("button"); // FORCE 2
-        newBt2.setAttribute("id", "emoForce2");
-        newBt2.classList.add("btChooseXP");
-        newBt2.textContent = emoForce2
-        frxp.append(newBt2)
-    var newBt3 = document.createElement("button"); // FORCE 3
-        newBt3.setAttribute("id", "emoForce3");
-        newBt3.classList.add("btChooseXP");
-        newBt3.textContent = emoForce3
-        frxp.append(newBt3)
-    var hr = document.createElement("br")
-        containerBt.append(hr);
-        //✅ 🈯️ 💹 ❇️ ✳️ ❎❌    
-    containerBt.appendChild(frxp)
+        nom.setAttribute("id", "btModifNom");
+        menuContainer.append(nom);
+        
+    if (menu == 'modifequipe') {
+        
+        var logodiv = document.createElement('div')
+            logodiv.id = 'logoEquipeModif_div'
+        var logo = document.createElement('img')
+            logo.id = "logoEquipeModif"
+            logo.setAttribute('src', document.getElementById('logoHeader').getAttribute('src'))
+            logo.setAttribute('alt', "🖼️")
+            logo.setAttribute('onerror', 'this.onerror=null; this.src="img/logo/LogoHockey7.png"')
+            logodiv.append(logo)
+            // logo.innerHTML = '<img id="logoEquipeModif" src="' + document.getElementById('logoHeader').getAttribute('src') + '" style="max-width:100%; max-height: 200px; min-width:100px; min-height:100px" onerror="this.onerror=null; this.src=\'img/logo/LogoHockey7.png\'" alt="🖼️">'
+            menuContainer.append(logodiv)
 
-    return containerBt
+            var inputlabel = document.createElement('span')
+                inputlabel.id = 'labelModifTeam';
+                inputlabel.innerText = '💡 Vous pouvez modifier le nom\net le logo de votre équipe'
+                menuContainer.append(inputlabel)
+            var input = document.createElement('input');
+                input.id = "btModifLogo";
+                input.type = "file";
+                input.setAttribute('enctype', "multipart/form-data" )
+                input.setAttribute('accept', "image/png, image/gif, image/jpeg")
+                menuContainer.append(input)
+            var btValideLogo = document.createElement('button')
+                btValideLogo.id = 'btValideLogo'
+                btValideLogo.innerText = 'Valider le logo'
+                btValideLogo.addEventListener('click', function(){changeLogo_MODIFTEAMDB()})
+                menuContainer.append(btValideLogo)
+
+                // logo.addEventListener('click', function(){changeLogo_MODIFTEAMDB()})
+                logo.addEventListener('click', function(){input.click()})
+                // <input type="file" name="file" enctype="multipart/form-data" accept="image/png, image/gif, image/jpeg" style='display:none;'></input>
+                // input.style.display = 'none'
+            // p.addEventListener('click', function(){clickPlayerIcon(p)})
+    }
+
+    if (menu == 'addplayer' || menu == 'modifplayer') {
+
+        var labelXP = document.createElement('span')
+            labelXP.id = 'labelModifXP';
+            labelXP.innerText = '💡 Choisissez la force du joueur'
+            menuContainer.append(labelXP)
+
+        var frameXP = document.createElement("div");
+            frameXP.setAttribute("id", "frameBtXp");
+        var xp1 = document.createElement("button");     // FORCE 1
+            xp1.setAttribute("id", "emoForce1");
+            xp1.classList.add("btChooseXP");
+            xp1.textContent = emoForce1
+            frameXP.append(xp1)
+        var xp2 = document.createElement("button");     // FORCE 2
+            xp2.setAttribute("id", "emoForce2");
+            xp2.classList.add("btChooseXP");
+            xp2.textContent = emoForce2
+            frameXP.append(xp2)
+        var xp3 = document.createElement("button");     // FORCE 3
+            xp3.setAttribute("id", "emoForce3");
+            xp3.classList.add("btChooseXP");
+            xp3.textContent = emoForce3
+            frameXP.append(xp3)
+        // var hr = document.createElement("br")
+        //     menuContainer.append(hr);
+        //     //✅ 🈯️ 💹 ❇️ ✳️ ❎❌    
+        menuContainer.appendChild(frameXP)
+
+        if (menu == 'modifplayer') {
+            var btsupr = document.createElement("button");                  // SUPPR JOUEUR
+                btsupr.textContent = "🛑 Supprimer le joueur" //❌💥🛑🚮
+                btsupr.setAttribute("id", "btSupprPlayer")
+                btsupr.setAttribute("onclick", "supprPlayer(this)")
+                menuContainer.append(btsupr)
+        }
+    }
+
+    // <><><><><><><><><><><><><><><><><><>   ON-CLICK   <><><><><><><><><><><><><><><><><><>
+
+    switch (menu) {                                                
+        case 'addplayer':
+            // Attribution du clic pour le changement de nom :
+            nom.setAttribute("onclick", "changeName_DISPLAYONLY(this)");
+            // Attribution du clic pour chaque emoji de force(xp) :
+            xp1.setAttribute("onclick", "clickBtMenuAddPlayer(this)")
+            xp2.setAttribute("onclick", "clickBtMenuAddPlayer(this)")
+            xp3.setAttribute("onclick", "clickBtMenuAddPlayer(this)")
+            break;
+        case 'modifplayer':
+            // Attribution du clic pour le changement de nom :
+            nom.setAttribute("onclick", "changeName_MODIFPLAYERDB(this)");
+            // Attribution du clic pour chaque emoji de force(xp) :
+            xp1.setAttribute("onclick", "changeXP_MODIFPLAYER(this)")
+            xp2.setAttribute("onclick", "changeXP_MODIFPLAYER(this)")
+            xp3.setAttribute("onclick", "changeXP_MODIFPLAYER(this)")
+            break;
+        case 'modifequipe':
+            // Attribution du clic pour le changement de nom :
+            nom.setAttribute("onclick", "changeName_MODIFTEAMDB(this)");
+            break;
+    }
+
+    var menu = document.createDocumentFragment();
+        menu.appendChild(menuContainer)
+
+    return menu;
 }
 
 function clickAddPlayer() {
-    enleveMenuTousJoueurs_();
+    enleveMenu_();
     var name = prompt("Nom du nouveau joueur ?")
     if (name == "" || name == null) { return }
+    if (name.length > nbcarPlayer) {
+        snackbar('ℹ️ Le nom ne doit pas dépasser '+nbcarPlayer+' caractères', 'orange')
+        return
+    }
     
     // On vérifie qu'un joueur ne porte pas déjà ce nom
     var players = document.getElementsByClassName('player')
@@ -449,6 +550,7 @@ function clickAddPlayer() {
             var x = document.getElementById("snackbar"); // Get the snackbar DIV
                 x.className = "show"; // Add the "show" class to DIV
                 x.innerHTML = name + " existe déjà !";
+                x.style.borderRadius = '100px'
                 x.style.color = 'orange'
                 setTimeout(function(){ 
                         x.className = x.className.replace("show", ""); 
@@ -457,39 +559,83 @@ function clickAddPlayer() {
         }
     }
 
-    // clicked.classList.add("menu")
-    // var pos = clicked.getBoundingClientRect();
+    // Création du menu et ajout au DOM au niveau du containerEquipes
+    var menu = creerMenu(name, 'addplayer')
+    document.getElementById("containerEquipes").appendChild(menu);
 
-    var containerBt = creerMenuJoueur(name)
-    var tree = document.createDocumentFragment();
-        tree.appendChild(containerBt)
-    document.getElementById("containerEquipes").appendChild(tree);
-    document.getElementById('newPlayerName').setAttribute("onclick", "changeName_NEWPLAYER(this)");
-    var btsXP = document.getElementsByClassName('btChooseXP')
-    Array.prototype.forEach.call(btsXP, bt => 
-        bt.setAttribute("onclick", "clickBtMenuAddPlayer(this)")
-    )
 }
 
-function changeName_MODIFPLAYER(e) {
+
+
+function changeLogo_MODIFTEAMDB(e){
+
+    var input = document.getElementById('btModifLogo')
+
+    // input.click()
+    console.log(input)
+    console.log(input.files[0])
+    // alert('Fichier choisi : ' + input.files.length)
+
+    // Envoi du fichier vers le server
+    var id = document.getElementById('team').getAttribute('name')
+    var newlogo = input.files[0]
+
+    // changeTeam()
+    if (input.files.length>0) {
+
+        // Remplacer le logo dans la bdd
+        DB_changeTeamLOGO(id, newlogo)
+        // Remplacer le logo du menu
+        // Remplacer le logo de l'accueil
+
+    }
+    
+}
+
+function changeName_MODIFTEAMDB(e){
     console.log(e)
     newname = prompt('Nouveau nom ?',e.innerText)
-    if (newname) {
-        e.innerText = newname
-        id = e.parentNode.parentNode.id
-        DB_changePlayerNAME(id, newname)
-        e.parentNode.parentNode.name = newname
-        console.log(e.parentNode.parentNode.children[1])
-        e.parentNode.parentNode.children[1].innerText = newname
+    if (!newname) { return }
+    if (newname.length > nbcarTeam) {
+        snackbar('ℹ️ Le nom ne doit pas dépasser '+nbcarTeam+' caractères', 'orange')
+        return
     }
 
+        e.innerText = newname
+        id = document.getElementById('team').getAttribute('name')
+        DB_changeTeamNAME(id, newname)
+        document.getElementById('team').innerText = newname
+
+        e.parentNode.parentNode.name = newname // Nom affiché dans le menu
+        console.log(e.parentNode.parentNode.children[1])
+        e.parentNode.parentNode.children[1].innerText = newname // Nom affiché dans l'écran principale    
 }
 
-function changeName_NEWPLAYER(e) {
+
+function changeName_MODIFPLAYERDB(e) {
+    console.log(e)
     newname = prompt('Nouveau nom ?',e.innerText)
-    if (newname) {
-        e.innerText =newname
+    if (!newname) { return }
+    if (newname.length > nbcarPlayer) {
+        snackbar('ℹ️ Le nom ne doit pas dépasser '+nbcarPlayer+' caractères', 'orange')
+        return
     }
+    e.innerText = newname
+    id = e.parentNode.parentNode.id
+    DB_changePlayerNAME(id, newname)
+    e.parentNode.parentNode.name = newname // Nom affiché dans le menu
+    console.log(e.parentNode.parentNode.children[1])
+    e.parentNode.parentNode.children[1].innerText = nbcarPlayer // Nom affiché dans la tuile (écran principale)
+}
+
+function changeName_DISPLAYONLY(e) {
+    newname = prompt('Nouveau nom ?',e.innerText)
+    if (!newname) { return }
+    if (newname.length > nbcarPlayer) {
+        snackbar('ℹ️ Le nom ne doit pas dépasser '+nbcarPlayer+' caractères', 'orange')
+        return
+    }
+    e.innerText =newname
 }
 
 
@@ -509,7 +655,7 @@ function clickBtMenuAddPlayer(clicked){
         console.log("force:"+force+" | emoForce:"+emoForce)
 
         var team = document.getElementById("team").getAttribute("name");
-        var name = document.getElementById("newPlayerName").textContent;
+        var name = document.getElementById("btModifNom").textContent;
         
         var player = createPlayer_(force, name, 0)
         DB_createPlayer(force, name, team, player)
@@ -535,11 +681,6 @@ function createPlayer_(force, name, absent, id) {
     }
 
     var p = document.createElement('div')
-        // p.addEventListener('click' , function(){clickPlayerName(p)})
-        p.setAttribute('draggable' , "true")
-        p.setAttribute('ondragstart', 'drag(event)')
-        // p.ondragstart = drag(event)
-        // p.addEventListener('dragstart', drag(event))
         p.setAttribute('id' , id)
         p.setAttribute('force' , force)
         p.setAttribute('name' , name)
@@ -548,11 +689,10 @@ function createPlayer_(force, name, absent, id) {
     var x = document.createElement('span')
         x.innerText = emo
         x.classList.add('emoforce')
-        // x.addEventListener('click' , "clickPlayerIcon(this)")
         x.addEventListener('click' , function(){clickPlayerIcon(p)})
     var n = document.createElement('span')
         n.classList.add('playerName')
-        n.innerText = name.substring(0,13)
+        n.innerText = name.substring(0,nbcarPlayer)
         n.addEventListener('click' , function(){clickPlayerName(p)})
         
         p.append(x)
@@ -608,6 +748,8 @@ function movePlayer_(player, force, equipe) {
         // console.log(equipe.id + " vide, ajout de "+player.innerText+" ("+force+")")
         equipe.appendChild(player);
     }
+    player.setAttribute('draggable' , "true")
+    player.setAttribute('ondragstart', 'drag(event)')
 }
 
 
@@ -617,111 +759,13 @@ function unselect_(player){
     $("#cible").remove();
 }
 
-// function creerMenuJoueur_CHG(name){
-
-//     var containerBt = document.createElement("div");
-//         containerBt.setAttribute("id", "divOptionsJoueurs");
-//         containerBt.setAttribute("class", "divOptionsJoueurs");
-//         containerBt.style.display = "inline";
-//         containerBt.style.backgroundColor = "rgba(0,0,0, 0.8)"
-//         containerBt.style.borderRadius = "30px"
-//         containerBt.style.border = "2px solid grey"
-//         // containerBt.style.padding = "20px"
-//         containerBt.style.boxShadow = "rgba(0, 0, 0, 0.56) 0px 22px 70px 4px"
-//         containerBt.style.position = "absolute";
-//         containerBt.style.top = "0";
-//         containerBt.style.bottom = "0";
-//         containerBt.style.left = "0";
-//         containerBt.style.right = "0";
-//     var newBt6 = document.createElement("button");  // SUPPR JOUEUR
-//         newBt6.textContent = "🚮" //❌
-//         newBt6.classList.add("btSupprPlayer");
-//         containerBt.append(newBt6)
-//     var nom = document.createElement("span")       // AFFICHAGE NOM
-//         nom.innerText = name;
-//         nom.classList.add("btModifNom");
-//         nom.style.color = "white"
-//         containerBt.append(nom);
-//     var hr = document.createElement("br")
-//         containerBt.append(hr);
-//     var hr = document.createElement("br")
-//         containerBt.append(hr);
-//     var newBt4 = document.createElement("button"); // FORCE 1
-//         newBt4.setAttribute("id", "emoForce1");
-//         newBt4.classList.add("btModifForce");
-//         newBt4.textContent = emoForce1
-//         containerBt.append(newBt4)
-//     var newBt2 = document.createElement("button"); // FORCE 2
-//         newBt2.setAttribute("id", "emoForce2");
-//         newBt2.classList.add("btModifForce");
-//         newBt2.textContent = emoForce2
-//         containerBt.append(newBt2)
-//     var newBt3 = document.createElement("button"); // FORCE 3
-//         newBt3.setAttribute("id", "emoForce3");
-//         newBt3.classList.add("btModifForce");
-//         newBt3.textContent = emoForce3
-//         containerBt.append(newBt3)
-//     var hr = document.createElement("br")
-//         containerBt.append(hr);
-//         var newBt5 = document.createElement("button");  // CLOSE
-//         newBt5.textContent = "✅"        //✅ 🈯️ 💹 ❇️ ✳️ ❎❌
-//         newBt5.classList.add("btCloseMenu");
-//         containerBt.append(newBt5)
-
-//     return containerBt 
-// }
 
 function clickPlayerIcon(clicked) {
-
     console.log("Click Icone : modif du joueur");
-    // console.log(window)
-    // $("#divOptionsJoueurs").remove();
-    // console.log(clicked)
-
-    // if(clicked.classList.contains("menu")){
-
-    //     console.log("menu existant : suppression")
-    //     console.log(clicked.children)
-    //     clicked.classList.remove("menu")
-    //     $(clicked.children[2]).remove();
-        
-    // } else {
-
-        // console.log("le menu n'existe pas")
-        // clicked.classList.add("menu")
-        // var pos = clicked.getBoundingClientRect();
-
-        // var name = clicked.children[1].innerText // + " ✏️"
-        var name = clicked.getAttribute('name')
-        var containerBt = creerMenuJoueur(name);
-
-        var newBt6 = document.createElement("button");  // SUPPR JOUEUR
-            newBt6.textContent = "🛑 Supprimer le joueur" //❌💥🛑🚮
-            newBt6.style.top = "65%";
-            newBt6.style.position = "sticky";
-            // newBt6.style.top = "75%";
-            // newBt6.style.position = "relative";
-            newBt6.style.color = "white"
-            newBt6.style.padding = "15px"
-            newBt6.style.fontSize = "1.4rem"
-            newBt6.style.borderRadius = "50px"
-            newBt6.style.border = "1px solid white"
-            newBt6.classList.add("btSupprPlayer");
-            newBt6.setAttribute("onclick", "supprPlayer(this)")
-
-            containerBt.append(newBt6)
-        var tree = document.createDocumentFragment();
-            tree.appendChild(containerBt)
-        clicked.appendChild(tree);
-
-        document.getElementById('newPlayerName').setAttribute("onclick", "changeName_MODIFPLAYER(this)");
-
-        var btsXP = document.getElementsByClassName('btChooseXP')
-        Array.prototype.forEach.call(btsXP, bt => 
-            bt.setAttribute("onclick", "changeXP_MODIFPLAYER(this)")
-        )
-
-    // }
+    var name = clicked.getAttribute('name')
+    // Création du menu et ajout DOM au niveau du joueur
+    var menu = creerMenu(name, 'modifplayer');
+    clicked.appendChild(menu);
 }
 
 function supprPlayer(e) {
@@ -748,6 +792,7 @@ function supprPlayer(e) {
         return;
 
 }
+
 
 
 function changeXP_MODIFPLAYER(clicked) {
@@ -785,102 +830,6 @@ function changeXP_MODIFPLAYER(clicked) {
     majForceEquipes_()
 }
 
-
-// function clickSwitchInactif(clicked) {       
-//     // ACTION DANS LE DOM :
-//     $(clicked).toggleClass("inactif");
-//     console.log(clicked.getAttribute('name') + " change statut absent à: "+clicked.classList.contains("inactif"))
-
-//     clicked.parentNode.appendChild(clicked);
-//     majNbJoueurs_();
-// }'
-
-// function clickBtNom(clicked) {
-//     var player = clicked
-//     var nouveauNom = prompt("Nouveau nom ?",player.children[1].innerText)
-//     if (nouveauNom == "" || nouveauNom == null) { 
-//         return }
-//     console.log("changment de nom: "+player.children[1].innerText+" -> "+nouveauNom)
-//     // STOCKAGE DANS LE DOM :
-//     player.children[1].innerText = nouveauNom
-//     // STOCKAGE DANS LE COOKIE :
-//     localStorage.setItem(
-//         player.getAttribute("name"),
-//         JSON.stringify({
-//             "team":document.getElementById("team").getAttribute("name"),
-//             "force":parseInt(player.getAttribute("force")),
-//             "absent": player.classList.contains("inactif"),
-//             "name":nouveauNom
-//         })
-//     );
-//     // Suppression du menu
-//     $(clicked.children[2]).remove();
-//     clicked.classList.remove("menu")
-// }
-
-
-// function select(clicked) {
-
-//     console.log("SELECTED");
-//     console.log(clicked);
-//     console.log(window.event.target);
-//     console.log("^-------------------------^");
-
-//     // CLIQUE DE L'ICONE DE FORCE - affichage du menu
-//     if(window.event.target.classList.contains("emoforce")) {
-//         clickPlayerIcon(clicked);
-//         return;
-//     }
-
-//     // // CLIQUE DU BOUTON FORCE - modif force
-//     // if(window.event.target.classList.contains("btModifForce")) {
-//     //     changeXP_MODIFPLAYER(clicked);
-//     //     majForceEquipes_()
-//     //     return;
-//     // }
-//     // CLIQUE DU BOUTON NOM - modif nom
-//     if(window.event.target.classList.contains("btModifNom")) {
-//         clickBtNom(clicked);
-//         return;
-//     }
-//     // CLIQUE DU BOUTON CLOSE - ferme le menu
-//     if(window.event.target.classList.contains("btCloseMenu")) {
-//         $(clicked.children[2]).remove();
-//         return;
-//     }
-//     // CLIQUE DU BOUTON SUPPR - supprime le joueur
-//     if(window.event.target.classList.contains("btSupprPlayer")) {
-//         if (clicked.parentNode.id == "div0") {
-//             if (confirm("Supprimer définitivement ?")) {    
-//                 $(clicked).remove();
-//                 deleteFromDatabase(clicked.id)
-//                 localStorage.removeItem(clicked.id)
-//                 majNbJoueurs_();
-//             }
-//         } else {
-//             $(clicked.children[2]).remove();
-//             clicked.classList.remove("menu")
-//             document.getElementById("div9").appendChild(clicked);
-//             clicked.classList.add("inactif");
-//             majForceEquipes_();
-//         }
-//         return;
-//     }
-//     enleveMenuTousJoueurs_();
-
-//     // CLIQUE NUL PART - ferme le menu
-//     if(window.event.target.classList.contains("divOptionsJoueurs")) {
-//         $(clicked.children[2]).remove();
-//         return;
-//     }
-
-//     // gère les présents/absents dans la div joueursDispos (div0)
-//     if (clicked.parentNode.id=="div0"){
-//         clickSwitchInactif(clicked);
-//         return;
-//     } 
-//     ecranEquipe_SELECTPLAYER(clicked);
-// }
 
 function ecranEquipe_SELECTPLAYER(clicked){
     // console.log(clicked)
@@ -942,12 +891,14 @@ function enleverTousJoueurs_(){
     }
 }
 
-function enleveMenuTousJoueurs_(){
-    var players = document.getElementsByClassName("player")
-    for (let i=0 ; i<players.length ; i++) {
-        $(players[i].children[2]).remove();
-        // players[i].classList.remove("menu")
-    }
+function enleveMenu_(){
+    try{document.getElementById('divmenu').remove();} catch {}
+
+    // var players = document.getElementsByClassName("player")
+    // for (let i=0 ; i<players.length ; i++) {
+    //     $(players[i].children[2]).remove();
+    //     // players[i].classList.remove("menu")
+    // }
 }
 
 
@@ -974,10 +925,15 @@ function majForceEquipes_() {
             case "div3": forceEq3 += parseInt(force); break;
         }
     }
+    
+    iconeForce1 = iconeForce2 = iconeForce3 = '💪'
+    if((forceEq1 > forceEq2) & (forceEq1>forceEq3)) {iconeForce1='🦾'}
+    if((forceEq2 > forceEq1) & (forceEq2>forceEq3)) {iconeForce2='🦾'}
+    if((forceEq3 > forceEq1) & (forceEq3>forceEq2)) {iconeForce3='🦾'}
 
-    $("#forceEq1").text(forceEq1);
-    $("#forceEq2").text(forceEq2);
-    $("#forceEq3").text(forceEq3);
+    $("#forceEq1").text(iconeForce1 + forceEq1);
+    $("#forceEq2").text(iconeForce2 + forceEq2);
+    $("#forceEq3").text(iconeForce3 + forceEq3);
 
     if (forceEq1==0)  { $("#forceEq1").css({"display":"none"});
         } else        { $("#forceEq1").css({"display":"inline-block"}); }
@@ -988,6 +944,70 @@ function majForceEquipes_() {
 }
 
 
+function snackbar_DB(response) {
+    var text = response.result;
+    var color = response.success ? 'white' : 'orange';
+    snackbar(text, color)
+}
+
+function snackbar(text, color='white') {
+	var x = document.getElementById("snackbar"); // Get the snackbar DIV
+		x.className = "show"; // Add the "show" class to DIV
+		x.innerHTML =text;
+		x.style.color = color;
+		setTimeout(function(){  x.className = x.className.replace("show", ""); 	}, 3000); // After 3 seconds, remove the show class from DIV
+}
+
+function snackbar(text, color='white') {
+	var x = document.getElementById("snackbar"); // Get the snackbar DIV
+		x.className = "show"; // Add the "show" class to DIV
+		x.innerHTML =text;
+		x.style.color = color;
+		setTimeout(function(){  x.className = x.className.replace("show", ""); 	}, 3000); // After 3 seconds, remove the show class from DIV
+}
+
+function showParams(){
+    var p = document.getElementById("params"); // Get the DIV
+        p.className = "show"; // Add the "show" class to DIV
+        setTimeout(function(){  p.className = p.className.replace("show", ""); 	}, 20000); // After 3 seconds, remove the show class from DIV
+}
+
+function hideParams(){
+    var p = document.getElementById("params"); // Get the DIV
+        p.className = ""; // remove the "show" class to DIV
+}
+
+function defineTextSize(defaultSize) {
+    var tailleText = localStorage.getItem('tailleTextPlayer');
+    console.log('fontsize récupérée de localstorage :' + tailleText);
+    if (tailleText === null) {
+        tailleText = defaultSize;
+        localStorage.setItem('tailleTextPlayer', tailleText);
+        console.log('------------taille localstorage créée :' + tailleText);
+    }
+    document.documentElement.style.setProperty('--font-size-player', tailleText + 'px');
+}
+
+function grossir(){
+    var el = document.getElementsByClassName('player')[0];
+    var style = window.getComputedStyle(el, null).getPropertyValue('font-size');
+    var fontSize = parseFloat(style);     // now you have a proper float for the font size (yes, it can be a float, not just an integer)
+    fontSize = Math.round(fontSize + 1)
+    fontSizePC = fontSize + 'px'
+    document.documentElement.style.setProperty('--font-size-player', fontSizePC);
+    localStorage.setItem('tailleTextPlayer', fontSize);
+    console.log('------------nouvelle taille texte localstorage :' +fontSize)
+}
+function retrecir(){
+    var el = document.getElementsByClassName('player')[0];
+    var style = window.getComputedStyle(el, null).getPropertyValue('font-size');
+    var fontSize = parseFloat(style);     // now you have a proper float for the font size (yes, it can be a float, not just an integer)
+    fontSize = Math.abs(Math.round(fontSize - 1))
+    fontSizePC = fontSize + 'px'
+    document.documentElement.style.setProperty('--font-size-player', fontSizePC);
+    localStorage.setItem('tailleTextPlayer', fontSize);
+    console.log('------------nouvelle taille texte localstorage :' +fontSize)
+}
 
 function testTable(table){
     console.log("table :");	console.log(table);
@@ -995,3 +1015,4 @@ function testTable(table){
     console.log("values :");		console.log(Object.values(table));
     console.log("entries :");		console.log(Object.entries(table));
 }
+

@@ -19,7 +19,7 @@ if (!$req) {
     $result = "Error: $conn->error";
 } else {
     $success = true;
-    $result = "$name a été supprimé 👍";
+    $result = "👍 $name a été supprimé";
 }
 
 echo json_encode(

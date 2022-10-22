@@ -27,7 +27,7 @@ try{
         $result = "Error ($nbko ko / ".count($_POST).") : $conn->error";
     } else {
         $success = true;
-        $result = "Joueurs inactifs mis à jour 👍";
+        $result = "👍 Joueurs inactifs mis à jour";
     }
     $stmt->close();
         

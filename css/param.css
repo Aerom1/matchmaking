@@ -1,0 +1,71 @@
+/* The params - position it at the bottom and in the middle of the screen */
+#params {
+    visibility: hidden;
+    width: 100%; /* Set a default minimum width */
+    bottom: 0;
+    left: 0;
+    /* margin-left: -125px; Divide value of min-width by 2 */
+    background-color: #333; /* Black background color */
+    color: #fff; /* White text color */
+    text-align: center; /* Centered text */
+    padding: 25px 0; /* Padding */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    /* left: 50%; Center the snackbar */
+    /* top: 30px; 30px from the bottom */
+    /* font-Size : 1.5rem; */
+}
+  
+  
+  /* Show when clicking on a button (class added with JavaScript) */
+#params.show {
+    visibility: visible; /* Show */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+    However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadeinparam 0.5s, fadeoutparam 0.5s 19.5s;
+    animation: fadeinparam 0.5s, fadeoutparam 0.5s 19.5s;
+}
+
+#params button {
+    font-size: 2em;
+    height: 10vh;
+    width: 20%;
+    /* border-radius: 6px; */
+}
+
+button#smaller {
+  border-radius: 100px 0 0 100px;
+}
+
+button#bigger {
+  border-radius: 0 100px 100px 0;
+}  
+  
+#closeParams{
+    padding : 0 25px 0 25px;
+    font-size: 40px;
+    /* border : 1px solid gray; */
+    position: absolute;
+    right: 0;
+}
+
+  /* Animations to fade the snackbar in and out */
+  @-webkit-keyframes fadeinparam {
+    from {bottom: -100px;}
+    to {bottom: 0;}
+  }
+  
+  @keyframes fadeinparam {
+    from {bottom: -100px; }
+    to {bottom: 0; }
+  }
+  
+  @-webkit-keyframes fadeoutparam {
+    from {bottom: 0;}
+    to {bottom: -100px;}
+  }
+  
+  @keyframes fadeoutparam {
+    from {bottom: 0;}
+    to {bottom: -100px;}
+  } 

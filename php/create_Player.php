@@ -47,7 +47,7 @@ $absent = clean_input($_POST['absent']);
         } else {
             // printf("<br/>Le joueur a été ajouté");
             $success = true;
-            $result = "$name a été ajouté 👍";
+            $result = "👍 $name a été ajouté";
             $new_id = $conn->insert_id;
         }
 // }
