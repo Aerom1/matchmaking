@@ -48,7 +48,6 @@ http://127.0.0.1:8080/matchmaking/index.php
 	<!------------------------------------------------------------------------------------------------------------------>
 
 <body>
-	GUTEN TAG
 				<div id="snackbar">Snackbar text message</div> 
 				<script>	function testLogo(e) {
 					//$('#div9').hide() 
@@ -74,6 +73,8 @@ http://127.0.0.1:8080/matchmaking/index.php
 			<div id="forceEq2" class="forceEquipe" ></div>
 		</span>
 	</header>
+	GUTEN TAG
+
 	<div id ="containerEquipes" class="containerEquipes">
 		<div id="div1" class="container" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
 		<div id="div3" class="container" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
