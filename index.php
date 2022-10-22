@@ -48,7 +48,7 @@ http://127.0.0.1:8080/matchmaking/index.php
 	<!------------------------------------------------------------------------------------------------------------------>
 
 <body>
-	Bonjour le monde !
+	<h2>Bonjour le monde !<h2>
 				<div id="snackbar">Snackbar text message</div> 
 				<script>	function testLogo(e) {
 					//$('#div9').hide() 
