@@ -2,6 +2,11 @@
   --font-size-player: 5em;
 }
 
+h2 {
+  font-size: 30px;
+  color:rgb(255, 217, 19);
+}
+
 /* AFFICHAGE PORTRAIT */
 @media screen and (min-height: 480px) {
 
