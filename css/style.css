@@ -2,17 +2,15 @@
   --font-size-player: 5em;
 }
 
-h2 {
-  font-size: 30px;
-  color:rgb(255, 217, 19);
-}
+/* MEILLEUR GUIDE UTILISATION POUR : FLEX
+-> https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
 
 /* AFFICHAGE PORTRAIT */
 @media screen and (min-height: 480px) {
 
 
   .player {
-    font-size: var(--font-size-player);
+    font-size: var(--font-size-player, 20);
     margin: 3px;
 
   }
@@ -99,10 +97,7 @@ body {
   font-family: sans-serif;
 }
 
-h1 {
-  font-size: 3em;
-  font-family: "Audiowide";
-}
+  
 
 /* Make content area fill the entire browser window */
 html, .fullscreen {
@@ -119,15 +114,12 @@ html, .fullscreen {
   position:relative;
 }
 
-
-
 .containerEquipes {
   /* position:absolute; */
   /* top:14vh; */
   /* bottom:21vh; */
   margin-top: 5vh;
   margin-bottom: 6vh;
-
   left: 5px;
   right: 5px;
   display: flex;
@@ -208,9 +200,12 @@ html, .fullscreen {
 }
 
 
-
+img {
+  cursor: pointer;
+}
 
 button {
+  cursor: pointer;
   box-shadow: 
   rgba(0, 0, 0, 0.05) 0px 1px 6px 0px, 
   rgba(0, 0, 0, 0.1) 0px 4px 4px 0px, 
@@ -309,6 +304,8 @@ div.span {
 }
 
 .cible{
+  max-width: 100px;
+  min-width: 100px;
   background-color: lightgray;
   animation: bounce-in 0.6s linear;
   /* padding-left: 20px ;
