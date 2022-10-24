@@ -204,16 +204,30 @@ function compteJoueursDeLequipe_(team){
 function btBack(){
     console.log("bouton BACK")
     enleveMenu_();
-    $("#questionPresents").show();
+
+    $('#containerButton_MenuAccueil').show();
+    $('#containerButton_MenuEquipes').hide();
+    $('header').show();
+    
+    // $("#team").show(); 
+    // $("#logoHeader").show(); 
+    // $("#questionPresents").show();
+    // $("#btChgTeam").show();
+    // $("#btAddTeam").show();
+    // $("#btBack").hide(); 
+    // $("#btForceEquipes").hide(); 
+    // $("#btNbEquipes").hide(); 
+    // $("#btRandom").show(); 
     $("#divPlus").remove();
-    $("#btChgTeam").show();
-    $("#btAddTeam").show();
-    $("#div0").show();
-    $("#div1").hide();
-    $("#div2").hide();
-    $("#div3").hide();
-    $("#btBack").slideUp(); 
-    $("#btEquipes").slideUp(); 
+        $("#div0").show();
+        $("#div1").hide();
+        $("#div2").hide();
+        $("#div3").hide();
+
+    document.getElementById('containerEquipes').style.height = '63vh';
+
+    // document.getElementById('containerButton_MenuAccueil').className = 'accueil';
+
     if ($(".selected").length>0) {unselect_($(".selected")[0])}
 
 
@@ -256,15 +270,15 @@ function creerDivPlus_(){
 }
 
 function btModifNbEquipes() {
-    // $("#btEquipes").animate({"":""},1000)
+    // $("#btNbEquipes").animate({"":""},1000)
     enleveMenu_();
-    var bouton = document.getElementById('btEquipes');
+    var bouton = document.getElementById('btNbEquipes');
     var nbEquipe = bouton.getAttribute("nb");
     //var txtBtEq = bouton.innerText;
     
     if (nbEquipe==2){
         nbEquipe = 3;
-    }else{
+    } else {
         nbEquipe = 2;
     }
     console.log("NB EQUIPE : " + nbEquipe)
@@ -274,25 +288,51 @@ function btModifNbEquipes() {
 
 function btRandom(){
 
-    var nbEquipe = document.getElementById('btEquipes').getAttribute("nb");   
-    $("#btBack").slideDown(); 
-    $("#btEquipes").slideDown(); 
-    $("#btChgTeam").hide();
-    $("#btAddTeam").hide();
+    var nbEquipe = document.getElementById('btNbEquipes').getAttribute("nb");   
+    
+    $('#containerButton_MenuAccueil').hide();
+    $('#containerButton_MenuEquipes').show();
+    $('header').hide();
+    
+    // $("#team").hide(); 
+    // $("#logoHeader").hide(); 
+    // $("#btBack").slideDown(); 
+    // $("#btForceEquipes").slideDown(); 
+    // $("#btNbEquipes").slideDown(); 
+    // $("#btRandom").hide(); 
+    // $("#btChgTeam").hide();
+    // $("#btAddTeam").hide();
+
+    document.getElementById('containerEquipes').style.height = '83vh';
+
+    // document.getElementById('containerButton_MenuAccueil').className = 'equipes';
 
     if (nbEquipe==0) {
         // Pas de nombre d'équipe choisi -> selon nombre de joueurs
         var nbJoueurs = document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length
-        //if(txtBtEq=="👩🏻‍🤝‍👩🏿🧑🏽‍🤝‍🧑🏻"){nbEquipe=3}else{nbEquipe=2}
         if(nbJoueurs>=12){
             nbEquipe=3;
         }else{
             nbEquipe=2
         }
-        document.getElementById('btEquipes').setAttribute("nb",nbEquipe);
+        document.getElementById('btNbEquipes').setAttribute("nb",nbEquipe);
         console.log(nbJoueurs + " JOUEURS : " + nbEquipe + " equipes !")
     }
     RANDOM(nbEquipe);
+}
+
+function changeBtForceDisposition(nbEquipe) {
+    if (nbEquipe==3){
+        document.getElementById('containerForceMenuEquipes').style.flexDirection = 'column';
+        $('.forceEquipe').css('padding', '0')
+        document.getElementById('brasForce').style.right = '0';
+        document.getElementById('brasForce').style.top = '1.1vh';
+    } else {
+        document.getElementById('containerForceMenuEquipes').style.flexDirection = 'row';
+        $('.forceEquipe').css('padding', '1vh 0')
+        document.getElementById('brasForce').style.right = '8vw';
+        document.getElementById('brasForce').style.top = '2vh';
+    }
 }
 
 function RANDOM(nbEquipe) {
@@ -312,7 +352,7 @@ function RANDOM(nbEquipe) {
     var equipe2 = document.getElementById('div2');
     var equipe3 = document.getElementById('div3');
     var absents = document.getElementById('div9');
-    var txtBtEq = document.getElementById('btEquipes').innerText;
+    var txtBtEq = document.getElementById('btNbEquipes').innerText;
     //console.log("txtBtEq:"+txtBtEq.substring(txtBtEq.length-2))
 
     
@@ -323,7 +363,7 @@ function RANDOM(nbEquipe) {
     do {
         compteur+=1
         reinit_();
-        var forceEq1 = 0, forceEq2 = 0, forceEq3 = 0;
+        var forceEq1 = forceEq2 = forceEq3 = 0;
         var bascule = 0;
         while (dispos.children.length) {
             var i = getRandomInt_(dispos.children.length);
@@ -405,7 +445,8 @@ function RANDOM(nbEquipe) {
         // createPlayer_(Number(player.xp), player.name, Number(player.absent), Number(player.id))
     // })
 
-    DB_changePlayersInactifs(j)
+    DB_changePlayersInactifs(j);
+    changeBtForceDisposition(nbEquipe);
 
 }
 
@@ -926,10 +967,10 @@ function majForceEquipes_() {
         }
     }
     
-    iconeForce1 = iconeForce2 = iconeForce3 = '💪'
-    if((forceEq1 > forceEq2) & (forceEq1>forceEq3)) {iconeForce1='🦾'}
-    if((forceEq2 > forceEq1) & (forceEq2>forceEq3)) {iconeForce2='🦾'}
-    if((forceEq3 > forceEq1) & (forceEq3>forceEq2)) {iconeForce3='🦾'}
+    iconeForce1 = iconeForce2 = iconeForce3 = ''
+    // if((forceEq1 > forceEq2) & (forceEq1>forceEq3)) {iconeForce1='🦾'}
+    // if((forceEq2 > forceEq1) & (forceEq2>forceEq3)) {iconeForce2='🦾'}
+    // if((forceEq3 > forceEq1) & (forceEq3>forceEq2)) {iconeForce3='🦾'}
 
     $("#forceEq1").text(iconeForce1 + forceEq1);
     $("#forceEq2").text(iconeForce2 + forceEq2);
@@ -941,6 +982,10 @@ function majForceEquipes_() {
         } else        { $("#forceEq2").css({"display":"inline-block"}); }
     if (forceEq3==0)  { $("#forceEq3").css({"display":"none"});
         } else        { $("#forceEq3").css({"display":"inline-block"}); }
+    if (forceEq1==0)  { $("#btForceEquipes").css({"display":"none"});
+        } else        { $("#btForceEquipes").css({"display":"block"}); }
+    // if (forceEq3==0)  { $("#forceEq3").css({"display":"none"});
+    //     } else        { $("#forceEq3").css({"display":"inline-block"}); }
 }
 
 
@@ -992,20 +1037,22 @@ function grossir(){
     var el = document.getElementsByClassName('player')[0];
     var style = window.getComputedStyle(el, null).getPropertyValue('font-size');
     var fontSize = parseFloat(style);     // now you have a proper float for the font size (yes, it can be a float, not just an integer)
-    fontSize = Math.round(fontSize + 1)
-    fontSizePC = fontSize + 'px'
+        fontSize = Math.round(fontSize + 1)
+        fontSizePC = fontSize + 'px'
     document.documentElement.style.setProperty('--font-size-player', fontSizePC);
     localStorage.setItem('tailleTextPlayer', fontSize);
+
     console.log('------------nouvelle taille texte localstorage :' +fontSize)
 }
 function retrecir(){
     var el = document.getElementsByClassName('player')[0];
     var style = window.getComputedStyle(el, null).getPropertyValue('font-size');
     var fontSize = parseFloat(style);     // now you have a proper float for the font size (yes, it can be a float, not just an integer)
-    fontSize = Math.abs(Math.round(fontSize - 1))
-    fontSizePC = fontSize + 'px'
+        fontSize = Math.abs(Math.round(fontSize - 1))
+        fontSizePC = fontSize + 'px'
     document.documentElement.style.setProperty('--font-size-player', fontSizePC);
     localStorage.setItem('tailleTextPlayer', fontSize);
+
     console.log('------------nouvelle taille texte localstorage :' +fontSize)
 }
 
