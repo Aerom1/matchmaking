@@ -44,33 +44,32 @@
 
 }
 
-  
-  h1::after{
-    content:' ⚙️';
-    font-size: .5em;
-    /* line-height: .8em; */
-  }
-  h1 {
-    text-shadow: 2px 8px 3px rgba(0,0,0,0.2),    0px -5px 35px rgba(255,255,255,0.3);
-    z-index: 20;
-    margin-bottom: 1vh;
-    font-size: 3em;
-    font-family: "Audiowide";
-  }
+
+h1::after{
+  content:' ⚙️';
+  font-size: .5em;
+  /* line-height: .8em; */
+}
+h1 {
+  text-shadow: 2px 8px 3px rgba(0,0,0,0.2),    0px -5px 35px rgba(255,255,255,0.3);
+  z-index: 20;
+  margin-bottom: 1vh;
+  font-family: "Audiowide";
+}
 
 
-  #logoHeader {
-    position:absolute;
-    max-width:100%;
-    height: 80px;
-    left:15px;
-    top: 5px;
-    z-index: 100;
-  }
+#logoHeader {
+  position:absolute;
+  max-width:100%;
+  height: 80px;
+  left:15px;
+  top: 5px;
+  z-index: 100;
+}
 
-  #questionPresents {
-    display: block;
-    text-align: right;
-    font-size:1.5rem;
-    color: #1a5f19; /*#bf0e1c;*/
-  }
+#questionPresents {
+  display: block;
+  text-align: right;
+  font-size:1.5rem;
+  color: #1a5f19; /*#bf0e1c;*/
+}

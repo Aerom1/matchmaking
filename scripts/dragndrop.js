@@ -43,6 +43,8 @@ function drag(ev) {
 }
 
 function ajoutCiblesToutesEquipes(divOrigine){
+    nbEquipe = document.getElementById('btNbEquipes').getAttribute('nb')
+    if (nbEquipe == 2) { return }
     // Ajoute 3 cibles (une pour chaque équipe)
     for (let i=1;i<=3;i++) {
         if ("div"+i !== divOrigine) {

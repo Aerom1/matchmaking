@@ -78,16 +78,17 @@ http://127.0.0.1:8080/matchmaking/index.php
 			<button type="button" id="btChgTeam" onclick="changeTeam()" nextteamid="">
 				<img class="logo2" id="logoEquipeNext" src="" alt="👨‍👩‍👦‍👦" width="100" height="120">	</button>
 			<button type="button" id="btRandom"  onclick="btRandom()">
-				<img id="logoBtRandom"  src='img/logo/LogoHockey7.png' alt='🏒'/>				</button>
+				<!-- <img id="logoBtRandom1"  src='img/logo/LogoHockey7.png' alt='🏒'/> -->
+				<span id="logoBtRandom2">	🎲	</span>				</button>
 			<button type="button" id="btAddTeam" onclick="btAddTeam()">
-				<span class="logo2">➕</span>			</button> 
+				<span class="logo2">	➕	</span>			</button> 
 		</div>
 
 		<div id="containerButton_MenuEquipes" style='display:none;'> 	<!--    BOUTONS    👨‍👩‍👦‍👦🧩🏒⚙️📃🔙➕+⨄⨁👨🏽‍🤝‍👨🏻 -->
 			<button type="button" id="btBack" onclick="btBack()">
-				<span class="logo2">🔙</span>	</button>
+				<span class="logo2">	🔙	</span>	</button>
 			<button type="button" id="btForceEquipes" onclick="btRandom()">
-				<span id='brasForce'>🦾</span>
+				<span id='icoRandom'>	🎲	</span> <!-- 🦾🥋🥇🏅🏆🎲⚡ -->
 				<div id='containerForceMenuEquipes'>
 					<div id="forceEq1" class="forceEquipe" ></div>
 					<div id="forceEq3" class="forceEquipe" ></div>

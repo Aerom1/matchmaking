@@ -5,27 +5,6 @@
 /* AFFICHAGE PORTRAIT */
 @media screen and (min-height: 480px) {
   
-  #brasForce{
-    position: absolute;
-    font-size: 2.4em;
-  }
-
-  .forceEquipe {
-    /* width: 33.4%; */
-    flex-grow: 1;
-  }
-
-  #btForceEquipes{
-    position: relative;
-    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
-    /* top:4px; */
-    /* left:50%; */
-    /* border-radius: 10px; */
-    /* padding: 2px; */
-    /* border: 1px solid black; */
-    overflow: hidden;
-    padding: 0;
-  }
 
   #containerForceMenuEquipes{
     width: 100%;
@@ -37,9 +16,10 @@
     /* left: 0; */
     align-items: stretch;
     justify-content: center;
-    font-size: 1.5em;
+    font-size: 1.3em;
     align-content: center;
     flex-direction: column;
+    float: right;
   }
 
   #containerButton_MenuEquipes {
@@ -71,10 +51,14 @@
   }
   
   
-  #logoBtRandom {
+  #logoBtRandom1 {
     max-height: 80%;
     max-width : 80%;
-    max-height: 8vh;
+    max-height: 6vh;
+  }
+  
+  #logoBtRandom2 {
+    font-size: 3rem;
   }
   
   .logo2{
@@ -88,7 +72,35 @@
     color: white;
   }
   
-  #btChgTeam, #btAddTeam, #btBack, #btNbEquipes, #btRandom, #btForceEquipes{
+  
+  #btForceEquipes{
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+    /* top:4px; */
+    /* left:50%; */
+    /* border-radius: 10px; */
+    /* padding: 2px; */
+    /* border: 1px solid black; */
+    overflow: hidden;
+    padding: 0;
+  }
+
+  #btForceEquipes {
+    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset; */
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    border-radius: 500px;
+    background-color: #3d3d3d;
+  }
+
+  #btBack, #btNbEquipes {
+    /* background-color: rgba(0,0,0,0); */
+    /* background-color: #3d3d3d; */
+    border-radius: 500px;
+    /* box-shadow: none; */
+    /* border: 0px; */
+  } 
+
+  #btChgTeam, #btAddTeam, #btRandom {
     border-radius: 500px;
     max-height: 10vh;
     width: 100%;
@@ -100,12 +112,23 @@
   #btAddTeam, #btNbEquipes    {  grid-column: 3;  }
   
   #btRandom {
-    border-color: orange;
-    border-radius: 500px;
     
-    /* grid-row: 1/4; */
+    font-size: 3rem;
+    /* border-color: orange; */
+    /* border-radius: 500px; */
   }
   
+  #icoRandom{
+    position: absolute;
+    font-size: 2.8em;
+  }
+
+  .forceEquipe {
+    /* width: 33.4%; */
+    flex-grow: 1;
+    padding-right: 5vw;
+  }
+
   
 }
 

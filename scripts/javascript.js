@@ -233,6 +233,7 @@ function btBack(){
 
     reinit_();
     creerDivPlus_();
+    document.exitFullscreen();
 }
 
 function reinit_() {
@@ -319,19 +320,45 @@ function btRandom(){
         console.log(nbJoueurs + " JOUEURS : " + nbEquipe + " equipes !")
     }
     RANDOM(nbEquipe);
+    document.documentElement.requestFullscreen();
 }
 
+
 function changeBtForceDisposition(nbEquipe) {
+
+    
+// METHODE POUR CENTRER UN ELEMENT EN POSITION ABSOLUTE
+// top: 50%;  /* position the top  edge of the element at the middle of the parent */
+// left: 50%; /* position the left edge of the element at the middle of the parent */
+// transform: translate(-50%, -50%); /* This is a shorthand of
+//                                      translateX(-50%) and translateY(-50%) */
+
     if (nbEquipe==3){
+        document.querySelectorAll('.forceEquipe').forEach(e => {  
+            e.style.paddingRight = '35%';  
+            e.style.paddingTop = '0%';  
+        });
+        // $('.forceEquipe').css('padding-right', '5%') 
+        document.getElementById('icoRandom').style.left = '0';
+        document.getElementById('icoRandom').style.top = '1.1vh';
+        document.getElementById('icoRandom').style.transform = 'none';
         document.getElementById('containerForceMenuEquipes').style.flexDirection = 'column';
-        $('.forceEquipe').css('padding', '0')
-        document.getElementById('brasForce').style.right = '0';
-        document.getElementById('brasForce').style.top = '1.1vh';
+        document.getElementById('containerForceMenuEquipes').style.width = '44%';
+        document.getElementById('containerForceMenuEquipes').style.height = '100%';
     } else {
+        document.querySelectorAll('.forceEquipe').forEach(e => {  
+                e.style.paddingRight = '0%';
+                e.style.paddingTop = '7%';
+              });
+        // $('.forceEquipe').css('padding', '1vh 0')
+        document.getElementById('icoRandom').style.right = 'none';
+        document.getElementById('icoRandom').style.left = '50%';
+        document.getElementById('icoRandom').style.top = '20%';
+        document.getElementById('icoRandom').style.transform = 'translate(-50%)';
         document.getElementById('containerForceMenuEquipes').style.flexDirection = 'row';
-        $('.forceEquipe').css('padding', '1vh 0')
-        document.getElementById('brasForce').style.right = '8vw';
-        document.getElementById('brasForce').style.top = '2vh';
+        document.getElementById('containerForceMenuEquipes').style.width = '100%';
+        document.getElementById('containerForceMenuEquipes').style.height = '100%';
+
     }
 }
 
@@ -976,16 +1003,18 @@ function majForceEquipes_() {
     $("#forceEq2").text(iconeForce2 + forceEq2);
     $("#forceEq3").text(iconeForce3 + forceEq3);
 
-    if (forceEq1==0)  { $("#forceEq1").css({"display":"none"});
-        } else        { $("#forceEq1").css({"display":"inline-block"}); }
-    if (forceEq2==0)  { $("#forceEq2").css({"display":"none"});
-        } else        { $("#forceEq2").css({"display":"inline-block"}); }
+    // if (forceEq1==0)  { document.getElementById("forceEq1").setAttribute("display","none");
+    //     } else        { document.getElementById("forceEq1").setAttribute("display","unset"); }
+    // // if (forceEq1==0)  { $("#forceEq1").css({"display":"none"});
+    // //     } else        { $("#forceEq1").css({"display":"unset"}); }
+    // if (forceEq2==0)  { $("#forceEq2").css({"display":"none"});
+    //     } else        { $("#forceEq2").css({"display":"unset"}); }
     if (forceEq3==0)  { $("#forceEq3").css({"display":"none"});
-        } else        { $("#forceEq3").css({"display":"inline-block"}); }
-    if (forceEq1==0)  { $("#btForceEquipes").css({"display":"none"});
-        } else        { $("#btForceEquipes").css({"display":"block"}); }
-    // if (forceEq3==0)  { $("#forceEq3").css({"display":"none"});
-    //     } else        { $("#forceEq3").css({"display":"inline-block"}); }
+        } else        { $("#forceEq3").css({"display":"unset"}); }
+    // if (forceEq1==0)  { $("#btForceEquipes").css({"display":"none"});
+    //     } else        { $("#btForceEquipes").css({"display":"block"}); }
+    // if (forceEq1==0)  { document.getElementById("btForceEquipes").setAttribute("display","none");
+    //     } else        { document.getElementById("btForceEquipes").setAttribute("display","unset"); }
 }
 
 
