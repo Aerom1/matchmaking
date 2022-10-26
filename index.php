@@ -127,7 +127,7 @@ http://127.0.0.1:8080/matchmaking/index.php
 		$(document).ready(function () {
 			console.log("Hello world - document ready")
 
-				snackbar("🤖 Coucou")
+				snackbar("🤖 Coucou","white",2)
 				var team = 		Object.values(all_teams	 ).filter(item => item.fav === '1')[0] // récupère le premier résultat
 				if (!team) {team = all_teams[0]} // Si l'équipe favorite n'est pas définie, on prend la première équipe de la liste
 				var players = 	Object.values(all_players).filter(item => item.team === team.id)
@@ -139,7 +139,7 @@ http://127.0.0.1:8080/matchmaking/index.php
 		});
 
 		function testLogo(e) {
-			snackbar("🤖 Coucou")
+			snackbar("🤖 Yo l'humain ! Tu pues du cul 💩","white",2)
 		}
 
 	</script>

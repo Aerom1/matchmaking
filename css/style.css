@@ -114,6 +114,7 @@ html, .fullscreen {
   margin-top: 3vh;
   margin-bottom: 6vh;
   height: 80vh;
+  gap: 10px;
 }
 
 .container {

@@ -1023,10 +1023,11 @@ function snackbar_DB (response) {
     snackbar(text, color)
 }
 
-function snackbar (text, color='white') {
+function snackbar (text, color='white', size = 1) {
 	var x = document.getElementById("snackbar"); // Get the snackbar DIV
 		x.className = "show"; // Add the "show" class to DIV
 		x.innerHTML =text;
+        x.style.fontSize = size+"em"
 		x.style.color = color;
 		setTimeout(function(){  x.className = x.className.replace("show", ""); 	}, 3000); // After 3 seconds, remove the show class from DIV
 }

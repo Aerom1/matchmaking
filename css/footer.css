@@ -94,11 +94,11 @@
   }
 
   #btBack, #btNbEquipes {
-    /* background-color: rgba(0,0,0,0); */
     /* background-color: #3d3d3d; */
+    background-color: rgba(0,0,0,0);
+    box-shadow: none;
+    border: 0px;
     border-radius: 500px;
-    /* box-shadow: none; */
-    /* border: 0px; */
   } 
 
   #btChgTeam, #btAddTeam, #btRandom {
@@ -137,106 +137,6 @@
 /* AFFICHAGE PAYSAGE */
 @media screen and (max-height: 480px) {
   
-  footer {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    position:absolute;
-    top: 0px;
-    left: 0vw; 
-    width: 8vw;
-  }
-  
-  #btChgTeam{
-    margin-top: -15px;
-    font-size:8vh;
-    border-radius: 500px;
-    overflow:hidden;
-    width: 7vw;
-  }
-  
-  #btBack,#btNbEquipes{
-    position: absolute;
-    top: 70vh;
-    height: 15vh;
-    width: 7vw;
-    left: 2vw;
-    margin-top:3vh;
-    border-radius: 500px;
-  }
-  
-  #btBack {
-    font-size: 8vh;
-    top:0vh;
-  }
-  
-  #containerButton_MenuAccueil {
-    /* #btBack,#btNbEquipes */
-    padding-top: 10px;
-    position:relative;
-    width:100%;
-    text-align: center;
-    font-size:3vh;
-  }
-  
-  
-  #btRandom {
-    position:absolute;
-    /* bottom:5px; */
-    /* right: 20px; */
-    
-    top: 0vh;
-    right: -1130%;
-    
-    height: 20vh;
-    /* font-size:8vw; */
-    padding:5px;
-    border-color: orange;
-    border-radius: 500px;
-  }
-
-
-  
-  #btForceEquipes{
-    display: flex;
-    text-align: right;
-    align-content: flex-end;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid black;
-  }
-
-  #btForceEquipes::after {
-    /* content:'Ã°Å¸â€™Âª'; */
-    font-size: 1.8em;
-    /* line-height: 10px; */
-  }
-    
-    /* .forceEquipe::before {
-      content: "ÃƒÂ°Ã…Â¸Ã¢â‚¬â„¢Ã‚Âª";
-    } */
-  
-  .forceEquipe{
-    /* display: none; */
-    padding: 0px 1vw;
-    font-size: 1.4rem;
-    /* box-shadow:  rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset; */
-    /* margin: -2px; */
-    height: 100%;
-    /* width: 25%; */
-  }
-  
-  /* #forceEq1 { 
-      border-top-left-radius: 20px;
-      border-bottom-left-radius: 20px;
-  }
-  
-  #forceEq2 { 
-      border-top-right-radius: 20px;
-      border-bottom-right-radius: 20px;
-  } */
-
-
 }
 
 
