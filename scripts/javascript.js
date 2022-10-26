@@ -63,7 +63,6 @@ function changeTeam(){
     $("#div1").hide();
     $("#div2").hide();
     $("#div3").hide();
-    $(".containerEquipes").css({"display":"grid"})
     $(".container").css({"width":"100%"})
     
     // var teamActuelleId = document.getElementById("team").getAttribute('name')
@@ -102,10 +101,10 @@ function loadTeam(team, players, nextTeam){
     $("#div1").hide();
     $("#div2").hide();
     $("#div3").hide();
-    $(".containerEquipes").css({"display":"grid"})
+    $("#containerEquipes").css({"display":"grid"})
     $(".container").css({"width":"100%"})
     $(".cible").remove();
-    $("#questionPresents").slideDown();
+    // $("#questionPresents").slideDown();
 
 }
 
@@ -142,12 +141,10 @@ function loadData(team, players){
 function btEditTeam(){
     enleveMenu_();
     var team = document.getElementById('team').innerText
-
     // Création du menu et ajout au DOM au niveau du containerEquipes
     var menu = creerMenu(team, 'modifequipe')
     document.getElementById("containerEquipes").appendChild(menu);
-
-
+    // menu.style.animation="appearfromright 0.5s linear 2";
 }
 
 function btAddTeam(){
@@ -224,8 +221,9 @@ function btBack(){
         $("#div2").hide();
         $("#div3").hide();
 
-    document.getElementById('containerEquipes').style.height = '63vh';
-
+    // indique aux conteneur de joueurs quelle mise en forme prendre
+    document.getElementById('containerEquipes').className = 'accueil';   // "accueil","equipes"
+    
     // document.getElementById('containerButton_MenuAccueil').className = 'accueil';
 
     if ($(".selected").length>0) {unselect_($(".selected")[0])}
@@ -239,7 +237,7 @@ function btBack(){
 function reinit_() {
     console.log("reinit_")
     $(".cible").remove();
-    $(".containerEquipes").css({"display":"grid"})
+    // $("#containerEquipes").css({"display":"grid"})
     $(".container").css({"width":"100%"})
     var dispos = document.getElementById('div0');
     var equipe1 = document.getElementById('div1');
@@ -304,7 +302,8 @@ function btRandom(){
     // $("#btChgTeam").hide();
     // $("#btAddTeam").hide();
 
-    document.getElementById('containerEquipes').style.height = '83vh';
+    // indique aux conteneur de joueurs quelle mise en forme prendre
+    document.getElementById('containerEquipes').className = 'equipes';   // "accueil","equipes"
 
     // document.getElementById('containerButton_MenuAccueil').className = 'equipes';
 
@@ -364,7 +363,7 @@ function changeBtForceDisposition(nbEquipe) {
 
 function RANDOM(nbEquipe) {
     console.log("=============début random");
-    document.getElementById("questionPresents").style.display = "none"
+    // document.getElementById("questionPresents").style.display = "none"
     // $("#btRandom").animate({
     //     height:"10px",
     //     width: "+=100px",
@@ -449,11 +448,11 @@ function RANDOM(nbEquipe) {
     // console.log("NB JOUEURS EQ 3 : "+ equipe3.children.length)
     if(equipe3.children.length){
         $("#div3").show();
-        $(".containerEquipes").css({"display":"grid"})
+        $("#containerEquipes").css({"display":"grid"})
         $(".container").css({"width":"100%"})
     }else{
         $("#div3").hide();
-        $(".containerEquipes").css({"display":"flex"})
+        $("#containerEquipes").css({"display":"flex"})
         $(".container").css({"width":"49%"})
 
     }
@@ -1018,13 +1017,13 @@ function majForceEquipes_() {
 }
 
 
-function snackbar_DB(response) {
+function snackbar_DB (response) {
     var text = response.result;
     var color = response.success ? 'white' : 'orange';
     snackbar(text, color)
 }
 
-function snackbar(text, color='white') {
+function snackbar (text, color='white') {
 	var x = document.getElementById("snackbar"); // Get the snackbar DIV
 		x.className = "show"; // Add the "show" class to DIV
 		x.innerHTML =text;
@@ -1032,23 +1031,21 @@ function snackbar(text, color='white') {
 		setTimeout(function(){  x.className = x.className.replace("show", ""); 	}, 3000); // After 3 seconds, remove the show class from DIV
 }
 
-function snackbar(text, color='white') {
-	var x = document.getElementById("snackbar"); // Get the snackbar DIV
-		x.className = "show"; // Add the "show" class to DIV
-		x.innerHTML =text;
-		x.style.color = color;
-		setTimeout(function(){  x.className = x.className.replace("show", ""); 	}, 3000); // After 3 seconds, remove the show class from DIV
-}
-
-function showParams(){
-    var p = document.getElementById("params"); // Get the DIV
+function showZoom(){
+    var p = document.getElementById("zoom"); // Get the DIV
         p.className = "show"; // Add the "show" class to DIV
         setTimeout(function(){  p.className = p.className.replace("show", ""); 	}, 20000); // After 3 seconds, remove the show class from DIV
 }
 
-function hideParams(){
-    var p = document.getElementById("params"); // Get the DIV
+function hideZoom(){
+    var p = document.getElementById("zoom"); // Get the DIV
         p.className = ""; // remove the "show" class to DIV
+    // p.style.animation="fadeoutzoom 2s linear 2";
+    // window.setTimeout(
+    //     function removethis()
+    //     {
+    //         p.className = ""; // remove the "show" class to DIV
+    //     }, 2000);       
 }
 
 function defineTextSize(defaultSize) {

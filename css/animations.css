@@ -42,7 +42,7 @@ animation: zoom 0.3s linear;
 }   */
 100% {
     transform: rotate(360deg);
-    height:10vh;
+    height:10%;
     opacity:1;
 }
 }

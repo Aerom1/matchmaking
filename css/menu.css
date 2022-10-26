@@ -1,29 +1,30 @@
 /* AFFICHAGE DU MENU
 Nouveau joueur
 Modif joueur
-Modif équipe 
+Modif Ã©quipe 
 */
 
 #divmenu{
   animation: 300ms linear 0ms 1 normal none running bounce-in;
+  z-Index : 2;
   text-align: center;
-  max-width: -moz-fit-content;
-  max-width: fit-content; /* -moz-available; */
   display : grid;
-  color : white;
-  background-Color : #333; /* rgba(0,0,0, 0.9); */
-  /* border-Radius : 20px;
-  border : 2px solid grey; */
-  box-Shadow : rgba(0, 0, 0, 0.56) 0px 0px 70px 10px;
-  padding : 7%;
-  position : fixed;
-  top : 0;
-  bottom : 0;
-  /* left : 0; */
-  right : 0;
   grid-Template-Rows : repeat(8, 1fr);
   gap : 2vh;
-  z-Index : 2;
+  background-Color : #333; /* rgba(0,0,0, 0.9); */
+  color : white;
+  box-Shadow : rgba(0, 0, 0, 0.56) 0px 0px 70px 10px;
+  padding : 7%;
+
+  position : absolute;
+  /* max-width: -moz-fit-content;
+  max-width: fit-content; */
+  top : 0;
+  bottom : 0;
+  left : 0;
+  right : 0;
+  /* width: 100%;
+  height: 100%; */
 }
 
 #btModifNom, #btSupprPlayer, #btCloseMenu{
@@ -55,7 +56,7 @@ Modif équipe
   border-radius: 20px;
   color : white;
   box-Shadow : none;
-  max-width : 90vw;
+  /* max-width : 90vw; */
   overflow-x : hidden;
   align-self: end;
 }
@@ -70,7 +71,7 @@ Modif équipe
   font-size: 5rem;
   border-radius: 100px;
   background-color: rgba(255,255,255,0.2);
-  margin: 2vw;
+  margin: 0 5px;
 }
 
 .emoforce{
@@ -104,4 +105,5 @@ Modif équipe
 
 #labelModifXP {
   align-self: end;
+  font-size: var(--font-size-player, 20);
 }

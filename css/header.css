@@ -33,7 +33,6 @@
 
 
       #questionPresents{
-        display: none;
         position:absolute;
         /* top:7vh;
         left:20vw; */
@@ -47,7 +46,7 @@
 
 h1::after{
   content:' ⚙️';
-  font-size: .5em;
+  font-size: 1em;
   /* line-height: .8em; */
 }
 h1 {
@@ -72,4 +71,5 @@ h1 {
   text-align: right;
   font-size:1.5rem;
   color: #1a5f19; /*#bf0e1c;*/
+  margin-top: 0; /* pour empêcher le double margin (bas de h1 + haut de questionPresents */
 }

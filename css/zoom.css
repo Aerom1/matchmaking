@@ -1,0 +1,104 @@
+/* The position it at the bottom and in the middle of the screen */
+#zoom {
+    visibility: hidden;
+    z-index: 1; /* Add a z-index if needed */
+    position: fixed; /* Sit on top of the screen */
+    width: 100%; /* Set a default minimum width */
+    bottom: 0;
+    top: 0;
+    left: 0;
+    /* color: #fff; */
+    text-align: center; /* Centered text */
+    display: grid;
+    grid-template-columns: 1fr 3fr 3fr 1fr;
+    grid-gap: 10px;
+    grid-auto-rows: 33%;
+    grid-template-areas:
+    ". . . ."
+    ". a b ."
+    ". . . .";
+    }
+    
+#zoomframe {
+  background-color: rgba(200,200,255,1);
+  position: fixed; /* Sit on top of the screen */
+  width: 100%; /* Set a default minimum width */
+  bottom: 0;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+}
+
+/* Show when clicking on a button (class added with JavaScript) */
+#zoom.show {
+    visibility: visible; /* Show */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+    However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadeinzoom 0.5s, fadeoutzoom 0.5s 19.5s;
+    animation: fadeinzoom 0.5s, fadeoutzoom 0.5s 19.5s;
+}
+
+
+
+#zoom button {
+    height: 10vh;
+    /* width: 20%; */
+    /* border-radius: 6px; */
+    align-self: center;
+    /* justify-self: center; */
+    /* box-shadow: rgb(44, 62, 80) 0px 0px 15px 0px inset; */
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px 0px, rgba(0, 0, 0, 0.09) 0px 4px 2px 0px, rgba(0, 0, 0, 0.09) 0px 8px 4px 0px, rgba(0, 0, 0, 0.09) 0px 16px 8px 0px, rgba(0, 0, 0, 0.09) 0px 32px 16px 0px;
+    opacity: 0.9;
+    background-color: rgba(0,0,0,0.8);
+}
+
+button#smaller {
+  border-radius: 100px 0 0 100px;
+  grid-area: a;
+  font-size: 2em;
+}
+
+button#bigger {
+  border-radius: 0 100px 100px 0;
+  grid-area: b;
+  font-size: 3em;
+}  
+  
+#closeZoom{
+    padding : 0 25px 0 25px;
+    font-size: 40px;
+    /* border : 1px solid gray; */
+    position: absolute;
+    right: 0;
+}
+
+  /* Animations to fade the snackbar in and out */
+  @-webkit-keyframes fadeinzoom {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+        
+  @keyframes fadeinzoom {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeoutzoom {
+    from {opacity: 1;}
+    to {  opacity: 0;}
+        }
+        
+  @keyframes fadeoutzoom {
+    from {opacity: 1;}
+    to {  opacity: 0;}
+    /* from {opacity: 1;}
+    to {opacity: 0;} */
+  } 
+
+  
+#lienzoom{ 
+  font-size: 2em;
+  position: fixed;
+  opacity: 0.6;
+}
+

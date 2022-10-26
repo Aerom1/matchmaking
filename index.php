@@ -23,7 +23,7 @@ http://127.0.0.1:8080/matchmaking/index.php
 	<link rel="stylesheet" href="css/menu.css">
 	<link rel="stylesheet" href="css/animations.css">
 	<link rel="stylesheet" href="css/snackbar.css">
-	<link rel="stylesheet" href="css/param.css">
+	<link rel="stylesheet" href="css/zoom.css">
 
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf8_general_ci"/>
@@ -44,41 +44,32 @@ http://127.0.0.1:8080/matchmaking/index.php
         $all_players = 	json_encode( $conn->query("SELECT * FROM tbplayer ORDER BY absent ASC, name ASC")->fetch_all( MYSQLI_ASSOC ) ,JSON_FORCE_OBJECT|JSON_UNESCAPED_UNICODE);
 		$conn -> close();
 	?>
-</head>
-	<!------------------------------------------------------------------------------------------------------------------>
-
-<body>
-				<div id="snackbar">Snackbar text message</div> 
-				<script>	function testLogo(e) {
-					//$('#div9').hide() 
-					// $('#logoHeader').hide()
-					// alert('Result include: <?= include('php/input.php') ?>')
-					snackbar("🤖 Coucou")
-					showParams()
-					}</script>
-				<div id="textEchange" style="display:none;"> Clic joueur pour échanger 🔁 ou glisser-déposer<br/>Clic image 🐭😼🐻 pour modifer ✏️ 	</div>
 	
-				<!-- Champ caché ! Si création de nouvelle équipe, ce champ input permet de pour parcourir les fichiers pour choisir une image source-> https://gist.github.com/0xPr0xy/4060754-->
-				<input type="file" name="file" enctype="multipart/form-data" accept="image/png, image/gif, image/jpeg" style='display:none;'></input>
-				
+</head>
+<body>
+	<!----------------- HEADER --------------->
 	<header>
 		<h1 id="team" onclick="btEditTeam()" class="font-effect-shadow-multiple"> </h1>
 		<img id="logoHeader" onclick="testLogo()" class="logo" src="img/logo/LogoHockey7.png" alt="🏒" style='font-size:60px'/>
-		<h2 id="questionPresents" style='margin-top: 0;'>Qui est présent ?</h2>
+		<h2 id="questionPresents">Qui est présent ?</h2>
 	</header>
-	<div id ="containerEquipes" class="containerEquipes">
-		<div id="div1" class="container" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-		<div id="div3" class="container" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-		<div id="div2" class="container" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-		<div id="div0" class="container" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-		<div id="div9" class="container" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-	</div>
+	<div id='lienzoom' onclick="showZoom()">🔎</div>
+	<!----------------- EQUIPES --------------->
+	<section>
+		<div id ="containerEquipes" class="accueil">
+			<div id="div0" class="container"></div>
+			<div id="div1" class="container" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+			<div id="div3" class="container" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+			<div id="div2" class="container" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+			<div id="div9" class="container"></div>
+		</div>
+	</section>
+	<!----------------- FOOTER --------------->
 	<footer>
 		<div id="containerButton_MenuAccueil"> 	<!--    BOUTONS    👨‍👩‍👦‍👦🧩🏒⚙️📃🔙➕+⨄⨁ -->
 			<button type="button" id="btChgTeam" onclick="changeTeam()" nextteamid="">
-				<img class="logo2" id="logoEquipeNext" src="" alt="👨‍👩‍👦‍👦" width="100" height="120">	</button>
-			<button type="button" id="btRandom"  onclick="btRandom()">
-				<!-- <img id="logoBtRandom1"  src='img/logo/LogoHockey7.png' alt='🏒'/> -->
+				<img class="logo2" id="logoEquipeNext" src="" alt="👨‍👩‍👦‍👦">	</button>
+			<button type="button" id="btRandom"  onclick="btRandom()"> <!-- <img id="logoBtRandom1"  src='img/logo/LogoHockey7.png' alt='🏒'/> -->
 				<span id="logoBtRandom2">	🎲	</span>				</button>
 			<button type="button" id="btAddTeam" onclick="btAddTeam()">
 				<span class="logo2">	➕	</span>			</button> 
@@ -99,16 +90,23 @@ http://127.0.0.1:8080/matchmaking/index.php
 				<span class="logo2">➗</span>			
 			</button>
 		</div>
-
-		<div id='params'>
-			<button id='smaller' onclick='retrecir()'><sub>Aa</sub><b>-</b></button>
-			<button id='bigger' onclick='grossir()' tailleText='1'><sub>Aa</sub><b>+</b></button>
-			<!-- <button class="add-button" >Ajouter <sub>à l'écran d'accueil</sub></button> -->
-			<span id='closeParams' onclick="hideParams()">X</span>
-		</div>
+		
 	</footer>
+	<!----------------- ASIDE --------------->
+	<aside>
+		<div id="snackbar">Snackbar text message</div> 
+		<div id="textEchange" style="display:none;"> Clic joueur pour échanger 🔁 ou glisser-déposer<br/>Clic image 🐭😼🐻 pour modifer ✏️ 	</div>
+		<div id='zoom'>
+			<div id='zoomframe' onclick="hideZoom()"></div>
+			<button id='smaller' onclick='retrecir()'>🔍</button>
+			<button id='bigger' onclick='grossir()' tailleText='1'>🔎</button>
+			<!-- <button class="add-button" >Ajouter <sub>à l'écran d'accueil</sub></button> -->
+			<span id='closeZoom' onclick="hideZoom()">X</span>
+		</div>
+		<input type="file" name="file" enctype="multipart/form-data" accept="image/png, image/gif, image/jpeg" style='display:none;'></input> <!-- Champ caché ! champ input pour choisir une image -> https://gist.github.com/0xPr0xy/4060754-->
+	</aside>
 
-	<!------------------------------------------------------------------------------------------------------------------>
+	<!--===================================-->
 
 	<script src="scripts/javascript.js"></script>
 	<script src="scripts/dragndrop.js"></script>
@@ -129,6 +127,7 @@ http://127.0.0.1:8080/matchmaking/index.php
 		$(document).ready(function () {
 			console.log("Hello world - document ready")
 
+				snackbar("🤖 Coucou")
 				var team = 		Object.values(all_teams	 ).filter(item => item.fav === '1')[0] // récupère le premier résultat
 				if (!team) {team = all_teams[0]} // Si l'équipe favorite n'est pas définie, on prend la première équipe de la liste
 				var players = 	Object.values(all_players).filter(item => item.team === team.id)
@@ -138,6 +137,10 @@ http://127.0.0.1:8080/matchmaking/index.php
 
 			console.log("<<<<<<<<<<<< END >>>>>>>>>>>>");
 		});
+
+		function testLogo(e) {
+			snackbar("🤖 Coucou")
+		}
 
 	</script>
 
