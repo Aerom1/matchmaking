@@ -98,10 +98,10 @@ http://127.0.0.1:8080/matchmaking/index.php
 		<div id="textEchange" style="display:none;"> Clic joueur pour échanger 🔁 ou glisser-déposer<br/>Clic image 🐭😼🐻 pour modifer ✏️ 	</div>
 		<div id='zoom'>
 			<div id='zoomframe' onclick="hideZoom()"></div>
-			<button id='smaller' onclick='retrecir()'>🔍</button>
-			<button id='bigger' onclick='grossir()' tailleText='1'>🔎</button>
-			<!-- <button class="add-button" >Ajouter <sub>à l'écran d'accueil</sub></button> -->
 			<span id='closeZoom' onclick="hideZoom()">X</span>
+			<button id='smaller' onclick='zoom("retrecir", document.getElementById("containerEquipes").className)'>🔍</button>
+			<button id='bigger' onclick='zoom("grossir", document.getElementById("containerEquipes").className)'>🔎</button>
+			<!-- <button class="add-button" >Ajouter <sub>à l'écran d'accueil</sub></button> -->
 		</div>
 		<input type="file" name="file" enctype="multipart/form-data" accept="image/png, image/gif, image/jpeg" style='display:none;'></input> <!-- Champ caché ! champ input pour choisir une image -> https://gist.github.com/0xPr0xy/4060754-->
 	</aside>

@@ -41,7 +41,7 @@ function getNextTeamId(all_teams, team) {
     var nbEquipes = Object.keys(all_teams).length
 
     for (i=0 ; i<nbEquipes ; i++){
-        console.log("all_teams[i].id == team.id ?  ->  " + all_teams[i].id + " == " + teamActuelleId)
+        // console.log("all_teams[i].id == team.id ?  ->  " + all_teams[i].id + " == " + teamActuelleId)
         if (all_teams[i].id == teamActuelleId) {
             if (i == nbEquipes-1) {
                 newTeamIndex = 0
@@ -245,16 +245,16 @@ function reinit_() {
     var equipe3 = document.getElementById('div3');
     var absents = document.getElementById('div9');
 
-    // Enlever la possibilité de glisser-déposer dans l'accueil
-    for (let i = 0; i < equipe1.children.length; i++) {
-        equipe1.children[i].setAttribute('draggable' , '')
-        // equipe1.children[i].setAttribute('ondragstart', 'drag(event)')
-      }
-    
     while (equipe1.children.length) { dispos.appendChild(equipe1.firstChild); }
     while (equipe2.children.length) { dispos.appendChild(equipe2.firstChild); }
     while (equipe3.children.length) { dispos.appendChild(equipe3.firstChild); }
     while (absents.children.length) { dispos.appendChild(absents.firstChild); }
+
+    // Enlever la possibilité de glisser-déposer dans l'accueil
+    for (let i = 0; i < dispos.children.length; i++) {
+        dispos.children[i].setAttribute('draggable' , '')
+      }
+    
     majForceEquipes_();
     majNbJoueurs_();
 }
@@ -1050,37 +1050,47 @@ function hideZoom(){
 }
 
 function defineTextSize(defaultSize) {
-    var tailleText = localStorage.getItem('tailleTextPlayer');
-    console.log('fontsize récupérée de localstorage :' + tailleText);
-    if (tailleText === null) {
-        tailleText = defaultSize;
-        localStorage.setItem('tailleTextPlayer', tailleText);
-        console.log('------------taille localstorage créée :' + tailleText);
+    
+    var tailleText_accueil = localStorage.getItem('tailleText_accueil');
+    console.log('tailleText_accueil récupérée de localstorage :' + tailleText_accueil);
+    if (tailleText_accueil === null) {
+        tailleText_accueil = defaultSize;
+        localStorage.setItem('tailleText_accueil', tailleText_accueil);
+        console.log('------------tailleText_accueil localstorage créée :' + tailleText_accueil);
     }
-    document.documentElement.style.setProperty('--font-size-player', tailleText + 'px');
+    document.documentElement.style.setProperty('--font-size-player-accueil', tailleText_accueil + 'px');
+
+
+    var tailleText_equipes = localStorage.getItem('tailleText_equipes');
+    console.log('tailleText_equipes récupérée de localstorage :' + tailleText_equipes);
+    if (tailleText_equipes === null) {
+        tailleText_equipes = defaultSize;
+        localStorage.setItem('tailleText_equipes', tailleText_equipes);
+        console.log('------------tailleText_equipes localstorage créée :' + tailleText_equipes);
+    }
+    document.documentElement.style.setProperty('--font-size-player-equipes', tailleText_equipes + 'px');
 }
 
-function grossir(){
+function zoom(action, ecran){
+
+    var property, localStorageItem // nom de la propriété dans le local storage, et de la propriété (var) dans le css
+    if (ecran == "accueil") {
+        property = '--font-size-player-accueil'
+        localStorageItem = 'tailleText_accueil'
+    } else {
+        property = '--font-size-player-equipes'
+        localStorageItem = 'tailleText_equipes'
+    }
+    // On récupère la taille actuelle d'un joueur au pif (le premier)
     var el = document.getElementsByClassName('player')[0];
     var style = window.getComputedStyle(el, null).getPropertyValue('font-size');
     var fontSize = parseFloat(style);     // now you have a proper float for the font size (yes, it can be a float, not just an integer)
-        fontSize = Math.round(fontSize + 1)
+        fontSize = (action == 'grossir' ? Math.round(fontSize + 1) : Math.abs(Math.round(fontSize - 1)));
         fontSizePC = fontSize + 'px'
-    document.documentElement.style.setProperty('--font-size-player', fontSizePC);
-    localStorage.setItem('tailleTextPlayer', fontSize);
+    document.documentElement.style.setProperty(property, fontSizePC);
+    localStorage.setItem(localStorageItem, fontSize);
 
-    console.log('------------nouvelle taille texte localstorage :' +fontSize)
-}
-function retrecir(){
-    var el = document.getElementsByClassName('player')[0];
-    var style = window.getComputedStyle(el, null).getPropertyValue('font-size');
-    var fontSize = parseFloat(style);     // now you have a proper float for the font size (yes, it can be a float, not just an integer)
-        fontSize = Math.abs(Math.round(fontSize - 1))
-        fontSizePC = fontSize + 'px'
-    document.documentElement.style.setProperty('--font-size-player', fontSizePC);
-    localStorage.setItem('tailleTextPlayer', fontSize);
-
-    console.log('------------nouvelle taille texte localstorage :' +fontSize)
+    console.log("------------ action:" + action + " ecran:" + ecran + " size:" + fontSize)
 }
 
 function testTable(table){

@@ -1,18 +1,26 @@
 :root {
-  --font-size-player: 5em;
+  --font-size-player-accueil: 20px;
+  --font-size-player-equipes: 20px;
 }
-
-/* MEILLEUR GUIDE UTILISATION POUR : FLEX
--> https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
+ 
+/* MEILLEUR GUIDE UTILISATION POUR : FLEX & GRID
+-> https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+-> https://css-tricks.com/snippets/css/complete-guide-grid/
+ */
 
 /* AFFICHAGE PORTRAIT */
 @media screen and (min-height: 480px) {
 
 
-  .player {
-    font-size: var(--font-size-player, 20);
+  #containerEquipes.accueil .player {
+    font-size: var(--font-size-player-accueil, 20);
     margin: 3px;
   }
+  #containerEquipes.equipes .player {
+    font-size: var(--font-size-player-equipes, 20);
+    margin: 3px;
+  }
+
   .container {
     width: 49%;
   }
@@ -22,7 +30,7 @@
     width:10%;
   }
   #divPlus{
-    font-size: var(--font-size-player, 20);
+    font-size: var(--font-size-player-accueil, 20);
   }
 }
 
@@ -57,15 +65,15 @@
 
 /* Affichage PC ? */
 @media screen and (min-width: 800px) {
-  .player{
+  /* .player{
     font-size: var(--font-size-player, 20); ;
-  }
+  } */
   .container {
     width: 30%;
   }
-  #divPlus{
+  /* #divPlus{
     font-size: var(--font-size-player, 20);
-  }
+  } */
 }
 
 body { 

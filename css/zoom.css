@@ -17,10 +17,11 @@
     ". . . ."
     ". a b ."
     ". . . .";
+    column-gap: 14px;
     }
     
 #zoomframe {
-  background-color: rgba(200,200,255,1);
+  background-color: rgb(195, 195, 195);
   position: fixed; /* Sit on top of the screen */
   width: 100%; /* Set a default minimum width */
   bottom: 0;
@@ -55,7 +56,7 @@
 button#smaller {
   border-radius: 100px 0 0 100px;
   grid-area: a;
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
 button#bigger {
