@@ -16,7 +16,7 @@
     /* left: 0; */
     align-items: stretch;
     justify-content: center;
-    font-size: 1.3em;
+    font-size: 1.1em;
     align-content: center;
     flex-direction: column;
     float: right;
@@ -127,7 +127,7 @@
   .forceEquipe {
     /* width: 33.4%; */
     flex-grow: 1;
-    padding-right: 5vw;
+    /* padding-right: 5vw; */
   }
 
   

@@ -334,15 +334,15 @@ function changeBtForceDisposition(nbEquipe) {
 
     if (nbEquipe==3){
         document.querySelectorAll('.forceEquipe').forEach(e => {  
-            e.style.paddingRight = '35%';  
+            e.style.paddingRight = '25%';  
             e.style.paddingTop = '0%';  
         });
         // $('.forceEquipe').css('padding-right', '5%') 
-        document.getElementById('icoRandom').style.left = '0';
+        document.getElementById('icoRandom').style.left = '60%';
         document.getElementById('icoRandom').style.top = '1.1vh';
         document.getElementById('icoRandom').style.transform = 'none';
         document.getElementById('containerForceMenuEquipes').style.flexDirection = 'column';
-        document.getElementById('containerForceMenuEquipes').style.width = '44%';
+        document.getElementById('containerForceMenuEquipes').style.width = '100%';
         document.getElementById('containerForceMenuEquipes').style.height = '100%';
     } else {
         document.querySelectorAll('.forceEquipe').forEach(e => {  
@@ -998,9 +998,13 @@ function majForceEquipes_() {
     // if((forceEq2 > forceEq1) & (forceEq2>forceEq3)) {iconeForce2='🦾'}
     // if((forceEq3 > forceEq1) & (forceEq3>forceEq2)) {iconeForce3='🦾'}
 
-    $("#forceEq1").text(iconeForce1 + forceEq1);
-    $("#forceEq2").text(iconeForce2 + forceEq2);
-    $("#forceEq3").text(iconeForce3 + forceEq3);
+    var nbPlayer1 = $("#div1")[0].childElementCount
+    var nbPlayer2 = $("#div2")[0].childElementCount
+    var nbPlayer3 = $("#div3")[0].childElementCount
+
+    $("#forceEq1").html(forceEq1 + '⚡' + '<sup>' + nbPlayer1 + '🧍‍♀️</sup>'); // jaune 
+    $("#forceEq2").html(forceEq2 + '⚡' + '<sup>' + nbPlayer2 + '🧍</sup>'); // orange
+    $("#forceEq3").html(forceEq3 + '⚡' + '<sup>' + nbPlayer3 + '🧍‍♂️</sup>'); // noir
 
     // if (forceEq1==0)  { document.getElementById("forceEq1").setAttribute("display","none");
     //     } else        { document.getElementById("forceEq1").setAttribute("display","unset"); }
@@ -1050,7 +1054,7 @@ function hideZoom(){
 }
 
 function defineTextSize(defaultSize) {
-    
+
     var tailleText_accueil = localStorage.getItem('tailleText_accueil');
     console.log('tailleText_accueil récupérée de localstorage :' + tailleText_accueil);
     if (tailleText_accueil === null) {
