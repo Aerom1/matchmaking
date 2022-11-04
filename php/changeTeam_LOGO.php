@@ -24,8 +24,8 @@ if (!$req) {
 
 echo json_encode(
     array(
-        success => $success,
-        result => $result
+        'success' => $success,
+        'result' => $result
     ), JSON_UNESCAPED_UNICODE);
 
 $conn -> close();

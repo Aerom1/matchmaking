@@ -53,9 +53,9 @@ $absent = clean_input($_POST['absent']);
 // }
     
 $tableauRetour = array(
-    success => $success,
-    result => $result,
-    id => $new_id
+    'success' => $success,
+    'result' => $result,
+    'id' => $new_id
 );
 
 echo json_encode($tableauRetour, JSON_UNESCAPED_UNICODE);
