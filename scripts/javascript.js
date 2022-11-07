@@ -59,11 +59,21 @@ function getNextTeamId(all_teams, team) {
 function changeTeam(){
     console.log("changeTeam()")
 
-    $("#div0").show();
-    $("#div1").hide();
-    $("#div2").hide();
-    $("#div3").hide();
-    $(".container").css({"width":"100%"})
+    $(".teamContainer").css({"width":"100%"})
+    
+    // var teamActuelleId = document.getElementById("team").getAttribute('name')
+    var nextTeamId = document.getElementById("btChgTeam").getAttribute('nextteamid')
+    var nextTeam =      Object.values(all_teams).filter(item => item.id === nextTeamId)[0]
+    var nextPlayers =   Object.values(all_players).filter(item => item.team === nextTeamId)
+    var nextNextTeam = getNextTeamId(all_teams, nextTeam)
+
+    loadTeam(nextTeam, nextPlayers, nextNextTeam)
+}
+
+function changeTeam_OLD(){
+    console.log("changeTeam()")
+
+    $(".teamContainer").css({"width":"100%"})
     
     // var teamActuelleId = document.getElementById("team").getAttribute('name')
     var nextTeamId = document.getElementById("btChgTeam").getAttribute('nextteamid')
@@ -83,12 +93,10 @@ function loadTeam(team, players, nextTeam){
     document.getElementById("logoEquipeNext").setAttribute("src",nextTeam.logo); // logo du bouton next Team
     document.getElementById("btChgTeam").setAttribute("nextteamid",nextTeam.id); // affiche le logo de la prochaine équipe
     
-    
     var teamActuelle = document.getElementById("team")
         teamActuelle.setAttribute("name", team.id);
         teamActuelle.innerText = team.name;
-
-    $("#divPlus").remove();
+    
     enleverTousJoueurs_();
 
     loadData(team, players);
@@ -97,15 +105,9 @@ function loadTeam(team, players, nextTeam){
     majNbJoueurs_();
     creerDivPlus_();
 
-    $("#div0").show();
-    $("#div1").hide();
-    $("#div2").hide();
-    $("#div3").hide();
     $("#containerEquipes").css({"display":"grid"})
-    $(".container").css({"width":"100%"})
+    $(".teamContainer").css({"width":"100%"})
     $(".cible").remove();
-    // $("#questionPresents").slideDown();
-
 }
 
 function loadData(team, players){
@@ -147,39 +149,6 @@ function btEditTeam(){
     // menu.style.animation="appearfromright 0.5s linear 2";
 }
 
-function btAddTeam(){
-
-    enleveMenu_();
-    var name = prompt("Nom de la nouvelle équipe ?")
-    if (name == "" || name == null) { return }
-    if (name.length > nbcarTeam) {
-        snackbar('ℹ️ Le nom ne doit pas dépasser '+nbcarTeam+' caractères', 'orange')
-        return
-    }
-    
-    var wrapper = $('<div/>').css({height:0,width:0,'overflow':'hidden'});
-    var fileInput = $(':file').wrap(wrapper);
-
-    fileInput.change(function(){
-        $this = $(this);
-        alert($this.val());
-        // $('#file').text($this.val());
-    })
-    // $('#file').click(function(){
-    //     fileInput.click();
-    // });
-
-    fileInput.click();
-
-    alert(fileInput)
-
-    // Envoi du fichier vers le server
-    var id = team.id
-    var newlogo = fileInput.files[0]
-    DB_changeTeamLOGO(id, newlogo)
-
-    // changeTeam()
-}
 
 
 
@@ -205,40 +174,21 @@ function btBack(){
     $('#containerButton_MenuAccueil').show();
     $('#containerButton_MenuEquipes').hide();
     $('header').show();
-    
-    // $("#team").show(); 
-    // $("#logoHeader").show(); 
-    // $("#questionPresents").show();
-    // $("#btChgTeam").show();
-    // $("#btAddTeam").show();
-    // $("#btBack").hide(); 
-    // $("#btForceEquipes").hide(); 
-    // $("#btNbEquipes").hide(); 
-    // $("#btRandom").show(); 
-    $("#divPlus").remove();
-        $("#div0").show();
-        $("#div1").hide();
-        $("#div2").hide();
-        $("#div3").hide();
 
     // indique aux conteneur de joueurs quelle mise en forme prendre
     document.getElementById('containerEquipes').className = 'accueil';   // "accueil","equipes"
     
-    // document.getElementById('containerButton_MenuAccueil').className = 'accueil';
-
     if ($(".selected").length>0) {unselect_($(".selected")[0])}
-
 
     reinit_();
     creerDivPlus_();
-    document.exitFullscreen();
 }
 
 function reinit_() {
     console.log("reinit_")
+    $("#divPlus").remove();
     $(".cible").remove();
-    // $("#containerEquipes").css({"display":"grid"})
-    $(".container").css({"width":"100%"})
+    $(".teamContainer").css({"width":"100%"})
     var dispos = document.getElementById('div0');
     var equipe1 = document.getElementById('div1');
     var equipe2 = document.getElementById('div2');
@@ -287,26 +237,15 @@ function btModifNbEquipes() {
 
 function btRandom(){
 
-    var nbEquipe = document.getElementById('btNbEquipes').getAttribute("nb");   
     
+    $('header').hide();
     $('#containerButton_MenuAccueil').hide();
     $('#containerButton_MenuEquipes').show();
-    $('header').hide();
     
-    // $("#team").hide(); 
-    // $("#logoHeader").hide(); 
-    // $("#btBack").slideDown(); 
-    // $("#btForceEquipes").slideDown(); 
-    // $("#btNbEquipes").slideDown(); 
-    // $("#btRandom").hide(); 
-    // $("#btChgTeam").hide();
-    // $("#btAddTeam").hide();
-
     // indique aux conteneur de joueurs quelle mise en forme prendre
     document.getElementById('containerEquipes').className = 'equipes';   // "accueil","equipes"
-
-    // document.getElementById('containerButton_MenuAccueil').className = 'equipes';
-
+    
+    var nbEquipe = document.getElementById('btNbEquipes').getAttribute("nb");   
     if (nbEquipe==0) {
         // Pas de nombre d'équipe choisi -> selon nombre de joueurs
         var nbJoueurs = document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length
@@ -319,7 +258,6 @@ function btRandom(){
         console.log(nbJoueurs + " JOUEURS : " + nbEquipe + " equipes !")
     }
     RANDOM(nbEquipe);
-    document.documentElement.requestFullscreen();
 }
 
 
@@ -440,31 +378,23 @@ function RANDOM(nbEquipe) {
 
     } while (difference > ecartmax);
     majForceEquipes_();
-   
-    $("#div0").hide();
-    $("#div1").show();
-    $("#div2").show();
     
-    // console.log("NB JOUEURS EQ 3 : "+ equipe3.children.length)
     if(equipe3.children.length){
         $("#div3").show();
         $("#containerEquipes").css({"display":"grid"})
-        $(".container").css({"width":"100%"})
+        $(".teamContainer").css({"width":"100%"})
     }else{
         $("#div3").hide();
         $("#containerEquipes").css({"display":"flex"})
-        $(".container").css({"width":"49%"})
-
+        $(".teamContainer").css({"width":"49%"})
     }
 
     var j = {}
     var players = document.getElementsByClassName('player')
-    // players.forEach(p => t[p.getAttribute('id')] = p.classList.contains('inactif'))
-
     Array.prototype.forEach.call(players, p => {
         j[p.getAttribute('id')] = p.classList.contains('inactif') ? 1:0
     })
-
+    // players.forEach(p => t[p.getAttribute('id')] = p.classList.contains('inactif'))
     // players.forEach( function(player) {
         // t[p.getAttribute('id')] = p.classList.contains('inactif')
         // logPlayersCreated.push(player.name + " (xp:" + player.xp +")" + (player.absent==1 ? " -> inactif":""))
@@ -659,24 +589,7 @@ function changeLogo_MODIFTEAMDB(e){
     
 }
 
-function changeName_MODIFTEAMDB(e){
-    console.log(e)
-    newname = prompt('Nouveau nom ?',e.innerText)
-    if (!newname) { return }
-    if (newname.length > nbcarTeam) {
-        snackbar('ℹ️ Le nom ne doit pas dépasser '+nbcarTeam+' caractères', 'orange')
-        return
-    }
 
-        e.innerText = newname
-        id = document.getElementById('team').getAttribute('name')
-        DB_changeTeamNAME(id, newname)
-        document.getElementById('team').innerText = newname
-
-        e.parentNode.parentNode.name = newname // Nom affiché dans le menu
-        console.log(e.parentNode.parentNode.children[1])
-        e.parentNode.parentNode.children[1].innerText = newname // Nom affiché dans l'écran principale    
-}
 
 
 function changeName_MODIFPLAYERDB(e) {
@@ -692,7 +605,7 @@ function changeName_MODIFPLAYERDB(e) {
     DB_changePlayerNAME(id, newname)
     e.parentNode.parentNode.name = newname // Nom affiché dans le menu
     console.log(e.parentNode.parentNode.children[1])
-    e.parentNode.parentNode.children[1].innerText = nbcarPlayer // Nom affiché dans la tuile (écran principale)
+    e.parentNode.parentNode.children[1].innerText = newname // Nom affiché dans la tuile (écran principale)
 }
 
 function changeName_DISPLAYONLY(e) {
@@ -956,6 +869,7 @@ function enleverTousJoueurs_(){
         // console.log("suppression de "+players[0].innerText)
         $(players[0]).remove();
     }
+    $("#divPlus").remove();
 }
 
 function enleveMenu_(){
@@ -1023,7 +937,7 @@ function majForceEquipes_() {
 
 function snackbar_DB (response) {
     var text = response.result;
-    var color = response.success ? 'white' : 'orange';
+    var color = response.success ? 'rgb(0,255,0)' : 'orange';
     snackbar(text, color)
 }
 
@@ -1097,6 +1011,30 @@ function zoom(action, ecran){
     console.log("------------ action:" + action + " ecran:" + ecran + " size:" + fontSize)
 }
 
+function toggleFullscreen(){
+    // document.exitFullscreen();
+    // document.documentElement.requestFullscreen();
+    if (!document.fullscreenElement &&    // alternative standard method
+    !document.mozFullScreenElement && !document.webkitFullscreenElement) {  // current working methods
+     if (document.documentElement.requestFullscreen) {
+       document.documentElement.requestFullscreen();
+     } else if (document.documentElement.mozRequestFullScreen) {
+       document.documentElement.mozRequestFullScreen();
+     } else if (document.documentElement.webkitRequestFullscreen) {
+       document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+     }
+   } else {
+      if (document.cancelFullScreen) {
+         document.cancelFullScreen();
+      } else if (document.mozCancelFullScreen) {
+         document.mozCancelFullScreen();
+      } else if (document.webkitCancelFullScreen) {
+        document.webkitCancelFullScreen();
+      }
+   }
+ }
+
+ 
 function testTable(table){
     console.log("table :");	console.log(table);
     console.log("keys :");			console.log(Object.keys(table));

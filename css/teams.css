@@ -1,0 +1,135 @@
+/* AFFICHAGE DU MENU
+Nouveau joueur
+Modif joueur
+Modif Ã©quipe 
+*/
+
+html {
+    /* display: flex; */
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width:500px;
+    min-height:100%;
+    /* max-width:1280px;
+    min-height:100%; */
+    margin:0 auto;
+    position:relative;
+}
+
+#divmenu{
+  animation: 300ms linear 0ms 1 normal none running bounce-in;
+  z-Index : 2;
+  text-align: center;
+  display : grid;
+  grid-Template-Rows : repeat(8, 1fr);
+  gap : 2vh;
+  background-Color : #333; /* rgba(0,0,0, 0.9); */
+  color : white;
+  box-Shadow : rgba(0, 0, 0, 0.56) 0px 0px 70px 10px;
+  padding : 7%;
+  
+  position : absolute;
+  /* max-width: -moz-fit-content;
+  max-width: fit-content; */
+  top : 0;
+  bottom : 0;
+  left : 0;
+  right : 0;
+  /* width: 100%;
+  height: 100%; */
+}
+
+#btModifNom, #btSupprPlayer, #btCloseMenu{
+  font-size: 2rem;
+  background-color: transparent;
+  border:0px;
+  cursor: pointer;
+}
+
+#btCloseMenu{ 
+  font-size: 3rem;  
+  font-Size : 45px;
+  text-Align : right;
+}
+
+#btModifNom::after {content: '  🖋️';}
+#btModifNom { 
+  border-top: 1px solid white ;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  color : white;
+  box-Shadow : none;
+  /* max-width : 90vw; */
+  overflow-x : hidden;
+  align-self: end;
+}
+
+#btModifLogo{
+  align-self: end;
+}
+
+#imgPlaceholder {
+  grid-row: 3/5;
+  max-width:  100%;
+  max-height: 200px;
+  min-width:  100px;
+  min-height: 100px;
+  background-color: rgba(255,255,255,0.1);
+  border-radius: 5px;
+  padding: 5px;
+  max-width:100%; 
+  height:auto; 
+  border: 1px dashed gray;
+}
+
+#labelModifTeam {
+  grid-row: 7;
+}
+
+#labelModifXP {
+  align-self: end;
+  font-size: 0.6em;
+}
+
+#formSettingsChangeLogo {
+  /* border: 1px solid grey; */
+  /* border-radius: 5px; */
+  padding: 10px;
+
+  border-bottom: 1px solid white ;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  color : white;
+  box-Shadow : none;
+  /* max-width : 90vw; */
+  /* overflow-x : hidden; */
+  /* align-self: end; */
+
+}
+
+/* .btn {
+  border-radius: 20px !important;
+} */
+
+#chooseFile {
+  border-radius: 20px;
+}
+
+#btCloseMenu.animer{
+  animation-name: animateClose;
+  animation-duration: 1s;
+  animation-timing-function:ease ;
+  animation-iteration-count: 1;
+}
+@keyframes animateClose {
+  from {  transform:  scale(1) rotate(0deg);}
+  to {    transform:  scale(1) rotate(360deg);}
+  /* transform: rotate(0deg);  
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  opacity: 1; */
+}

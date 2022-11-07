@@ -22,7 +22,7 @@ BOW-SHADOW GENERATOR-> https://html-css-js.com/css/generator/box-shadow/
     margin: 3px;
   }
 
-  .container {
+  .teamContainer {
     width: 49%;
   }
 
@@ -51,7 +51,7 @@ BOW-SHADOW GENERATOR-> https://html-css-js.com/css/generator/box-shadow/
     margin-left: 0.5vw;
     margin-bottom: 1vh;
   }
-  .container {
+  .teamContainer {
     /* width: 49%; */
     /* height:100%; */
     display: flex;
@@ -69,7 +69,7 @@ BOW-SHADOW GENERATOR-> https://html-css-js.com/css/generator/box-shadow/
   /* .player{
     font-size: var(--font-size-player, 20); ;
   } */
-  .container {
+  .teamContainer {
     width: 30%;
   }
   /* #divPlus{
@@ -126,7 +126,7 @@ html, .fullscreen {
   gap: 10px;
 }
 
-.container {
+.teamContainer {
   height: 100%;
   align-items: stretch;
   /* margin-bottom: 5px; */
@@ -196,7 +196,7 @@ img {
   cursor: pointer;
 }
 
-button {
+button, #btSettings {
   cursor: pointer;
   box-shadow: 
   rgba(0, 0, 0, 0.05) 0px 1px 6px 0px, 
@@ -236,11 +236,15 @@ box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, inset 0px 0
 } */
 
 
-#div0{
+#div0:not(:empty){
   color:green;
   display: flex;
   flex-wrap: wrap;
-  width:100%
+  /* width:100% */
+}
+
+.teamContainer:empty {
+  display: none;
 }
 
 #div9{

@@ -99,6 +99,42 @@ function DB_changeTeamNAME(id, newname) {
 	}).catch(error => console.log(error));
 }
 
+function DB_createTeam(name) {
+	console.log("==============> DB_createTeam " + name);
+
+	fetch('php/create_Team.php', {
+		method: 'POST',
+		mode: 'cors',
+		headers: {'Content-type': 'application/x-www-form-urlencoded'},
+		body: 'name='+name,
+	})
+	.then(response => response.json())
+	.then(response => {
+		console.log("RESULTAT APPEL SERVEUR CREATION EQUIPE");
+		console.log("DB -> " + response.result)
+		// location.reload();
+		snackbar_DB(response) // Affichage du pop (snackbar)
+	}).catch(error => console.log(error));
+}
+
+function DB_deleteTeam(id, name) {
+	console.log("==============> DB_deleteTeam " + id);
+
+	fetch('php/delete_Team.php', {
+		method: 'POST',
+		mode: 'cors',
+		headers: {'Content-type': 'application/x-www-form-urlencoded'},
+		body: 'id='+id+'&name='+name,
+	})
+	.then(response => response.json())
+	.then(response => {
+		console.log("RESULTAT APPEL SERVEUR SUPPRESSION EQUIPE");
+		console.log("DB -> " + response.result)
+		// location.reload();
+		snackbar_DB(response) // Affichage du pop (snackbar)
+	}).catch(error => console.log(error));
+}
+
 function DB_changeTeamLOGO(id, newlogo) {
 	console.log("==============> DB_changeTeamLOGO");
 

@@ -3,6 +3,35 @@ http://localhost:8080/matchmaking/index.php
 http://127.0.0.1:8080/matchmaking/index.php
 -->
 
+<?php 
+	
+	session_start(); // Start the session to store variable between pages
+	$conn = include 'php/connectToDB.php';
+
+	if(isset($_POST["submit"])) {
+		
+	} else {
+		$team =	$conn->query("SELECT * FROM tbteam WHERE fav = 1 LIMIT 1") -> fetch_assoc() ;
+		$_SESSION['team'] = $team;
+	}
+
+
+	// require "php/functions.php"; 
+	// $all_teams = 	recup_table_ENTIERE($conn, "SELECT * FROM tbteam");
+	// $all_players = 	recup_table_ENTIERE($conn, "SELECT * FROM tbplayer");
+	$all_teams_json = 	json_encode( $conn->query("SELECT * FROM tbteam ORDER BY fav DESC") -> fetch_all( MYSQLI_ASSOC ) ,				JSON_FORCE_OBJECT | JSON_UNESCAPED_UNICODE);
+	$all_players_json = json_encode( $conn->query("SELECT * FROM tbplayer ORDER BY absent ASC, name ASC") -> fetch_all( MYSQLI_ASSOC ), JSON_FORCE_OBJECT | JSON_UNESCAPED_UNICODE);
+	$team =		 	 	$conn->query("SELECT * FROM tbteam WHERE fav = 1 LIMIT 1") -> fetch_assoc() ;
+	$team_json =		json_encode( $team, JSON_FORCE_OBJECT | JSON_UNESCAPED_UNICODE);
+
+	$conn -> close();
+
+	$_SESSION['team'] = $team;
+	$_SESSION['nbcarTeam']   = 13;
+	$_SESSION['nbcarPlayer'] = 13;
+
+
+?>
 <!DOCTYPE HTML>
 <html lang="fr">
 	 
@@ -35,18 +64,11 @@ http://127.0.0.1:8080/matchmaking/index.php
 	<meta name="mobile-web-app-capable" content="yes">
 	<link rel="manifest" href="pwa/rompwa.webmanifest">
 
-	<?php 
-		$conn = include 'php/connectToDB.php';
-		// require "php/functions.php"; 
-		// $all_teams = 	recup_table_ENTIERE($conn, "SELECT * FROM tbteam");
-        // $all_players = 	recup_table_ENTIERE($conn, "SELECT * FROM tbplayer");
-		$all_teams = 	json_encode( $conn->query("SELECT * FROM tbteam ORDER BY fav DESC")  ->fetch_all( MYSQLI_ASSOC ) ,	JSON_FORCE_OBJECT|JSON_UNESCAPED_UNICODE);
-        $all_players = 	json_encode( $conn->query("SELECT * FROM tbplayer ORDER BY absent ASC, name ASC")->fetch_all( MYSQLI_ASSOC ) ,JSON_FORCE_OBJECT|JSON_UNESCAPED_UNICODE);
-		$conn -> close();
-	?>
+
 	
 </head>
 <body>
+	<div id="snackbar">Snackbar text message</div> 
 	<!----------------- HEADER --------------->
 	<header>
 		<h1 id="team" onclick="btEditTeam()" class="font-effect-shadow-multiple"> </h1>
@@ -57,11 +79,11 @@ http://127.0.0.1:8080/matchmaking/index.php
 	<!----------------- EQUIPES --------------->
 	<section>
 		<div id ="containerEquipes" class="accueil">
-			<div id="div0" class="container"></div>
-			<div id="div1" class="container" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-			<div id="div3" class="container" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-			<div id="div2" class="container" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-			<div id="div9" class="container"></div>
+			<div id="div0" class="teamContainer"></div>
+			<div id="div1" class="teamContainer" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+			<div id="div3" class="teamContainer" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+			<div id="div2" class="teamContainer" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+			<div id="div9" class="teamContainer"></div>
 		</div>
 	</section>
 	<!----------------- FOOTER --------------->
@@ -69,10 +91,14 @@ http://127.0.0.1:8080/matchmaking/index.php
 		<div id="containerButton_MenuAccueil"> 	<!--    BOUTONS    👨‍👩‍👦‍👦🧩🏒⚙️📃🔙➕+⨄⨁ -->
 			<button type="button" id="btChgTeam" onclick="changeTeam()" nextteamid="">
 				<img class="logo2" id="logoEquipeNext" src="" alt="👨‍👩‍👦‍👦">	</button>
-			<button type="button" id="btRandom"  onclick="btRandom()"> <!-- <img id="logoBtRandom1"  src='img/logo/LogoHockey7.png' alt='🏒'/> -->
-				<span id="logoBtRandom2">	🎲	</span>				</button>
-			<button type="button" id="btAddTeam" onclick="btAddTeam()">
-				<span class="logo2">	➕	</span>			</button> 
+			<button type="button" id="btRandom"  onclick="btRandom()"> <span id="logoBtRandom2">	🎲	</span></button> <!-- <img id="logoBtRandom1"  src='img/logo/LogoHockey7.png' alt='🏒'/> -->
+			<!-- SETTINGS -->
+			<button type="button" id="btSettings" onclick="window.open('teams.php','_self')">⚙️</button>
+			<!-- <form action="teams.php" method="post" id='formSettings' >
+				<input type="hidden" name="nbcarTeam" value= <!?= $_SESSION['nbcarTeam'] ?> />
+				<input type="hidden" name="team" value= <!?= $_SESSION['team']['id'] ?> />
+				<input type="submit" name="submit" value="⚙️" id="btSettings" style="width:100%;height:100%;font-size: 3rem;">
+			</form> -->
 		</div>
 
 		<div id="containerButton_MenuEquipes" style='display:none;'> 	<!--    BOUTONS    👨‍👩‍👦‍👦🧩🏒⚙️📃🔙➕+⨄⨁👨🏽‍🤝‍👨🏻 -->
@@ -94,13 +120,13 @@ http://127.0.0.1:8080/matchmaking/index.php
 	</footer>
 	<!----------------- ASIDE --------------->
 	<aside>
-		<div id="snackbar">Snackbar text message</div> 
 		<div id="textEchange" style="display:none;"> Clic joueur pour échanger 🔁 ou glisser-déposer<br/>Clic image 🐭😼🐻 pour modifer ✏️ 	</div>
 		<div id='zoom'>
 			<div id='zoomframe' onclick="hideZoom()"></div>
 			<span id='closeZoom' onclick="hideZoom()">X</span>
-			<button id='smaller' onclick='zoom("retrecir", document.getElementById("containerEquipes").className)'>🔍</button>
-			<button id='bigger' onclick='zoom("grossir", document.getElementById("containerEquipes").className)'>🔎</button>
+			<button type="button" id='smaller' onclick='zoom("retrecir", document.getElementById("containerEquipes").className)'>🔍</button>
+			<button type="button" id='bigger' onclick='zoom("grossir", document.getElementById("containerEquipes").className)'>🔎</button>
+			<button type="button" id='fullscreen' onclick="toggleFullscreen()">  ↕️  </button>
 			<!-- <button class="add-button" >Ajouter <sub>à l'écran d'accueil</sub></button> -->
 		</div>
 		<input type="file" name="file" enctype="multipart/form-data" accept="image/png, image/gif, image/jpeg" style='display:none;'></input> <!-- Champ caché ! champ input pour choisir une image -> https://gist.github.com/0xPr0xy/4060754-->
@@ -115,11 +141,12 @@ http://127.0.0.1:8080/matchmaking/index.php
 	
 	<script>
 		// =================== // Nombre de caractère maximal autorisé
-		var nbcarPlayer = 13;
-		var nbcarTeam = 13;
+		var nbcarPlayer = <?= $_SESSION['nbcarPlayer'] ?> // 13;
+		var nbcarTeam =	  <?= $_SESSION['nbcarTeam']   ?> // 13;
+
 		// =================== // Récupération des données du serveur // testTable(all_teams)
-		var all_teams = <?= $all_teams ?>;
-		var all_players = <?= $all_players ?>;
+		var all_teams = <?= $all_teams_json ?>;
+		var all_players = <?= $all_players_json ?>;
 		// =================== // 
 		const defautTextSize = 20;
 			
