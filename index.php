@@ -71,8 +71,8 @@ http://127.0.0.1:8080/matchmaking/index.php
 	<div id="snackbar">Snackbar text message</div> 
 	<!----------------- HEADER --------------->
 	<header>
-		<h1 id="team" onclick="btEditTeam()" class="font-effect-shadow-multiple"> </h1>
-		<img id="logoHeader" onclick="testLogo()" class="logo" src="img/logo/LogoHockey7.png" alt="🏒" style='font-size:60px'/>
+		<h1 id="team" onclick="clicTitre()" class="font-effect-shadow-multiple"> </h1>
+		<img id="logoHeader" onclick="clicLogo()" class="logo" src="img/logo/LogoHockey7.png" alt="🏒" style='font-size:60px'/>
 		<h2 id="questionPresents">Qui est présent ?</h2>
 	</header>
 	<div id='lienzoom' onclick="showZoom()">🔎</div>
@@ -165,9 +165,8 @@ http://127.0.0.1:8080/matchmaking/index.php
 			console.log("<<<<<<<<<<<< END >>>>>>>>>>>>");
 		});
 
-		function testLogo(e) {
-			snackbar("🤖 Yo l'humain ! Tu pues du cul 💩","white",2)
-		}
+		function clicLogo(e) {	snackbar("💩 Tu pues du cul","white",2)		}
+		function clicTitre(e) {	snackbar("🤪","white",2)		}
 
 	</script>
 

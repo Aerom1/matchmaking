@@ -424,43 +424,7 @@ function creerMenu(name, menu) {
         nom.innerText = name;
         nom.setAttribute("id", "btModifNom");
         menuContainer.append(nom);
-        
-    if (menu == 'modifequipe') {
-        
-        var logodiv = document.createElement('div')
-            logodiv.id = 'logoEquipeModif_div'
-        var logo = document.createElement('img')
-            logo.id = "logoEquipeModif"
-            logo.setAttribute('src', document.getElementById('logoHeader').getAttribute('src'))
-            logo.setAttribute('alt', "🖼️")
-            logo.setAttribute('onerror', 'this.onerror=null; this.src="img/logo/LogoHockey7.png"')
-            logodiv.append(logo)
-            // logo.innerHTML = '<img id="logoEquipeModif" src="' + document.getElementById('logoHeader').getAttribute('src') + '" style="max-width:100%; max-height: 200px; min-width:100px; min-height:100px" onerror="this.onerror=null; this.src=\'img/logo/LogoHockey7.png\'" alt="🖼️">'
-            menuContainer.append(logodiv)
-
-            var inputlabel = document.createElement('span')
-                inputlabel.id = 'labelModifTeam';
-                inputlabel.innerText = '💡 Vous pouvez modifier le nom\net le logo de votre équipe'
-                menuContainer.append(inputlabel)
-            var input = document.createElement('input');
-                input.id = "btModifLogo";
-                input.type = "file";
-                input.setAttribute('enctype', "multipart/form-data" )
-                input.setAttribute('accept', "image/png, image/gif, image/jpeg")
-                menuContainer.append(input)
-            var btValideLogo = document.createElement('button')
-                btValideLogo.id = 'btValideLogo'
-                btValideLogo.innerText = 'Valider le logo'
-                btValideLogo.addEventListener('click', function(){changeLogo_MODIFTEAMDB()})
-                menuContainer.append(btValideLogo)
-
-                // logo.addEventListener('click', function(){changeLogo_MODIFTEAMDB()})
-                logo.addEventListener('click', function(){input.click()})
-                // <input type="file" name="file" enctype="multipart/form-data" accept="image/png, image/gif, image/jpeg" style='display:none;'></input>
-                // input.style.display = 'none'
-            // p.addEventListener('click', function(){clickPlayerIcon(p)})
-    }
-
+ 
     if (menu == 'addplayer' || menu == 'modifplayer') {
 
         var labelXP = document.createElement('span')
@@ -517,10 +481,6 @@ function creerMenu(name, menu) {
             xp1.setAttribute("onclick", "changeXP_MODIFPLAYER(this)")
             xp2.setAttribute("onclick", "changeXP_MODIFPLAYER(this)")
             xp3.setAttribute("onclick", "changeXP_MODIFPLAYER(this)")
-            break;
-        case 'modifequipe':
-            // Attribution du clic pour le changement de nom :
-            nom.setAttribute("onclick", "changeName_MODIFTEAMDB(this)");
             break;
     }
 
