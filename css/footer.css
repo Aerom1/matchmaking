@@ -1,6 +1,4 @@
-/*  BOUTONS DE BAS DE PAGE : 
-#btChgTeam, btRandom 
-*/
+/*  BOUTONS DE BAS DE PAGE : */
 
 /* AFFICHAGE PORTRAIT */
 @media screen and (min-height: 480px) {
@@ -104,15 +102,14 @@
     font-size: 3rem;
   }
   
-  #btChgTeam, #btRandom, #btSettings {
+ #btRandom, #btSettings, #btVide {
     border-radius: 500px;
     overflow: hidden;
-    /* max-height: 10vh; */
   }
   
-  #btChgTeam, #btBack         {  grid-column: 1;  }
+  #btBack, #btVide            {  grid-column: 1;  }
   #btRandom, #btForceEquipes  {  grid-column: 2;  }
-  #btNbEquipes, #btSettings {  grid-column: 3;  }
+  #btNbEquipes, #btSettings   {  grid-column: 3;  }
    
   #btRandom {
     
@@ -121,6 +118,14 @@
     /* border-radius: 500px; */
   }
   
+  #icoChgTeam {
+    position:absolute; 
+    font-size:20px; 
+    font-weight:bolder; 
+    left:5%; 
+    bottom:5%;
+  }
+
   #icoRandom{
     position: absolute;
     font-size: 2.8em;

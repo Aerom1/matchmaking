@@ -56,17 +56,38 @@ h1 {
   font-family: "Audiowide";
 }
 
-
 #logoHeader {
+  /* border:1px solid red; */
   position:absolute;
-  /* max-width:100%; */
   max-width: -moz-available;
-  height: 80px;
+  max-height: 80px;
   left:15px;
-  right:15px;
   top: 5px;
-  z-index: 100;
 }
+
+#logoHeader #logoTeam{
+  /* border:1px solid blue; */
+  height: 80px;
+  max-width: -moz-available;
+  font-size: 60px;
+}
+
+#logoHeader #formChgTeam {
+  border:1px solid brown;
+  background-color: rgba(255,255,255,0.8);
+  border-radius:100px;
+  position:absolute;
+  right:0;
+  bottom:0;
+  overflow:hidden;
+}
+
+#logoHeader #formChgTeam #logoEquipeNext {
+  max-width:  30px;
+  max-height: 30px;
+  font-size: 21px;
+}
+
 
 #questionPresents {
   display: block;

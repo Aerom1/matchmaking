@@ -56,55 +56,49 @@ function getNextTeamId(all_teams, team) {
     return nextTeam
 }
 
-function changeTeam(){
-    console.log("changeTeam()")
+// function changeTeam(){
+//     console.log("changeTeam()")
+//     $(".teamContainer").css({"width":"100%"})
+//     // var teamActuelleId = document.getElementById("team").getAttribute('name')
+//     var nextTeamId = document.getElementById("btChgTeam").getAttribute('nextteamid')
+//     var nextTeam =      Object.values(all_teams).filter(item => item.id === nextTeamId)[0]
+//     var nextPlayers =   Object.values(all_players).filter(item => item.team === nextTeamId)
+//     var nextNextTeam = getNextTeamId(all_teams, nextTeam)
+//     loadTeam(nextTeam, nextPlayers, nextNextTeam)
+// }
 
-    $(".teamContainer").css({"width":"100%"})
-    
-    // var teamActuelleId = document.getElementById("team").getAttribute('name')
-    var nextTeamId = document.getElementById("btChgTeam").getAttribute('nextteamid')
-    var nextTeam =      Object.values(all_teams).filter(item => item.id === nextTeamId)[0]
-    var nextPlayers =   Object.values(all_players).filter(item => item.team === nextTeamId)
-    var nextNextTeam = getNextTeamId(all_teams, nextTeam)
-
-    loadTeam(nextTeam, nextPlayers, nextNextTeam)
-}
-
-function changeTeam_OLD(){
-    console.log("changeTeam()")
-
-    $(".teamContainer").css({"width":"100%"})
-    
-    // var teamActuelleId = document.getElementById("team").getAttribute('name')
-    var nextTeamId = document.getElementById("btChgTeam").getAttribute('nextteamid')
-    var nextTeam =      Object.values(all_teams).filter(item => item.id === nextTeamId)[0]
-    var nextPlayers =   Object.values(all_players).filter(item => item.team === nextTeamId)
-    var nextNextTeam = getNextTeamId(all_teams, nextTeam)
-
-    loadTeam(nextTeam, nextPlayers, nextNextTeam)
-}
+// function changeTeam_OLD(){
+//     console.log("changeTeam()")
+//     $(".teamContainer").css({"width":"100%"})
+//     // var teamActuelleId = document.getElementById("team").getAttribute('name')
+//     var nextTeamId =    document.getElementById("nextteamid").value
+//     var nextTeam =      Object.values(all_teams).filter(item => item.id === nextTeamId)[0]
+//     var nextPlayers =   Object.values(all_players).filter(item => item.team === nextTeamId)
+//     var nextNextTeam = getNextTeamId(all_teams, nextTeam)
+//     loadTeam(nextTeam, nextPlayers, nextNextTeam)
+// }
 
 
 function loadTeam(team, players, nextTeam){
     console.log("load team : " + team.name)
 
-    // document.getElementById("logoHeader").setAttribute("src",team.logo); // logo de l'appli (header)
-    document.getElementById("logoHeader").setAttribute("src",team.logo); // logo du bouton (random)
+    document.getElementById("logoTeam").setAttribute("src",team.logo); // logo de l'appli (header)
     document.getElementById("logoEquipeNext").setAttribute("src",nextTeam.logo); // logo du bouton next Team
-    document.getElementById("btChgTeam").setAttribute("nextteamid",nextTeam.id); // affiche le logo de la prochaine équipe
-    
+    document.getElementById("nextteamid").value = nextTeam.id; // affiche l'ID
+
     var teamActuelle = document.getElementById("team")
         teamActuelle.setAttribute("name", team.id);
         teamActuelle.innerText = team.name;
     
     enleverTousJoueurs_();
-
-    loadData(team, players);
-
+    //----------------------------
+        loadData(team, players);
+    //----------------------------
     majForceEquipes_();
     majNbJoueurs_();
     creerDivPlus_();
 
+    // Ajuster l'affichage 
     $("#containerEquipes").css({"display":"grid"})
     $(".teamContainer").css({"width":"100%"})
     $(".cible").remove();
@@ -112,7 +106,7 @@ function loadTeam(team, players, nextTeam){
 
 function loadData(team, players){
     console.log("Load Data pour " + team.name + " (" + players.length + " joueurs)");
-
+    console.log(players)
     var logPlayersCreated=[]
     players.forEach( function(player) {
         logPlayersCreated.push(player.name + " (xp:" + player.xp +")" + (player.absent==1 ? " -> inactif":""))
@@ -401,7 +395,7 @@ function RANDOM(nbEquipe) {
         // createPlayer_(Number(player.xp), player.name, Number(player.absent), Number(player.id))
     // })
 
-    DB_changePlayersInactifs(j);
+    DB_CHANGE_player_inactifs(j);
     changeBtForceDisposition(nbEquipe);
 
 }
@@ -541,7 +535,7 @@ function changeLogo_MODIFTEAMDB(e){
     if (input.files.length>0) {
 
         // Remplacer le logo dans la bdd
-        DB_changeTeamLOGO(id, newlogo)
+        DB_CHANGE_team_logo(id, newlogo)
         // Remplacer le logo du menu
         // Remplacer le logo de l'accueil
 
@@ -562,7 +556,7 @@ function changeName_MODIFPLAYERDB(e) {
     }
     e.innerText = newname
     id = e.parentNode.parentNode.id
-    DB_changePlayerNAME(id, newname)
+    DB_CHANGE_player_name(id, newname)
     e.parentNode.parentNode.name = newname // Nom affiché dans le menu
     console.log(e.parentNode.parentNode.children[1])
     e.parentNode.parentNode.children[1].innerText = newname // Nom affiché dans la tuile (écran principale)
@@ -598,7 +592,7 @@ function clickBtMenuAddPlayer(clicked){
         var name = document.getElementById("btModifNom").textContent;
         
         var player = createPlayer_(force, name, 0)
-        DB_createPlayer(force, name, team, player)
+        DB_CREATE_player(force, name, team, player)
 			
     }
     // Suppression du menu
@@ -718,7 +712,7 @@ function supprPlayer(e) {
         if (player.parentNode.id == "div0") {
             if (confirm("Supprimer définitivement ?")) {    
                 $(player).remove();
-                DB_deletePlayer(player_id, player_name)
+                DB_DELETE_player(player_id, player_name)
                 // localStorage.removeItem(player.id)
                 majNbJoueurs_();
             }
@@ -759,7 +753,7 @@ function changeXP_MODIFPLAYER(clicked) {
     player.firstChild.innerText = ""+emoForce;
 
     // STOCKAGE DANS LA BDD :
-    DB_changePlayerXP(id, force)
+    DB_CHANGE_player_xp(id, force)
 
     console.log(player.children[1].innerText+" a une nouvelle force: "+player.getAttribute("Force") + ' ' +emoForce)
     
@@ -849,7 +843,11 @@ function getRandomInt_(max) {
 
 function majNbJoueurs_() {
     //mise à jour du nombre de joueurs sur l'interface principale
-    document.getElementById("questionPresents").innerText = "Présents: "+(document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length) +" / "+document.getElementsByClassName("player").length
+    if (document.getElementsByClassName("player").length > 0) {
+        document.getElementById("questionPresents").innerText = "Présents: "+(document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length) +" / "+document.getElementsByClassName("player").length
+    } else {
+        document.getElementById("questionPresents").innerText = "Ajoutez un joueur"
+    }
 }
 
 

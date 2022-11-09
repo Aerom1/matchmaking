@@ -4,6 +4,13 @@ button:active {
 animation: zoom 0.3s linear ;
 }
 
+#btRandom {
+  animation-name: tourne;
+  animation-duration: 1s;
+  animation-timing-function:ease ;
+  animation-iteration-count: 1;
+}
+
 /* #btRandom:active {
 animation: zoom 0.3s linear;
 } */
@@ -32,18 +39,16 @@ animation: zoom 0.3s linear;
   
 @keyframes tourne {
 0% {
-    transform: rotate(0deg);
-    opacity:0.5;
+  transform: rotate(180deg) scale(1);
+  opacity:0.5;
 }
-/* 50% {
-    transform: rotate(1080deg);
-    height:30vh;
-    opacity:0.5;
-}   */
+50% {
+  background-color: green;
+  transform: rotate(0deg)  scale(2);    
+}  
 100% {
-    transform: rotate(360deg);
-    height:10%;
-    opacity:1;
+  transform: rotate(1080deg) scale(1);
+  opacity:1;
 }
 }
 

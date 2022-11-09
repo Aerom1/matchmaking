@@ -49,14 +49,14 @@ html {
 }
 
 #btCloseMenu{ 
-  font-size: 3rem;  
-  font-Size : 45px;
+  /* font-size: 3rem;  
+  font-Size : 45px; */
   text-Align : right;
 }
 
 #btModifNom::after {content: '  🖋️';}
 #btModifNom { 
-  border-top: 1px solid white ;
+  border-bottom: 1px solid white ;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   color : white;
@@ -71,7 +71,7 @@ html {
 }
 
 #imgPlaceholder {
-  grid-row: 3/5;
+  /* grid-row: 3/5; */
   max-width:  100%;
   max-height: 200px;
   min-width:  100px;
@@ -81,11 +81,7 @@ html {
   padding: 5px;
   max-width:100%; 
   height:auto; 
-  border: 1px dashed gray;
-}
-
-#labelModifTeam {
-  grid-row: 7;
+  /* border: 1px dashed gray; */
 }
 
 #labelModifXP {
@@ -93,12 +89,14 @@ html {
   font-size: 0.6em;
 }
 
-#formSettingsChangeLogo {
+#formContainer {
+  /* formSettingsChangeLogo */
+  
   /* border: 1px solid grey; */
   /* border-radius: 5px; */
   padding: 10px;
 
-  border-bottom: 1px solid white ;
+  /* border: 1px solid white ; */
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   color : white;

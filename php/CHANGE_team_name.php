@@ -10,7 +10,6 @@ try{
     
     if(isset($_POST['id']) and isset($_POST['name'])) {
         $sql = "UPDATE tbteam SET name = ? WHERE tbteam.id = ?;";
-
         ($stmt = $conn->prepare($sql)) or trigger_error($conn->error, E_USER_ERROR);
         $stmt->bind_param('si', clean_input($_POST['name']), clean_input($_POST['id'])); 
         $stmt->execute() or trigger_error($stmt->error, E_USER_ERROR);

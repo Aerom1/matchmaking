@@ -55,13 +55,13 @@ if(isset($_POST["submit"])) {
             if($stmt->execute()){
             $resMessage = array(
                 "status" => "alert-success",
-                "message" => "Image uploaded successfully."
+                "message" => "Logo modifié !"
             );
             $_SESSION['team']['logo'] = clean_input($target_file);
             } else {
             $resMessage = array(
                 "status" => "alert-danger",
-                "message" => "Erreur d'enregistrement SQL."
+                "message" => "Erreur d'enregistrement (SQL)."
             );
             }
 

@@ -17,9 +17,9 @@ function formEncode(obj) {
 
 
 
-function DB_deletePlayer(id, name) {
-	console.log("==============> DB_deletePlayer " + id);
-	fetch('php/delete_Player.php', {
+function DB_DELETE_player(id, name) {
+	console.log("==============> DB_DELETE_player " + id);
+	fetch('php/DELETE_player.php', {
 		method: 'POST',
 		mode: 'cors',
 		headers: {'Content-type': 'application/x-www-form-urlencoded'},
@@ -33,15 +33,15 @@ function DB_deletePlayer(id, name) {
 	}).catch(error => console.log(error));
 }
 
-function DB_createPlayer(force, name, team, player) {
-	console.log("==============> DB_createPlayer");
+function DB_CREATE_player(force, name, team, player) {
+	console.log("==============> DB_CREATE_player");
 	const data = {
 		team:parseInt(team),
 		name:name,
 		absent:0,
 		id:54,
 		xp:parseInt(force)}
-	fetch('php/create_Player.php', {
+	fetch('php/CREATE_player.php', {
 		method: 'POST',
 		mode: 'cors',
 		// headers: {'Content-Type': 'application/json'},
@@ -65,10 +65,10 @@ function DB_createPlayer(force, name, team, player) {
 }
 
 
-function DB_changePlayerNAME(id, newname) {
-	console.log("==============> DB_changePlayerNAME " + newname + '('+id + ')');
+function DB_CHANGE_player_name(id, newname) {
+	console.log("==============> DB_CHANGE_player_name " + newname + '('+id + ')');
 
-	fetch('php/changePlayer_NAME.php', {
+	fetch('php/CHANGE_player_name.php', {
 		method: 'POST',
 		mode: 'cors',
 		headers: {'Content-type': 'application/x-www-form-urlencoded'},
@@ -82,10 +82,10 @@ function DB_changePlayerNAME(id, newname) {
 	}).catch(error => console.log(error));
 }
 
-function DB_changeTeamNAME(id, newname) {
-	console.log("==============> DB_changeTeamNAME " + newname + '('+id+')');
+function DB_CHANGE_team_name(id, newname) {
+	console.log("==============> DB_CHANGE_team_name " + newname + '('+id+')');
 
-	fetch('php/changeTeam_NAME.php', {
+	fetch('php/CHANGE_team_name.php', {
 		method: 'POST',
 		mode: 'cors',
 		headers: {'Content-type': 'application/x-www-form-urlencoded'},
@@ -99,10 +99,10 @@ function DB_changeTeamNAME(id, newname) {
 	}).catch(error => console.log(error));
 }
 
-function DB_createTeam(name) {
-	console.log("==============> DB_createTeam " + name);
+function DB_CREATE_team(name) {
+	console.log("==============> DB_CREATE_team " + name);
 
-	fetch('php/create_Team.php', {
+	fetch('php/CREATE_team.php', {
 		method: 'POST',
 		mode: 'cors',
 		headers: {'Content-type': 'application/x-www-form-urlencoded'},
@@ -117,14 +117,14 @@ function DB_createTeam(name) {
 	}).catch(error => console.log(error));
 }
 
-function DB_deleteTeam(id, name) {
-	console.log("==============> DB_deleteTeam " + id);
+function DB_DELETE_team(id) {
+	console.log("==============> DB_DELETE_team " + id);
 
-	fetch('php/delete_Team.php', {
+	fetch('php/DELETE_team.php', {
 		method: 'POST',
 		mode: 'cors',
 		headers: {'Content-type': 'application/x-www-form-urlencoded'},
-		body: 'id='+id+'&name='+name,
+		body: 'id='+id,
 	})
 	.then(response => response.json())
 	.then(response => {
@@ -132,13 +132,14 @@ function DB_deleteTeam(id, name) {
 		console.log("DB -> " + response.result)
 		// location.reload();
 		snackbar_DB(response) // Affichage du pop (snackbar)
+		setTimeout(function() {window.location.href = 'index.php'}, 1000);
 	}).catch(error => console.log(error));
 }
 
-function DB_changeTeamLOGO(id, newlogo) {
-	console.log("==============> DB_changeTeamLOGO");
+function DB_CHANGE_team_logo(id, newlogo) {
+	console.log("==============> DB_CHANGE_team_logo");
 
-	fetch('php/changeTeam_LOGO.php', {
+	fetch('php/CHANGE_team_logo.php', {
 		method: 'POST',
 		mode: 'cors',
 		headers: {'Content-type': 'application/x-www-form-urlencoded'},
@@ -152,10 +153,10 @@ function DB_changeTeamLOGO(id, newlogo) {
 	}).catch(error => console.log(error));
 }
 
-function DB_changePlayerXP(id, xp) {
-	console.log("==============> DB_changePlayerXP xp:" + xp + '(id:'+id+')');
+function DB_CHANGE_player_xp(id, xp) {
+	console.log("==============> DB_CHANGE_player_xp xp:" + xp + '(id:'+id+')');
 
-	fetch('php/changePlayer_XP.php', {
+	fetch('php/CHANGE_player_xp.php', {
 		method: 'POST',
 		mode: 'cors',
 		headers: {'Content-type': 'application/x-www-form-urlencoded'},
@@ -169,10 +170,10 @@ function DB_changePlayerXP(id, xp) {
 	}).catch(error => console.log(error));
 }
 
-function DB_changePlayersInactifs(players) {
-	console.log("==============> DB_changePlayersInactifs");
+function DB_CHANGE_player_inactifs(players) {
+	console.log("==============> DB_CHANGE_player_inactifs");
 
-	fetch('php/changePlayers_INACTIFS.php', {
+	fetch('php/CHANGE_player_inactifs.php', {
 		method: 'POST',
 		mode: 'cors',
 		headers: {'Content-type': 'application/x-www-form-urlencoded'},

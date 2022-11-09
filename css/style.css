@@ -141,6 +141,7 @@ html, .fullscreen {
   animation: bounce-in .3s linear;
   /* text-align: left; */
   padding:2px;
+  max-height: 20vh;
   border-radius: 20px;
   overflow: hidden;
   flex-grow: 1;
