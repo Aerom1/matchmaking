@@ -41,7 +41,7 @@ if (!$stmt) {
         } else {
             // printf("<br/>Le joueur a été ajouté");
             $success = true;
-            $result = "👍 l'équipe a été créée";
+            $result = "👍 $name a été créée";
             $new_id = $conn->insert_id;
 
             $_SESSION['team']['id'] = $new_id;
@@ -49,13 +49,29 @@ if (!$stmt) {
             $_SESSION['team']['logo'] = '';
             $_SESSION['team']['fav'] = 0;
 
+            $all_teams = $conn->query("SELECT * FROM tbteam") -> fetch_all( MYSQLI_ASSOC );
+            $dropdownHTMLfav = '<li style="font-size:2em;"><center>🏠</li><li><hr class="dropdown-divider"></li>';
+            foreach( $all_teams as $team) {
+                if($team["fav"]) {
+                    $dropdownHTMLfav .= "<li><center><button type='button' class='dropdown-item' style='color:white;background-color:green;'>✓  ".$team["name"]."</button></li>";
+                } else {
+                    $dropdownHTMLfav .=  "<li><center><button onclick='selectFavorite(this)' teamid=".$team["id"]." type='button' class='dropdown-item'>".$team["name"]."</button></li>";
+                }
+            }
+            $dropdownHTMLdel = '';
+            foreach( $all_teams as $team) {
+                $dropdownHTMLdel .= "<li><center><button onclick='btDelTeam(this)' teamid=" .$team["id"]. " teamname=" .$team["name"]. " type='button' class='dropdown-item'>".$team["name"]."</button></li>";
+            }
+            $stmt->close();
         }
     }
     
     $tableauRetour = array(
         'success' => $success,
         'result' => $result,
-        'id' => $new_id
+        'id' => $new_id,
+        'dropdownHTMLfav' => $dropdownHTMLfav,
+        'dropdownHTMLdel' => $dropdownHTMLdel
     );
 
     echo json_encode($tableauRetour, JSON_UNESCAPED_UNICODE);

@@ -1,0 +1,38 @@
+HOCKEY
+
+<BUG>
+
+<EVO>
+	- quand équipe est créée, close envoie vers accueil de la bonne équipe
+	- enlever tous les vh, ne pas se référer au viewport, utiliser des %
+	- droits utilisateur pour modifier l'équipe
+<>
+	- automatiser le transfert vers raspberry
+	- créer un certificat de sécurité
+	- animation de disparition  https://stackoverflow.com/questions/7000648/css3-transition-on-dom-removal
+
+OK	- pouvoir supprimer n'importe quelle équipe depuis settings
+OK	- quand équipe est créée, met à jour settings pour modif nom/logo
+OK	- team settings : ajouter listBox pour sélectionner favTeam
+OK	- lorsqu'une équipe est supprimée, retourner directement sur la page d'accueil
+OK	- sécuriser (injection sql) le $_POST du changeTeam
+OK	- accueil changement d'équipe : recharger PHP !
+OK - gérer la façon d'arriver sur team.php (avec ou sans submit)
+OK - settings : ajouter/modifier/supprimer une équipe
+OK	- mettre un peu de distance entre les groupes de joueur div1 div2 div3
+KO	- maintenant on voit l'ascenceur... il faudrait que #containerEquipes soit collé aux bords et que la marge se fasse sur les div123
+
+KO	- supprimer 2 des 3 meta viewport
+OK	- ajuster la hauteur de   #containerEquipes selon accueil/equipes
+OK	- ajouter zoom dans ecran equipes
+OK	- mieux occuper l'espace libre (hauteur de l'écrean)
+OK	- mieux gérer le glisser-déposer
+OK	- Sécurité ! injections sql, etc...
+
+<PHP>
+OK	- écran eq1-eq2-eq3 : laisser juste le bouton back
+OK	- php addPlayer
+OK	- php supprPlayer
+OK	- php modif nom
+OK	- php modif force
+OK	- php modif absenteisme (enregistrer les absents quand je génère les équipes ?)

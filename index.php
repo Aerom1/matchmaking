@@ -17,6 +17,11 @@ http://127.0.0.1:8080/matchmaking/index.php
 		foreach ($all_teams as $t) { 	// On filtre la liste d'équipe
 			if ($t['id'] == $_POST["teamid"]) 
 			{ $team = $t; }
+		}
+	} elseif(isset($_GET["teamid"])) {
+		foreach ($all_teams as $t) { 	// On filtre la liste d'équipe
+			if ($t['id'] == $_GET["teamid"]) 
+			{ $team = $t; }
 		}	
 	} else {
 		$team =	 $all_teams[0];			// Si pas de demande d'équipe, on prend l'équipe favorite

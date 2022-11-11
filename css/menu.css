@@ -50,15 +50,16 @@ Modif Ã©quipe
 }
 
 #btModifNom::after {content: '  🖋️';}
-#btModifNom { 
-  border-bottom: 1px solid white ;
+#btModifNom {
+  border-bottom: 1px solid white;
   background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
+  border-radius: 34px;
   color : white;
-  box-Shadow : none;
+  /* box-Shadow : none; */
   /* max-width : 90vw; */
   overflow-x : hidden;
   align-self: end;
+  height: 100%;
 }
 
 #frameBtXp {

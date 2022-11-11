@@ -39,7 +39,6 @@ function DB_CREATE_player(force, name, team, player) {
 		team:parseInt(team),
 		name:name,
 		absent:0,
-		id:54,
 		xp:parseInt(force)}
 	fetch('php/CREATE_player.php', {
 		method: 'POST',
@@ -99,6 +98,23 @@ function DB_CHANGE_team_name(id, newname) {
 	}).catch(error => console.log(error));
 }
 
+function DB_CHANGE_team_favorite(id, name) {
+	console.log("==============> DB_CHANGE_team_favorite " + name + '('+id+')');
+	fetch('php/CHANGE_team_favorite.php', {
+		method: 'POST',
+		mode: 'cors',
+		headers: {'Content-type': 'application/x-www-form-urlencoded'},
+		body: 'id='+id+'&name='+name,
+	})
+	.then(response => response.json())
+	.then(response => {
+		console.log("RESULTAT APPEL SERVEUR MODIF EQUIPE FAVORITE");
+		console.log("DB -> " + response.result)
+		snackbar_DB(response) // Affichage du pop (snackbar)
+		document.getElementById('teamlistfav').innerHTML = response.dropdownHTML ; // METTRE A JOUR LA LISTE DEROULANTE
+	}).catch(error => console.log(error));
+}
+
 function DB_CREATE_team(name) {
 	console.log("==============> DB_CREATE_team " + name);
 
@@ -114,17 +130,22 @@ function DB_CREATE_team(name) {
 		console.log("DB -> " + response.result)
 		// location.reload();
 		snackbar_DB(response) // Affichage du pop (snackbar)
+		document.getElementsByName('teamId').value = response.id
+		document.getElementById('btModifNom').innerText = name
+		document.getElementById('imgPlaceholder').setAttribute('src','')
+		document.getElementById('teamlistfav').innerHTML = response.dropdownHTMLfav ; // METTRE A JOUR LA LISTE DEROULANTE
+		document.getElementById('teamlistdel').innerHTML = response.dropdownHTMLdel ; // METTRE A JOUR LA LISTE DEROULANTE
 	}).catch(error => console.log(error));
 }
 
-function DB_DELETE_team(id) {
+function DB_DELETE_team(id, name) {
 	console.log("==============> DB_DELETE_team " + id);
 
 	fetch('php/DELETE_team.php', {
 		method: 'POST',
 		mode: 'cors',
 		headers: {'Content-type': 'application/x-www-form-urlencoded'},
-		body: 'id='+id,
+		body: 'id='+id+'&name='+name,
 	})
 	.then(response => response.json())
 	.then(response => {

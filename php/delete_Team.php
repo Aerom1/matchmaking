@@ -7,6 +7,7 @@ $conn = include 'connectToDB.php';
 // Recup les infos à sauvegarder
 include 'input.php'; // pour la fonction clean_input qui évite les injections sql
 $id   = clean_input($_POST['id']);
+$name   = clean_input($_POST['name']);
 
 // Requête au serveur
 $sql  = "DELETE FROM tbteam WHERE id = $id";
@@ -18,7 +19,7 @@ if (!$req) {
     $result = "Error: $conn->error";
 } else {
     $success = true;
-    $result = "👍 l'équipe a été supprimée";
+    $result = "👍 $name a été supprimée";
 }
 
 echo json_encode(

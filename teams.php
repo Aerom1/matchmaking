@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/teams.css">
+    <link rel="stylesheet" href="css/settings.css">
     <link rel="stylesheet" href="css/snackbar.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
@@ -24,7 +24,6 @@
             <button id="closeTourne" type="button" class="btn-close btn-close-white" aria-label="Close" onclick="fermer()"></button>
         </div>
 
-        <span id="labelModifTeam">💡 Modifier le nom et le logo de l'équipe</span>
 
 
 
@@ -59,23 +58,51 @@
             <?php }?>
         </div>
 
-        <br/>
+        <span id="labelModifTeam">💡 Modifier le nom et le logo de l'équipe</span>
 
         <!-- 💥❌🚫❗⚠️☢️🛑➕ -->
-        <button onclick="btDelTeam(<?PHP echo htmlspecialchars ($_SESSION['team']['id']) ?>)" class='btn btn-danger'>Supprimer l'équipe</button>
+        
+        <!-- Split dropup button -->
+        <div class="btn-group dropup">
+        <button onclick="btDelTeam(this)" class='btn btn-danger' teamid=<?PHP echo htmlspecialchars ($_SESSION['team']['id']) ?> teamname=<?PHP echo htmlspecialchars ($_SESSION['team']['name']) ?>>
+            Supprimer l'équipe
+        <!-- <button type="button" class="btn btn-secondary"> -->
+        </button>
+        <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="visually-hidden">Toggle Dropdown</span>
+        </button>
+        <ul id="teamlistdel" class="dropdown-menu">
+            <!-- Dropdown menu links -->
+            <?php 
+                foreach( $all_teams as $team) {
+                    echo "<li><center><button onclick='btDelTeam(this)' teamid=" .$team["id"]. " teamname=" .$team["name"]. " type='button' class='dropdown-item'>".$team["name"]."</button></li>";
+                }
+            ?>
+        </ul>
+        </div>
+
 
         <!-- CREATION / SUPPRESSION -->
         <button onclick="btAddTeam(<?PHP echo htmlspecialchars ($_SESSION['nbcarTeam']) ?>)" class='btn btn-secondary'>Créer une équipe</button>
 
-        <div class="btn-group">
-        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            Choisir l'équipe favorite
-        </button>
-        <ul class="dropdown-menu dropdown-menu-end">
-            <li><button type="button" class="dropdown-item">Action</button></li>
-            <li><button type="button" class="dropdown-item">Another action</button></li>
-            <li><button type="button" class="dropdown-item">Something else here</button></li>
-        </ul>
+        <div class="btn-group dropup-center dropup">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Choisir l'équipe favorite
+            </button>
+            <ul id="teamlistfav" class="dropdown-menu dropdown-menu-end">
+                <li style="font-size:2em;"><center>🏠</li>  
+                <li><hr class="dropdown-divider"></li>
+                <?php 
+                    // ☑✓✔✅√☒☐✕❎💯✗✘✖❌    
+                    foreach( $all_teams as $team) {
+                        if($team["fav"]) {
+                            echo "<li><center><button type='button' class='dropdown-item' style='color:white;background-color:green;'>✓  ".$team["name"]."</button></li>";
+                        } else {
+                            echo "<li><center><button onclick='selectFavorite(this)' teamid=".$team["id"]." type='button' class='dropdown-item'>".$team["name"]."</button></li>";
+                        }
+                    }
+                ?>
+            </ul>
         </div>
 
         <!-- <form action="teams.php" method="post" id='formSettings' >
@@ -86,9 +113,19 @@
 
     </div>
 
+
     <script src="scripts/appels_server.js"></script>
     <script src="scripts/settings.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+        
+    <script>
+        function selectFavorite(btn) {
+            id =    btn.getAttribute("teamid");
+            name =  btn.innerText;
+            DB_CHANGE_team_favorite(id, name);
+        }
+    </script>
 
 </body>
 </html>

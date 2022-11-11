@@ -15,6 +15,8 @@
 
 if(isset($_POST["submit"])) {
 
+    // OUVERTURE DE LA PAGE APRES FILE SUBMIT DEPUIS LA MEME PAGE
+
     // Set image placement folder
     $target_dir = "img/team/";
     // Get file path
@@ -47,29 +49,34 @@ if(isset($_POST["submit"])) {
         );
     } else if (file_exists($target_file) | move_uploaded_file($_FILES["fileUpload"]["tmp_name"], $target_file)) {
 
-            $sql = "UPDATE tbteam SET logo = ? WHERE tbteam.id = ?;";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param('si', clean_input($target_file), clean_input($_POST["teamId"])); 
+        $sql = "UPDATE tbteam SET logo = ? WHERE tbteam.id = ?;";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('si', clean_input($target_file), clean_input($_POST["teamId"])); 
 
-            // $sql = "INSERT INTO tbteam (logo) VALUES ('$target_file')";
-            if($stmt->execute()){
-            $resMessage = array(
-                "status" => "alert-success",
-                "message" => "Logo modifié !"
-            );
-            $_SESSION['team']['logo'] = clean_input($target_file);
-            } else {
-            $resMessage = array(
-                "status" => "alert-danger",
-                "message" => "Erreur d'enregistrement (SQL)."
-            );
-            }
-
+        // $sql = "INSERT INTO tbteam (logo) VALUES ('$target_file')";
+        if($stmt->execute()){
+        $resMessage = array(
+            "status" => "alert-success",
+            "message" => "Logo modifié !"
+        );
+        $_SESSION['team']['logo'] = clean_input($target_file);
         } else {
-            $resMessage = array(
-                "status" => "alert-danger",
-                "message" => "Erreur d'import de l'image."
-            );
+        $resMessage = array(
+            "status" => "alert-danger",
+            "message" => "Erreur d'enregistrement (SQL)."
+        );
         }
+
+    } else {
+        $resMessage = array(
+            "status" => "alert-danger",
+            "message" => "Erreur d'import de l'image."
+        );
     }
+} else {
+
+    // OUVERTURE DE LA PAGE DEPUIS L'ACCUEIL (index.php)
+    $all_teams = $conn->query("SELECT * FROM tbteam") -> fetch_all( MYSQLI_ASSOC );
+
+}
 ?>

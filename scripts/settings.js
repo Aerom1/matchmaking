@@ -28,9 +28,11 @@ function btAddTeam(nbcarTeam){
     DB_CREATE_team(name);
 }
 
-function btDelTeam(id){
-    if (confirm("Confirmer la suppression de l'équipe entière ?\nCette action est irréversible !")) {
-        DB_DELETE_team(id);
+function btDelTeam(btn){
+    var name = btn.getAttribute('teamname')
+    var id = btn.getAttribute('teamid')
+    if (confirm("Confirmer la suppression de l'équipe "+ name +" ?\nCette action est irréversible !")) {
+        DB_DELETE_team(id, name);
     }
 }
 
