@@ -126,8 +126,8 @@ http://127.0.0.1:8080/matchmaking/index.php
 			<!-- 🎲 RANDOM -->
 			<button type="button" id="btRandom"  onclick="btRandom()"> <span id="logoBtRandom2">	🎲	</span></button> <!-- <img id="logoBtRandom1"  src='img/logo/LogoHockey7.png' alt='🏒'/> -->
 			<!-- ⚙️ SETTINGS -->
-			<button type="button" id="btSettings" onclick="window.open('teams.php','_self')">⚙️</button>
-				<!-- <form action="teams.php" method="post" id='formSettings' >
+			<button type="button" id="btSettings" onclick="window.open('settings.php','_self')">⚙️</button>
+				<!-- <form action="settings.php" method="post" id='formSettings' >
 					<input type="hidden" name="nbcarTeam" value= <!?= $_SESSION['nbcarTeam'] ?> />
 					<input type="hidden" name="team" value= <!?= $_SESSION['team']['id'] ?> />
 					<input type="submit" name="submit" value="⚙️" id="btSettings" style="width:100%;height:100%;font-size: 3rem;">

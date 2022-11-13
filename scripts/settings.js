@@ -1,3 +1,14 @@
+document.getElementById("chooseFile").onchange = function () {
+    readURL(this);
+    document.getElementById("btn_ImportLogo").classList.remove('d-none')    // Afficher le bouton de validation
+}
+
+
+function fermer(teamid) {
+    document.getElementById("btCloseMenu").classList.add("animer")
+    window.location.href = 'index.php?teamid='+teamid;
+}
+
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -6,16 +17,6 @@ function readURL(input) {
         }
         reader.readAsDataURL(input.files[0]); // convert to base64 string
     }
-}
-
-document.getElementById("chooseFile").onchange = function () {
-        readURL(this);
-        document.getElementById("btn_ImportLogo").classList.remove('d-none')    // Afficher le bouton de validation
-}
-
-function fermer() {
-    document.getElementById("btCloseMenu").classList.add("animer")
-    window.location.href = 'index.php';
 }
 
 function btAddTeam(nbcarTeam){
@@ -46,6 +47,12 @@ function changeName_MODIFTEAMDB(e, nbcarTeam, id){
     }
     e.innerText = newname;
     DB_CHANGE_team_name(id, newname);
+}
+
+function selectFavorite(btn) {
+    var id =    btn.getAttribute("teamid");
+    var name =  btn.innerText;
+    DB_CHANGE_team_favorite(id, name);
 }
 
 function snackbar_DB (response) {

@@ -13,7 +13,7 @@
     // var_dump($_FILES["fileUpload"]["error"]);
     // echo "<script>alert('target_file : $tmpfileupload)')</script>";
 
-if(isset($_POST["submit"])) {
+if ( isset($_POST["submit"]) ) {
 
     // OUVERTURE DE LA PAGE APRES FILE SUBMIT DEPUIS LA MEME PAGE
 
@@ -47,14 +47,30 @@ if(isset($_POST["submit"])) {
             "status" => "alert-danger",
             "message" => "Fichier trop grand : max 2 Mb"
         );
-    } else if (file_exists($target_file) | move_uploaded_file($_FILES["fileUpload"]["tmp_name"], $target_file)) {
+    } else {
+        
+        if (file_exists($target_file)) { 
+            echo "<script>console.log('################################# le fichier existe déjà'); </script>";
+        } else {
+            echo "<script>console.log('################################# le fichier n'existe pas encore'); </script>";
+            if (move_uploaded_file($_FILES["fileUpload"]["tmp_name"], $target_file)) {
+                echo "<script>console.log('################################# déplacement réussi'); </script>";
+            } else {
+                echo "<script>console.log('################################# déplacement échoué'); </script>";
+                $resMessage = array(
+                    "status" => "alert-danger",
+                    "message" => "Erreur d'import (move_uploaded_file)"
+                );
+                goto stopUpload;
+            }
+        }
 
         $sql = "UPDATE tbteam SET logo = ? WHERE tbteam.id = ?;";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('si', clean_input($target_file), clean_input($_POST["teamId"])); 
+        $stmt->bind_param('si', $target_file, clean_input($_POST["teamId"])); 
 
         // $sql = "INSERT INTO tbteam (logo) VALUES ('$target_file')";
-        if($stmt->execute()){
+        if ($stmt->execute()) {
         $resMessage = array(
             "status" => "alert-success",
             "message" => "Logo modifié !"
@@ -64,14 +80,11 @@ if(isset($_POST["submit"])) {
         $resMessage = array(
             "status" => "alert-danger",
             "message" => "Erreur d'enregistrement (SQL)."
-        );
+            );
         }
 
-    } else {
-        $resMessage = array(
-            "status" => "alert-danger",
-            "message" => "Erreur d'import de l'image."
-        );
+        stopUpload:
+
     }
 } else {
 

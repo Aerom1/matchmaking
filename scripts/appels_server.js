@@ -127,12 +127,13 @@ function DB_CREATE_team(name) {
 	.then(response => response.json())
 	.then(response => {
 		console.log("RESULTAT APPEL SERVEUR CREATION EQUIPE");
-		console.log("DB -> " + response.result)
+		console.log("DB -> " + response.result);
 		// location.reload();
 		snackbar_DB(response) // Affichage du pop (snackbar)
-		document.getElementsByName('teamId').value = response.id
-		document.getElementById('btModifNom').innerText = name
-		document.getElementById('imgPlaceholder').setAttribute('src','')
+		document.getElementsByName('teamId').value = response.id;
+		document.getElementById('btCloseMenu').onclick = function(){ fermer(response.id) };
+		document.getElementById('btModifNom').innerText = name;
+		document.getElementById('imgPlaceholder').setAttribute('src','');
 		document.getElementById('teamlistfav').innerHTML = response.dropdownHTMLfav ; // METTRE A JOUR LA LISTE DEROULANTE
 		document.getElementById('teamlistdel').innerHTML = response.dropdownHTMLdel ; // METTRE A JOUR LA LISTE DEROULANTE
 	}).catch(error => console.log(error));

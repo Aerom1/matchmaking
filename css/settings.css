@@ -70,7 +70,7 @@ html {
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   color : white;
-  height: 100%;
+  min-height: 100%;
   /* max-width : 90vw; */
   overflow-x : hidden;
   align-self: end;
@@ -117,6 +117,11 @@ html {
   /* align-self: end; */
 
 }
+
+#btn_ImportLogo {
+  width: 100%;
+}
+
 
 /* .btn {
   border-radius: 20px !important;

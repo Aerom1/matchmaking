@@ -21,7 +21,7 @@
     <div id="divmenu">
         <!-- TEXTES: NOM, ASTUCE ET FERMETURE [X] -->
         <div id="btCloseMenu">
-            <button id="closeTourne" type="button" class="btn-close btn-close-white" aria-label="Close" onclick="fermer()"></button>
+            <button id="closeTourne" type="button" class="btn-close btn-close-white" aria-label="Close" onclick="fermer( <?PHP echo htmlspecialchars ($_SESSION['team']['id']) ?> )"></button>
         </div>
 
 
@@ -47,50 +47,48 @@
                     <input type="file" name="fileUpload" class="form-control" id="chooseFile">   <!-- custom-file-input -->
                 </div>
                 <!-- BOUTON IMPORT -->
-                <button id="btn_ImportLogo" type="submit" name="submit" class="btn btn-primary d-none btn-block mt-4">  Charger le logo  </button>
+                <button id="btn_ImportLogo" type="submit" name="submit" class="btn btn-primary d-none btn-block mt-4">  Enregistrer le logo  </button>
             </form>
 
             <!-- Display response messages -->
             <?php if(!empty($resMessage)) {?>
-                <div class="alert <?php echo $resMessage['status']?>">
+                <div class="alert p-1 mt-2 mb-0 <?php echo $resMessage['status']?>">
                     <?php echo $resMessage['message']?>
                 </div>
             <?php }?>
         </div>
-
+        <!-- LABEL -->
         <span id="labelModifTeam">💡 Modifier le nom et le logo de l'équipe</span>
-
         <!-- 💥❌🚫❗⚠️☢️🛑➕ -->
-        
-        <!-- Split dropup button -->
+        <!-- SUPPRIMER EQUIPE -->
         <div class="btn-group dropup">
-        <button onclick="btDelTeam(this)" class='btn btn-danger' teamid=<?PHP echo htmlspecialchars ($_SESSION['team']['id']) ?> teamname=<?PHP echo htmlspecialchars ($_SESSION['team']['name']) ?>>
-            Supprimer l'équipe
-        <!-- <button type="button" class="btn btn-secondary"> -->
-        </button>
-        <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-            <span class="visually-hidden">Toggle Dropdown</span>
-        </button>
-        <ul id="teamlistdel" class="dropdown-menu">
-            <!-- Dropdown menu links -->
-            <?php 
-                foreach( $all_teams as $team) {
-                    echo "<li><center><button onclick='btDelTeam(this)' teamid=" .$team["id"]. " teamname=" .$team["name"]. " type='button' class='dropdown-item'>".$team["name"]."</button></li>";
-                }
-            ?>
-        </ul>
+            <button onclick="btDelTeam(this)" class='btn btn-danger' teamid=<?PHP echo htmlspecialchars ($_SESSION['team']['id']) ?> teamname=<?PHP echo htmlspecialchars ($_SESSION['team']['name']) ?>>
+                Supprimer l'équipe
+            </button>
+            <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
+            </button>
+            <ul id="teamlistdel" class="dropdown-menu">
+                <!-- Dropdown menu links -->
+                <?php 
+                    foreach( $all_teams as $team) {
+                        echo "<li><center><button onclick='btDelTeam(this)' teamid=" .$team["id"]. " teamname=" .$team["name"]. " type='button' class='dropdown-item'>".$team["name"]."</button></li>";
+                    }
+                ?>
+            </ul>
         </div>
 
 
-        <!-- CREATION / SUPPRESSION -->
+        <!-- NOUVELLE EQUIPE -->
         <button onclick="btAddTeam(<?PHP echo htmlspecialchars ($_SESSION['nbcarTeam']) ?>)" class='btn btn-secondary'>Créer une équipe</button>
-
+        
+        <!-- CHOIX FAVORI -->
         <div class="btn-group dropup-center dropup">
             <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 Choisir l'équipe favorite
             </button>
             <ul id="teamlistfav" class="dropdown-menu dropdown-menu-end">
-                <li style="font-size:2em;"><center>🏠</li>  
+                <li style="font-size:2em;"><center>🏠</li>
                 <li><hr class="dropdown-divider"></li>
                 <?php 
                     // ☑✓✔✅√☒☐✕❎💯✗✘✖❌    
@@ -105,7 +103,7 @@
             </ul>
         </div>
 
-        <!-- <form action="teams.php" method="post" id='formSettings' >
+        <!-- <form action="settings.php" method="post" id='formSettings' >
             <input type="hidden" name="nbcarTeam" value= <!?= $_SESSION['nbcarTeam'] ?> />
             <input type="hidden" name="team" value= <!?= $_SESSION['team']['id'] ?> />
             <input type="submit" name="submit" value="⚙️" id="btSettings" style="width:100%;height:100%;font-size: 3rem;">
@@ -118,14 +116,6 @@
     <script src="scripts/settings.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 
-        
-    <script>
-        function selectFavorite(btn) {
-            id =    btn.getAttribute("teamid");
-            name =  btn.innerText;
-            DB_CHANGE_team_favorite(id, name);
-        }
-    </script>
-
+    
 </body>
 </html>

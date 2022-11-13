@@ -1,9 +1,9 @@
 HOCKEY
 
 <BUG>
-
+	- quand je choisis une image pour la 2e fois, le message de statut reste affiché (importé/échec)
 <EVO>
-	- quand équipe est créée, close envoie vers accueil de la bonne équipe
+	- ajout menu pour choisir une autre équipe depuis l'accueil (faire un dropdown sur le bouton libre)
 	- enlever tous les vh, ne pas se référer au viewport, utiliser des %
 	- droits utilisateur pour modifier l'équipe
 <>
@@ -11,6 +11,8 @@ HOCKEY
 	- créer un certificat de sécurité
 	- animation de disparition  https://stackoverflow.com/questions/7000648/css3-transition-on-dom-removal
 
+OK	- quand je quitte settings, je reviens forcément sur l'équipe fav
+OK	- quand équipe est créée, close envoie vers accueil de la bonne équipe
 OK	- pouvoir supprimer n'importe quelle équipe depuis settings
 OK	- quand équipe est créée, met à jour settings pour modif nom/logo
 OK	- team settings : ajouter listBox pour sélectionner favTeam
