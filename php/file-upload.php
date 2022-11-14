@@ -56,10 +56,11 @@ if ( isset($_POST["submit"]) ) {
             if (move_uploaded_file($_FILES["fileUpload"]["tmp_name"], $target_file)) {
                 echo "<script>console.log('################################# déplacement réussi'); </script>";
             } else {
+
                 echo "<script>console.log('################################# déplacement échoué'); </script>";
                 $resMessage = array(
                     "status" => "alert-danger",
-                    "message" => "Erreur d'import (move_uploaded_file)"
+                    "message" => "Erreur d'import #".$_FILES["fileUpload"]["error"]." | file:".$target_file
                 );
                 goto stopUpload;
             }

@@ -85,6 +85,15 @@ button#fullscreen {
     right: 0;
 }
 
+#btn_theme {
+  border-radius: 50px;
+  padding: 6px;
+  margin: 19px;
+  font-size: 50px;
+  position: absolute;
+  left: 0;
+  top:0;
+}
   /* Animations to fade the snackbar in and out */
   @-webkit-keyframes fadeinzoom {
     from {opacity: 0;}

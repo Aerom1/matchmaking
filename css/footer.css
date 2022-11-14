@@ -64,7 +64,7 @@
     max-height: 7vh;
     max-width: 100%;
     font-size: 3rem;
-    color: white;
+    color: #998ea4;
   }
   
   
@@ -105,6 +105,8 @@
  #btRandom, #btSettings, #btVide {
     border-radius: 500px;
     overflow: hidden;
+    font-size: 3em;
+    color: #998ea4;
   }
   
   #btBack, #btVide            {  grid-column: 1;  }

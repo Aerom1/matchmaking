@@ -3,6 +3,7 @@ HOCKEY
 <BUG>
 	- quand je choisis une image pour la 2e fois, le message de statut reste affiché (importé/échec)
 <EVO>
+	- quand suppr équipe avec menu déroulant, mettre à jour menuS déroulantS suppr + fav
 	- ajout menu pour choisir une autre équipe depuis l'accueil (faire un dropdown sur le bouton libre)
 	- enlever tous les vh, ne pas se référer au viewport, utiliser des %
 	- droits utilisateur pour modifier l'équipe

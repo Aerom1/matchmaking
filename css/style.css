@@ -77,15 +77,18 @@ BOW-SHADOW GENERATOR-> https://html-css-js.com/css/generator/box-shadow/
   } */
 }
 
-body { 
+html { 
   /* font-family: "Audiowide", sans-serif; */
   font-family: sans-serif;
 }
 
-  
+html.dark-theme{
+  background-color: #3d3d3d;
+}
 
 /* Make content area fill the entire browser window */
 html, .fullscreen {
+  background-color: #fff;
   /* display: flex; */
   height: 100%;
   margin: 0;
@@ -97,7 +100,7 @@ html, .fullscreen {
   min-height:100%; */
   margin:0 auto;
   position:relative;
-  background-color: #3d3d3d;
+  
 }
 
 #containerEquipes{

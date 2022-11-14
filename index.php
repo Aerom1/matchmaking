@@ -122,7 +122,7 @@ http://127.0.0.1:8080/matchmaking/index.php
 	<footer>
 		<div id="containerButton_MenuAccueil">
 			<!-- 🔁 CHANGE TEAM -->
-			<button type="button" id="btVide">	(❁´◡`❁)	</button>
+			<button type="button" id="btVide">	🗘	</button>
 			<!-- 🎲 RANDOM -->
 			<button type="button" id="btRandom"  onclick="btRandom()"> <span id="logoBtRandom2">	🎲	</span></button> <!-- <img id="logoBtRandom1"  src='img/logo/LogoHockey7.png' alt='🏒'/> -->
 			<!-- ⚙️ SETTINGS -->
@@ -137,7 +137,7 @@ http://127.0.0.1:8080/matchmaking/index.php
 		<div id="containerButton_MenuEquipes" style='display:none;'>
 			<!-- 🔙 BACK -->
 			<button type="button" id="btBack" onclick="btBack()">
-				<span class="logo2">	🔙	</span>	</button>
+				<span class="logo2">	↺	</span>	</button>
 			<!-- 🎲 RANDOM -->
 			<button type="button" id="btForceEquipes" onclick="btRandom()">
 				<span id='icoRandom'>	🎲	</span> <!-- 🦾🥋🥇🏅🏆🎲⚡ -->
@@ -149,17 +149,18 @@ http://127.0.0.1:8080/matchmaking/index.php
 			</button>
 			<!-- ➗ NB -->
 			<button type="button" id="btNbEquipes" nb=0 onclick="btModifNbEquipes()">
-				<span class="logo2">➗</span>			
+				<span class="logo2">÷</span>			
 			</button>
 		</div>
 		
 	</footer>
-	<!----------------- ASIDE:ZOOM--------------->
+	<!----------------- ASIDE: ZOOM--------------->
 	<aside>
 		<div id="textEchange" style="display:none;"> Clic joueur pour échanger 🔁 ou glisser-déposer<br/>Clic image 🐭😼🐻 pour modifer ✏️ 	</div>
 		<div id='zoom'>
 			<div id='zoomframe' onclick="hideZoom()"></div>
 			<span id='closeZoom' onclick="hideZoom()">X</span>
+			<button type="button" id='btn_theme' onclick="toggleTheme()">🌗</button>
 			<button type="button" id='smaller' onclick='zoom("retrecir", document.getElementById("containerEquipes").className)'>🔍</button>
 			<button type="button" id='bigger' onclick='zoom("grossir", document.getElementById("containerEquipes").className)'>🔎</button>
 			<button type="button" id='fullscreen' onclick="toggleFullscreen()">  ↕️  </button>
@@ -188,16 +189,18 @@ http://127.0.0.1:8080/matchmaking/index.php
 		$(document).ready(function () {
 			console.log("Hello world - document ready")
 
+				<?PHP if(!isset($_POST["teamid"])) {	// Si c'est le premier chargement de la page
+					echo "snackbar('🤖 Coucou','white',2);";
+				} ?>
+
 				var team = <?= $team_json ?>;
 				var players = <?= $players_json ?>;
 				var nextTeam =  getNextTeamId(all_teams, team) // on définit dès maintenant l'identifiant de la prochaine équipe, pour pouvoir afficher son logo
 				loadTeam(team, players, nextTeam);
 				defineTextSize(defautTextSize);
+				setTheme();
+				
 
-				<?PHP if(!isset($_POST["teamid"])) {	// Si c'est le premier chargement de la page
-					echo "snackbar('🤖 Coucou','white',2);";
-				}
-				?>
 			console.log("<<<<<<<<<<<< END >>>>>>>>>>>>");
 		});
 

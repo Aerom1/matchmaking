@@ -969,6 +969,24 @@ function zoom(action, ecran){
     console.log("------------ action:" + action + " ecran:" + ecran + " size:" + fontSize)
 }
 
+function toggleTheme(){
+    document.querySelector("html").classList.toggle('dark-theme')
+    console.log("------------ theme:" + document.querySelector("html").classList.toString())
+    localStorage.setItem('theme', document.querySelector("html").classList.toString());
+}
+
+function setTheme(){
+    var theme = localStorage.getItem('theme');
+    console.log('theme récupéré de localstorage :' + theme);
+    if (theme === null) {
+        theme = "";
+        localStorage.setItem('theme', theme);
+        console.log('------------theme localstorage créé');
+    }
+    document.querySelector("html").classList.remove('dark-theme')
+    if (theme!=='') { document.querySelector("html").classList.add(theme) }
+}
+
 function toggleFullscreen(){
     // document.exitFullscreen();
     // document.documentElement.requestFullscreen();

@@ -62,7 +62,7 @@
         <!-- 💥❌🚫❗⚠️☢️🛑➕ -->
         <!-- SUPPRIMER EQUIPE -->
         <div class="btn-group dropup">
-            <button onclick="btDelTeam(this)" class='btn btn-danger' teamid=<?PHP echo htmlspecialchars ($_SESSION['team']['id']) ?> teamname=<?PHP echo htmlspecialchars ($_SESSION['team']['name']) ?>>
+            <button onclick="btDelTeam(this, 1)" class='btn btn-danger' teamid=<?PHP echo htmlspecialchars ($_SESSION['team']['id']) ?> teamname="<?PHP echo htmlspecialchars ($_SESSION['team']['name']) ?>">
                 Supprimer l'équipe
             </button>
             <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
@@ -72,7 +72,7 @@
                 <!-- Dropdown menu links -->
                 <?php 
                     foreach( $all_teams as $team) {
-                        echo "<li><center><button onclick='btDelTeam(this)' teamid=" .$team["id"]. " teamname=" .$team["name"]. " type='button' class='dropdown-item'>".$team["name"]."</button></li>";
+                        echo "<li><center><button onclick='btDelTeam(this, 0)' teamid=" .$team["id"]. " teamname=" .$team["name"]. " type='button' class='dropdown-item'>".$team["name"]."</button></li>";
                     }
                 ?>
             </ul>
@@ -116,6 +116,6 @@
     <script src="scripts/settings.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 
-    
+
 </body>
 </html>

@@ -29,11 +29,11 @@ function btAddTeam(nbcarTeam){
     DB_CREATE_team(name);
 }
 
-function btDelTeam(btn){
+function btDelTeam(btn, self){
     var name = btn.getAttribute('teamname')
     var id = btn.getAttribute('teamid')
     if (confirm("Confirmer la suppression de l'équipe "+ name +" ?\nCette action est irréversible !")) {
-        DB_DELETE_team(id, name);
+        DB_DELETE_team(id, name, self);
     }
 }
 

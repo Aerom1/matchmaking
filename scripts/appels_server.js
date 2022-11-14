@@ -139,8 +139,8 @@ function DB_CREATE_team(name) {
 	}).catch(error => console.log(error));
 }
 
-function DB_DELETE_team(id, name) {
-	console.log("==============> DB_DELETE_team " + id);
+function DB_DELETE_team(id, name, self) {
+	console.log("==============> DB_DELETE_team " + id + ' (self:'+self+')');
 
 	fetch('php/DELETE_team.php', {
 		method: 'POST',
@@ -154,7 +154,9 @@ function DB_DELETE_team(id, name) {
 		console.log("DB -> " + response.result)
 		// location.reload();
 		snackbar_DB(response) // Affichage du pop (snackbar)
-		setTimeout(function() {window.location.href = 'index.php'}, 1000);
+		if (self) {
+			setTimeout(function() {window.location.href = 'index.php'}, 500);
+		}
 	}).catch(error => console.log(error));
 }
 
