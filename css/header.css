@@ -1,46 +1,10 @@
 
-
 /* AFFICHAGE PORTRAIT */
 @media screen and (min-height: 480px) {
-
-    header {
-        position:sticky;
-        top: 0vh; 
-        /* left: 0;  */
-        /* right: 0; */
-    }
-
-    h1 {
-        font-size: 2rem;
-        text-align: right;
-        margin:0px;
-      }
-
 }
-
 
 /* AFFICHAGE PAYSAGE */
 @media screen and (max-height: 480px) {
-
-      
-      h1 { 
-        position: absolute;
-        left:15vw;
-        font-size: 1.5rem; 
-        text-align: right;
-        margin:0;
-      }
-
-
-      #questionPresents{
-        position:absolute;
-        /* top:7vh;
-        left:20vw; */
-        bottom: 10px;
-        font-size: 2rem;
-      }
-
-
 }
 
 
@@ -48,6 +12,19 @@
   content:' ⚙️';
   font-size: 1em;
 } */
+
+header {
+  position:sticky;
+  top: 0vh; 
+  /* left: 0;  */
+  /* right: 0; */
+}
+
+h1 {
+  font-size: 2rem;
+  text-align: right;
+  margin:0px;
+}
 
 h1 {
   text-shadow: 2px 8px 3px rgba(0,0,0,0.2),    0px -5px 35px rgba(255,255,255,0.3);

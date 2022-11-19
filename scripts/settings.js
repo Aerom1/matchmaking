@@ -1,9 +1,8 @@
+
 document.getElementById("chooseFile").onchange = function () {
     readURL(this);
     document.getElementById("btn_ImportLogo").classList.remove('d-none')    // Afficher le bouton de validation
 }
-
-
 
 function fermer(btn) {
     document.getElementById('loading-spinner-mask').classList.remove('invisible');

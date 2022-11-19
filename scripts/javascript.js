@@ -6,11 +6,6 @@
 // const { cp } = require('fs');
 // const { cp } = require('fs');
 
-//test new branch
-
-{/* <script src="appel_server.js"></script> */}
-
-
 const imgSunride = "img/sunride.png";
 const imgViking = "img/viking.png";
 const emoForce1 = "🐭";
@@ -18,20 +13,6 @@ const emoForce2 = "😼";
 const emoForce3 = "🐻";
 //🐭😼🐻🦁🐯🐹😺😺🐶
 
-
-// function hideAll(){
-//     if ($("#div0").is(":visible")) {
-//         $("#div0").hide();
-//         $("#div1").hide();
-//         $("#div2").hide();
-//         $("#div3").hide();
-//     } else {
-//         $("#div0").show();
-//         $("#div1").hide();
-//         $("#div2").hide();
-//         $("#div3").hide();
-//     }
-// }
 
 function changerEquipe(element) {
     document.getElementById('loading-spinner-mask').classList.remove('invisible');
@@ -61,29 +42,6 @@ function getNextTeamId(all_teams, team) {
     console.info("Prochaine équipe trouvée : " +  nextTeam.name)
     return nextTeam
 }
-
-// function changeTeam(){
-//     console.log("changeTeam()")
-//     $(".teamContainer").css({"width":"100%"})
-//     // var teamActuelleId = document.getElementById("team").getAttribute('name')
-//     var nextTeamId = document.getElementById("btChgTeam").getAttribute('nextteamid')
-//     var nextTeam =      Object.values(all_teams).filter(item => item.id === nextTeamId)[0]
-//     var nextPlayers =   Object.values(all_players).filter(item => item.team === nextTeamId)
-//     var nextNextTeam = getNextTeamId(all_teams, nextTeam)
-//     loadTeam(nextTeam, nextPlayers, nextNextTeam)
-// }
-
-// function changeTeam_OLD(){
-//     console.log("changeTeam()")
-//     $(".teamContainer").css({"width":"100%"})
-//     // var teamActuelleId = document.getElementById("team").getAttribute('name')
-//     var nextTeamId =    document.getElementById("nextteamid").value
-//     var nextTeam =      Object.values(all_teams).filter(item => item.id === nextTeamId)[0]
-//     var nextPlayers =   Object.values(all_players).filter(item => item.team === nextTeamId)
-//     var nextNextTeam = getNextTeamId(all_teams, nextTeam)
-//     loadTeam(nextTeam, nextPlayers, nextNextTeam)
-// }
-
 
 function loadTeam(team, players, nextTeam){
     console.log("load team : " + team.name)
@@ -149,8 +107,6 @@ function btEditTeam(){
     document.getElementById("containerEquipes").appendChild(menu);
     // menu.style.animation="appearfromright 0.5s linear 2";
 }
-
-
 
 
 function compteJoueursDeLequipe_(team){
@@ -265,10 +221,8 @@ function btRandom(){
 
 }
 
-
 function changeBtForceDisposition(nbEquipe) {
 
-    
 // METHODE POUR CENTRER UN ELEMENT EN POSITION ABSOLUTE
 // top: 50%;  /* position the top  edge of the element at the middle of the parent */
 // left: 50%; /* position the left edge of the element at the middle of the parent */
@@ -399,16 +353,9 @@ function RANDOM(nbEquipe) {
     Array.prototype.forEach.call(players, p => {
         j[p.getAttribute('id')] = p.classList.contains('inactif') ? 1:0
     })
-    // players.forEach(p => t[p.getAttribute('id')] = p.classList.contains('inactif'))
-    // players.forEach( function(player) {
-        // t[p.getAttribute('id')] = p.classList.contains('inactif')
-        // logPlayersCreated.push(player.name + " (xp:" + player.xp +")" + (player.absent==1 ? " -> inactif":""))
-        // createPlayer_(Number(player.xp), player.name, Number(player.absent), Number(player.id))
-    // })
 
     DB_CHANGE_player_inactifs(j);
     changeBtForceDisposition(nbEquipe);
-
 }
 
 
@@ -454,8 +401,6 @@ function creerMenu(name, menu) {
             xp3.classList.add("btChooseXP");
             xp3.textContent = emoForce3
             frameXP.append(xp3)
-        // var hr = document.createElement("br")
-        //     menuContainer.append(hr);
         //     //✅ 🈯️ 💹 ❇️ ✳️ ❎❌    
         menuContainer.appendChild(frameXP)
 
@@ -520,41 +465,11 @@ function clickAddPlayer() {
             return;
         }
     }
-
     // Création du menu et ajout au DOM au niveau du containerEquipes
     var menu = creerMenu(name, 'addplayer')
     document.getElementById("containerEquipes").appendChild(menu);
 
 }
-
-
-
-function changeLogo_MODIFTEAMDB(e){
-
-    var input = document.getElementById('btModifLogo')
-
-    // input.click()
-    console.log(input)
-    console.log(input.files[0])
-    // alert('Fichier choisi : ' + input.files.length)
-
-    // Envoi du fichier vers le server
-    var id = document.getElementById('team').getAttribute('name')
-    var newlogo = input.files[0]
-
-    // changeTeam()
-    if (input.files.length>0) {
-
-        // Remplacer le logo dans la bdd
-        DB_CHANGE_team_logo(id, newlogo)
-        // Remplacer le logo du menu
-        // Remplacer le logo de l'accueil
-
-    }
-    
-}
-
-
 
 
 function changeName_MODIFPLAYERDB(e) {
@@ -608,9 +523,6 @@ function clickBtMenuAddPlayer(clicked){
     }
     // Suppression du menu
     menu.remove()
-    // $(clicked.children[2]).remove();
-    // clicked.remove("menu");
-
     majNbJoueurs_();
 }
 
@@ -661,15 +573,6 @@ function clickPlayerName(p){
         // SI ECRAN DES EQUIPES : le joueur est sélectionné pour un échange
         ecranEquipe_SELECTPLAYER(p)
     }
-    // parentNode.toggleClass('inactif')
-    // console.log("clickPlayerName")
-    // console.log(p)
-    // console.log('window.event.target')
-    // console.log(window.event.target)
-    
-    // if (window.event.target.classList.contains('emoforce')) {return}
-
-    // alert("HELLO")
 }
 
 
@@ -744,10 +647,6 @@ function changeXP_MODIFPLAYER(clicked) {
     // 
     var menu = clicked.parentNode.parentNode
     var player = clicked.parentNode.parentNode.parentNode 
-    // console.log(clicked)
-    // console.log('menu');console.log(menu)
-    // console.log('player');console.log(player)
-
     var emoForce = window.event.target.textContent;
     console.log("Click Bouton force: "+emoForce);
     var force
@@ -770,8 +669,6 @@ function changeXP_MODIFPLAYER(clicked) {
     
     // Suppression du menu
     menu.remove()
-    // $(clicked.children[2]).remove();
-    // clicked.classList.remove("menu")
     majForceEquipes_()
 }
 

@@ -170,16 +170,6 @@ function DB_CREATE_team(name, nbcarTeam) {
 			document.getElementById('autoDestruction').setAttribute('teamid',response.id);
 			document.getElementById('autoDestruction').setAttribute('teamname',name);
 		}
-		/* VOICI TOUS LES CHAMPS $_SESSION DU PHP. Il faut les mettre à jour lors de la création d'une équipe :
-		x <button id="closeTourne" type="button" class="btn-close btn-close-white" aria-label="Close" onclick="fermer( <?PHP echo htmlspecialchars ($_SESSION['team']['id']) ?> )"></button>
-        x <button id="btModifNom" onclick="changeName_MODIFTEAMDB(this, <?php echo htmlspecialchars ($_SESSION['nbcarTeam']); ?>, <?php echo htmlspecialchars ($_SESSION['team']['id']); ?>)"><?php echo htmlspecialchars( $_SESSION['team']['name'] ); ?></button>
-		x <img id="imgPlaceholder" src="<?php echo htmlspecialchars( $_SESSION['team']['logo'] ); ?>" class="figure-img img-fluid rounded" alt="">
-		x <input type="hidden" name="teamId" value="<?php echo htmlspecialchars ($_SESSION['team']['id']); ?>" >
-		- <button onclick="btDelTeam(this, 1)" class='btn btn-danger' teamid=<?PHP echo htmlspecialchars ($_SESSION['team']['id']) ?> teamname="<?PHP echo htmlspecialchars ($_SESSION['team']['name']) ?>">
-        x <button onclick="btAddTeam(<?PHP echo htmlspecialchars ($_SESSION['nbcarTeam']) ?>)" class='btn btn-secondary'>Créer une équipe</button>
-        <span>TeamId: <?php echo htmlspecialchars ($_SESSION['team']['id']); ?></span>
-
-		*/
 		unloadingSpinner()
 	}).catch(error => console.log(error));
 }
@@ -266,65 +256,3 @@ function DB_CHANGE_player_inactifs(players) {
 		// snackbar_DB(response) // Affichage du pop (snackbar)
 	}).catch(error => console.log(error));
 }
-
-// function connectBdd(){
-//     var mysql = require('mysql');
-//     const pool  = mysql.createPool({
-//         connectionLimit : 10,
-//         host     : 'fdb32.atspace.me',
-//         database : '4081187_matchmaking',
-//         user     : '4081187_matchmaking',
-//         password : 'M4tchmaking'
-//     });
-//     // Get all beers
-//     app.get('', (req, res) => {
-//         pool.getConnection((err, connection) => {
-//             if(err) throw err;
-//             console.log('connected as id ' + connection.threadId);
-//             connection.query('SELECT * from players', (err, rows) => {
-//                 connection.release(); // return the connection to pool
-//                 if (!err) {
-//                     res.send(rows);
-//                 } else {
-//                     console.log(err);
-//                 }
-//                 // if(err) throw err
-//                 console.log('The data from players table are: \n', rows);
-//             });
-//         });
-//     });
-// }
-
-
-// function save2(){
-//     // Get the mysql service
-//     var mysql = require('mysql');
-//     // Add the credentials to access your database
-//     var connection = mysql.createConnection({
-//         host     : 'fdb32.atspace.me',
-//         database : '4081187_matchmaking',
-//         user     : '4081187_matchmaking',
-//         password : 'M4tchmaking'
-//     });
-//     // connect to mysql
-//     connection.connect(function(err) {
-//         // in case of error
-//         if(err){
-//             console.log(err.code);
-//             console.log(err.fatal);
-//         }
-//     });
-//     // Perform a query
-//     $query = 'SELECT * from players LIMIT 10';
-//     connection.query($query, function(err, rows, fields) {
-//         if(err){
-//             console.log("An error ocurred performing the query.");
-//             return;
-//         }
-//         console.log("Query succesfully executed: ", rows);
-//     });
-//     // Close the connection
-//     connection.end(function(){
-//         // The connection has been closed
-//     });
-// }

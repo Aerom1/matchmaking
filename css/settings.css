@@ -8,17 +8,17 @@ Modif Ã©quipe
 }
 
 html {
-    /* display: flex; */
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    max-width:500px;
-    min-height:100%;
-    /* max-width:1280px;
-    min-height:100%; */
-    margin:0 auto;
-    position:relative;
+  /* display: flex; */
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width:500px;
+  min-height:100%;
+  /* max-width:1280px;
+  min-height:100%; */
+  margin:0 auto;
+  position:relative;
 }
 
 #divmenu{

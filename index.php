@@ -14,37 +14,28 @@ http://127.0.0.1:8080/matchmaking/index.php
 	// Toutes les équipes
 	$all_teams = $conn->query("SELECT * FROM tbteam ORDER BY fav DESC") -> fetch_all( MYSQLI_ASSOC );
 	
-	// Détermination de l'équipe à afficher :
-	if(isset($_POST["teamid"])) { $id = $_POST["teamid"]; }	// Si le POST contient un ID d'équipe
-	if(isset($_GET["teamid"]))  { $id = $_GET["teamid"]; }	// Si le GET contient un ID d'équipe
+	// Détermine l'équipe à afficher :
+	if (isset($_POST["teamid"])) { $id = $_POST["teamid"]; }	// Si le POST contient un ID d'équipe
+	if (isset($_GET["teamid"]))  { $id = $_GET["teamid"]; }	// Si le GET contient un ID d'équipe
 	if ($id) {
 		foreach ($all_teams as $t) { 	// On filtre la liste d'équipe
-			if ($t['id'] == $id) 
-			{ $team = $t; }
+			if ($t['id'] == $id) { 
+				$team = $t; 
+			}
 		}
-	} else {
-		$team =	 $all_teams[0];			// Si pas de demande d'équipe, on prend l'équipe favorite
+	} 
+	if (!$team) {
+		$team =	 $all_teams[0];			// Si pas de demande d'équipe, ou équipe n'existe plus, on prend l'équipe favorite
 	}
 
 	// Récupérer la liste des joueurs de l'équipe
 	$stmt = $conn->prepare("SELECT * FROM tbplayer WHERE team = ?");
-	$stmt->bind_param('i',clean_input($team["id"]));
-	$stmt->execute();
+		$stmt->bind_param('i',clean_input($team["id"]));
+		$stmt->execute();
 	$result = $stmt->get_result();
 	$players = $result -> fetch_all(MYSQLI_ASSOC);
-
-	// $players =	 $conn->query("SELECT * FROM tbplayer WHERE team = ". $team["id"]) -> fetch_all(MYSQLI_ASSOC) ;
 	$conn -> close();
-	// echo "<br/>";
-	// var_dump($team);
-	// echo " SUCCESS !";
-	// echo "<br/>" . $t['id'] . "=?=" . $_POST["nextteamid"];
-	// echo ("<br/><br/>");
-	// $team =
-	// $conn->query("SELECT * FROM tbteam WHERE id = " . $_POST['nextteamid']) -> fetch_assoc() ;
-	// $conn->query("SELECT * FROM tbteam WHERE fav = 1 LIMIT 1") -> fetch_assoc() ;
-	// echo "<script> console.log('nouvelle equipe: ". $team["name"] ."')</script>";
-	// $team =		 	 	$conn->query("SELECT * FROM tbteam WHERE fav = 1 LIMIT 1") -> fetch_assoc() ;
+
 	$all_teams_json = 	json_encode( $all_teams, JSON_FORCE_OBJECT | JSON_UNESCAPED_UNICODE);
 	$team_json =		json_encode( $team, 	 JSON_FORCE_OBJECT | JSON_UNESCAPED_UNICODE);
 	$players_json =		json_encode( $players,	 JSON_UNESCAPED_UNICODE);
@@ -75,7 +66,6 @@ http://127.0.0.1:8080/matchmaking/index.php
 	<link rel="stylesheet" href="css\zoom.css">
 	<link rel="stylesheet" href="css\loading.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide|Sofia&effect=neon|outline|emboss|shadow-multiple">
-
 	
 	<link rel="apple-touch-icon" href="img/favicon.png"/>
 	<link rel="shortcut icon" href="img/favicon.png"/>
@@ -212,13 +202,13 @@ http://127.0.0.1:8080/matchmaking/index.php
 
 			console.log("<<<<<<<<<<<< END >>>>>>>>>>>>");
 		});
-
+		
+		function clicTitre(e) {	snackbar("🤪","white",2)		}
 		function clicLogo(e) {	
 			document.getElementById('loading-spinner-mask').classList.remove('invisible');
 			document.getElementById("formChgTeam").submit();
 			snackbar("Equipe suivante !","white",2)		
 		}
-		function clicTitre(e) {	snackbar("🤪","white",2)		}
 		function openPageSettings() {
 			document.getElementById('loading-spinner-mask').classList.remove('invisible');
 			window.open('settings.php','_self');
