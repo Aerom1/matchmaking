@@ -61,7 +61,7 @@
   }
   
   .logo2{
-    max-height: 7vh;
+    max-height: 6vh;
     max-width: 100%;
     font-size: 3rem;
     color: #998ea4;
@@ -105,17 +105,15 @@
  #btRandom, #btSettings, #btVide {
     border-radius: 500px;
     overflow: hidden;
-    font-size: 3em;
+    font-size: 2em;
     color: #998ea4;
   }
   
   #btBack, #btVide, #containerListeEquipes            {  grid-column: 1;  }
   #btRandom, #btForceEquipes  {  grid-column: 2;  }
   #btNbEquipes, #btSettings   {  grid-column: 3;  }
-  
-  #containerListeEquipes.invisible {
-    display:none;
-  }
+ 
+
   
   #btRandom {
     

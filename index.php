@@ -15,16 +15,13 @@ http://127.0.0.1:8080/matchmaking/index.php
 	$all_teams = $conn->query("SELECT * FROM tbteam ORDER BY fav DESC") -> fetch_all( MYSQLI_ASSOC );
 	
 	// Détermination de l'équipe à afficher :
-	if(isset($_POST["teamid"])) {	// Si le POST contient un ID d'équipe
+	if(isset($_POST["teamid"])) { $id = $_POST["teamid"]; }	// Si le POST contient un ID d'équipe
+	if(isset($_GET["teamid"]))  { $id = $_GET["teamid"]; }	// Si le GET contient un ID d'équipe
+	if ($id) {
 		foreach ($all_teams as $t) { 	// On filtre la liste d'équipe
-			if ($t['id'] == $_POST["teamid"]) 
+			if ($t['id'] == $id) 
 			{ $team = $t; }
 		}
-	} elseif(isset($_GET["teamid"])) {
-		foreach ($all_teams as $t) { 	// On filtre la liste d'équipe
-			if ($t['id'] == $_GET["teamid"]) 
-			{ $team = $t; }
-		}	
 	} else {
 		$team =	 $all_teams[0];			// Si pas de demande d'équipe, on prend l'équipe favorite
 	}
@@ -69,13 +66,14 @@ http://127.0.0.1:8080/matchmaking/index.php
 	<meta charset="utf8">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/header.css">
+	<link rel="stylesheet" href="css\style.css">
+	<link rel="stylesheet" href="css\header.css">
 	<link rel="stylesheet" href="css/footer.css">
-	<link rel="stylesheet" href="css/menu.css">
-	<link rel="stylesheet" href="css/animations.css">
-	<link rel="stylesheet" href="css/snackbar.css">
-	<link rel="stylesheet" href="css/zoom.css">
+	<link rel="stylesheet" href="css\menu.css">
+	<link rel="stylesheet" href="css\animations.css">
+	<link rel="stylesheet" href="css\snackbar.css">
+	<link rel="stylesheet" href="css\zoom.css">
+	<link rel="stylesheet" href="css\loading.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide|Sofia&effect=neon|outline|emboss|shadow-multiple">
 
 	
@@ -123,24 +121,21 @@ http://127.0.0.1:8080/matchmaking/index.php
 	<!----------------- FOOTER ---------------> <!-- 👨‍👩‍👦‍👦🧩🏒⚙️📃🔙➕+⨄⨁👨🏽‍🤝‍👨🏻↻ -->
 	<footer>
 		<div id="containerButton_MenuAccueil">
-			<!--  CHANGE TEAM  🔁🗘 -->
-			<button type="button" id="btVide" onclick="document.getElementById('containerListeEquipes').classList.toggle('invisible')">	🔁	</button>
-			
+			<!--  CHANGE TEAM  🔁🗘↻ -->
+			<button type="button" id="btVide" onclick="document.getElementById('containerListeEquipes').classList.toggle('invisible')" nextteamid="">
+				<img class="logo2" id="logoEquipeNext2" src="<?= $_SESSION['team']['logo'] ?>" alt="👨‍👩‍👦‍👦" max-width="100" max-height="120">
+			</button>
+			<!-- <button type="button" id="btChgTeam" class="btn" onclick="changeTeam()" nextteamid="">
+			</button> -->
+
 			<div id='containerListeEquipes' class="invisible" style="position:absolute; bottom:10vh; ">
 				<?php echo displayTeams($all_teams); ?>
 			</div>
 
-			<script>
-				function changerEquipe(element) {
-					teamid = element.getAttribute('teamid')
-					window.location.href = 'index.php?teamid='+teamid;
-				}
-			</script>
-			
 			<!-- 🎲 RANDOM -->
 			<button type="button" id="btRandom"  onclick="btRandom()"> <span id="logoBtRandom2">	🎲	</span></button> <!-- <img id="logoBtRandom1"  src='img/logo/LogoHockey7.png' alt='🏒'/> -->
 			<!-- ⚙️ SETTINGS -->
-			<button type="button" id="btSettings" onclick="window.open('settings.php','_self')">⚙️</button>
+			<button type="button" id="btSettings" onclick="openPageSettings()">⚙️</button>
 		</div>
 
 		<div id="containerButton_MenuEquipes" style='display:none;'>
@@ -176,6 +171,11 @@ http://127.0.0.1:8080/matchmaking/index.php
 			<!-- <button class="add-button" >Ajouter <sub>à l'écran d'accueil</sub></button> -->
 		</div>
 	</aside>
+	<aside>
+		<div id="loading-spinner-mask"  class="invisible">
+			<div id="spinner6"  class=""></div>
+		</div>
+	</aside>
 
 	<!--===================================-->
 	<!-- 			 SCRIPTS			   -->
@@ -198,7 +198,7 @@ http://127.0.0.1:8080/matchmaking/index.php
 		$(document).ready(function () {
 			console.log("Hello world - document ready")
 
-				<?PHP if(!isset($_POST["teamid"])) {	// Si c'est le premier chargement de la page
+				<?PHP if(!(isset($_POST["teamid"]) or isset($_GET["teamid"]))) {	// Si c'est le premier chargement de la page
 					echo "snackbar('🤖 Coucou','white',2);";
 				} ?>
 
@@ -214,9 +214,15 @@ http://127.0.0.1:8080/matchmaking/index.php
 		});
 
 		function clicLogo(e) {	
-			document.getElementById("formChgTeam").submit()
-			snackbar("Equipe suivante !","white",2)		}
+			document.getElementById('loading-spinner-mask').classList.remove('invisible');
+			document.getElementById("formChgTeam").submit();
+			snackbar("Equipe suivante !","white",2)		
+		}
 		function clicTitre(e) {	snackbar("🤪","white",2)		}
+		function openPageSettings() {
+			document.getElementById('loading-spinner-mask').classList.remove('invisible');
+			window.open('settings.php','_self');
+		}
 
 	</script>
 

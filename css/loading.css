@@ -1,0 +1,129 @@
+/* ======= PreLoader CSS Start  ========*/
+
+/* 
+/*=== mask === */
+/*-- This code is for mask over all web content which will be 
+fade out when your webpage get loaded. 
+ --*/
+ #loading-spinner-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* you can change color of mask here*/
+    background: rgba(230,230,230,0.5);
+    z-index: 99;
+    /* makes sure it stays on top */
+  }
+  
+  /*=== extra preloading text=== */
+  /** this code can be use for adding loading text under preloader */
+  #loading_text {
+    display: block;
+    position: absolute;
+    font-family: sans-serif,arial;
+    top: 50%;
+    left: 50%;
+    height: 50px;
+    width: 50px;
+    margin: 50px 0 0 -25px;
+    padding: 2px 0;
+}
+
+/**===== spinner6 =====*/
+#spinner6 {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 50px;
+    width: 50px;
+    margin: -25px 0 0 -25px;
+    border: 5px solid transparent;
+    border-top-color: #000000;
+    border-bottom-color: #000000;
+    box-shadow: 0 0 10px #d62d20;
+    border-radius: 50%;
+    -webkit-animation: spinner6 .5s linear infinite;
+            animation: spinner6 .5s linear infinite;
+  }
+  
+  #spinner6:after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    bottom: 5px;
+    left: 5px;
+    border: 5px solid transparent;
+    border-radius: 50%;
+    background: #ffa700;
+    box-shadow: 0 0 5px #d62d20;
+    -webkit-animation: spinner6_after 1s linear infinite;
+            animation: spinner6_after 1s linear infinite;
+  }
+  
+  @keyframes spinner6 {
+    0% {
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+    }
+    50% {
+      -webkit-transform: rotate(180deg);
+              transform: rotate(180deg);
+      -webkit-transform: rotate(180deg);
+              transform: rotate(180deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+    }
+  }
+  @keyframes spinner6_after {
+    0% {
+      border-top: 5px solid #d62d20;
+      border-bottom: 5px solid #d62d20;
+    }
+    50% {
+      border-top: 5px solid rgba(0, 0, 0, 0.25);
+      border-bottom: 5px solid rgba(0, 0, 0, 0.25);
+    }
+    100% {
+      border-top: 5px solid #d62d20;
+      border-bottom: 5px solid #d62d20;
+    }
+  }
+  @-webkit-keyframes spinner6 {
+    0% {
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+    }
+    50% {
+      -webkit-transform: rotate(180deg);
+              transform: rotate(180deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes spinner6_after {
+    0% {
+      border-top: 5px solid #d62d20;
+      border-bottom: 5px solid #d62d20;
+    }
+    50% {
+      border-top: 5px solid rgba(0, 0, 0, 0.25);
+      border-bottom: 5px solid rgba(0, 0, 0, 0.25);
+    }
+    100% {
+      border-top: 5px solid #d62d20;
+      border-bottom: 5px solid #d62d20;
+    }
+  }
+  /** END of spinner6 */

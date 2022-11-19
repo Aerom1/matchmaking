@@ -33,6 +33,12 @@ const emoForce3 = "🐻";
 //     }
 // }
 
+function changerEquipe(element) {
+    document.getElementById('loading-spinner-mask').classList.remove('invisible');
+    teamid = element.getAttribute('teamid')
+    window.location.href = 'index.php?teamid='+teamid;
+}
+
  // définit la prochaine équipe qui sera affichée, pour pouvoir afficher son logo sur le bouton de chgmt d'équipe
 function getNextTeamId(all_teams, team) {
 
@@ -84,6 +90,7 @@ function loadTeam(team, players, nextTeam){
 
     document.getElementById("logoTeam").setAttribute("src",team.logo); // logo de l'appli (header)
     document.getElementById("logoEquipeNext").setAttribute("src",nextTeam.logo); // logo du bouton next Team
+    document.getElementById("logoEquipeNext2").setAttribute("src",nextTeam.logo); // logo du bouton next Team
     document.getElementById("nextteamid").value = nextTeam.id; // affiche l'ID
 
     var teamActuelle = document.getElementById("team")
@@ -231,7 +238,8 @@ function btModifNbEquipes() {
 
 function btRandom(){
 
-    
+    document.getElementById('loading-spinner-mask').classList.remove('invisible');
+
     $('header').hide();
     $('#containerButton_MenuAccueil').hide();
     $('#containerButton_MenuEquipes').show();
@@ -252,6 +260,9 @@ function btRandom(){
         console.log(nbJoueurs + " JOUEURS : " + nbEquipe + " equipes !")
     }
     RANDOM(nbEquipe);
+
+    document.getElementById('loading-spinner-mask').classList.add('invisible');
+
 }
 
 

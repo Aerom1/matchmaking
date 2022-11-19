@@ -4,7 +4,9 @@ document.getElementById("chooseFile").onchange = function () {
 }
 
 
+
 function fermer(btn) {
+    document.getElementById('loading-spinner-mask').classList.remove('invisible');
     teamid = btn.getAttribute('teamid')
     document.getElementById("btCloseMenu").classList.add("animer")
     window.location.href = 'index.php?teamid='+teamid;
@@ -28,6 +30,7 @@ function btAddTeam(nbcarTeam){
         return;
     }
     DB_CREATE_team(name, nbcarTeam);
+    
 }
 
 function btDelTeam(btn, self){

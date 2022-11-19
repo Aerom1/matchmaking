@@ -3,6 +3,7 @@
 // Connection
 $conn = include 'connectToDB.php';
 include 'input.php'; // pour la fonction clean_input qui évite les injections sql
+include 'updateDropdowns.php';
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
@@ -15,12 +16,18 @@ try{
         $stmt->execute() or trigger_error($stmt->error, E_USER_ERROR);
 
         // Return response to the browser
-        if ($stmt) {
-            $success = true;
-            $result = "👍 Nouveau nom : " . $_POST['name'];
-        } else {
+        if (!$stmt) {
             $success = false;
             $result = "Error: $conn->error";
+        } else {
+            $success = true;
+            $result = "👍 Nouveau nom : " . $_POST['name'];
+
+            $_SESSION['team']['name'] = $_POST['name'];
+            $all_teams = $conn->query("SELECT * FROM tbteam") -> fetch_all( MYSQLI_ASSOC );
+            $dropdownfav = updateDropdownHTMLfav($all_teams);
+            $dropdowndel = updateDropdownHTMLdel($all_teams, $name);
+
         }
         $stmt->close();
     }
@@ -28,7 +35,9 @@ try{
     echo json_encode(
         array(
             'success' => $success,
-            'result' => $result
+            'result' => $result,
+            'dropdownHTMLfav' => $dropdownfav,
+            'dropdownHTMLdel' => $dropdowndel
         ), JSON_UNESCAPED_UNICODE);
         
 } catch(Exception $e){

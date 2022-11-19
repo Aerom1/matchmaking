@@ -15,10 +15,19 @@ function formEncode(obj) {
 	return str.join("&");
 }
 
-
+function loadingSpinner(){  
+	document.getElementById('loading-spinner-mask').classList.remove('invisible');
+}
+function unloadingSpinner(){   
+	document.getElementById('loading-spinner-mask').classList.add('invisible');
+	var e = document.getElementById('resultImportLogo')
+	if (e!==null) {e.remove()}
+}
 
 function DB_DELETE_player(id, name) {
 	console.log("==============> DB_DELETE_player " + id);
+	loadingSpinner()
+
 	fetch('php/DELETE_player.php', {
 		method: 'POST',
 		mode: 'cors',
@@ -30,11 +39,14 @@ function DB_DELETE_player(id, name) {
 		console.log("RESULTAT APPEL SERVEUR SUPPRESSION JOUEUR");
 		console.log("DB -> " + response.result)
 		snackbar_DB(response) // Affichage du pop (snackbar)
+		unloadingSpinner()
 	}).catch(error => console.log(error));
 }
 
 function DB_CREATE_player(force, name, team, player) {
 	console.log("==============> DB_CREATE_player");
+	loadingSpinner()
+
 	const data = {
 		team:parseInt(team),
 		name:name,
@@ -60,12 +72,14 @@ function DB_CREATE_player(force, name, team, player) {
 		// 	var p = document.getElementsByName(name);
 		// 	console.log(p[p.length-1])
 		}
+		unloadingSpinner()
 	}).catch(error => console.log(error));
 }
 
 
 function DB_CHANGE_player_name(id, newname) {
 	console.log("==============> DB_CHANGE_player_name " + newname + '('+id + ')');
+    loadingSpinner()
 
 	fetch('php/CHANGE_player_name.php', {
 		method: 'POST',
@@ -78,11 +92,13 @@ function DB_CHANGE_player_name(id, newname) {
 		console.log("RESULTAT APPEL SERVEUR MODIF NOM JOUEUR");
 		console.log("DB -> " + response.result)
 		snackbar_DB(response) // Affichage du pop (snackbar)
+		unloadingSpinner()
 	}).catch(error => console.log(error));
 }
 
 function DB_CHANGE_team_name(id, newname) {
 	console.log("==============> DB_CHANGE_team_name " + newname + '('+id+')');
+	loadingSpinner()
 
 	fetch('php/CHANGE_team_name.php', {
 		method: 'POST',
@@ -95,11 +111,20 @@ function DB_CHANGE_team_name(id, newname) {
 		console.log("RESULTAT APPEL SERVEUR MODIF NOM EQUIPE");
 		console.log("DB -> " + response.result)
 		snackbar_DB(response) // Affichage du pop (snackbar)
+		if (response.success) {
+			document.getElementById('btModifNom').innerText = newname;
+			document.getElementById('teamlistfav').innerHTML = response.dropdownHTMLfav ; // METTRE A JOUR LA LISTE DEROULANTE
+			document.getElementById('teamlistdel').innerHTML = response.dropdownHTMLdel ; // METTRE A JOUR LA LISTE DEROULANTE
+			document.getElementById('autoDestruction').setAttribute('teamname',newname);
+		}
+		unloadingSpinner()
 	}).catch(error => console.log(error));
 }
 
 function DB_CHANGE_team_favorite(id, name) {
 	console.log("==============> DB_CHANGE_team_favorite " + name + '('+id+')');
+	loadingSpinner()
+	
 	fetch('php/CHANGE_team_favorite.php', {
 		method: 'POST',
 		mode: 'cors',
@@ -111,12 +136,16 @@ function DB_CHANGE_team_favorite(id, name) {
 		console.log("RESULTAT APPEL SERVEUR MODIF EQUIPE FAVORITE");
 		console.log("DB -> " + response.result)
 		snackbar_DB(response) // Affichage du pop (snackbar)
-		document.getElementById('teamlistfav').innerHTML = response.dropdownHTML ; // METTRE A JOUR LA LISTE DEROULANTE
+		if (response.success) {
+			document.getElementById('teamlistfav').innerHTML = response.dropdownHTML ; // METTRE A JOUR LA LISTE DEROULANTE
+		}
+		unloadingSpinner()
 	}).catch(error => console.log(error));
 }
 
 function DB_CREATE_team(name, nbcarTeam) {
 	console.log("==============> DB_CREATE_team " + name);
+	loadingSpinner()
 
 	fetch('php/CREATE_team.php', {
 		method: 'POST',
@@ -130,16 +159,17 @@ function DB_CREATE_team(name, nbcarTeam) {
 		console.log("DB -> " + response.result);
 		// location.reload();
 		snackbar_DB(response) // Affichage du pop (snackbar)
-		document.getElementById('formTeamId').value = response.id;
-		document.getElementById('closeTourne').setAttribute('teamid', response.id);
-		document.getElementById('btModifNom').innerText = name;
-		document.getElementById('btModifNom').setAttribute('teamid', response.id);
-		document.getElementById('imgPlaceholder').setAttribute('src','');
-		document.getElementById('teamlistfav').innerHTML = response.dropdownHTMLfav ; // METTRE A JOUR LA LISTE DEROULANTE
-		document.getElementById('teamlistdel').innerHTML = response.dropdownHTMLdel ; // METTRE A JOUR LA LISTE DEROULANTE
-		document.getElementById('autoDestruction').setAttribute('teamid',response.id);
-		document.getElementById('autoDestruction').setAttribute('teamname',name);
-
+		if (response.success) {
+			document.getElementById('formTeamId').value = response.id;
+			document.getElementById('closeTourne').setAttribute('teamid', response.id);
+			document.getElementById('btModifNom').innerText = name;
+			document.getElementById('btModifNom').setAttribute('teamid', response.id);
+			document.getElementById('imgPlaceholder').setAttribute('src','');
+			document.getElementById('teamlistfav').innerHTML = response.dropdownHTMLfav ; // METTRE A JOUR LA LISTE DEROULANTE
+			document.getElementById('teamlistdel').innerHTML = response.dropdownHTMLdel ; // METTRE A JOUR LA LISTE DEROULANTE
+			document.getElementById('autoDestruction').setAttribute('teamid',response.id);
+			document.getElementById('autoDestruction').setAttribute('teamname',name);
+		}
 		/* VOICI TOUS LES CHAMPS $_SESSION DU PHP. Il faut les mettre à jour lors de la création d'une équipe :
 		x <button id="closeTourne" type="button" class="btn-close btn-close-white" aria-label="Close" onclick="fermer( <?PHP echo htmlspecialchars ($_SESSION['team']['id']) ?> )"></button>
         x <button id="btModifNom" onclick="changeName_MODIFTEAMDB(this, <?php echo htmlspecialchars ($_SESSION['nbcarTeam']); ?>, <?php echo htmlspecialchars ($_SESSION['team']['id']); ?>)"><?php echo htmlspecialchars( $_SESSION['team']['name'] ); ?></button>
@@ -150,12 +180,13 @@ function DB_CREATE_team(name, nbcarTeam) {
         <span>TeamId: <?php echo htmlspecialchars ($_SESSION['team']['id']); ?></span>
 
 		*/
-
+		unloadingSpinner()
 	}).catch(error => console.log(error));
 }
 
 function DB_DELETE_team(id, name, self) {
 	console.log("==============> DB_DELETE_team " + id + ' (self:'+self+')');
+	loadingSpinner()
 
 	fetch('php/DELETE_team.php', {
 		method: 'POST',
@@ -169,17 +200,21 @@ function DB_DELETE_team(id, name, self) {
 		console.log("DB -> " + response.result)
 		// location.reload();
 		snackbar_DB(response) // Affichage du pop (snackbar)
-		document.getElementById('teamlistfav').innerHTML = response.dropdownHTMLfav ; // METTRE A JOUR LA LISTE DEROULANTE
-		document.getElementById('teamlistdel').innerHTML = response.dropdownHTMLdel ; // METTRE A JOUR LA LISTE DEROULANTE
-
+		if (response.success) {
+			document.getElementById('teamlistfav').innerHTML = response.dropdownHTMLfav ; // METTRE A JOUR LA LISTE DEROULANTE
+			document.getElementById('teamlistdel').innerHTML = response.dropdownHTMLdel ; // METTRE A JOUR LA LISTE DEROULANTE
+		}
 		if (self) {
 			setTimeout(function() {window.location.href = 'index.php'}, 500);
+		} else {
+			unloadingSpinner()
 		}
 	}).catch(error => console.log(error));
 }
 
 function DB_CHANGE_team_logo(id, newlogo) {
 	console.log("==============> DB_CHANGE_team_logo");
+	loadingSpinner()
 
 	fetch('php/CHANGE_team_logo.php', {
 		method: 'POST',
@@ -192,11 +227,13 @@ function DB_CHANGE_team_logo(id, newlogo) {
 		console.log("RESULTAT APPEL SERVEUR MODIF LOGO EQUIPE");
 		console.log("DB -> " + response.result)
 		snackbar_DB(response) // Affichage du pop (snackbar)
+		unloadingSpinner()
 	}).catch(error => console.log(error));
 }
 
 function DB_CHANGE_player_xp(id, xp) {
 	console.log("==============> DB_CHANGE_player_xp xp:" + xp + '(id:'+id+')');
+	loadingSpinner()
 
 	fetch('php/CHANGE_player_xp.php', {
 		method: 'POST',
@@ -209,12 +246,13 @@ function DB_CHANGE_player_xp(id, xp) {
 		console.log("RESULTAT APPEL SERVEUR MODIF NOM JOUEUR");
 		console.log("DB -> " + response.result)
 		snackbar_DB(response) // Affichage du pop (snackbar)
+		unloadingSpinner()
 	}).catch(error => console.log(error));
 }
 
 function DB_CHANGE_player_inactifs(players) {
 	console.log("==============> DB_CHANGE_player_inactifs");
-
+	
 	fetch('php/CHANGE_player_inactifs.php', {
 		method: 'POST',
 		mode: 'cors',

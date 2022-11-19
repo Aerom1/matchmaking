@@ -3,6 +3,9 @@ Nouveau joueur
 Modif joueur
 Modif Ã©quipe 
 */
+.invisible {
+  display:none;
+}
 
 html {
     /* display: flex; */

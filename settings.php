@@ -14,6 +14,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/settings.css">
     <link rel="stylesheet" href="css/snackbar.css">
+    <link rel="stylesheet" href="css/loading.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 
@@ -21,7 +22,13 @@
 
 <body>
     <div id="snackbar">Snackbar text message</div> 
+
+    <div id="loading-spinner-mask"  class="invisible">
+        <div id="spinner6"  class=""></div>
+    </div>
+
     <div id="divmenu">
+
         <!-- CLOSE [X] -->
         <div id="btCloseMenu">
             <button id="closeTourne" type="button" class="btn-close btn-close-white" aria-label="Close" onclick="fermer(this)"  teamid=<?php echo htmlspecialchars ($_SESSION['team']['id']); ?>> </button>
@@ -48,13 +55,15 @@
             </form>
             <!-- MESSAGE RESULTAT IMPORT -->
             <?php if(!empty($resMessage)) {?>
-                <div class="alert p-1 mt-2 mb-0 <?php echo $resMessage['status']?>">
+                <div id="resultImportLogo" class="alert p-1 mt-2 mb-0 <?php echo $resMessage['status']?>">
                     <?php echo $resMessage['message']?>
                 </div>
             <?php }?>
         </div>
+        
         <!-- LABEL -->
         <span id="labelModifTeam">💡 Modifier le nom et le logo de l'équipe</span>
+
         <!-- SUPPRIMER EQUIPE -->    <!-- 💥❌🚫❗⚠️☢️🛑➕ -->
         <div class="btn-group dropup">
             <button id='autoDestruction' onclick="btDelTeam(this, 1)" class='btn btn-danger' teamid=<?PHP echo htmlspecialchars ($_SESSION['team']['id']) ?> teamname="<?PHP echo htmlspecialchars ($_SESSION['team']['name']) ?>">
@@ -84,7 +93,6 @@
         <span>TeamId: <?php echo htmlspecialchars ($_SESSION['team']['id']); ?></span>
 
     </div>
-
 
     <script src="scripts/appels_server.js"></script>
     <script src="scripts/settings.js"></script>
