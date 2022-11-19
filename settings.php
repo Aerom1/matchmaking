@@ -1,5 +1,9 @@
-<?php session_start();  // Start the session to store variable between pages  ?>
-<?php include("php/file-upload.php"); ?>  <!-- Tutorial PHP 8 Upload & Store File/Image in MySQL  https://www.positronx.io/php-upload-store-file-image-in-mysql-database/ -->
+<?php 
+    session_start();  // Start the session to store variable between pages 
+    include("php/file-upload.php");  // <!-- Tutorial PHP 8 Upload & Store File/Image in MySQL  https://www.positronx.io/php-upload-store-file-image-in-mysql-database/ -->
+    include 'php/updateDropdowns.php';
+    $all_teams = $conn->query("SELECT * FROM tbteam") -> fetch_all( MYSQLI_ASSOC );
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -17,17 +21,13 @@
 
 <body>
     <div id="snackbar">Snackbar text message</div> 
-
     <div id="divmenu">
-        <!-- TEXTES: NOM, ASTUCE ET FERMETURE [X] -->
+        <!-- CLOSE [X] -->
         <div id="btCloseMenu">
-            <button id="closeTourne" type="button" class="btn-close btn-close-white" aria-label="Close" onclick="fermer( <?PHP echo htmlspecialchars ($_SESSION['team']['id']) ?> )"></button>
+            <button id="closeTourne" type="button" class="btn-close btn-close-white" aria-label="Close" onclick="fermer(this)"  teamid=<?php echo htmlspecialchars ($_SESSION['team']['id']); ?>> </button>
         </div>
-
-
-
-
-        <button id="btModifNom" onclick="changeName_MODIFTEAMDB(this, <?php echo htmlspecialchars ($_SESSION['nbcarTeam']); ?>, <?php echo htmlspecialchars ($_SESSION['team']['id']); ?>)"><?php echo htmlspecialchars( $_SESSION['team']['name'] ); ?></button>
+        <!-- NOM -->
+        <button id="btModifNom" onclick="changeName_MODIFTEAMDB(this, <?php echo htmlspecialchars ($_SESSION['nbcarTeam']); ?>)" teamid=<?php echo htmlspecialchars ($_SESSION['team']['id']); ?> ><?php echo htmlspecialchars( $_SESSION['team']['name'] ); ?></button>
         <!-- FORMULAIRE LOGO -->
         <div id='formContainer'>
             <form id = "formSettingsChangeLogo" action="" method="post" enctype="multipart/form-data" class="mb-1" accept="image/png, image/gif, image/jpeg">
@@ -37,20 +37,16 @@
                         <img id="imgPlaceholder" src="<?php echo htmlspecialchars( $_SESSION['team']['logo'] ); ?>" class="figure-img img-fluid rounded" alt="">
                     </div>
                 </div>
-                <!-- <div id="logoEquipeModif_div">
-                    <img id="logoEquipeModif" src="<!?php echo htmlspecialchars ($_SESSION['team']['logo']); ?>" alt="🖼️" onerror="this.onerror=null; this.src='img/logo/LogoHockey7.png'">
-                </div> -->
-
-                <!-- CHOISIR FICHIER -->
+                <!-- ancienne image <div id="logoEquipeModif_div"> <img id="logoEquipeModif" src="<!?php echo htmlspecialchars ($_SESSION['team']['logo']); ?>" alt="🖼️" onerror="this.onerror=null; this.src='img/logo/LogoHockey7.png'">  </div> -->
+                <!-- BOUTON PARCOURIR -->
                 <div class="custom-file">
-                    <input type="hidden" name="teamId" value="<?php echo htmlspecialchars ($_SESSION['team']['id']); ?>" >
-                    <input type="file" name="fileUpload" class="form-control" id="chooseFile">   <!-- custom-file-input -->
+                    <input id="formTeamId" type="hidden" name="teamId" value="<?php echo htmlspecialchars ($_SESSION['team']['id']); ?>" >
+                    <input id="chooseFile" type="file" name="fileUpload" class="form-control">   <!-- custom-file-input -->
                 </div>
                 <!-- BOUTON IMPORT -->
                 <button id="btn_ImportLogo" type="submit" name="submit" class="btn btn-primary d-none btn-block mt-4">  Enregistrer le logo  </button>
             </form>
-
-            <!-- Display response messages -->
+            <!-- MESSAGE RESULTAT IMPORT -->
             <?php if(!empty($resMessage)) {?>
                 <div class="alert p-1 mt-2 mb-0 <?php echo $resMessage['status']?>">
                     <?php echo $resMessage['message']?>
@@ -59,25 +55,18 @@
         </div>
         <!-- LABEL -->
         <span id="labelModifTeam">💡 Modifier le nom et le logo de l'équipe</span>
-        <!-- 💥❌🚫❗⚠️☢️🛑➕ -->
-        <!-- SUPPRIMER EQUIPE -->
+        <!-- SUPPRIMER EQUIPE -->    <!-- 💥❌🚫❗⚠️☢️🛑➕ -->
         <div class="btn-group dropup">
-            <button onclick="btDelTeam(this, 1)" class='btn btn-danger' teamid=<?PHP echo htmlspecialchars ($_SESSION['team']['id']) ?> teamname="<?PHP echo htmlspecialchars ($_SESSION['team']['name']) ?>">
+            <button id='autoDestruction' onclick="btDelTeam(this, 1)" class='btn btn-danger' teamid=<?PHP echo htmlspecialchars ($_SESSION['team']['id']) ?> teamname="<?PHP echo htmlspecialchars ($_SESSION['team']['name']) ?>">
                 Supprimer l'équipe
             </button>
             <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
-            <ul id="teamlistdel" class="dropdown-menu">
-                <!-- Dropdown menu links -->
-                <?php 
-                    foreach( $all_teams as $team) {
-                        echo "<li><center><button onclick='btDelTeam(this, 0)' teamid=" .$team["id"]. " teamname=" .$team["name"]. " type='button' class='dropdown-item'>".$team["name"]."</button></li>";
-                    }
-                ?>
+            <ul id="teamlistdel" class="dropdown-menu">  <!-- Dropdown menu links -->
+                <?php echo updateDropdownHTMLdel($all_teams, $_SESSION['team']['name']); ?>
             </ul>
         </div>
-
 
         <!-- NOUVELLE EQUIPE -->
         <button onclick="btAddTeam(<?PHP echo htmlspecialchars ($_SESSION['nbcarTeam']) ?>)" class='btn btn-secondary'>Créer une équipe</button>
@@ -88,26 +77,11 @@
                 Choisir l'équipe favorite
             </button>
             <ul id="teamlistfav" class="dropdown-menu dropdown-menu-end">
-                <li style="font-size:2em;"><center>🏠</li>
-                <li><hr class="dropdown-divider"></li>
-                <?php 
-                    // ☑✓✔✅√☒☐✕❎💯✗✘✖❌    
-                    foreach( $all_teams as $team) {
-                        if($team["fav"]) {
-                            echo "<li><center><button type='button' class='dropdown-item' style='color:white;background-color:green;'>✓  ".$team["name"]."</button></li>";
-                        } else {
-                            echo "<li><center><button onclick='selectFavorite(this)' teamid=".$team["id"]." type='button' class='dropdown-item'>".$team["name"]."</button></li>";
-                        }
-                    }
-                ?>
+                <?php echo updateDropdownHTMLfav($all_teams); ?>
             </ul>
         </div>
 
-        <!-- <form action="settings.php" method="post" id='formSettings' >
-            <input type="hidden" name="nbcarTeam" value= <!?= $_SESSION['nbcarTeam'] ?> />
-            <input type="hidden" name="team" value= <!?= $_SESSION['team']['id'] ?> />
-            <input type="submit" name="submit" value="⚙️" id="btSettings" style="width:100%;height:100%;font-size: 3rem;">
-        </form> -->
+        <span>TeamId: <?php echo htmlspecialchars ($_SESSION['team']['id']); ?></span>
 
     </div>
 

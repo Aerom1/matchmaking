@@ -4,7 +4,8 @@ document.getElementById("chooseFile").onchange = function () {
 }
 
 
-function fermer(teamid) {
+function fermer(btn) {
+    teamid = btn.getAttribute('teamid')
     document.getElementById("btCloseMenu").classList.add("animer")
     window.location.href = 'index.php?teamid='+teamid;
 }
@@ -26,7 +27,7 @@ function btAddTeam(nbcarTeam){
         snackbar('ℹ️ Le nom ne doit pas dépasser '+nbcarTeam+' caractères', 'orange')
         return;
     }
-    DB_CREATE_team(name);
+    DB_CREATE_team(name, nbcarTeam);
 }
 
 function btDelTeam(btn, self){
@@ -37,8 +38,9 @@ function btDelTeam(btn, self){
     }
 }
 
-function changeName_MODIFTEAMDB(e, nbcarTeam, id){
+function changeName_MODIFTEAMDB(e, nbcarTeam){
     // console.log(e);
+    id = e.getAttribute('teamId')
     newname = prompt('Nouveau nom ?',e.innerText);
     if (!newname) { return }
     if (newname.length > nbcarTeam ) {

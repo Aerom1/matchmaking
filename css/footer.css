@@ -109,10 +109,14 @@
     color: #998ea4;
   }
   
-  #btBack, #btVide            {  grid-column: 1;  }
+  #btBack, #btVide, #containerListeEquipes            {  grid-column: 1;  }
   #btRandom, #btForceEquipes  {  grid-column: 2;  }
   #btNbEquipes, #btSettings   {  grid-column: 3;  }
-   
+  
+  #containerListeEquipes.invisible {
+    display:none;
+  }
+  
   #btRandom {
     
     font-size: 3rem;
@@ -139,6 +143,34 @@
     /* padding-right: 5vw; */
   }
 
+  .imgContainerListeLogoTeam
+  {
+    width:50px;
+    display:inline-block;
+    text-align: center;
+  }
+
+  .imgListeLogoTeam
+  {
+    min-height: 20px;
+    min-width: 20px;
+    max-width: 100%;
+    max-height: 28px;
+  }
+  .listeLogoTeam
+  {
+    cursor:pointer;
+    font-size:2em;
+    padding:15px 50px;
+    margin:15px 0;
+    background-color:black;
+    color:white;
+    border-radius:20px;
+    border:1px solid grey;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    height: 4vh;
+    overflow: hidden;
+  }
   
 }
 

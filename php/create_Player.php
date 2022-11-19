@@ -36,14 +36,18 @@ $absent = clean_input($_POST['absent']);
 //         $result = "Une personne porte déjà ce nom !";
 //     } else {
 
-        $sql = "INSERT INTO tbplayer (name, team, xp, absent) VALUES ('$name', $team, $xp, $absent)";
-        $req = $conn->query($sql);
-        
+        $sql = "INSERT INTO tbplayer (name, team, xp, absent) VALUES (?, ?, ?, ?)";
+        // $req = $conn->query($sql);
+        ($stmt = $conn->prepare($sql)) or trigger_error('Mysql prepare | '.$conn->error, E_USER_ERROR);
+        $stmt->bind_param('siii',$name, $team, $xp, $absent) or trigger_error('Mysql bind_param | '.$stmt->error, E_USER_ERROR);
+        $stmt->execute() or trigger_error('Mysql execute | '.$stmt->error, E_USER_ERROR);
+
+
         // Return response to the browser
-        if (!$req) {
+        if (!$stmt) {
             // printf("<br/>Error message: %s\n", $conn->error);
             $success = false;
-            $result = "Error: $conn->error";
+            $result = "Error: $stmt->error";
         } else {
             // printf("<br/>Le joueur a été ajouté");
             $success = true;

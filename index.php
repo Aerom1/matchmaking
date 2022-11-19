@@ -7,6 +7,8 @@ http://127.0.0.1:8080/matchmaking/index.php
 	
 	session_start(); // Start the session to store variable between pages
 	include 'php/input.php'; // pour la fonction clean_input qui évite les injections sql
+	include 'php/updateDropdowns.php';
+
 	$conn = include 'php/connectToDB.php'; // connexion à la bdd mysql
 
 	// Toutes les équipes
@@ -121,26 +123,33 @@ http://127.0.0.1:8080/matchmaking/index.php
 	<!----------------- FOOTER ---------------> <!-- 👨‍👩‍👦‍👦🧩🏒⚙️📃🔙➕+⨄⨁👨🏽‍🤝‍👨🏻↻ -->
 	<footer>
 		<div id="containerButton_MenuAccueil">
-			<!-- 🔁 CHANGE TEAM -->
-			<button type="button" id="btVide">	🗘	</button>
+			<!--  CHANGE TEAM  🔁🗘 -->
+			<button type="button" id="btVide" onclick="document.getElementById('containerListeEquipes').classList.toggle('invisible')">	🔁	</button>
+			
+			<div id='containerListeEquipes' class="invisible" style="position:absolute; bottom:10vh; ">
+				<?php echo displayTeams($all_teams); ?>
+			</div>
+
+			<script>
+				function changerEquipe(element) {
+					teamid = element.getAttribute('teamid')
+					window.location.href = 'index.php?teamid='+teamid;
+				}
+			</script>
+			
 			<!-- 🎲 RANDOM -->
 			<button type="button" id="btRandom"  onclick="btRandom()"> <span id="logoBtRandom2">	🎲	</span></button> <!-- <img id="logoBtRandom1"  src='img/logo/LogoHockey7.png' alt='🏒'/> -->
 			<!-- ⚙️ SETTINGS -->
 			<button type="button" id="btSettings" onclick="window.open('settings.php','_self')">⚙️</button>
-				<!-- <form action="settings.php" method="post" id='formSettings' >
-					<input type="hidden" name="nbcarTeam" value= <!?= $_SESSION['nbcarTeam'] ?> />
-					<input type="hidden" name="team" value= <!?= $_SESSION['team']['id'] ?> />
-					<input type="submit" name="submit" value="⚙️" id="btSettings" style="width:100%;height:100%;font-size: 3rem;">
-				</form> -->
 		</div>
 
 		<div id="containerButton_MenuEquipes" style='display:none;'>
-			<!-- 🔙 BACK -->
+			<!--  BACK 🔙🔄↺ -->
 			<button type="button" id="btBack" onclick="btBack()">
 				<span class="logo2">	↺	</span>	</button>
-			<!-- 🎲 RANDOM -->
+			<!--  RANDOM 🎲  🦾🥋🥇🏅🏆⚡-->
 			<button type="button" id="btForceEquipes" onclick="btRandom()">
-				<span id='icoRandom'>	🎲	</span> <!-- 🦾🥋🥇🏅🏆🎲⚡ -->
+				<span id='icoRandom'>	🎲	</span> 
 				<div id='containerForceMenuEquipes'>
 					<div id="forceEq1" class="forceEquipe" ></div>
 					<div id="forceEq3" class="forceEquipe" ></div>

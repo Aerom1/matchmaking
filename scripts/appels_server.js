@@ -115,7 +115,7 @@ function DB_CHANGE_team_favorite(id, name) {
 	}).catch(error => console.log(error));
 }
 
-function DB_CREATE_team(name) {
+function DB_CREATE_team(name, nbcarTeam) {
 	console.log("==============> DB_CREATE_team " + name);
 
 	fetch('php/CREATE_team.php', {
@@ -130,12 +130,27 @@ function DB_CREATE_team(name) {
 		console.log("DB -> " + response.result);
 		// location.reload();
 		snackbar_DB(response) // Affichage du pop (snackbar)
-		document.getElementsByName('teamId').value = response.id;
-		document.getElementById('btCloseMenu').onclick = function(){ fermer(response.id) };
+		document.getElementById('formTeamId').value = response.id;
+		document.getElementById('closeTourne').setAttribute('teamid', response.id);
 		document.getElementById('btModifNom').innerText = name;
+		document.getElementById('btModifNom').setAttribute('teamid', response.id);
 		document.getElementById('imgPlaceholder').setAttribute('src','');
 		document.getElementById('teamlistfav').innerHTML = response.dropdownHTMLfav ; // METTRE A JOUR LA LISTE DEROULANTE
 		document.getElementById('teamlistdel').innerHTML = response.dropdownHTMLdel ; // METTRE A JOUR LA LISTE DEROULANTE
+		document.getElementById('autoDestruction').setAttribute('teamid',response.id);
+		document.getElementById('autoDestruction').setAttribute('teamname',name);
+
+		/* VOICI TOUS LES CHAMPS $_SESSION DU PHP. Il faut les mettre à jour lors de la création d'une équipe :
+		x <button id="closeTourne" type="button" class="btn-close btn-close-white" aria-label="Close" onclick="fermer( <?PHP echo htmlspecialchars ($_SESSION['team']['id']) ?> )"></button>
+        x <button id="btModifNom" onclick="changeName_MODIFTEAMDB(this, <?php echo htmlspecialchars ($_SESSION['nbcarTeam']); ?>, <?php echo htmlspecialchars ($_SESSION['team']['id']); ?>)"><?php echo htmlspecialchars( $_SESSION['team']['name'] ); ?></button>
+		x <img id="imgPlaceholder" src="<?php echo htmlspecialchars( $_SESSION['team']['logo'] ); ?>" class="figure-img img-fluid rounded" alt="">
+		x <input type="hidden" name="teamId" value="<?php echo htmlspecialchars ($_SESSION['team']['id']); ?>" >
+		- <button onclick="btDelTeam(this, 1)" class='btn btn-danger' teamid=<?PHP echo htmlspecialchars ($_SESSION['team']['id']) ?> teamname="<?PHP echo htmlspecialchars ($_SESSION['team']['name']) ?>">
+        x <button onclick="btAddTeam(<?PHP echo htmlspecialchars ($_SESSION['nbcarTeam']) ?>)" class='btn btn-secondary'>Créer une équipe</button>
+        <span>TeamId: <?php echo htmlspecialchars ($_SESSION['team']['id']); ?></span>
+
+		*/
+
 	}).catch(error => console.log(error));
 }
 
@@ -154,6 +169,9 @@ function DB_DELETE_team(id, name, self) {
 		console.log("DB -> " + response.result)
 		// location.reload();
 		snackbar_DB(response) // Affichage du pop (snackbar)
+		document.getElementById('teamlistfav').innerHTML = response.dropdownHTMLfav ; // METTRE A JOUR LA LISTE DEROULANTE
+		document.getElementById('teamlistdel').innerHTML = response.dropdownHTMLdel ; // METTRE A JOUR LA LISTE DEROULANTE
+
 		if (self) {
 			setTimeout(function() {window.location.href = 'index.php'}, 500);
 		}

@@ -1,17 +1,21 @@
 HOCKEY
 
 <BUG>
-	- quand je choisis une image pour la 2e fois, le message de statut reste affiché (importé/échec)
+	- le message de statut (importé/échec) reste affiché dans plusieurs cas: quand je choisis une image pour la 2e fois, quand je créé une équipe...
 <EVO>
-	- quand suppr équipe avec menu déroulant, mettre à jour menuS déroulantS suppr + fav
-	- ajout menu pour choisir une autre équipe depuis l'accueil (faire un dropdown sur le bouton libre)
-	- enlever tous les vh, ne pas se référer au viewport, utiliser des %
-	- droits utilisateur pour modifier l'équipe
+OK	- ajout menu pour choisir une autre équipe depuis l'accueil (faire un dropdown sur le bouton libre)
+	- a.php : droits utilisateur pour modifier l'équipe
 <>
+	- enlever tous les vh, ne pas se référer au viewport, utiliser des %
 	- automatiser le transfert vers raspberry
 	- créer un certificat de sécurité
 	- animation de disparition  https://stackoverflow.com/questions/7000648/css3-transition-on-dom-removal
 
+OK	- quand j'enregistre un logo, les listes déroulantes disparaissent
+OK	- quand je supprime une équipe, les listes déroulantes ne se mettent pas à jour
+OK	- CREATE_player.php n'a pas de prepared statment alors qu'il y a plusieurs champs utilisateurs
+OK	- quand je créée une équipe, je ne mets à jour aucune variable de session, donc les modifs (nom, logo, suppression) se font sur la mauvaise équipe ! ex: si je modifie le logo juste après avoir créé l'équipe, cela modifie le logo de l'équipe SUNRIDE
+OK	- bug si je supprime l'équipe affichée, mais en passant par le menu déroulant au lieu du bouton
 OK	- quand je quitte settings, je reviens forcément sur l'équipe fav
 OK	- quand équipe est créée, close envoie vers accueil de la bonne équipe
 OK	- pouvoir supprimer n'importe quelle équipe depuis settings

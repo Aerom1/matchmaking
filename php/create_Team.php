@@ -2,6 +2,7 @@
 
 $conn = include 'connectToDB.php';
 include 'input.php'; // pour la fonction clean_input qui évite les injections sql
+include 'updateDropdowns.php';
 
 // Recup les infos à sauvegarder
 $name   = clean_input($_POST['name']);
@@ -9,14 +10,14 @@ $name   = clean_input($_POST['name']);
 // Commence par vérifier s'il y a déjà un joueur qui porte ce nom dans l'équipe
 $sql = "SELECT * FROM tbteam WHERE tbteam.name=?";
 ($stmt = $conn->prepare($sql)) or trigger_error($conn->error, E_USER_ERROR);
-$stmt->bind_param('s',clean_input($_POST['name']));
-$stmt->execute() or trigger_error($stmt->error, E_USER_ERROR);
+$stmt->bind_param('s',$name) or trigger_error('Mysql bind_param | '.$stmt->error, E_USER_ERROR);
+$stmt->execute() or trigger_error('Mysql execute | '.$stmt->error, E_USER_ERROR);
 
 // Return response to the browser
 if (!$stmt) {
     // printf("<br/>Error message: %s\n", $conn->error);
     $success = false;
-    $result = "Error message: $conn->error";
+    $result = "Error message: $stmt->error";
 } else {
 
     $result = $stmt->get_result();
@@ -29,9 +30,9 @@ if (!$stmt) {
     } else {
 
         $sql = "INSERT INTO tbteam (name, logo, fav) VALUES (?, '', 0)";
-        ($stmt = $conn->prepare($sql)) or trigger_error($conn->error, E_USER_ERROR);
-        $stmt->bind_param('s', clean_input($_POST['name']));
-        $stmt->execute() or trigger_error( $stmt->error, E_USER_ERROR);
+        ($stmt = $conn->prepare($sql)) or trigger_error('Mysql prepare | '.$conn->error, E_USER_ERROR);
+        $stmt->bind_param('s', $name) or trigger_error('Mysql bind_param | '.$stmt->error, E_USER_ERROR);
+        $stmt->execute() or trigger_error('Mysql execute | '.$stmt->error, E_USER_ERROR);
 
         // Return response to the browser
         if (!$stmt) {
@@ -48,20 +49,12 @@ if (!$stmt) {
             $_SESSION['team']['name'] = $name;
             $_SESSION['team']['logo'] = '';
             $_SESSION['team']['fav'] = 0;
-
+            
             $all_teams = $conn->query("SELECT * FROM tbteam") -> fetch_all( MYSQLI_ASSOC );
-            $dropdownHTMLfav = '<li style="font-size:2em;"><center>🏠</li><li><hr class="dropdown-divider"></li>';
-            foreach( $all_teams as $team) {
-                if($team["fav"]) {
-                    $dropdownHTMLfav .= "<li><center><button type='button' class='dropdown-item' style='color:white;background-color:green;'>✓  ".$team["name"]."</button></li>";
-                } else {
-                    $dropdownHTMLfav .=  "<li><center><button onclick='selectFavorite(this)' teamid=".$team["id"]." type='button' class='dropdown-item'>".$team["name"]."</button></li>";
-                }
-            }
-            $dropdownHTMLdel = '';
-            foreach( $all_teams as $team) {
-                $dropdownHTMLdel .= "<li><center><button onclick='btDelTeam(this)' teamid=" .$team["id"]. " teamname=" .$team["name"]. " type='button' class='dropdown-item'>".$team["name"]."</button></li>";
-            }
+
+            $dropdownfav = updateDropdownHTMLfav($all_teams);
+            $dropdowndel = updateDropdownHTMLdel($all_teams, $name);
+
             $stmt->close();
         }
     }
@@ -70,8 +63,8 @@ if (!$stmt) {
         'success' => $success,
         'result' => $result,
         'id' => $new_id,
-        'dropdownHTMLfav' => $dropdownHTMLfav,
-        'dropdownHTMLdel' => $dropdownHTMLdel
+        'dropdownHTMLfav' => $dropdownfav,
+        'dropdownHTMLdel' => $dropdowndel
     );
 
     echo json_encode($tableauRetour, JSON_UNESCAPED_UNICODE);

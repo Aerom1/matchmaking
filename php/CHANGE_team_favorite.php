@@ -3,6 +3,7 @@
 // Connection
 $conn = include 'connectToDB.php';
 include 'input.php'; // pour la fonction clean_input qui évite les injections sql
+include 'updateDropdowns.php';
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
@@ -29,14 +30,16 @@ try{
             $result = "👍 Nouvelle équipe favorite : " . $_POST['name'];
 
             $all_teams = $conn->query("SELECT * FROM tbteam") -> fetch_all( MYSQLI_ASSOC );
-            $dropdownHTML = '<li style="font-size:2em;"><center>🏠</li><li><hr class="dropdown-divider"></li>';
-            foreach( $all_teams as $team) {
-                if($team["fav"]) {
-                    $dropdownHTML .= "<li><center><button type='button' class='dropdown-item' style='color:white;background-color:green;'>✓  ".$team["name"]."</button></li>";
-                } else {
-                    $dropdownHTML .=  "<li><center><button onclick='selectFavorite(this)' teamid=".$team["id"]." type='button' class='dropdown-item'>".$team["name"]."</button></li>";
-                }
-            }
+            $dropdownHTMLfav = updateDropdownHTMLfav($all_teams);
+
+            // $dropdownHTML = '<li style="font-size:2em;"><center>🏠</li><li><hr class="dropdown-divider"></li>';
+            // foreach( $all_teams as $team) {
+            //     if($team["fav"]) {
+            //         $dropdownHTML .= "<li><center><button type='button' class='dropdown-item' style='color:white;background-color:green;'>✓  ".$team["name"]."</button></li>";
+            //     } else {
+            //         $dropdownHTML .=  "<li><center><button onclick='selectFavorite(this)' teamid=".$team["id"]." type='button' class='dropdown-item'>".$team["name"]."</button></li>";
+            //     }
+            // }
             $stmt->close();
         }
     }
@@ -45,7 +48,7 @@ try{
         array(
             'success' => $success,
             'result' => $result,
-            'dropdownHTML' => $dropdownHTML
+            'dropdownHTML' => $dropdownHTMLfav
         ), JSON_UNESCAPED_UNICODE);
         
 } catch(Exception $e){
