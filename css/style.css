@@ -211,6 +211,8 @@ img {
     rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
     rgba(0, 0, 0, 0.17) 0px -2px 25px 0px inset, 
     rgba(0, 0, 0, 0.2) 0px -3px 1px 0px inset;
+  color: transparent;
+  text-shadow: 0 0 0 #8e8e8e;
 }
 
 #div0>.player {
@@ -246,8 +248,8 @@ img {
   /* border-radius: 100px; */
 }
 #div0>.player.inactif{
-  color: gray;
-  background-color: white;
+  color: white;
+  background-color: firebrick;
 }
 
 div.span {
@@ -266,8 +268,8 @@ div.span {
 }
 
 .cible{
-  max-width: 100px;
-  min-width: 100px;
+  /* max-width: 100px;
+  min-width: 100px; */
   background-color: lightgray;
   animation: bounce-in 0.6s linear;
   text-align: center;
@@ -277,5 +279,10 @@ div.span {
   flex-grow: 1;
   /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px 0px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px 0px inset; */
   /* box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px; */
-  box-shadow: rgb(44, 62, 80) 0px 15px 15px -15px inset, rgb(44, 62, 80) 0px -15px 15px -15px inset, rgb(31, 193, 27) 2px 2px, rgb(255, 217, 19) 4px 4px, rgb(255, 156, 85) 6px 6px, rgb(255, 85, 85) 8px 8px;
+  /* box-shadow: rgb(44, 62, 80) 0px 15px 15px -15px inset, rgb(44, 62, 80) 0px -15px 15px -15px inset, rgb(31, 193, 27) 2px 2px, rgb(255, 217, 19) 4px 4px, rgb(255, 156, 85) 6px 6px, rgb(255, 85, 85) 8px 8px; */
+  box-shadow: rgb(31 193 27) -2px -2px, rgb(255 217 19) -4px -4px, rgb(255 156 85) -6px -6px, rgb(255 85 85) -8px -8px, white 2px 2px 5px;
+  position: absolute;
+  width: 6vh;
+  height: 6vh;
+  border: 1px solid;
 }
