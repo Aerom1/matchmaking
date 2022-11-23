@@ -1,12 +1,6 @@
 HOCKEY
 
-	- faire un unique bouton de menu ? icône burger qui se transforme en croix
-		> zoom +/-
-		> plein écran
-		> dark theme
-		> lien vers settings.php
-		> affichage du menu des équipes
-	- mettre les cibles en absolute pour ne pas modifier l'emplacement des joueurs (et avec une animation ^^)
+	- bouton de menu : faire une icône burger qui se transforme en croix
 	- mettre une image par défaut pour toutes les équipes pour éviter l'icône "image manquante"
 	- choisir son sport (liste ci-dessous)
 	- a.php : droits utilisateur pour modifier l'équipe
@@ -26,6 +20,8 @@ Parcours utilisateur :
 	par défaut je ne peux rien modifier
 	je dois m'identifier pour modifier
 
+OK	- faire unique bouton de menu pour zoom / plein écran / dark theme / settings / menu des équipes
+OK	- mettre les cibles en absolute pour ne pas modifier l'emplacement des joueurs (et avec une animation ^^)
 OK	- permettre de supprimer le logo et de laisser vide
 OK	- le message de statut (importé/échec) reste affiché dans plusieurs cas: quand je choisis une image pour la 2e fois, quand je créé une équipe...
 OK	- en plus le message coucou revient quand on choisi l'équipe avec le nouveau menu
