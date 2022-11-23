@@ -1,5 +1,6 @@
 HOCKEY
 
+	- remettre la barre de force tout en haut
 	- bouton de menu : faire une icône burger qui se transforme en croix
 	- mettre une image par défaut pour toutes les équipes pour éviter l'icône "image manquante"
 	- choisir son sport (liste ci-dessous)

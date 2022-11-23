@@ -132,7 +132,7 @@ http://127.0.0.1:8080/matchmaking/index.php
 			<ul><?php echo displayTeams2($all_teams); ?></ul>
 		</div>
 
-		
+
 		<input type="checkbox" id="active">
 		<div id="menu1" class="menuP menudeco" onclick="this.classList.toggle('open')">
 			<label for="active" id="btchangeteam" class="sbutton"></label>	
@@ -179,7 +179,7 @@ http://127.0.0.1:8080/matchmaking/index.php
 
 		<div id="containerButton_MenuEquipes" style='display:none;'>
 			<!--  BACK 🔙🔄↺ -->
-			<button type="button" id="btBack" onclick="btBack()">
+			<button type="button" id="btBack" class="menudeco" onclick="btBack()">
 				<span class="logo2">	↺	</span>	</button>
 			<!--  RANDOM 🎲  🦾🥋🥇🏅🏆⚡-->
 			<button type="button" id="btForceEquipes" onclick="btRandom()">
@@ -191,7 +191,7 @@ http://127.0.0.1:8080/matchmaking/index.php
 				</div>
 			</button>
 			<!-- ➗ NB -->
-			<button type="button" id="btNbEquipes" nb=0 onclick="btModifNbEquipes()">
+			<button type="button" id="btNbEquipes" class="menudeco" nb=0 onclick="btModifNbEquipes()">
 				<span class="logo2">÷</span>			
 			</button>
 		</div>
