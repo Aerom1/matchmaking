@@ -7,7 +7,7 @@ animation: zoom 0.3s linear ;
 #btRandom {
   animation-name: tourne;
   animation-duration: 1s;
-  animation-timing-function:ease ;
+  animation-timing-function: ease;
   animation-iteration-count: 1;
 }
 
@@ -44,7 +44,7 @@ animation: zoom 0.3s linear;
 }
 50% {
   background-color: green;
-  transform: rotate(0deg)  scale(0.6);    
+  transform: rotate(0deg)  scale(0.6);
 }  
 100% {
   transform: rotate(360deg) scale(1);

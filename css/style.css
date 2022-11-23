@@ -7,6 +7,7 @@
 FLEX-> https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 GRID-> https://css-tricks.com/snippets/css/complete-guide-grid/
 BOW-SHADOW GENERATOR-> https://html-css-js.com/css/generator/box-shadow/
+CSS Image Centering – How to Center an Image in a Div : https://www.freecodecamp.org/news/how-to-center-an-image-in-a-div-css/
  */
 
 /* AFFICHAGE PORTRAIT */
@@ -26,6 +27,7 @@ BOW-SHADOW GENERATOR-> https://html-css-js.com/css/generator/box-shadow/
 html { 
   /* font-family: "Audiowide", sans-serif; */
   font-family: sans-serif;
+  border: 1px solid lightgray;
 }
 
 html.dark-theme{
@@ -34,7 +36,7 @@ html.dark-theme{
 
 /* Make content area fill the entire browser window */
 html, .fullscreen {
-  background-color: #fff;
+  background-color: #e8e8f3;
   /* display: flex; */
   height: 100%;
   margin: 0;
@@ -86,8 +88,8 @@ html, .fullscreen {
 
 #containerEquipes.accueil {
   margin-top: 2vh;
-  margin-bottom: 6vh;
-  height: 60vh;
+  margin-bottom: 4vh;
+  height: 63vh;
 }
 
 #containerEquipes.equipes {
@@ -169,7 +171,7 @@ img {
   cursor: pointer;
 }
 
-button, #btSettings {
+/* button, #btSettings {
   cursor: pointer;
   box-shadow: 
   rgba(0, 0, 0, 0.05) 0px 1px 6px 0px, 
@@ -178,7 +180,7 @@ button, #btSettings {
   rgba(0, 0, 0, 0.1) 0px 16px 16px 0px, 
   rgba(0, 0, 0, 0.15) 8px 32px 32px 0px,
   rgba(0, 0, 0, 0.15) 8px 64px 64px 0px;
-}
+} */
 
 #div0:not(:empty){
   color:green;
@@ -200,7 +202,7 @@ button, #btSettings {
   font-size: var(--font-size-player-accueil, 20);
   max-height: 20vh;
   margin:3px;
-  padding: 1px 20px ;
+  padding: 1px 20px;
   display: flex;
   align-items: center;
   border-radius: 20px;
@@ -244,8 +246,8 @@ button, #btSettings {
   /* border-radius: 100px; */
 }
 #div0>.player.inactif{
-  color: white;
-  background-color: red;
+  color: gray;
+  background-color: white;
 }
 
 div.span {

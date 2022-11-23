@@ -41,6 +41,7 @@
                 <!-- IMAGE -->
                 <div class="user-image mb-3 text-center">
                     <div style="width: 160px; height: 160px; overflow: hidden; background: #cccccc; margin: 0 auto; border-radius: 10px;">
+                        <button id="supprLogo" type="button" class="btn-close" style="position:absolute; background-color: white; " aria-label="Close" onclick="supprLogo_MODIFTEAM(this)"  teamid=<?php echo htmlspecialchars ($_SESSION['team']['id']); ?>> </button>
                         <img id="imgPlaceholder" src="<?php echo htmlspecialchars( $_SESSION['team']['logo'] ); ?>" class="figure-img img-fluid rounded" alt="">
                     </div>
                 </div>
@@ -93,6 +94,19 @@
         <span>TeamId: <?php echo htmlspecialchars ($_SESSION['team']['id']); ?></span>
 
     </div>
+
+    <script>
+        document.getElementById("chooseFile").onchange = function () {
+            readURL(this);
+            document.getElementById("btn_ImportLogo").classList.remove('d-none')    // Afficher le bouton de validation
+        }
+        <?php   if (isset($_SESSION['team']['logo']) and $_SESSION['team']['logo'] !== '') {     ?>
+            document.getElementById("supprLogo").style.display = 'inline-block';
+        <?php } else { ?>
+            document.getElementById("supprLogo").style.display = 'none';
+        <?php }?>
+        
+    </script>
 
     <script src="scripts/appels_server.js"></script>
     <script src="scripts/settings.js"></script>

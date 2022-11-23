@@ -1,11 +1,32 @@
 HOCKEY
 
+	- faire un unique bouton de menu ? icône burger qui se transforme en croix
+		> zoom +/-
+		> plein écran
+		> dark theme
+		> lien vers settings.php
+		> affichage du menu des équipes
+	- mettre les cibles en absolute pour ne pas modifier l'emplacement des joueurs (et avec une animation ^^)
+	- mettre une image par défaut pour toutes les équipes pour éviter l'icône "image manquante"
+	- choisir son sport (liste ci-dessous)
 	- a.php : droits utilisateur pour modifier l'équipe
+	- ajouter un petit mot quand il n'y a aucun joueur
+	- ? faire une interface pour ajouter plusieurs joueurs d'un coup ? ou faire en sorte qu'après l'ajout on propose encore d'ajouter
 	- enlever tous les vh, ne pas se référer au viewport, utiliser des %
 	- automatiser le transfert vers raspberry
 	- créer un certificat de sécurité
 	- animation de disparition  https://stackoverflow.com/questions/7000648/css3-transition-on-dom-removal
 
+
+Parcours utilisateur :
+	je vais sur le site
+	je peux m'identifier et voir mes équipes
+	ou
+	j'ai un lien spécifique pour mon équipe
+	par défaut je ne peux rien modifier
+	je dois m'identifier pour modifier
+
+OK	- permettre de supprimer le logo et de laisser vide
 OK	- le message de statut (importé/échec) reste affiché dans plusieurs cas: quand je choisis une image pour la 2e fois, quand je créé une équipe...
 OK	- en plus le message coucou revient quand on choisi l'équipe avec le nouveau menu
 OK	- ajout menu pour choisir une autre équipe depuis l'accueil (faire un dropdown sur le bouton libre)
@@ -38,3 +59,41 @@ OK	- php supprPlayer
 OK	- php modif nom
 OK	- php modif force
 OK	- php modif absenteisme (enregistrer les absents quand je génère les équipes ?)
+
+
+Handball
+Hockey
+Rugby
+Volley-ball
+Water-polo
+Baseball
+Softball
+Football
+Basketball
+Balle à la main
+Balle aux prisonniers
+Balle au tamis
+Balle pelote
+Ballon au poing
+Bandy
+Cricket
+Fistball
+Floorball
+Football américain
+Football australien
+Football en salle
+Football gaélique
+Kayak-polo
+Kin-ball
+Korfball
+Netball
+Polo
+Poull-Ball
+Rafroball
+Ringuette
+Roller Derby
+Sepak takraw
+Smolball
+Speed Corner
+Tchoukball
+Ultimate Frisbee

@@ -1,0 +1,145 @@
+*{
+    /* margin: 0;
+    padding: 0; */
+    box-sizing: border-box;
+    /* font-family: 'Lato', sans-serif;
+    font-family: 'Oswald', sans-serif; */
+  }
+  .wrapper{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    /*background: linear-gradient(-135deg, #c850c0, #4158d0);*/
+    /* background: linear-gradient(375deg, #1cc7d0, #2ede98); */
+    /* background: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%);*/
+    /* clip-path: circle(25px at calc(0% + 45px) 45px); */
+    background: #e8e8f3;
+    clip-path: circle(35px at calc(100% - 55px) calc(100% - 55px));
+    transition: all 0.3s ease-in-out;
+    z-index: 3;
+  }
+  #active:checked ~ .wrapper{
+    clip-path: circle(75%);
+  }
+  .menu-btn{
+    padding: 20px;
+    z-index: 4;
+    position: absolute;
+    bottom: 34px;
+    right: 20px;
+    /* left: 20px; */
+    height: 70px;
+    width: 70px;
+    text-align: center;
+    line-height: 0px;
+    border-radius: 50%;
+    font-size: 30px;
+    color: #7a7a7a;
+    cursor: pointer;
+    /*background: linear-gradient(-135deg, #c850c0, #4158d0);*/
+    /* background: linear-gradient(375deg, #1cc7d0, #2ede98); */
+    /* background: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%); */
+    background: #e8e8f3;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .settings-btn{
+    position: absolute;
+    z-index: 2;
+    right: 20px;
+    bottom: 125px;
+    padding: 10px;
+    height: 70px;
+    width: 70px;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    font-size: 35px;
+    color: rgb(255 255 255);
+    cursor: pointer;
+    /*background: linear-gradient(-135deg, #c850c0, #4158d0);*/
+    /* background: linear-gradient(375deg, #1cc7d0, #2ede98); */
+    /* background: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%); */
+    background: #333;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .settings-btn i:before{
+    content: "\f00b";
+  }
+
+  .filter-white{
+    filter: invert(100%) sepia(0%) saturate(7497%) hue-rotate(242deg) brightness(107%) contrast(100%);    
+}
+
+  #active:checked ~ .menu-btn{
+    color: #fff;
+    background-color: #333;
+    box-shadow: none;
+  }
+  #active:checked ~ .menu-btn i:before{
+    content: "\f00d";
+  }
+  .wrapper ul{
+    position: absolute;
+    top: 50%;
+    /* left: 50%; */
+    transform: translate(0, -50%);
+    list-style: none;
+    text-align: center;
+    width: 90%;
+  }
+  .wrapper ul li{
+    margin: 15px 0;
+  }
+  .wrapper ul li a{
+    color: none;
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: 500;
+    padding: 5px 30px;
+    color: #fff;
+    border-radius: 50px;
+    background: #000;
+    position: relative;
+    line-height: 50px;
+    transition: all 0.3s ease;
+  }
+  .wrapper ul li a:after{
+    position: absolute;
+    content: "";
+    background: #fff;
+     background: linear-gradient(#14ffe9, #ffeb3b, #ff00e0);
+    /*background: linear-gradient(375deg, #1cc7d0, #2ede98);*/
+    width: 104%;
+    height: 110%;
+    left: -2%;
+    top: -5%; /* if the font is 'Oswald'*/
+    border-radius: 50px;
+    transform: scaleY(0);
+    z-index: -1;
+    animation: rotate 1.5s linear infinite;
+    transition: transform 0.3s ease;
+  }
+  .wrapper ul li a:hover:after{
+    transform: scaleY(1);
+  }
+  .wrapper ul li a:hover{
+    color: #fff;
+  }
+  input[type="checkbox"]{
+    display: none;
+  }
+
+  
+  @keyframes rotate {
+    0%{
+      filter: hue-rotate(0deg);
+    }
+    100%{
+      filter: hue-rotate(360deg);
+    }
+  }
+  

@@ -15,8 +15,8 @@
 
 header {
   position:sticky;
-  top: 0vh; 
-  /* left: 0;  */
+  top: 0;
+  /* left: 0; */
   /* right: 0; */
 }
 
@@ -49,7 +49,7 @@ h1 {
   font-size: 60px;
 }
 
-#logoHeader #formChgTeam {
+/* #logoHeader #formChgTeam {
   border:1px solid brown;
   background-color: rgba(255,255,255,0.8);
   border-radius:100px;
@@ -59,17 +59,17 @@ h1 {
   overflow:hidden;
 }
 
-#logoHeader #formChgTeam #logoEquipeNext {
+#logoHeader #formChgTeam {
   max-width:  30px;
   max-height: 30px;
   font-size: 21px;
-}
+} */
 
 
 #questionPresents {
   display: block;
   text-align: right;
-  font-size:1.5rem;
-  color: #21b41f; /*#bf0e1c;*/
+  font-size: 1rem;
+  color: green; /*#bf0e1c;*/
   margin-top: 0; /* pour empêcher le double margin (bas de h1 + haut de questionPresents */
 }

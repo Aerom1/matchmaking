@@ -13,6 +13,7 @@ const emoForce2 = "😼";
 const emoForce3 = "🐻";
 //🐭😼🐻🦁🐯🐹😺😺🐶
 
+function x(id){return document.getElementById(id)}
 
 function changerEquipe(element) {
     document.getElementById('loading-spinner-mask').classList.remove('invisible');
@@ -43,13 +44,13 @@ function getNextTeamId(all_teams, team) {
     return nextTeam
 }
 
-function loadTeam(team, players, nextTeam){
+function loadTeam(team, players){
     console.log("load team : " + team.name)
 
     document.getElementById("logoTeam").setAttribute("src",team.logo); // logo de l'appli (header)
-    document.getElementById("logoEquipeNext").setAttribute("src",nextTeam.logo); // logo du bouton next Team
-    document.getElementById("logoEquipeNext2").setAttribute("src",nextTeam.logo); // logo du bouton next Team
-    document.getElementById("nextteamid").value = nextTeam.id; // affiche l'ID
+    // document.getElementById("logoEquipeNext").setAttribute("src",nextTeam.logo); // logo du bouton next Team
+    // document.getElementById("logoEquipeNext2").setAttribute("src",nextTeam.logo); // logo du bouton next Team
+    // document.getElementById("nextteamid").value = nextTeam.id; // affiche l'ID
 
     var teamActuelle = document.getElementById("team")
         teamActuelle.setAttribute("name", team.id);
@@ -131,7 +132,11 @@ function btBack(){
     $('#containerButton_MenuAccueil').show();
     $('#containerButton_MenuEquipes').hide();
     $('header').show();
+    $('#menu1').show();
+    $('#menu2wrapper').show();
+    $('#btRandom').show();
 
+    
     // indique aux conteneur de joueurs quelle mise en forme prendre
     document.getElementById('containerEquipes').className = 'accueil';   // "accueil","equipes"
     
@@ -199,7 +204,11 @@ function btRandom(){
     $('header').hide();
     $('#containerButton_MenuAccueil').hide();
     $('#containerButton_MenuEquipes').show();
+    $('#menu1').hide();
+    $('#menu2wrapper').hide();
+    $('#btRandom').hide();
     
+        
     // indique aux conteneur de joueurs quelle mise en forme prendre
     document.getElementById('containerEquipes').className = 'equipes';   // "accueil","equipes"
     
@@ -361,7 +370,7 @@ function RANDOM(nbEquipe) {
 
 
 
-function creerMenu(name, menu) {
+function creerMenu(name, menu, force=0) {
 
     try {document.getElementById('divmenu').remove()} catch{} // On enlève un éventuel menu précédent
 
@@ -401,6 +410,14 @@ function creerMenu(name, menu) {
             xp3.classList.add("btChooseXP");
             xp3.textContent = emoForce3
             frameXP.append(xp3)
+
+            if (force==1) {xp1.classList.add('forceActuelle')}
+            if (force==2) {xp2.classList.add('forceActuelle')}
+            if (force==3) {xp3.classList.add('forceActuelle')}
+            // if (force==1) {xp1.style.border = "2px solid white"}
+            // if (force==2) {xp2.style.border = "2px solid white"}
+            // if (force==3) {xp3.style.border = "2px solid white"}
+
         //     //✅ 🈯️ 💹 ❇️ ✳️ ❎❌    
         menuContainer.appendChild(frameXP)
 
@@ -611,8 +628,9 @@ function unselect_(player){
 function clickPlayerIcon(clicked) {
     console.log("Click Icone : modif du joueur");
     var name = clicked.getAttribute('name')
+    var force = clicked.getAttribute('force')
     // Création du menu et ajout DOM au niveau du joueur
-    var menu = creerMenu(name, 'modifplayer');
+    var menu = creerMenu(name, 'modifplayer', force);
     clicked.appendChild(menu);
 }
 
@@ -856,7 +874,8 @@ function defineTextSize(defaultSize) {
 }
 
 function zoom(action, ecran){
-
+    
+    var ecran = document.getElementById("containerEquipes").className
     var property, localStorageItem // nom de la propriété dans le local storage, et de la propriété (var) dans le css
     if (ecran == "accueil") {
         property = '--font-size-player-accueil'
@@ -869,7 +888,7 @@ function zoom(action, ecran){
     var el = document.getElementsByClassName('player')[0];
     var style = window.getComputedStyle(el, null).getPropertyValue('font-size');
     var fontSize = parseFloat(style);     // now you have a proper float for the font size (yes, it can be a float, not just an integer)
-        fontSize = (action == 'grossir' ? Math.round(fontSize + 1) : Math.abs(Math.round(fontSize - 1)));
+        fontSize = (action == 'grossir' ? Math.round(fontSize + 3) : Math.abs(Math.round(fontSize - 3)));
         fontSizePC = fontSize + 'px'
     document.documentElement.style.setProperty(property, fontSizePC);
     localStorage.setItem(localStorageItem, fontSize);
@@ -896,6 +915,7 @@ function setTheme(){
 }
 
 function toggleFullscreen(){
+
     // document.exitFullscreen();
     // document.documentElement.requestFullscreen();
     if (!document.fullscreenElement &&    // alternative standard method

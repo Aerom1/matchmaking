@@ -161,6 +161,7 @@ function DB_CREATE_team(name, nbcarTeam) {
 		snackbar_DB(response) // Affichage du pop (snackbar)
 		if (response.success) {
 			document.getElementById('formTeamId').value = response.id;
+			document.getElementById('supprLogo').setAttribute('teamid', response.id);
 			document.getElementById('closeTourne').setAttribute('teamid', response.id);
 			document.getElementById('btModifNom').innerText = name;
 			document.getElementById('btModifNom').setAttribute('teamid', response.id);
@@ -217,6 +218,29 @@ function DB_CHANGE_team_logo(id, newlogo) {
 		console.log("RESULTAT APPEL SERVEUR MODIF LOGO EQUIPE");
 		console.log("DB -> " + response.result)
 		snackbar_DB(response) // Affichage du pop (snackbar)
+		unloadingSpinner()
+	}).catch(error => console.log(error));
+}
+
+function CHANGE_team_logo_suppr(id) {
+	console.log("==============> CHANGE_team_logo_suppr");
+	loadingSpinner()
+
+	fetch('php/CHANGE_team_logo_suppr.php', {
+		method: 'POST',
+		mode: 'cors',
+		headers: {'Content-type': 'application/x-www-form-urlencoded'},
+		body: 'id='+id
+	})
+	.then(response => response.json())
+	.then(response => {
+		console.log("RESULTAT APPEL SERVEUR SUPPR LOGO EQUIPE");
+		console.log("DB -> " + response.result)
+		snackbar_DB(response) // Affichage du pop (snackbar)
+		if (response.success) {
+			document.getElementById('imgPlaceholder').setAttribute('src','');
+			document.getElementById("supprLogo").style.display = 'none';
+		}
 		unloadingSpinner()
 	}).catch(error => console.log(error));
 }

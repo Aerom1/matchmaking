@@ -2,16 +2,8 @@
 <?php 
 // Tutorial PHP 8 Upload & Store File/Image in MySQL  https://www.positronx.io/php-upload-store-file-image-in-mysql-database/
 
-    // Database connection
-    // include("config/database.php");
-    // Connection
-    $conn = include 'php/connectToDB.php';
-    include 'php/input.php'; // pour la fonction clean_input qui évite les injections sql
-
-    // echo "<script>alert('connexion réussie')</script>";
-    // echo "//ICI";
-    // var_dump($_FILES["fileUpload"]["error"]);
-    // echo "<script>alert('target_file : $tmpfileupload)')</script>";
+$conn = include 'php/connectToDB.php';
+include 'php/input.php'; // pour la fonction clean_input qui évite les injections sql
 
 if ( isset($_POST["submit"]) ) {
 

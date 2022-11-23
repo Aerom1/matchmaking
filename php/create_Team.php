@@ -29,7 +29,7 @@ if (!$stmt) {
         $result = "Une équipe porte déjà ce nom !";
     } else {
 
-        $sql = "INSERT INTO tbteam (name, logo, fav) VALUES (?, '', 0)";
+        $sql = "INSERT INTO tbteam (name, logo, fav, sport) VALUES (?, '', 0, '')";
         ($stmt = $conn->prepare($sql)) or trigger_error('Mysql prepare | '.$conn->error, E_USER_ERROR);
         $stmt->bind_param('s', $name) or trigger_error('Mysql bind_param | '.$stmt->error, E_USER_ERROR);
         $stmt->execute() or trigger_error('Mysql execute | '.$stmt->error, E_USER_ERROR);

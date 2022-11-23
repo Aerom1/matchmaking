@@ -1,15 +1,30 @@
 <?php 
 
-function displayTeams($all_teams){
-    $dropdownHTMLfav = '';
+function displayTeams1($all_teams){
+    $HTML = '';
     foreach( $all_teams as $team) {
         // if ( $team["fav"] ) {
-            $dropdownHTMLfav .= "<div onclick='changerEquipe(this)' class='listeLogoTeam' teamid=" .$team["id"]. " teamname=" .$team["name"]. " > <div class='imgContainerListeLogoTeam'> <img src='" .$team["logo"]. "' class='imgListeLogoTeam' alt = '👨🏾‍🤝‍👨🏻' > </div> " .$team["name"]. " </div>";
+            $HTML .= "<div onclick='changerEquipe(this)' class='listeLogoTeam' teamid=" .$team["id"]. " teamname=" .$team["name"]. " > <div class='imgContainerListeLogoTeam'> <img src='" .$team["logo"]. "' class='imgListeLogoTeam' alt = '👨🏾‍🤝‍👨🏻' > </div> " .$team["name"]. " </div>";
         // } else {
-        //     $dropdownHTMLfav .= "⭐
+        //     $HTML .= "⭐
         // }
     }
-    return $dropdownHTMLfav;
+    return $HTML;
+}
+
+function displayTeams2($all_teams){
+    $HTML = '';
+    foreach( $all_teams as $team) {
+
+        // if ( $team["fav"] ) {
+
+            $HTML .= "<li><a href='index.php?teamid=" .$team["id"]. "'> <div class='imgContainerListeLogoTeam'> <img src='" .$team["logo"]. "' class='imgListeLogoTeam' alt = '👨🏾‍🤝‍👨🏻' > </div> " .$team["name"]. "</a></li>";
+
+        // } else {
+        //     $HTML .= "⭐
+        // }
+    }
+    return $HTML;
 }
 
 function updateDropdownHTMLfav($all_teams){

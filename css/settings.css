@@ -43,7 +43,7 @@ html {
   height: 100%; */
 }
 
-#btModifNom, #btSupprPlayer, #btCloseMenu{
+#btModifNom, #btSupprPlayer, #closeTourne{
   font-size: 2rem;
   background-color: transparent;
   border:0px;
@@ -86,9 +86,10 @@ html {
   background-color: rgba(255,255,255,0.1);
   border-radius: 5px;
   padding: 5px;
-  max-width:100%; 
-  height:auto; 
+  max-width:100%;
+  height:auto;
   /* border: 1px dashed gray; */
+  /* position: absolute; */
 }
 
 #labelModifTeam {

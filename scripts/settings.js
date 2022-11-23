@@ -1,8 +1,7 @@
 
-document.getElementById("chooseFile").onchange = function () {
-    readURL(this);
-    document.getElementById("btn_ImportLogo").classList.remove('d-none')    // Afficher le bouton de validation
-}
+
+
+function x(id){return document.getElementById(id)}
 
 function fermer(btn) {
     document.getElementById('loading-spinner-mask').classList.remove('invisible');
@@ -16,6 +15,7 @@ function readURL(input) {
         var reader = new FileReader();
         reader.onload = function (e) {
             document.getElementById("imgPlaceholder").setAttribute('src', e.target.result)
+            document.getElementById("supprLogo").style.display = 'inline-block';
         }
         reader.readAsDataURL(input.files[0]); // convert to base64 string
     }
@@ -37,6 +37,13 @@ function btDelTeam(btn, self){
     var id = btn.getAttribute('teamid')
     if (confirm("Confirmer la suppression de l'équipe "+ name +" ?\nCette action est irréversible !")) {
         DB_DELETE_team(id, name, self);
+    }
+}
+
+function supprLogo_MODIFTEAM(btn){
+    var id = btn.getAttribute('teamid')
+    if (confirm("Confirmer la suppression du logo ?\nCette action est irréversible !")) {
+        CHANGE_team_logo_suppr(id);
     }
 }
 
