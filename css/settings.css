@@ -100,11 +100,9 @@ html {
 
 #formContainer {
   /* formSettingsChangeLogo */
-  
   /* border: 1px solid grey; */
   /* border-radius: 5px; */
   padding: 10px;
-
   /* border: 1px solid white ; */
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 20px;
@@ -113,7 +111,6 @@ html {
   /* max-width : 90vw; */
   /* overflow-x : hidden; */
   /* align-self: end; */
-
 }
 
 #btn_ImportLogo {

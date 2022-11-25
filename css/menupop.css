@@ -17,7 +17,7 @@
 }
 
 .menuP {
-    z-index: 1;
+    z-index: 5;
     position: absolute;
     bottom: 34px;
     left: 20px;
@@ -57,6 +57,13 @@
     opacity: 1;
     pointer-events: auto;
 }
+/* .menuP.open .sbutton:nth-of-type(2) { */
+/* .menuP.open #btzoomplus {
+    left: 120%;
+    top: 0;
+    background: url("../img/svg/zoom-out.svg") no-repeat 50%/50% #24f1f1;
+} */
+
 /* .menuP.open .sbutton:first-of-type { */
 .menuP.open #btfullscreen {
     left: 0;
@@ -64,20 +71,6 @@
     background: url("../img/svg/fullscreen.svg") no-repeat 50%/ 50% #e8e8f3;
     transition-delay: 0.05s;
 }
-/* .menuP.open .sbutton:nth-of-type(2) { */
-/* .menuP.open #btzoomplus {
-    left: 120%;
-    top: 0;
-    background: url("../img/svg/zoom-out.svg") no-repeat 50%/50% #24f1f1;
-} */
-/* .menuP.open .sbutton:nth-of-type(3) { */
-.menuP.open #btzoommoins {
-    left: 0;
-    top: -490%;
-    background: url("../img/svg/zoom-in.svg") no-repeat 50%/ 50% #24f1f1;
-    transition-delay: 0.05s;
-}
-
 /* .menuP.open .sbutton:nth-of-type(4) { */
 .menuP.open #btchangeteam {
     left: 0;
@@ -85,13 +78,21 @@
     background: url("../img/svg/team.svg") no-repeat 50%/ 50% #e8e8f3;
     transition-delay: 0.05s;
 }
+/* .menuP.open .sbutton:nth-of-type(3) { */
 /* .menuP.open .sbutton:last-of-type { */
 .menuP.open #btsettings {
     left: 0;
-    top: -370%;
-    background: url("../img/svg/gear-solid.svg") no-repeat 50% 45%/50% 45% #fcc42c;
+    top: -490%;
+    background: url("../img/svg/gear-solid.svg") no-repeat 50% 45%/50% 45% #e8e8f3;
     transition-delay: 0.1s;
 }
+.menuP.open #btzoom {
+    left: 0;
+    top: -370%;
+    background: url("../img/svg/zoom-in.svg") no-repeat 50%/ 50% #e8e8f3;
+    transition-delay: 0.05s;
+}
+
 .sbutton {
     padding: 30px;
     border-radius: 50%;
@@ -110,6 +111,7 @@
 }
 .sbutton:hover {
     transform: scale(1.1);
+    animation: rotate 1.5s linear infinite;
 }
 
 
@@ -119,7 +121,7 @@
     top: 10px;
     position: absolute;
     width: max-content;
-    background-color: #e8e8f3dd;
+    background-color: #e8e8f3;
     border-radius: 20px;
     box-shadow: rgb(0 0 0 / 40%) 0px 2px 4px 0px, rgb(0 0 0 / 30%) 0px 7px 13px -3px;
     padding: 15px;
@@ -130,7 +132,7 @@
     top: 10px;
     position: absolute;
     width: max-content;
-    background-color: #e8e8f3dd;
+    background-color: #e8e8f3;
     border-radius: 20px;
     box-shadow: rgb(0 0 0 / 40%) 0px 2px 4px 0px, rgb(0 0 0 / 30%) 0px 7px 13px -3px;
     padding: 15px;
@@ -141,8 +143,29 @@
     top: 10px;
     position: absolute;
     width: max-content;
-    background-color: #fcc42cdd;
+    background-color: #e8e8f3;
     border-radius: 20px;
     box-shadow: rgb(0 0 0 / 40%) 0px 2px 4px 0px, rgb(0 0 0 / 30%) 0px 7px 13px -3px;
     padding: 15px;
 }
+.menuP.open #btzoom::after {
+    content:"Taille des noms";
+    left: 120%;
+    top: 10px;
+    position: absolute;
+    width: max-content;
+    background-color: #e8e8f3;
+    border-radius: 20px;
+    box-shadow: rgb(0 0 0 / 40%) 0px 2px 4px 0px, rgb(0 0 0 / 30%) 0px 7px 13px -3px;
+    padding: 15px;
+}
+
+@keyframes rotate {
+    0%{
+      filter: hue-rotate(0deg);
+    }
+    100%{
+      filter: hue-rotate(360deg);
+    }
+  }
+  

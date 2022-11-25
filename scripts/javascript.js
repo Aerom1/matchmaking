@@ -129,7 +129,6 @@ function btBack(){
     console.log("bouton BACK")
     enleveMenu_();
 
-    $('#containerButton_MenuAccueil').show();
     $('#containerButton_MenuEquipes').hide();
     $('header').show();
     $('#menu1').show();
@@ -198,11 +197,10 @@ function btModifNbEquipes() {
 }
 
 function btRandom(){
-
+    console.log("BTRANDOM")
     document.getElementById('loading-spinner-mask').classList.remove('invisible');
 
     $('header').hide();
-    $('#containerButton_MenuAccueil').hide();
     $('#containerButton_MenuEquipes').show();
     $('#menu1').hide();
     $('#menu2wrapper').hide();
@@ -622,6 +620,7 @@ function unselect_(player){
     $(player).removeClass("selected"); //déselectionne
     $("#textEchange").slideUp()
     $("#cible").remove();
+    $(".player").css("border","none")
 }
 
 

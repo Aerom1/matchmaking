@@ -13,7 +13,7 @@ function dragLeave(e) {
     e.target.classList.remove('drag-over');
     e.target.parentNode.classList.remove('drag-over');
     $("#cible").remove();
-
+    $(".player").css("border","none")
 }
 function dragOver(e) {
     console.log("=== dragOver ===");
@@ -28,6 +28,7 @@ function dragOver(e) {
 function dragEnd(e) {
     console.log("<@> dragEnd <@>");
     $(".cible").remove();
+    $(".player").css("border","none")
 }
 
 function allowDrop(ev) {
@@ -56,11 +57,20 @@ function ajoutCiblesToutesEquipes(divOrigine){
                 cibletxt.innerText = "🎯";
             cible.appendChild(cibletxt)
             document.getElementById("div"+i).appendChild(cible);
+            $("#div"+i+" .player").css("border","3px dashed red")
+            // $("#div"+i+" .player").addClass("rotating-border rotating-border--black-white  rotating-border--reverse")
+            // $("#div"+i+" .player").addClass("rotating-border")
+            // $("#div"+i+" .player").addClass("rotating-border--black-white")
+            // $("#div"+i+" .player").addClass("rotating-border--reverse")
+            
         }
     }
 }    
 
 function drop(ev) {
+
+    $(".player").css("border","none")
+
     console.log(">> drop <<");
     ev.target.classList.remove('drag-over');
     ev.target.parentNode.classList.remove('drag-over');

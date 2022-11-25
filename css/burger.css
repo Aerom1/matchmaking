@@ -8,15 +8,15 @@
   .wrapper{
     position: absolute;
     bottom: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
+    right: 0;
+    height: 30%;
+    width: 80%;
     /*background: linear-gradient(-135deg, #c850c0, #4158d0);*/
     /* background: linear-gradient(375deg, #1cc7d0, #2ede98); */
     /* background: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%);*/
     /* clip-path: circle(25px at calc(0% + 45px) 45px); */
     background: #e8e8f3;
-    clip-path: circle(35px at calc(100% - 55px) calc(100% - 55px));
+    /* clip-path: circle(35px at calc(100% - 55px) calc(100% - 55px)); */
     transition: all 0.3s ease-in-out;
     z-index: 3;
   }
@@ -43,31 +43,6 @@
     /* background: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%); */
     background: #e8e8f3;
     transition: all 0.3s ease-in-out;
-  }
-
-  .settings-btn{
-    position: absolute;
-    z-index: 2;
-    right: 20px;
-    bottom: 125px;
-    padding: 10px;
-    height: 70px;
-    width: 70px;
-    text-align: center;
-    line-height: 50px;
-    border-radius: 50%;
-    font-size: 35px;
-    color: rgb(255 255 255);
-    cursor: pointer;
-    /*background: linear-gradient(-135deg, #c850c0, #4158d0);*/
-    /* background: linear-gradient(375deg, #1cc7d0, #2ede98); */
-    /* background: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%); */
-    background: #333;
-    transition: all 0.3s ease-in-out;
-  }
-
-  .settings-btn i:before{
-    content: "\f00b";
   }
 
   .filter-white{
@@ -111,7 +86,7 @@
     position: absolute;
     content: "";
     background: #fff;
-     background: linear-gradient(#14ffe9, #ffeb3b, #ff00e0);
+    background: linear-gradient(#14ffe9, #ffeb3b, #ff00e0);
     /*background: linear-gradient(375deg, #1cc7d0, #2ede98);*/
     width: 104%;
     height: 110%;

@@ -1,7 +1,7 @@
 /* The position it at the bottom and in the middle of the screen */
 #zoom {
   visibility: hidden;
-  z-index: 3; /* Add a z-index if needed */
+  z-index: 6; /* Add a z-index if needed */
   position: fixed; /* Sit on top of the screen */
   width: 100%; /* Set a default minimum width */
   bottom: 0;

@@ -143,7 +143,7 @@ function DB_CHANGE_team_favorite(id, name) {
 	}).catch(error => console.log(error));
 }
 
-function DB_CREATE_team(name, nbcarTeam) {
+function DB_CREATE_team(name) {
 	console.log("==============> DB_CREATE_team " + name);
 	loadingSpinner()
 

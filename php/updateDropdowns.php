@@ -8,6 +8,32 @@
 //     return $HTML;
 // }
 
+function displayTeams3($all_teams){
+    $HTML = '';
+    foreach( $all_teams as $team) {
+        
+        if ($team["fav"]) {
+            $src = '<img onclick="testpropagation(e)" src="img/svg/fav.svg" fav=1 teamid=' .$team["id"]. '.alt="'.$team["name"].'" class="tabteam__fav">';
+        } else {
+            $src = '<img src="img/svg/unfav.svg" fav=1 teamid=' .$team["id"]. '.alt="'.$team["name"].'" class="tabteam__fav">';;
+        }
+        
+        $HTML .= '<article class="tabteam__profile" onclick="changerEquipe(this)" teamid="' .$team["id"]. '">';
+		$HTML .= '<img src="'.$team["logo"].'" alt="'.$team["name"].'" class="tabteam__picture">';
+		$HTML .= '<span class="tabteam__name">'.$team["name"].'</span>';
+		$HTML .= $src;
+        $HTML .= '</article>';
+        
+        // if ( $team["fav"] ) {
+            // $HTML .= "<li><a href='index.php?teamid=" .$team["id"]. "'> <div class='imgContainerListeLogoTeam'> <img src='" .$team["logo"]. "' class='imgListeLogoTeam' alt = '👨🏾‍🤝‍👨🏻' > </div> " .$team["name"]. "</a></li>";
+            // } else {
+        //     // $HTML .= "⭐
+        //     $HTML .= "<li><a href='index.php?teamid=" .$team["id"]. "'> <div class='imgContainerListeLogoTeam'> <img src='" .$team["logo"]. "' class='imgListeLogoTeam' alt = '👨🏾‍🤝‍👨🏻' > </div> " .$team["name"]. "  ⭐</a></li>";
+        // }
+    }
+    return $HTML;
+}
+
 function displayTeams2($all_teams){
     $HTML = '';
     foreach( $all_teams as $team) {

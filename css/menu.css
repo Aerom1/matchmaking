@@ -6,7 +6,7 @@ Modif Ã©quipe
 
 #divmenu{
   animation: 300ms linear 0ms 1 normal none running bounce-in;
-  z-Index : 3;
+  z-Index: 7;
   text-align: center;
   display : grid;
   grid-Template-Rows : repeat(8, 1fr);
@@ -15,7 +15,6 @@ Modif Ã©quipe
   color : white;
   box-Shadow : rgba(0, 0, 0, 0.56) 0px 0px 70px 10px;
   padding : 7%;
-
   position : absolute;
   /* max-width: -moz-fit-content;
   max-width: fit-content; */
@@ -73,12 +72,12 @@ Modif Ã©quipe
   border-radius: 100px;
   /* background-color: rgba(255,255,255,0.2); */
   margin: 0 5px;
-  background: linear-gradient(316deg, transparent, transparent, white);
+  background: linear-gradient(316deg, #00000087, transparent, white);
 }
 
 .btChooseXP.forceActuelle {
   border: 3px solid white;
-  background: linear-gradient(313deg, transparent, green, white);
+  background: linear-gradient(132deg, white, green, transparent);
   box-shadow: #848484 0px 0px 5px 5px;
 }
 

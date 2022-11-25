@@ -68,6 +68,8 @@ http://127.0.0.1:8080/matchmaking/index.php
 	<link rel="stylesheet" href="css\burger.css">
 	<link rel="stylesheet" href="css\burger2.css">
 	<link rel="stylesheet" href="css\menupop.css">
+	<link rel="stylesheet" href="css\teams.css">
+	<!-- <link rel="stylesheet" href="css\rotatingborder.css"> -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide|Sofia&effect=neon|outline|emboss|shadow-multiple">
 	
 	<link rel="apple-touch-icon" href="img/favicon.png"/>
@@ -78,9 +80,9 @@ http://127.0.0.1:8080/matchmaking/index.php
 	<meta http-equiv="Content-Type" content="text/html; charset=utf8_general_ci"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="mobile-web-app-capable" content="yes">
-	<link rel="manifest" href="pwa/rompwa.webmanifest">
+	<!-- <meta name="apple-mobile-web-app-capable" content="yes"> -->
+	<!-- <meta name="mobile-web-app-capable" content="yes"> -->
+	<!-- <link rel="manifest" href="pwa/rompwa.webmanifest"> -->
 
 </head>
 
@@ -92,13 +94,9 @@ http://127.0.0.1:8080/matchmaking/index.php
 
 	<div id="snackbar">Snackbar text message</div> 
 	<!----------------- HEADER --------------->
-	<header>
+	<header class="titre">
 		<div id="logoHeader">
 			<img id="logoTeam" onclick="clicLogo()" src="img/logo/LogoHockey7.png" alt="🏟" />
-			<!-- <form  id='formChgTeam' action="index.php" method="post" >
-				<input type="hidden" name="teamid" id="nextteamid" value="" />
-				<input type="hidden" id="logoEquipeNext" name="submit" alt="👨‍👩‍👦‍👦" >
-			</form> -->
 		</div>
 		<h1 id="team" onclick="clicTitre()" class="font-effect-shadow-multiple"> </h1>
 		<h2 id="questionPresents">Qui est présent ?</h2>
@@ -106,9 +104,6 @@ http://127.0.0.1:8080/matchmaking/index.php
 	
 	<div id='lienzoom' onclick="showZoom()">🔎</div>
 
-	<!-- <div id='lienzoom' class="menu" onclick="this.classList.toggle('open')">🔎</div> -->
-
-	
 	<!----------------- EQUIPES --------------->
 	<section>
 		<div id ="containerEquipes" class="accueil">
@@ -119,6 +114,21 @@ http://127.0.0.1:8080/matchmaking/index.php
 			<div id="div9" class="teamContainer"></div>
 		</div>
 	</section>
+
+	<!-- https://codepen.io/Markshall/pen/ZEQBKpb?editors=1100 -->
+	<article id="tabteam">
+	<header onclick="closeTabteam()">
+		<img class="tabteam__close" src="img/svg/close.svg">
+		<h1 class="tabteam__title"><span class="tabteam__title--top">Equipes</span><span class="tabteam__title--bottom">Choisissez</span></h1>
+	</header>
+	
+	<main class="tabteam__profiles">
+
+		<?php echo displayTeams3($all_teams); ?>
+
+	</main>
+	</article>
+
 	<!----------------- FOOTER ---------------> 
 	<footer style="text-align:center;">
 		<!-- 👨‍👩‍👦‍👦🧩🏟🏒⚙️📃🔙➕+⨄⨁👨🏽‍🤝‍👨🏻↻ -->
@@ -127,24 +137,23 @@ http://127.0.0.1:8080/matchmaking/index.php
 		<!-- document.getElementById('menu1').classList.remove('open') -->
 		<!-- https://codepen.io/barhatsor/pen/YzwxaQV?editors=1100	 -->
 
+		<!-- <input type="checkbox" id="active">
+		<label for="active" id="btchangeteam" class="sbutton menu-btn menudeco"></label>	
 		<div id="menu2wrapper" class="wrapper">
-			<a href='#' class="settings-btn"><i class="fas fa-bars"></i></a>
 			<ul><?php echo displayTeams2($all_teams); ?></ul>
-		</div>
+		</div> -->
 
-
-		<input type="checkbox" id="active">
 		<div id="menu1" class="menuP menudeco" onclick="this.classList.toggle('open')">
-			<label for="active" id="btchangeteam" class="sbutton"></label>	
-			<!-- <input type="checkbox" id="active">
-			<label for="active" id="btchangeteam" class="sbutton menu-btn menudeco"></label>	 -->
-			<div class="sbutton" id="btzoommoins" onclick='showZoom()'></div>
+			<!-- <div class="line"></div>
+			<div class="line"></div>
+			<div class="line"></div> -->
+
 			<div class="sbutton" id="btfullscreen" onclick="toggleFullscreen()"></div>
+			<!-- <label for="active" id="btchangeteam" class="sbutton"></label>	 -->
+			<div class="sbutton" id="btchangeteam" onclick="openTabteam()"></div>
 			<div class="sbutton" id="btsettings" onclick="openPageSettings()"></div>
-			<!-- <div class="sbutton" id="btzoomplus" onclick='zoom(event, "retrecir", document.getElementById("containerEquipes").className)'></div> -->
-			<!-- <div class="sbutton" id="btzoommoins" onclick='zoom(event, "grossir",  document.getElementById("containerEquipes").className)'></div> -->
-			<!-- <div class="sbutton" id="btchangeteam"></div> -->
-			<!-- <label for="btchangeteam">Changer d'équipe</label> -->
+			<div class="sbutton" id="btzoom" onclick='showZoom()'></div>
+
 		</div>
 		
 		<!-- BURGER INUTILISE -->
@@ -156,27 +165,9 @@ http://127.0.0.1:8080/matchmaking/index.php
 		</label>
 
 		<!-- 🎲 RANDOM -->
-		<div class="menudeco" id="btRandom" onclick="btRandom()" style='background: url("img/svg/shuffle.svg") no-repeat 50%/ 50% #e8e8f3;' >
-			<!-- gris foncé : #e8e8f3 --> 
-			<!-- <img id="logoBtRandom" src="img/svg/gear-solid.svg">  -->
-		</div> 
-		<!-- <span id="logoBtRandom2">	🎲	</span> -->
-		<!-- <img id="logoBtRandom1"  src='img/logo/LogoHockey7.png' alt='🏟'/> -->
-
-		<div id="containerButton_MenuAccueil">
-			<!--  CHANGE TEAM  🔁🗘↻ -->
-			<!-- <button type="button" id="btVide" onclick="document.getElementById('containerListeEquipes').classList.toggle('invisible')" nextteamid="">
-				<img class="logo2" id="logoEquipeNext2" src="<!?= $_SESSION['team']['logo'] ?>" alt="👨‍👩‍👦‍👦" max-width="100" max-height="120">
-			</button>
-			<div id='containerListeEquipes' class="invisible" style="position:absolute; bottom:10vh; ">
-				<!?php echo displayTeams1($all_teams); ?>
-			</div> -->
-			<!-- <button type="button" id="btChgTeam" class="btn" onclick="changeTeam()" nextteamid="">
-			</button> -->
-			<!-- ⚙️ SETTINGS -->
-			<!-- <button type="button" id="btSettings" onclick="openPageSettings()">⚙️</button> -->
-		</div>
-
+		<div class="menudeco" id="btRandom" onclick="btRandom()" style='background: url("img/svg/shuffle.svg") no-repeat 50%/ 50% #e8e8f3;' >	</div> 
+		
+		<!-- BOUTONS  🔙🎲➗  -->
 		<div id="containerButton_MenuEquipes" style='display:none;'>
 			<!--  BACK 🔙🔄↺ -->
 			<button type="button" id="btBack" class="menudeco" onclick="btBack()">
@@ -211,7 +202,6 @@ http://127.0.0.1:8080/matchmaking/index.php
 			<button type="button" id='btn_theme' onclick="toggleTheme()">🌗</button>
 			<button type="button" id='smaller' onclick='zoom("retrecir")'>🔍</button>
 			<button type="button" id='bigger' onclick='zoom("grossir")'>🔎</button>
-			<!-- <button class="add-button" >Ajouter <sub>à l'écran d'accueil</sub></button> -->
 		</div>
 	</aside>
 
@@ -232,7 +222,6 @@ http://127.0.0.1:8080/matchmaking/index.php
 		var nbcarTeam =	  <?= $_SESSION['nbcarTeam']   ?> // 13;
 		// =================== // Récupération des données du serveur // testTable(all_teams)
 		var all_teams = <?= $all_teams_json ?>;
-		// =================== // 
 			
 		$(document).ready(function () {
 			console.log("Hello world - document ready")
@@ -240,18 +229,20 @@ http://127.0.0.1:8080/matchmaking/index.php
 				<?PHP if(!(isset($_POST["teamid"]) or isset($_GET["teamid"]))) {	// Si c'est le premier chargement de la page
 					echo "snackbar('🤖 Coucou','white',2);";
 				} ?>
-
 				var team = <?= $team_json ?>;
 				var players = <?= $players_json ?>;
-				// var nextTeam =  getNextTeamId(all_teams, team) // on définit dès maintenant l'identifiant de la prochaine équipe, pour pouvoir afficher son logo
 				loadTeam(team, players);
 				defineTextSize(defautTextSize);
 				setTheme();
-				
-
 			console.log("<<<<<<<<<<<< END >>>>>>>>>>>>");
 		});
-		
+		function testpropagation(e){
+			alert(2);
+			e.stopPropagation();
+			e.preventDefault();
+			return false;
+		}
+
 		function clicTitre(e) {	snackbar("🤪","white",2)		}
 		function clicLogo(e) {	
 			// document.getElementById('loading-spinner-mask').classList.remove('invisible');
@@ -262,8 +253,53 @@ http://127.0.0.1:8080/matchmaking/index.php
 			document.getElementById('loading-spinner-mask').classList.remove('invisible');
 			window.open('settings.php','_self');
 		}
+		function openTabteam(){
+			document.getElementById('tabteam').classList.add('open');
+		}
+		function closeTabteam(){
+			document.getElementById('tabteam').classList.remove('open');
+		}
 
 	</script>
+
+<!-- !				! -->
+<!-- !		FIN		! -->
+<!-- !______________! -->
+
+<!-- <form  id='formChgTeam' action="index.php" method="post" >
+<input type="hidden" name="teamid" id="nextteamid" value="" />
+<input type="hidden" id="logoEquipeNext" name="submit" alt="👨‍👩‍👦‍👦" >
+</form> -->
+<!-- <div id='lienzoom' class="menu" onclick="this.classList.toggle('open')">🔎</div> -->
+
+<!-- <div class="sbutton" id="btzoomplus" onclick='zoom(event, "retrecir", document.getElementById("containerEquipes").className)'></div> -->
+<!-- <div class="sbutton" id="btzoommoins" onclick='zoom(event, "grossir",  document.getElementById("containerEquipes").className)'></div> -->
+<!-- <div class="sbutton" id="btchangeteam"></div> -->
+<!-- <label for="btchangeteam">Changer d'équipe</label> -->
+
+<!-- <div id="containerButton_MenuAccueil"></div> -->
+
+<!-- gris foncé : #e8e8f3 --> 
+<!-- <img id="logoBtRandom" src="img/svg/gear-solid.svg">  -->
+<!-- <span id="logoBtRandom2">	🎲	</span> -->
+<!-- <img id="logoBtRandom1"  src='img/logo/LogoHockey7.png' alt='🏟'/> -->
+<!--  CHANGE TEAM  🔁🗘↻ -->
+<!-- <button type="button" id="btVide" onclick="document.getElementById('containerListeEquipes').classList.toggle('invisible')" nextteamid="">
+<img class="logo2" id="logoEquipeNext2" src="<!?= $_SESSION['team']['logo'] ?>" alt="👨‍👩‍👦‍👦" max-width="100" max-height="120">
+</button>
+<div id='containerListeEquipes' class="invisible" style="position:absolute; bottom:10vh; ">
+<!?php echo displayTeams1($all_teams); ?>
+</div> -->
+<!-- <button type="button" id="btChgTeam" class="btn" onclick="changeTeam()" nextteamid="">
+</button> -->
+<!-- ⚙️ SETTINGS -->
+<!-- <button type="button" id="btSettings" onclick="openPageSettings()">⚙️</button> -->
+
+<!-- <button class="add-button" >Ajouter <sub>à l'écran d'accueil</sub></button> -->
+
+<!-- // var nextTeam =  getNextTeamId(all_teams, team) // on définit dès maintenant l'identifiant de la prochaine équipe, pour pouvoir afficher son logo -->
+
+</div>
 
 </body>
 

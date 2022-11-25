@@ -13,7 +13,7 @@
   font-size: 1em;
 } */
 
-header {
+header.titre {
   position:sticky;
   top: 0;
   /* left: 0; */

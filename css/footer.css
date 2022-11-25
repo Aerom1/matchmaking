@@ -37,7 +37,7 @@
   right: 2vh;
 }
 
-#containerButton_MenuAccueil {
+/* #containerButton_MenuAccueil {
   position: absolute;
   bottom: 4vh;
   left: 2vh;
@@ -46,14 +46,7 @@
   display: grid;
   grid-auto-columns: 1fr 2fr 1fr;
   gap: 3%;
-
-  /* position:sticky;
-  bottom: 3vh;
-  left: 0;
-  right: 0; */
-  /* position: fixed; */
-  /* height: 8vh; */
-}
+} */
 
 
 #logoBtRandom1 {
@@ -132,15 +125,17 @@
   /* font-size: 0rem; */
   /* border-color: orange; */
   /* border-radius: 500px; */
-  width: 40%;
-  height: 100px;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 6px 0px, rgba(0, 0, 0, 0.1) 0px 4px 4px 0px, rgba(0, 0, 0, 0.1) 0px 8px 8px 0px, rgba(0, 0, 0, 0.1) 0px 16px 16px 0px, rgba(0, 0, 0, 0.15) 8px 32px 32px 0px, rgba(0, 0, 0, 0.15) 8px 64px 64px 0px;
+  width: 140px;
+  height: 140px;
+  /* box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 6px 0px, rgba(0, 0, 0, 0.1) 0px 4px 4px 0px, rgba(0, 0, 0, 0.1) 0px 8px 8px 0px, rgba(0, 0, 0, 0.1) 0px 16px 16px 0px, rgba(0, 0, 0, 0.15) 8px 32px 32px 0px, rgba(0, 0, 0, 0.15) 8px 64px 64px 0px; */
   /* text-align: center; */
   /* display: flex; */
   /* justify-content: center; */
   /* align-items: center; */
   margin: auto;
   /* display: block; */
+  z-index: 0;
+  box-shadow: 7px 7px 15px rgb(55 84 170 / 23%), -7px -7px 20px rgb(255 255 255), inset 0px 0px 4px rgb(255 255 255 / 20%), inset 7px 7px 15px rgb(0 0 0 / 0%), inset -7px -7px 20px rgb(255 255 255 / 0%), 0px 0px 4px rgb(0 0 0 / 27%);
 }
 
 #icoChgTeam {

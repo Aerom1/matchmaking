@@ -28,7 +28,7 @@ function btAddTeam(nbcarTeam){
         snackbar('ℹ️ Le nom ne doit pas dépasser '+nbcarTeam+' caractères', 'orange')
         return;
     }
-    DB_CREATE_team(name, nbcarTeam);
+    DB_CREATE_team(name);
     
 }
 

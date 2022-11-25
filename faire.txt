@@ -1,12 +1,14 @@
 HOCKEY
 
+	- passer en admin si on clic dans un endroit caché (titre?)
+	- teamtab : pouvoir ajouter l'equipe en favori
 	- remettre la barre de force tout en haut
 	- bouton de menu : faire une icône burger qui se transforme en croix
-	- mettre une image par défaut pour toutes les équipes pour éviter l'icône "image manquante"
 	- choisir son sport (liste ci-dessous)
 	- a.php : droits utilisateur pour modifier l'équipe
 	- ajouter un petit mot quand il n'y a aucun joueur
 	- ? faire une interface pour ajouter plusieurs joueurs d'un coup ? ou faire en sorte qu'après l'ajout on propose encore d'ajouter
+	- charger le logo en dernier en cas de connexion lente (tor)
 	- enlever tous les vh, ne pas se référer au viewport, utiliser des %
 	- automatiser le transfert vers raspberry
 	- créer un certificat de sécurité
@@ -20,6 +22,12 @@ Parcours utilisateur :
 	j'ai un lien spécifique pour mon équipe
 	par défaut je ne peux rien modifier
 	je dois m'identifier pour modifier
+
+OK	- mettre une image par défaut pour toutes les équipes pour éviter l'icône "image manquante"
+OK	- mettre pointillés autour des joueurs en dragndrop
+OK	- la croix de fermeture de teamtab n'apparait pas (transparence)
+OK	- le chgmt d'équipe renvoie tjrs vers sunride car le teamid n'est pas défini
+OK	- ajout des étoiles de fav dans tabteam
 
 OK	- faire unique bouton de menu pour zoom / plein écran / dark theme / settings / menu des équipes
 OK	- mettre les cibles en absolute pour ne pas modifier l'emplacement des joueurs (et avec une animation ^^)
