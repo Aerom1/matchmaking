@@ -17,10 +17,10 @@
 }
 
 .menuP {
-    z-index: 5;
+    z-index: 3;
     position: absolute;
-    bottom: 34px;
-    left: 20px;
+    bottom: 10px;
+    right: 20px;
     /* position:fixed; */
     /* position: absolute; */
     /* bottom: 70px; */
@@ -115,9 +115,9 @@
 }
 
 
-.menuP.open #btfullscreen::after {
+.menuP.open #btfullscreen::before {
     content:"Plein écran";
-    left: 120%;
+    right: 130%;
     top: 10px;
     position: absolute;
     width: max-content;
@@ -126,9 +126,9 @@
     box-shadow: rgb(0 0 0 / 40%) 0px 2px 4px 0px, rgb(0 0 0 / 30%) 0px 7px 13px -3px;
     padding: 15px;
 }
-.menuP.open #btchangeteam::after {
+.menuP.open #btchangeteam::before {
     content:"Changer d'équipe";
-    left: 120%;
+    right: 130%;
     top: 10px;
     position: absolute;
     width: max-content;
@@ -137,9 +137,9 @@
     box-shadow: rgb(0 0 0 / 40%) 0px 2px 4px 0px, rgb(0 0 0 / 30%) 0px 7px 13px -3px;
     padding: 15px;
 }
-.menuP.open #btsettings::after {
+.menuP.open #btsettings::before {
     content:"Gérer les équipes";
-    left: 120%;
+    right: 130%;
     top: 10px;
     position: absolute;
     width: max-content;
@@ -148,9 +148,9 @@
     box-shadow: rgb(0 0 0 / 40%) 0px 2px 4px 0px, rgb(0 0 0 / 30%) 0px 7px 13px -3px;
     padding: 15px;
 }
-.menuP.open #btzoom::after {
+.menuP.open #btzoom::before {
     content:"Taille des noms";
-    left: 120%;
+    right: 130%;
     top: 10px;
     position: absolute;
     width: max-content;
