@@ -2,6 +2,7 @@
 // var_dump (file_get_contents('php://input'));
 
 // Connection
+session_start(); // Start the session to store variable between pages
 $conn = include 'connectToDB.php';
 
 // Recup les infos à sauvegarder

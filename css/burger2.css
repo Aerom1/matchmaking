@@ -50,8 +50,8 @@
  .burger-menu {
 	 --burger-menu-radius: 4em;
 	 position: fixed;
-	 top: 0px;
-	 right: 0px;
+	 /* top: 0px; */
+	 /* right: 0px; */
 	 z-index: 100;
 	 display: block;
 	 width: var(--burger-menu-radius);

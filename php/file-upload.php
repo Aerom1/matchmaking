@@ -2,6 +2,8 @@
 <?php 
 // Tutorial PHP 8 Upload & Store File/Image in MySQL  https://www.positronx.io/php-upload-store-file-image-in-mysql-database/
 
+session_start(); // Start the session to store variable between pages
+
 $conn = include 'php/connectToDB.php';
 include 'php/input.php'; // pour la fonction clean_input qui évite les injections sql
 
@@ -44,7 +46,7 @@ if ( isset($_POST["submit"]) ) {
         if (file_exists($target_file)) { 
             echo "<script>console.log('################################# le fichier existe déjà'); </script>";
         } else {
-            echo "<script>console.log('################################# le fichier n'existe pas encore'); </script>";
+            echo "<script>console.log('################################# le fichier n existe pas encore'); </script>";
             if (move_uploaded_file($_FILES["fileUpload"]["tmp_name"], $target_file)) {
                 echo "<script>console.log('################################# déplacement réussi'); </script>";
             } else {

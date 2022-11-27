@@ -4,11 +4,13 @@
 }
  
 /* MEILLEURS GUIDES :
-FLEX-> https://css-tricks.com/snippets/css/a-guide-to-flexbox/
-GRID-> https://css-tricks.com/snippets/css/complete-guide-grid/
+FLEX->  https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+    et  https://codepen.io/osublake/pen/dMLQJr
+GRID->  https://css-tricks.com/snippets/css/complete-guide-grid/
 BOW-SHADOW GENERATOR-> https://html-css-js.com/css/generator/box-shadow/
 CSS Image Centering – How to Center an Image in a Div : https://www.freecodecamp.org/news/how-to-center-an-image-in-a-div-css/
- */
+Center without transform = fit-content-> https://levelup.gitconnected.com/dont-use-transform-to-center-element-b378587ad1db
+*/
 
 /* AFFICHAGE PORTRAIT */
 @media screen and (min-height: 480px) {
@@ -40,15 +42,14 @@ html, .fullscreen {
   /* display: flex; */
   height: 100%;
   margin: 0;
-  padding: 0;
+  padding: 0px;
   width: 100%;
   max-width:500px;
   min-height:100%;
   /* max-width:1280px;
   min-height:100%; */
   margin:0 auto;
-  position:relative;
-  
+  /* position:relative; */
 }
 
 .invisible {
@@ -93,9 +94,9 @@ html, .fullscreen {
 }
 
 #containerEquipes.equipes {
-  margin-top: 3vh;
-  margin-bottom: 6vh;
-  height: 80vh;
+  margin-top: 5vh;
+  margin-bottom: 2vh;
+  height: 67vh;
   gap: 10px;
 }
 
@@ -251,6 +252,16 @@ img {
 #div0>.player.inactif{
   color: white;
   background-color: red;
+}
+
+
+#div0>.player.vu{
+  box-shadow: 
+  rgb(0 0 0 / 40%) 0px 2px 4px 0px, 
+  rgb(0 0 0 / 30%) 0px 7px 13px -3px,
+  #f7eb0385 -4px -10px 20px 5px inset,
+  #ffffff -4px 5px 10px 1px inset;
+  color: yellow;
 }
 
 div.span {

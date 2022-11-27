@@ -1,9 +1,11 @@
 HOCKEY
 
+	- réparer le dragndrop : le pointillé disparait dès que je change de div
 	- passer en admin si on clic dans un endroit caché (titre?)
 	- teamtab : pouvoir ajouter l'equipe en favori
-	- remettre la barre de force tout en haut
-	- bouton de menu : faire une icône burger qui se transforme en croix
+OK	- remettre la barre de force tout en haut
+OK	- Pouvoir ajouter une équipe depuis tabteam ? (lien vers settings.php ?)
+OK	- bouton de menu : faire une icône burger qui se transforme en croix
 	- choisir son sport (liste ci-dessous)
 	- a.php : droits utilisateur pour modifier l'équipe
 	- ajouter un petit mot quand il n'y a aucun joueur

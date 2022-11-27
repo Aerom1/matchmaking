@@ -1,7 +1,7 @@
 <?php 
     session_start();  // Start the session to store variable between pages 
-    include("php/file-upload.php");  // <!-- Tutorial PHP 8 Upload & Store File/Image in MySQL  https://www.positronx.io/php-upload-store-file-image-in-mysql-database/ -->
-    include 'php/updateDropdowns.php';
+    include "php/file-upload.php";  // <!-- Tutorial PHP 8 Upload & Store File/Image in MySQL  https://www.positronx.io/php-upload-store-file-image-in-mysql-database/ -->
+    include "php/updateDropdowns.php";
     $all_teams = $conn->query("SELECT * FROM tbteam") -> fetch_all( MYSQLI_ASSOC );
 ?>
 

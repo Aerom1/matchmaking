@@ -11,22 +11,26 @@
     background: #e8e8f3;
     border-radius: 500px;
     cursor: pointer;
-    box-shadow: 7px 7px 15px rgba(55, 84, 170, 0.15), -7px -7px 20px rgba(255, 255, 255, 1), inset 0px 0px 4px rgba(255, 255, 255, 0.2), inset 7px 7px 15px rgba(55, 84, 170, 0), inset -7px -7px 20px rgba(255, 255, 255, 0), 0px 0px 4px rgba(255, 255, 255, 0);
+    box-shadow: 7px 7px 15px rgb(55 84 170 / 23%), -7px -7px 20px rgb(255 255 255), inset 0px 0px 4px rgb(255 255 255 / 20%), inset 7px 7px 15px rgb(0 0 0 / 0%), inset -7px -7px 20px rgb(255 255 255 / 0%), 0px 0px 4px rgb(0 0 0 / 27%);
     width: 70px;
     height: 70px;
 }
 
 .menuP {
     z-index: 3;
-    position: absolute;
-    bottom: 10px;
+    position: fixed;
+    bottom: 20px;
     right: 20px;
     /* position:fixed; */
     /* position: absolute; */
     /* bottom: 70px; */
     /* right:50px; */
 }
-.menuP::before, .menuP::after {
+/* .menuP.open {
+    opacity: 0.9;
+} */
+
+/* .menuP::before, .menuP::after {
     content: "";
     background: #c3c2c7;
     border-radius: 5px;
@@ -44,15 +48,13 @@
 .menuP::after {
     transform: rotate(-90deg);
 }
-/* .menuP.open {
-    opacity: 0.9;
-} */
+
 .menuP.open::before {
     transform: rotate(45deg);
 }
 .menuP.open::after {
     transform: rotate(-45deg);
-}
+} */
 .menuP.open .sbutton {
     opacity: 1;
     pointer-events: auto;
@@ -71,14 +73,20 @@
     background: url("../img/svg/fullscreen.svg") no-repeat 50%/ 50% #e8e8f3;
     transition-delay: 0.05s;
 }
+/* .menuP.open .sbutton:nth-of-type(3) { */
+.menuP.open #btzoom {
+    left: 0;
+    top: -250%;
+    background: url("../img/svg/zoom-in.svg") no-repeat 50%/ 50% #e8e8f3;
+    transition-delay: 0.05s;
+}
 /* .menuP.open .sbutton:nth-of-type(4) { */
 .menuP.open #btchangeteam {
     left: 0;
-    top: -250%;
+    top: -370%;
     background: url("../img/svg/team.svg") no-repeat 50%/ 50% #e8e8f3;
     transition-delay: 0.05s;
 }
-/* .menuP.open .sbutton:nth-of-type(3) { */
 /* .menuP.open .sbutton:last-of-type { */
 .menuP.open #btsettings {
     left: 0;
@@ -86,15 +94,9 @@
     background: url("../img/svg/gear-solid.svg") no-repeat 50% 45%/50% 45% #e8e8f3;
     transition-delay: 0.1s;
 }
-.menuP.open #btzoom {
-    left: 0;
-    top: -370%;
-    background: url("../img/svg/zoom-in.svg") no-repeat 50%/ 50% #e8e8f3;
-    transition-delay: 0.05s;
-}
 
 .sbutton {
-    padding: 30px;
+    /* padding: 30px; */
     border-radius: 50%;
     cursor: pointer;
     background: #e8e8f3;
@@ -126,6 +128,18 @@
     box-shadow: rgb(0 0 0 / 40%) 0px 2px 4px 0px, rgb(0 0 0 / 30%) 0px 7px 13px -3px;
     padding: 15px;
 }
+.menuP.open #btzoom::before {
+    content:"Taille des noms";
+    right: 130%;
+    top: 10px;
+    position: absolute;
+    width: max-content;
+    background-color: #e8e8f3;
+    border-radius: 20px;
+    box-shadow: rgb(0 0 0 / 40%) 0px 2px 4px 0px, rgb(0 0 0 / 30%) 0px 7px 13px -3px;
+    padding: 15px;
+}
+
 .menuP.open #btchangeteam::before {
     content:"Changer d'équipe";
     right: 130%;
@@ -139,17 +153,6 @@
 }
 .menuP.open #btsettings::before {
     content:"Gérer les équipes";
-    right: 130%;
-    top: 10px;
-    position: absolute;
-    width: max-content;
-    background-color: #e8e8f3;
-    border-radius: 20px;
-    box-shadow: rgb(0 0 0 / 40%) 0px 2px 4px 0px, rgb(0 0 0 / 30%) 0px 7px 13px -3px;
-    padding: 15px;
-}
-.menuP.open #btzoom::before {
-    content:"Taille des noms";
     right: 130%;
     top: 10px;
     position: absolute;

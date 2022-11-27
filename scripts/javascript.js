@@ -68,6 +68,8 @@ function loadTeam(team, players){
     $("#containerEquipes").css({"display":"grid"})
     $(".teamContainer").css({"width":"100%"})
     $(".cible").remove();
+    $("#containerForceMenuEquipes").hide();
+
 }
 
 function loadData(team, players){
@@ -130,10 +132,14 @@ function btBack(){
     enleveMenu_();
 
     $('#containerButton_MenuEquipes').hide();
-    $('header').show();
+    $('header.titre').show();
     $('#menu1').show();
     $('#menu2wrapper').show();
-    $('#btRandom').show();
+
+    $("#containerForceMenuEquipes").hide();
+    // document.getElementById("#containerForceMenuEquipes").setAttribute('display','none');
+
+    // $('#btRandom').show();
 
     
     // indique aux conteneur de joueurs quelle mise en forme prendre
@@ -200,11 +206,11 @@ function btRandom(){
     console.log("BTRANDOM")
     document.getElementById('loading-spinner-mask').classList.remove('invisible');
 
-    $('header').hide();
+    $('header.titre').hide();
     $('#containerButton_MenuEquipes').show();
     $('#menu1').hide();
     $('#menu2wrapper').hide();
-    $('#btRandom').hide();
+    // $('#btRandom').hide();
     
         
     // indique aux conteneur de joueurs quelle mise en forme prendre
@@ -230,39 +236,39 @@ function btRandom(){
 
 function changeBtForceDisposition(nbEquipe) {
 
-// METHODE POUR CENTRER UN ELEMENT EN POSITION ABSOLUTE
-// top: 50%;  /* position the top  edge of the element at the middle of the parent */
-// left: 50%; /* position the left edge of the element at the middle of the parent */
-// transform: translate(-50%, -50%); /* This is a shorthand of
-//                                      translateX(-50%) and translateY(-50%) */
+// // METHODE POUR CENTRER UN ELEMENT EN POSITION ABSOLUTE
+// // top: 50%;  /* position the top  edge of the element at the middle of the parent */
+// // left: 50%; /* position the left edge of the element at the middle of the parent */
+// // transform: translate(-50%, -50%); /* This is a shorthand of
+// //                                      translateX(-50%) and translateY(-50%) */
 
-    if (nbEquipe==3){
-        document.querySelectorAll('.forceEquipe').forEach(e => {  
-            e.style.paddingRight = '25%';  
-            e.style.paddingTop = '0%';  
-        });
-        // $('.forceEquipe').css('padding-right', '5%') 
-        document.getElementById('icoRandom').style.left = '60%';
-        document.getElementById('icoRandom').style.top = '1.1vh';
-        document.getElementById('icoRandom').style.transform = 'none';
-        document.getElementById('containerForceMenuEquipes').style.flexDirection = 'column';
-        document.getElementById('containerForceMenuEquipes').style.width = '100%';
-        document.getElementById('containerForceMenuEquipes').style.height = '100%';
-    } else {
-        document.querySelectorAll('.forceEquipe').forEach(e => {  
-                e.style.paddingRight = '0%';
-                e.style.paddingTop = '7%';
-              });
-        // $('.forceEquipe').css('padding', '1vh 0')
-        document.getElementById('icoRandom').style.right = 'none';
-        document.getElementById('icoRandom').style.left = '50%';
-        document.getElementById('icoRandom').style.top = '20%';
-        document.getElementById('icoRandom').style.transform = 'translate(-50%)';
-        document.getElementById('containerForceMenuEquipes').style.flexDirection = 'row';
-        document.getElementById('containerForceMenuEquipes').style.width = '100%';
-        document.getElementById('containerForceMenuEquipes').style.height = '100%';
+//     if (nbEquipe==3){
+//         document.querySelectorAll('.forceEquipe').forEach(e => {  
+//             e.style.paddingRight = '25%';  
+//             e.style.paddingTop = '0%';  
+//         });
+//         // $('.forceEquipe').css('padding-right', '5%') 
+//         // document.getElementById('icoRandom').style.left = '60%';
+//         // document.getElementById('icoRandom').style.top = '1.1vh';
+//         // document.getElementById('icoRandom').style.transform = 'none';
+//         document.getElementById('containerForceMenuEquipes').style.flexDirection = 'column';
+//         document.getElementById('containerForceMenuEquipes').style.width = '100%';
+//         document.getElementById('containerForceMenuEquipes').style.height = '100%';
+//     } else {
+//         document.querySelectorAll('.forceEquipe').forEach(e => {  
+//                 e.style.paddingRight = '0%';
+//                 e.style.paddingTop = '7%';
+//               });
+//         // $('.forceEquipe').css('padding', '1vh 0')
+//         // document.getElementById('icoRandom').style.right = 'none';
+//         // document.getElementById('icoRandom').style.left = '50%';
+//         // document.getElementById('icoRandom').style.top = '20%';
+//         // document.getElementById('icoRandom').style.transform = 'translate(-50%)';
+//         document.getElementById('containerForceMenuEquipes').style.flexDirection = 'row';
+//         document.getElementById('containerForceMenuEquipes').style.width = '100%';
+//         document.getElementById('containerForceMenuEquipes').style.height = '100%';
 
-    }
+//     }
 }
 
 function RANDOM(nbEquipe) {
@@ -275,6 +281,8 @@ function RANDOM(nbEquipe) {
     // }, 1000)
 
     $("#divPlus").remove();
+    $("#containerForceMenuEquipes").show();
+    // document.getElementById("#containerForceMenuEquipes").setAttribute('display','flex');
 
     enleveMenu_();
     var dispos = document.getElementById('div0');
@@ -362,7 +370,7 @@ function RANDOM(nbEquipe) {
     })
 
     DB_CHANGE_player_inactifs(j);
-    changeBtForceDisposition(nbEquipe);
+    // changeBtForceDisposition(nbEquipe);
 }
 
 
@@ -460,7 +468,7 @@ function clickAddPlayer() {
     var name = prompt("Nom du nouveau joueur ?")
     if (name == "" || name == null) { return }
     if (name.length > nbcarPlayer) {
-        snackbar('ℹ️ Le nom ne doit pas dépasser '+nbcarPlayer+' caractères', 'orange')
+        snackbar('ℹ️ | Le nom ne doit pas dépasser '+nbcarPlayer+' caractères', 'orange')
         return
     }
     
@@ -492,7 +500,7 @@ function changeName_MODIFPLAYERDB(e) {
     newname = prompt('Nouveau nom ?',e.innerText)
     if (!newname) { return }
     if (newname.length > nbcarPlayer) {
-        snackbar('ℹ️ Le nom ne doit pas dépasser '+nbcarPlayer+' caractères', 'orange')
+        snackbar('ℹ️ | Le nom ne doit pas dépasser '+nbcarPlayer+' caractères', 'orange')
         return
     }
     e.innerText = newname
@@ -507,7 +515,7 @@ function changeName_DISPLAYONLY(e) {
     newname = prompt('Nouveau nom ?',e.innerText)
     if (!newname) { return }
     if (newname.length > nbcarPlayer) {
-        snackbar('ℹ️ Le nom ne doit pas dépasser '+nbcarPlayer+' caractères', 'orange')
+        snackbar('ℹ️ | Le nom ne doit pas dépasser '+nbcarPlayer+' caractères', 'orange')
         return
     }
     e.innerText =newname
@@ -577,13 +585,21 @@ function createPlayer_(force, name, absent, id) {
 
 function clickPlayerName(p){
     // console.log(p)
-
+    
     if (p.parentNode.id == 'div0') {
         // SI ECRAN D'ACCUEIL : le joueur passe actif/inactif
-        p.classList.toggle('inactif')
-        console.log(p.getAttribute('name') + " change statut absent à: "+p.classList.contains("inactif"))
-        p.parentNode.appendChild(p);
+        if (p.classList.contains("inactif")) {
+            p.classList.remove('inactif')
+            p.parentNode.insertBefore(p, p.parentNode.children[1]); // J'ajoute après le bouton '+'
+            
+        } else {
+            p.classList.add('inactif')
+            p.parentNode.appendChild(p);
+            
+        }
+        p.classList.add('vu')
         majNbJoueurs_();
+        console.log(p.getAttribute('name') + " change statut absent à: "+p.classList.contains("inactif"))
     } else {
         // SI ECRAN DES EQUIPES : le joueur est sélectionné pour un échange
         ecranEquipe_SELECTPLAYER(p)
@@ -799,9 +815,9 @@ function majForceEquipes_() {
     var nbPlayer2 = $("#div2")[0].childElementCount
     var nbPlayer3 = $("#div3")[0].childElementCount
 
-    $("#forceEq1").html(forceEq1 + '⚡' + '<sup>' + nbPlayer1 + '🧍‍♀️</sup>'); // jaune 
-    $("#forceEq2").html(forceEq2 + '⚡' + '<sup>' + nbPlayer2 + '🧍</sup>'); // orange
-    $("#forceEq3").html(forceEq3 + '⚡' + '<sup>' + nbPlayer3 + '🧍‍♂️</sup>'); // noir
+    $("#forceEq1").html('💪 ' + forceEq1 + ' <sup>(' + nbPlayer1 + ')</sup>'); // jaune  ⚡
+    $("#forceEq2").html('💪 ' + forceEq2 + ' <sup>(' + nbPlayer2 + ')</sup>'); // orange ⚡
+    $("#forceEq3").html('💪 ' + forceEq3 + ' <sup>(' + nbPlayer3 + ')</sup>'); // noir ⚡
 
     // if (forceEq1==0)  { document.getElementById("forceEq1").setAttribute("display","none");
     //     } else        { document.getElementById("forceEq1").setAttribute("display","unset"); }

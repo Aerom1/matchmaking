@@ -10,19 +10,23 @@
 
 
 #containerForceMenuEquipes{
-  width: 100%;
-  height: 100%;
+  /* width: 100%; */
+  /* height: 100%; */
   display: flex;
-  /* position: absolute; */
-  /* top: 0; */
+  position: fixed;
+  top: 0;
   /* bottom: 0; */
-  /* left: 0; */
-  align-items: stretch;
-  justify-content: center;
+  left: 0;
+  right: 0;
   font-size: 1.1em;
-  align-content: center;
-  flex-direction: column;
   float: right;
+  border-radius: 0 0 100px 100px;
+  overflow: hidden;
+  /* border-bottom: 1px solid white; */
+  margin: auto;
+  width: fit-content;
+  box-shadow: black 0 0 8px 2px;
+  opacity: 0.6;
 }
 
 #containerButton_MenuEquipes {
@@ -31,8 +35,8 @@
   grid-auto-columns: 1fr 2fr 1fr;
   /* font-size: 20px; */
   /* width:100%; */
-  position: absolute;
-  bottom: 2vh;
+  position: fixed;
+  bottom: 20px;
   left: 2vh;
   right: 2vh;
 }
@@ -89,7 +93,7 @@
 
 #btBack, #btNbEquipes {
   /* background-color: #3d3d3d; */
-  background-color: rgba(0,0,0,0);
+  background-color: #e8e8f3;
   /* box-shadow: none; */
   border: 0px;
   border-radius: 500px;
@@ -111,13 +115,13 @@
 /* } */
 
 #btBack, #btVide, #containerListeEquipes            {grid-column: 1;}
-#btRandom, #btForceEquipes  {  grid-column: 2;  }
+#btRandom, #btForceEquipes  {grid-column: 2;}
 #btNbEquipes, #btSettings   {  grid-column: 3;  }
 
 
 
 #btRandom {
-  position: sticky;
+  position: fixed;
   bottom:20px;
   /* left:50%; */
   /* transform: translate( -50%, 0); */
@@ -125,8 +129,8 @@
   /* font-size: 0rem; */
   /* border-color: orange; */
   /* border-radius: 500px; */
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   /* box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 6px 0px, rgba(0, 0, 0, 0.1) 0px 4px 4px 0px, rgba(0, 0, 0, 0.1) 0px 8px 8px 0px, rgba(0, 0, 0, 0.1) 0px 16px 16px 0px, rgba(0, 0, 0, 0.15) 8px 32px 32px 0px, rgba(0, 0, 0, 0.15) 8px 64px 64px 0px; */
   /* text-align: center; */
   /* display: flex; */
@@ -136,6 +140,8 @@
   /* display: block; */
   z-index: 0;
   box-shadow: 7px 7px 15px rgb(55 84 170 / 23%), -7px -7px 20px rgb(255 255 255), inset 0px 0px 4px rgb(255 255 255 / 20%), inset 7px 7px 15px rgb(0 0 0 / 0%), inset -7px -7px 20px rgb(255 255 255 / 0%), 0px 0px 4px rgb(0 0 0 / 27%);
+  left: 0;
+  right: 0;
 }
 
 #icoChgTeam {
@@ -155,6 +161,7 @@
   /* width: 33.4%; */
   flex-grow: 1;
   /* padding-right: 5vw; */
+  padding: 0 10px;
 }
 
 .imgContainerListeLogoTeam

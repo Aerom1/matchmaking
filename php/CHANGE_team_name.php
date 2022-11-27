@@ -1,6 +1,8 @@
 <?php 
 
 // Connection
+session_start(); // Start the session to store variable between pages
+
 $conn = include 'connectToDB.php';
 include 'input.php'; // pour la fonction clean_input qui évite les injections sql
 include 'updateDropdowns.php';

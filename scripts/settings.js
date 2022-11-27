@@ -25,10 +25,10 @@ function btAddTeam(nbcarTeam){
     var name = prompt("Nom de la nouvelle équipe ?")
     if (name == "" || name == null) { return }
     if (name.length > nbcarTeam ) {
-        snackbar('ℹ️ Le nom ne doit pas dépasser '+nbcarTeam+' caractères', 'orange')
+        snackbar('ℹ️ | Le nom ne doit pas dépasser '+nbcarTeam+' caractères', 'orange')
         return;
     }
-    DB_CREATE_team(name);
+    DB_CREATE_team(name, 'settings');
     
 }
 
@@ -53,7 +53,7 @@ function changeName_MODIFTEAMDB(e, nbcarTeam){
     newname = prompt('Nouveau nom ?',e.innerText);
     if (!newname) { return }
     if (newname.length > nbcarTeam ) {
-        snackbar('ℹ️ Le nom ne doit pas dépasser '+nbcarTeam+' caractères', 'orange');
+        snackbar('ℹ️ | Le nom ne doit pas dépasser '+nbcarTeam+' caractères', 'orange');
         return;
     }
     e.innerText = newname;

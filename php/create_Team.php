@@ -1,4 +1,5 @@
 <?php 
+session_start(); // Start the session to store variable between pages
 
 $conn = include 'connectToDB.php';
 include 'input.php'; // pour la fonction clean_input qui évite les injections sql
@@ -42,15 +43,17 @@ if (!$stmt) {
             $result = "Error: $conn->error";
         } else {
             // printf("<br/>Le joueur a été ajouté");
-            $success = true;
-            $result = "👍 $name a été créée";
             $new_id = $conn->insert_id;
-
+            
             $_SESSION['team']['id'] = $new_id;
             $_SESSION['team']['name'] = $name;
             $_SESSION['team']['logo'] = $logo;
             $_SESSION['team']['fav'] = 0;
             
+            $success = true;
+            $result = "👍 $name ($new_id) a été créé";
+            // $result = "id:". $_SESSION['team']['id'] . " name:".$_SESSION['team']['name'];
+
             $all_teams = $conn->query("SELECT * FROM tbteam") -> fetch_all( MYSQLI_ASSOC );
 
             $dropdownfav = updateDropdownHTMLfav($all_teams);

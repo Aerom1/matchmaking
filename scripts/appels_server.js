@@ -143,8 +143,8 @@ function DB_CHANGE_team_favorite(id, name) {
 	}).catch(error => console.log(error));
 }
 
-function DB_CREATE_team(name) {
-	console.log("==============> DB_CREATE_team " + name);
+function DB_CREATE_team(name, origin) {
+	console.log("==============> DB_CREATE_team " + name + " (origin:" + origin + ")");
 	loadingSpinner()
 
 	fetch('php/CREATE_team.php', {
@@ -160,16 +160,20 @@ function DB_CREATE_team(name) {
 		// location.reload();
 		snackbar_DB(response) // Affichage du pop (snackbar)
 		if (response.success) {
-			document.getElementById('formTeamId').value = response.id;
-			document.getElementById('supprLogo').setAttribute('teamid', response.id);
-			document.getElementById('closeTourne').setAttribute('teamid', response.id);
-			document.getElementById('btModifNom').innerText = name;
-			document.getElementById('btModifNom').setAttribute('teamid', response.id);
-			document.getElementById('imgPlaceholder').setAttribute('src','');
-			document.getElementById('teamlistfav').innerHTML = response.dropdownHTMLfav ; // METTRE A JOUR LA LISTE DEROULANTE
-			document.getElementById('teamlistdel').innerHTML = response.dropdownHTMLdel ; // METTRE A JOUR LA LISTE DEROULANTE
-			document.getElementById('autoDestruction').setAttribute('teamid',response.id);
-			document.getElementById('autoDestruction').setAttribute('teamname',name);
+			if (origin == "settings") {
+				document.getElementById('formTeamId').value = response.id;
+				document.getElementById('supprLogo').setAttribute('teamid', response.id);
+				document.getElementById('closeTourne').setAttribute('teamid', response.id);
+				document.getElementById('btModifNom').innerText = name;
+				document.getElementById('btModifNom').setAttribute('teamid', response.id);
+				document.getElementById('imgPlaceholder').setAttribute('src','');
+				document.getElementById('teamlistfav').innerHTML = response.dropdownHTMLfav ; // METTRE A JOUR LA LISTE DEROULANTE
+				document.getElementById('teamlistdel').innerHTML = response.dropdownHTMLdel ; // METTRE A JOUR LA LISTE DEROULANTE
+				document.getElementById('autoDestruction').setAttribute('teamid',response.id);
+				document.getElementById('autoDestruction').setAttribute('teamname',name);
+			} else if (origin == 'accueil') {
+				window.open('settings.php','_self');
+			}
 		}
 		unloadingSpinner()
 	}).catch(error => console.log(error));

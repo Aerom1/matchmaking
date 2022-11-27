@@ -68,7 +68,7 @@ http://127.0.0.1:8080/matchmaking/index.php
 	<link rel="stylesheet" href="css\burger.css">
 	<link rel="stylesheet" href="css\burger2.css">
 	<link rel="stylesheet" href="css\menupop.css">
-	<link rel="stylesheet" href="css\teams.css">
+	<link rel="stylesheet" href="css\tabteams.css">
 	<!-- <link rel="stylesheet" href="css\rotatingborder.css"> -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide|Sofia&effect=neon|outline|emboss|shadow-multiple">
 	
@@ -115,18 +115,27 @@ http://127.0.0.1:8080/matchmaking/index.php
 		</div>
 	</section>
 
+	<article>
+		<div id='containerForceMenuEquipes'>
+			<div id="forceEq1" class="forceEquipe" ></div>
+			<div id="forceEq3" class="forceEquipe" ></div>
+			<div id="forceEq2" class="forceEquipe" ></div>
+		</div>
+	</article>
+
 	<!-- https://codepen.io/Markshall/pen/ZEQBKpb?editors=1100 -->
-	<article id="tabteam">
-	<header onclick="closeTabteam()">
-		<img class="tabteam__close" src="img/svg/close.svg">
-		<h1 class="tabteam__title"><span class="tabteam__title--top">Equipes</span><span class="tabteam__title--bottom">Choisissez</span></h1>
-	</header>
-	
-	<main class="tabteam__profiles">
-
-		<?php echo displayTeams3($all_teams); ?>
-
-	</main>
+	<article id="tabteam_wrapper">
+		<section id="tabteam">
+		<header>
+			<img class="tabteam__close" src="img/svg/close.svg" onclick="closeTabteam()">
+			<span id="createTeam" onclick="openPageSettings_CreateTeam()">+</span>
+			<h1 class="tabteam__title"><span class="tabteam__title--top">Equipes</span><span class="tabteam__title--bottom">Choisissez</span></h1>
+		</header>
+		<main class="tabteam__profiles">
+			<?php echo displayTeams3($all_teams); ?>
+		</main>
+		<!-- <div class="menu-background" onclick="this.classList.toggle('open')"></div> -->
+		</section>
 	</article>
 
 	<!----------------- FOOTER ---------------> 
@@ -140,29 +149,22 @@ http://127.0.0.1:8080/matchmaking/index.php
 		<!-- <input type="checkbox" id="active">
 		<label for="active" id="btchangeteam" class="sbutton menu-btn menudeco"></label>	
 		<div id="menu2wrapper" class="wrapper">
-			<ul><?php echo displayTeams2($all_teams); ?></ul>
+			<ul><!?php echo displayTeams2($all_teams); ?></ul>
 		</div> -->
 
-		<div id="menu1" class="menuP menudeco" onclick="this.classList.toggle('open')">
-			<!-- <div class="line"></div>
+		<input type="checkbox" id="burger-toggle">
+		<label for="burger-toggle" id="menu1" class="menuP menudeco burger-menu" onclick="this.classList.toggle('open')">
+		<!-- <div id="menu1" class="menuP menudeco burger-menu" onclick="this.classList.toggle('open')"> -->
 			<div class="line"></div>
-			<div class="line"></div> -->
-
+			<div class="line"></div>
+			<div class="line"></div>
 			<div class="sbutton" id="btfullscreen" onclick="toggleFullscreen()"></div>
 			<!-- <label for="active" id="btchangeteam" class="sbutton"></label>	 -->
+			<div class="sbutton" id="btzoom" onclick='showZoom()'></div>
 			<div class="sbutton" id="btchangeteam" onclick="openTabteam()"></div>
 			<div class="sbutton" id="btsettings" onclick="openPageSettings()"></div>
-			<div class="sbutton" id="btzoom" onclick='showZoom()'></div>
-
-		</div>
-		
-		<!-- BURGER INUTILISE -->
-		<input type="checkbox" id="burger-toggle">
-		<label for="burger-toggle" class="burger-menu">
-			<div class="line"></div>
-			<div class="line"></div>
-			<div class="line"></div>
 		</label>
+		
 
 		<!-- 🎲 RANDOM -->
 		<div class="menudeco" id="btRandom" onclick="btRandom()" style='background: url("img/svg/shuffle.svg") no-repeat 50%/ 50% #e8e8f3;' >	</div> 
@@ -173,14 +175,9 @@ http://127.0.0.1:8080/matchmaking/index.php
 			<button type="button" id="btBack" class="menudeco" onclick="btBack()">
 				<span class="logo2">	↺	</span>	</button>
 			<!--  RANDOM 🎲  🦾🥋🥇🏅🏆⚡-->
-			<button type="button" id="btForceEquipes" onclick="btRandom()">
+			<!-- <button type="button" id="btForceEquipes" onclick="btRandom()">
 				<span id='icoRandom'>	🎲	</span> 
-				<div id='containerForceMenuEquipes'>
-					<div id="forceEq1" class="forceEquipe" ></div>
-					<div id="forceEq3" class="forceEquipe" ></div>
-					<div id="forceEq2" class="forceEquipe" ></div>
-				</div>
-			</button>
+			</button> -->
 			<!-- ➗ NB -->
 			<button type="button" id="btNbEquipes" class="menudeco" nb=0 onclick="btModifNbEquipes()">
 				<span class="logo2">÷</span>			
@@ -253,11 +250,20 @@ http://127.0.0.1:8080/matchmaking/index.php
 			document.getElementById('loading-spinner-mask').classList.remove('invisible');
 			window.open('settings.php','_self');
 		}
+		function openPageSettings_CreateTeam() {
+			var name = prompt("Nom de la nouvelle équipe ?")
+			if (name == "" || name == null) { return }
+			if (name.length > nbcarTeam ) {
+				snackbar('ℹ️ | Le nom ne doit pas dépasser '+nbcarTeam+' caractères', 'orange')
+			} else {
+				DB_CREATE_team(name, 'accueil');				
+			}
+		}
 		function openTabteam(){
-			document.getElementById('tabteam').classList.add('open');
+			document.getElementById('tabteam_wrapper').classList.add('open');
 		}
 		function closeTabteam(){
-			document.getElementById('tabteam').classList.remove('open');
+			document.getElementById('tabteam_wrapper').classList.remove('open');
 		}
 
 	</script>

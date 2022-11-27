@@ -12,7 +12,7 @@ fade out when your webpage get loaded.
   right: 0;
   bottom: 0;
   /* you can change color of mask here*/
-  background: rgba(230,230,230,0.5);
+  background: linear-gradient(0deg, transparent, transparent, white, transparent,transparent);
   z-index: 99;
   /* makes sure it stays on top */
 }c:\Users\romai\AppData\Local\Programs\Microsoft VS Code\resources\app\out\vs\code\electron-sandbox\workbench\workbench.html
@@ -43,10 +43,10 @@ fade out when your webpage get loaded.
   border: 5px solid transparent;
   border-top-color: #000000;
   border-bottom-color: #000000;
-  box-shadow: 0 0 10px #d62d20;
+  /* box-shadow: 0 0 10px #d62d20; */
   border-radius: 50%;
   -webkit-animation: spinner6 .5s linear infinite;
-          animation: spinner6 .5s linear infinite;
+  animation: spinner6 .5s linear infinite;
 }
 
 #spinner6:after {
@@ -61,27 +61,27 @@ fade out when your webpage get loaded.
   background: #ffa700;
   box-shadow: 0 0 5px #d62d20;
   -webkit-animation: spinner6_after 1s linear infinite;
-          animation: spinner6_after 1s linear infinite;
+  animation: spinner6_after 1s linear infinite;
 }
 
 @keyframes spinner6 {
   0% {
     -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    transform: rotate(0deg);
   }
   50% {
     -webkit-transform: rotate(180deg);
-            transform: rotate(180deg);
+    transform: rotate(180deg);
     -webkit-transform: rotate(180deg);
-            transform: rotate(180deg);
+    transform: rotate(180deg);
   }
   100% {
     -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    transform: rotate(360deg);
     -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 @keyframes spinner6_after {
@@ -118,8 +118,10 @@ fade out when your webpage get loaded.
     border-bottom: 5px solid #d62d20;
   }
   50% {
-    border-top: 5px solid rgba(0, 0, 0, 0.25);
-    border-bottom: 5px solid rgba(0, 0, 0, 0.25);
+    border-top: 5px solid white;
+    border-bottom: 5px solid white;
+    /* border-top: 5px solid rgba(0, 0, 0, 0.25);
+    border-bottom: 5px solid rgba(0, 0, 0, 0.25); */
   }
   100% {
     border-top: 5px solid #d62d20;
