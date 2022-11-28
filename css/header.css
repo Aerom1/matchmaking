@@ -5,6 +5,9 @@
 
 /* AFFICHAGE PAYSAGE */
 @media screen and (max-height: 480px) {
+  header.titre {
+    display: none;
+  }
 }
 
 

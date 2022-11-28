@@ -74,34 +74,37 @@ html, .fullscreen {
 
 
 #containerEquipes{
-  /* position:absolute; */
-  /* top:14vh; */
-  /* bottom:21vh; */
-  left: 5px;
-  right: 5px;
-  align-items: center;
-  overflow: auto;
-  display: flex;
-  justify-content: space-around;
-  justify-content: center;
+  position:absolute;
+  bottom: 15vh;
+  left: 0;
+  right: 0;
+  /* overflow: auto; */
+  /* display: flex; */
   padding: 10px;
+  /* bottom: 130px; */
+  border: 1px solid gray;
+  box-sizing: border-box;
+  /* justify-content: space-between; */
+  /* align-content: stretch; */
+  z-index: 1;
 }
 
 #containerEquipes.accueil {
-  margin-top: 2vh;
-  margin-bottom: 4vh;
-  height: 63vh;
+  top: 13vh;
+  /* margin-top: 2vh; */
+  /* margin-bottom: 4vh; */
+  /* height: 63vh; */
 }
 
 #containerEquipes.equipes {
-  margin-top: 5vh;
-  margin-bottom: 2vh;
-  height: 67vh;
+  top: 5vh;
+  /* margin-top: 5vh;
+  margin-bottom: 2vh; */
+  /* height: 67vh; */
   gap: 10px;
 }
 
-.teamContainer {
-  width: 49%;
+.equipe {
   height: 100%;
   align-items: stretch;
   /* margin-bottom: 5px; */
@@ -110,6 +113,7 @@ html, .fullscreen {
   flex-wrap: wrap;
   vertical-align:middle;
   text-align: center;
+  border: 1px solid lightgray;
 }
 
 .player {
@@ -191,7 +195,7 @@ img {
   /* width:100% */
 }
 
-.teamContainer:empty {
+.equipe:empty {
   display: none;
 }
 
@@ -273,6 +277,12 @@ div.span {
   vertical-align: middle;
 }
 
+#div1>.player.remplacant, #div3>.player.remplacant {
+  box-shadow: #00ffc2 0px -4px 20px 0px inset, #00ffc2 0px 0px 4px 0px;
+}
+#div2>.player.remplacant {
+  box-shadow: #ffd600 0px -4px 20px 0px inset, #ffd600 0px 0px 4px 0px;
+}
 
 .cible span{
   display:block;

@@ -86,10 +86,14 @@ button#bigger {
   grid-area: c;
 }
 
-#lienzoom{ 
+#lienzoom{
   font-size: 2em;
   position: fixed;
   opacity: 0.6;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 3;
 }
 
 

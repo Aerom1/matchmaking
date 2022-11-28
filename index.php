@@ -65,7 +65,7 @@ http://127.0.0.1:8080/matchmaking/index.php
 	<link rel="stylesheet" href="css\snackbar.css">
 	<link rel="stylesheet" href="css\zoom.css">
 	<link rel="stylesheet" href="css\loading.css">
-	<link rel="stylesheet" href="css\burger.css">
+	<!-- <link rel="stylesheet" href="css\burger.css"> -->
 	<link rel="stylesheet" href="css\burger2.css">
 	<link rel="stylesheet" href="css\menupop.css">
 	<link rel="stylesheet" href="css\tabteams.css">
@@ -102,16 +102,24 @@ http://127.0.0.1:8080/matchmaking/index.php
 		<h2 id="questionPresents">Qui est présent ?</h2>
 	</header>
 	
-	<div id='lienzoom' onclick="showZoom()">🔎</div>
+	<!-- <div id='lienzoom' onclick="showZoom()">🔎</div> -->
+
+	<div id='zoom' class="menu" >
+			<div id='zoomframe' onclick="hideZoom()"></div>
+			<span id='closeZoom' onclick="hideZoom()">X</span>
+			<button type="button" id='btn_theme' onclick="toggleTheme()">🌗</button>
+			<button type="button" id='smaller' onclick='zoom("retrecir")'>🔍</button>
+			<button type="button" id='bigger' onclick='zoom("grossir")'>🔎</button>
+		</div>
 
 	<!----------------- EQUIPES --------------->
 	<section>
 		<div id ="containerEquipes" class="accueil">
-			<div id="div0" class="teamContainer"></div>
-			<div id="div1" class="teamContainer" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-			<div id="div3" class="teamContainer" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-			<div id="div2" class="teamContainer" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-			<div id="div9" class="teamContainer"></div>
+			<div id="div0" class="equipe"></div>
+			<div id="div1" class="equipe" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+			<div id="div3" class="equipe" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+			<div id="div2" class="equipe" ondragend="dragEnd(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+			<div id="div9" class="equipe"></div>
 		</div>
 	</section>
 
@@ -166,22 +174,21 @@ http://127.0.0.1:8080/matchmaking/index.php
 		</label>
 		
 
-		<!-- 🎲 RANDOM -->
-		<div class="menudeco" id="btRandom" onclick="btRandom()" style='background: url("img/svg/shuffle.svg") no-repeat 50%/ 50% #e8e8f3;' >	</div> 
-		
 		<!-- BOUTONS  🔙🎲➗  -->
-		<div id="containerButton_MenuEquipes" style='display:none;'>
-			<!--  BACK 🔙🔄↺ -->
-			<button type="button" id="btBack" class="menudeco" onclick="btBack()">
-				<span class="logo2">	↺	</span>	</button>
+
+		<div id="containerButton_MenuEquipes">
+			<!--  🔙 BACK 🔄↺ -->
+			<div id="btBack" class="menudeco" onclick="btBack()"></div>
+			<!-- 🎲 RANDOM -->
+			<div id="btRandom" class="menudeco" onclick="btRandom()" style='background: url("img/svg/shuffle.svg") no-repeat 50%/ 50% #e8e8f3;' >	</div> 
+			<!-- ➗ NB ÷ -->
+			<div id="btNbEquipes" class="menudeco" nb=0 onclick="btModifNbEquipes()"></div>
+			<!-- <span class="logo2"></span>	 -->
+		
 			<!--  RANDOM 🎲  🦾🥋🥇🏅🏆⚡-->
 			<!-- <button type="button" id="btForceEquipes" onclick="btRandom()">
 				<span id='icoRandom'>	🎲	</span> 
 			</button> -->
-			<!-- ➗ NB -->
-			<button type="button" id="btNbEquipes" class="menudeco" nb=0 onclick="btModifNbEquipes()">
-				<span class="logo2">÷</span>			
-			</button>
 		</div>
 		
 	</footer>
@@ -193,13 +200,6 @@ http://127.0.0.1:8080/matchmaking/index.php
 			<div id="spinner6"  class=""></div>
 		</div>
 
-		<div id='zoom' class="menu" >
-			<div id='zoomframe' onclick="hideZoom()"></div>
-			<span id='closeZoom' onclick="hideZoom()">X</span>
-			<button type="button" id='btn_theme' onclick="toggleTheme()">🌗</button>
-			<button type="button" id='smaller' onclick='zoom("retrecir")'>🔍</button>
-			<button type="button" id='bigger' onclick='zoom("grossir")'>🔎</button>
-		</div>
 	</aside>
 
 	<!--===================================-->

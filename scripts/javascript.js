@@ -66,7 +66,7 @@ function loadTeam(team, players){
 
     // Ajuster l'affichage 
     $("#containerEquipes").css({"display":"grid"})
-    $(".teamContainer").css({"width":"100%"})
+    $(".equipe").css({"width":"100%"})
     $(".cible").remove();
     $("#containerForceMenuEquipes").hide();
 
@@ -127,21 +127,44 @@ function compteJoueursDeLequipe_(team){
 }
 
 
+function btRandom(){
+    console.log("BTRANDOM")
+    document.getElementById('loading-spinner-mask').classList.remove('invisible');
+
+    $('header.titre').hide();
+    // $('#btNbEquipes').show();
+    // $('#btBack').show();
+    $('#containerButton_MenuEquipes').addClass('extended')
+
+    // indique aux conteneur de joueurs quelle mise en forme prendre
+    document.getElementById('containerEquipes').className = 'equipes';   // "accueil","equipes"
+    
+    var nbEquipe = document.getElementById('btNbEquipes').getAttribute("nb");   
+    if (nbEquipe==0) {
+        // Pas de nombre d'équipe choisi -> selon nombre de joueurs
+        var nbJoueurs = document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length
+        if(nbJoueurs>=12){
+            nbEquipe=3;
+        }else{
+            nbEquipe=2
+        }
+        document.getElementById('btNbEquipes').setAttribute("nb",nbEquipe);
+        console.log(nbJoueurs + " JOUEURS : " + nbEquipe + " equipes !")
+    }
+    RANDOM(nbEquipe);
+    document.getElementById('loading-spinner-mask').classList.add('invisible');
+}
+
 function btBack(){
     console.log("bouton BACK")
     enleveMenu_();
 
-    $('#containerButton_MenuEquipes').hide();
+    $('#containerButton_MenuEquipes').removeClass('extended')
     $('header.titre').show();
-    $('#menu1').show();
-    $('#menu2wrapper').show();
-
+    // $('#btNbEquipes').hide();
+    // $('#btBack').hide();
     $("#containerForceMenuEquipes").hide();
-    // document.getElementById("#containerForceMenuEquipes").setAttribute('display','none');
 
-    // $('#btRandom').show();
-
-    
     // indique aux conteneur de joueurs quelle mise en forme prendre
     document.getElementById('containerEquipes').className = 'accueil';   // "accueil","equipes"
     
@@ -155,7 +178,7 @@ function reinit_() {
     console.log("reinit_")
     $("#divPlus").remove();
     $(".cible").remove();
-    $(".teamContainer").css({"width":"100%"})
+    $(".equipe").css({"width":"100%"})
     var dispos = document.getElementById('div0');
     var equipe1 = document.getElementById('div1');
     var equipe2 = document.getElementById('div2');
@@ -202,37 +225,6 @@ function btModifNbEquipes() {
     RANDOM(nbEquipe)
 }
 
-function btRandom(){
-    console.log("BTRANDOM")
-    document.getElementById('loading-spinner-mask').classList.remove('invisible');
-
-    $('header.titre').hide();
-    $('#containerButton_MenuEquipes').show();
-    $('#menu1').hide();
-    $('#menu2wrapper').hide();
-    // $('#btRandom').hide();
-    
-        
-    // indique aux conteneur de joueurs quelle mise en forme prendre
-    document.getElementById('containerEquipes').className = 'equipes';   // "accueil","equipes"
-    
-    var nbEquipe = document.getElementById('btNbEquipes').getAttribute("nb");   
-    if (nbEquipe==0) {
-        // Pas de nombre d'équipe choisi -> selon nombre de joueurs
-        var nbJoueurs = document.getElementsByClassName("player").length - document.getElementsByClassName("inactif").length
-        if(nbJoueurs>=12){
-            nbEquipe=3;
-        }else{
-            nbEquipe=2
-        }
-        document.getElementById('btNbEquipes').setAttribute("nb",nbEquipe);
-        console.log(nbJoueurs + " JOUEURS : " + nbEquipe + " equipes !")
-    }
-    RANDOM(nbEquipe);
-
-    document.getElementById('loading-spinner-mask').classList.add('invisible');
-
-}
 
 function changeBtForceDisposition(nbEquipe) {
 
@@ -356,11 +348,11 @@ function RANDOM(nbEquipe) {
     if(equipe3.children.length){
         $("#div3").show();
         $("#containerEquipes").css({"display":"grid"})
-        $(".teamContainer").css({"width":"100%"})
+        $(".equipe").css({"width":"100%"})
     }else{
         $("#div3").hide();
         $("#containerEquipes").css({"display":"flex"})
-        $(".teamContainer").css({"width":"49%"})
+        $(".equipe").css({"width":"49%"})
     }
 
     var j = {}
@@ -636,7 +628,8 @@ function unselect_(player){
     $(player).removeClass("selected"); //déselectionne
     $("#textEchange").slideUp()
     $("#cible").remove();
-    $(".player").css("border","none")
+    // $(".player").css("border","none")
+    $(".player").removeClass("remplacant")
 }
 
 

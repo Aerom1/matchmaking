@@ -1,8 +1,8 @@
-button:active {
+/* button:active { */
 /* animation: bounce-in .3s linear; */
 /* transform: rotate(1080deg); */
-animation: zoom 0.3s linear ;
-}
+/* animation: zoom 0.3s linear ; */
+/* } */
 
 #btRandom {
   animation-name: tourne;

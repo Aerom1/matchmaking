@@ -12,8 +12,8 @@
     border-radius: 500px;
     cursor: pointer;
     box-shadow: 7px 7px 15px rgb(55 84 170 / 23%), -7px -7px 20px rgb(255 255 255), inset 0px 0px 4px rgb(255 255 255 / 20%), inset 7px 7px 15px rgb(0 0 0 / 0%), inset -7px -7px 20px rgb(255 255 255 / 0%), 0px 0px 4px rgb(0 0 0 / 27%);
-    width: 70px;
-    height: 70px;
+    /* width: 50px; */
+    /* height: 50px; */
 }
 
 .menuP {
@@ -58,46 +58,45 @@
 .menuP.open .sbutton {
     opacity: 1;
     pointer-events: auto;
+    left: -20px;
 }
+
 /* .menuP.open .sbutton:nth-of-type(2) { */
-/* .menuP.open #btzoomplus {
-    left: 120%;
+    /* .menuP.open #btzoomplus {
+        left: 120%;
     top: 0;
     background: url("../img/svg/zoom-out.svg") no-repeat 50%/50% #24f1f1;
 } */
 
 /* .menuP.open .sbutton:first-of-type { */
 .menuP.open #btfullscreen {
-    left: 0;
-    top: -130%;
+    top: calc(-1em - var(--ecart-buttons));
     background: url("../img/svg/fullscreen.svg") no-repeat 50%/ 50% #e8e8f3;
-    transition-delay: 0.05s;
+    transition-delay: 0s;
 }
-/* .menuP.open .sbutton:nth-of-type(3) { */
+/* .menuP.open .sbutton:nth-of-type(2) { */
 .menuP.open #btzoom {
-    left: 0;
-    top: -250%;
+    top: calc(-1em - calc(var(--ecart-buttons)*2));    /* top: -190px; */
     background: url("../img/svg/zoom-in.svg") no-repeat 50%/ 50% #e8e8f3;
     transition-delay: 0.05s;
 }
-/* .menuP.open .sbutton:nth-of-type(4) { */
+/* .menuP.open .sbutton:nth-of-type(3) { */
 .menuP.open #btchangeteam {
-    left: 0;
-    top: -370%;
+    top: calc(-1em - calc(var(--ecart-buttons)*3));    /* top: -280px; */
     background: url("../img/svg/team.svg") no-repeat 50%/ 50% #e8e8f3;
-    transition-delay: 0.05s;
+    transition-delay: 0.1s;
 }
 /* .menuP.open .sbutton:last-of-type { */
 .menuP.open #btsettings {
-    left: 0;
-    top: -490%;
+    top: calc(-1em - calc(var(--ecart-buttons)*4));/* top: -370px; */
     background: url("../img/svg/gear-solid.svg") no-repeat 50% 45%/50% 45% #e8e8f3;
-    transition-delay: 0.1s;
+    transition-delay: 0.15s;
 }
 
 .sbutton {
+    --ecart-buttons: 5em;
     /* padding: 30px; */
-    border-radius: 50%;
+    border-radius: var(--ecart-buttons);
     cursor: pointer;
     background: #e8e8f3;
     position: absolute;
@@ -112,7 +111,7 @@
     height: 70px;
 }
 .sbutton:hover {
-    transform: scale(1.1);
+    transform: scale(1.2);
     animation: rotate 1.5s linear infinite;
 }
 
@@ -121,6 +120,7 @@
     content:"Plein écran";
     right: 130%;
     top: 10px;
+    /* top: calc( var(--ecart-buttons) / 7); */
     position: absolute;
     width: max-content;
     background-color: #e8e8f3;
