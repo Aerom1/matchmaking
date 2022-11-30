@@ -81,11 +81,14 @@ html, .fullscreen {
   /* overflow: auto; */
   /* display: flex; */
   padding: 10px;
-  border: 1px solid lightgray;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
   box-sizing: border-box;
   /* justify-content: space-between; */
   /* align-content: stretch; */
   z-index: 1;
+  /* background-color: rgb(255 255 255); */
+  box-shadow: inset rgba(255,255,255,0.1) 0px 0px 10px 10px;
 }
 
 #containerEquipes.accueil {

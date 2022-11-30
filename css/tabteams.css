@@ -39,10 +39,10 @@
     margin: auto;
 }
 #tabteam header {
-    --start: 35%;
+    --start: 22%;
     height: 10vh;
-    background-image: repeating-radial-gradient(circle at var(--start), #00000085 0%, #00000047 10%, #3333338a 10%, rgba(28, 28, 28, 0.33) 17%), linear-gradient(to right, #4e4e4e, #3330);
-    color: #fff;
+    background-image: repeating-radial-gradient(circle at var(--start), #ffffff85 0%, #ffffff36 10%, #879d888a 10%, rgb(214 214 214 / 16%) 17%), linear-gradient(to right, #ffffff, #cdb6b642);
+    color: #3f3f3f;
     position: relative;
     border-radius: 12px 12px 0 0;
     overflow: hidden;
@@ -61,7 +61,7 @@
     display: block;
 }
 #tabteam header .tabteam__title--top {
-    font-size: 24px;
+    font-size: 17px;
     font-weight: 700;
     letter-spacing: 5.5px;
 }
@@ -75,17 +75,17 @@
 
 #tabteam #createTeam{
     position: absolute;
-    right: 0px;
+    left: 0px;
     bottom: 0px;
     width: 20%;
     height: 33px;
     padding: 0 10px;
-    color: #18979e;
+    color: #545454;
     /* transform: scale(1.5); */
     /* translate: 15px 15px; */
-    background: linear-gradient(178deg, #898989,#d3d3dd);
+    background: linear-gradient(178deg, #d3d3dd, transparent);
     box-shadow: 0 0 10px rgb(0, 0, 0, 1);
-    border-radius: 100px 0 0 0;
+    border-radius: 0 100px 0 0;
     font-family: verdana;
     font-size: 28px;
     text-decoration: none;
@@ -112,10 +112,15 @@
     /* transform: translateY(-50px); */
     position: absolute;
     right: 0;
-    padding: 10px;
+    padding: 2px;
     /* color: transparent; */
     /* text-shadow: 0 0 white; */
     z-index: 1;
+    border: 1px solid lightgray;
+    border-radius: 100px;
+    margin: 5px;
+    background-color: #ffffff66;
+    box-shadow: 0 0px 15px 5px #00000066;
 }
 #tabteam .tabteam__fav{
     /* width:20px; */
@@ -132,7 +137,7 @@
     transform: translate(-50%, -50%);
 }
 .tabteam__profiles {
-    background-color: #d3d3dd;
+    background-color: #ffffff88;
     border-radius: 0 0 12px 12px;
     padding: 15px 15px 20px;
     display: grid;
@@ -152,7 +157,7 @@
     box-shadow: 0 5px 7px -1px rgb(0 0 0 / 44%);
     cursor: pointer;
     transition: transform 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98), box-shadow 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98);
-    background-color: #eaeaf2;
+    background-color: #ffffff87;
     height: 40px;
 }
 
@@ -190,11 +195,12 @@
     background-color: white;
 }
 .tabteam__name {
-    color: #1cc7d0;
+    color: #000000;
     font-weight: 600;
     font-size: 17px;
     letter-spacing: 0.64px;
     margin-left: 12px;
+    font-family: "Audiowide";
 }
 .tabteam__value {
     color: #2aad8a;
