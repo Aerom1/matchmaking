@@ -1,12 +1,11 @@
 HOCKEY
 
-OK	- positionnement et animation des boutons menu (btBack,btRandom,btNbequipes)
-OK	- répa croix du menupop, et passage en rouge (juste la croix)
-OK	- répa dragndrop : pointillé qui disparaissait dès que je change de div
-	- passer en admin si on clic dans un endroit caché (titre?)
 	- teamtab : pouvoir ajouter l'equipe en favori
-	- choisir son sport (liste ci-dessous)
-	- a.php : droits utilisateur pour modifier l'équipe
+	- create Team : choisir son sport (voir listes ci-dessous + sublime text)
+	- passer en admin si on clic dans un endroit caché (titre?)
+		> interdire au niveau de la bdd
+		> interdire 
+		> a.php : droits utilisateur pour modifier l'équipe
 	- ajouter un petit mot quand il n'y a aucun joueur
 	- ? faire une interface pour ajouter plusieurs joueurs d'un coup ? ou faire en sorte qu'après l'ajout on propose encore d'ajouter
 	- charger le logo en dernier en cas de connexion lente (tor)
@@ -24,6 +23,9 @@ Parcours utilisateur :
 	par défaut je ne peux rien modifier
 	je dois m'identifier pour modifier
 
+OK	- positionnement et animation des boutons menu (btBack,btRandom,btNbequipes)
+OK	- répa croix du menupop, et passage en rouge (juste la croix)
+OK	- répa dragndrop : pointillé qui disparaissait dès que je change de div
 OK	- remettre la barre de force tout en haut
 OK	- Pouvoir ajouter une équipe depuis tabteam ? (lien vers settings.php ?)
 OK	- bouton de menu : faire une icône burger qui se transforme en croix

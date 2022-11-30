@@ -176,21 +176,25 @@ http://127.0.0.1:8080/matchmaking/index.php
 
 		<!-- BOUTONS  🔙🎲➗  -->
 
-		<div id="containerButton_MenuEquipes">
-			<!--  🔙 BACK 🔄↺ -->
-			<div id="btBack" class="menudeco" onclick="btBack()"></div>
-			<!-- 🎲 RANDOM -->
-			<div id="btRandom" class="menudeco" onclick="btRandom()" style='background: url("img/svg/shuffle.svg") no-repeat 50%/ 50% #e8e8f3;' >	</div> 
-			<!-- ➗ NB ÷ -->
-			<div id="btNbEquipes" class="menudeco" nb=0 onclick="btModifNbEquipes()"></div>
-			<!-- <span class="logo2"></span>	 -->
-		
-			<!--  RANDOM 🎲  🦾🥋🥇🏅🏆⚡-->
-			<!-- <button type="button" id="btForceEquipes" onclick="btRandom()">
-				<span id='icoRandom'>	🎲	</span> 
-			</button> -->
-		</div>
-		
+
+		<div style="position: absolute; left: 50%; bottom: 20px">
+			<div style="position: relative; left: -50%">
+				<div id="containerButton_MenuEquipes">
+					<!--  🔙 BACK 🔄↺ -->
+					<div id="btBack" class="menudeco" onclick="btBack()"></div>
+					<!-- 🎲 RANDOM -->
+					<div id="btRandom" class="menudeco" onclick="btRandom()" style='background: url("img/svg/shuffle.svg") no-repeat 50%/ 50% #e8e8f3;' >	</div> 
+					<!-- ➗ NB ÷ -->
+					<div id="btNbEquipes" class="menudeco" nb=0 onclick="btModifNbEquipes()"></div>
+					<!-- <span class="logo2"></span>	 -->
+				
+					<!--  RANDOM 🎲  🦾🥋🥇🏅🏆⚡-->
+					<!-- <button type="button" id="btForceEquipes" onclick="btRandom()">
+						<span id='icoRandom'>	🎲	</span> 
+					</button> -->
+				</div>
+			</div>
+		</div>		
 	</footer>
 	<!----------------- ASIDE: ZOOM + LOADING SPINNER + TEXT--------------->
 	<aside>

@@ -160,6 +160,8 @@ function btBack(){
     enleveMenu_();
 
     $('#containerButton_MenuEquipes').removeClass('extended')
+    $('#containerForceMenuEquipes').removeClass('animate')
+
     $('header.titre').show();
     // $('#btNbEquipes').hide();
     // $('#btBack').hide();
@@ -274,7 +276,7 @@ function RANDOM(nbEquipe) {
 
     $("#divPlus").remove();
     $("#containerForceMenuEquipes").show();
-    // document.getElementById("#containerForceMenuEquipes").setAttribute('display','flex');
+    document.getElementById('containerForceMenuEquipes').classList.add('animate');
 
     enleveMenu_();
     var dispos = document.getElementById('div0');

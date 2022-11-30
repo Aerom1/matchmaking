@@ -26,10 +26,10 @@ Center without transform = fit-content-> https://levelup.gitconnected.com/dont-u
 
 
 
-html { 
+html {
   /* font-family: "Audiowide", sans-serif; */
   font-family: sans-serif;
-  border: 1px solid lightgray;
+  /* border: 1px solid lightgray; */
 }
 
 html.dark-theme{
@@ -81,8 +81,7 @@ html, .fullscreen {
   /* overflow: auto; */
   /* display: flex; */
   padding: 10px;
-  /* bottom: 130px; */
-  border: 1px solid gray;
+  border: 1px solid lightgray;
   box-sizing: border-box;
   /* justify-content: space-between; */
   /* align-content: stretch; */
@@ -113,7 +112,7 @@ html, .fullscreen {
   flex-wrap: wrap;
   vertical-align:middle;
   text-align: center;
-  border: 1px solid lightgray;
+  /* border: 1px solid lightgray; */
 }
 
 .player {
