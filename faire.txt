@@ -1,4 +1,9 @@
 HOCKEY
+	- Dans CREATE_player.php j'ai ajouté la ligne include "check_connection_or_exit.php"; 
+		si pas connecté, affiche le snackbar "🔒 Vous n'êtes pas connecté"
+		-> Ajouter à tous les fichiers PHP
+		C'est la sécurité ultime, mais déjà il faudrait que je désactive les fonctions 
+		Ensuite, désactiver l'accès aux fonction de l'interface
 
 	- teamtab : pouvoir ajouter l'equipe en favori
 	- create Team : choisir son sport (voir listes ci-dessous + sublime text)
@@ -6,6 +11,18 @@ HOCKEY
 		> interdire au niveau de la bdd
 		> interdire 
 		> a.php : droits utilisateur pour modifier l'équipe
+		une personne doit pouvoir voir/modifier plusieurs équipes
+		
+		compte joueur : peut uniquement voir
+		compte coach : peut voir et modifier
+		
+		est-ce que qqn peut créer un compte ?
+		
+
+		chaque personne à un compte
+		lorsque la personne est ajoutée par le coach
+
+
 	- ajouter un petit mot quand il n'y a aucun joueur
 	- ? faire une interface pour ajouter plusieurs joueurs d'un coup ? ou faire en sorte qu'après l'ajout on propose encore d'ajouter
 	- charger le logo en dernier en cas de connexion lente (tor)

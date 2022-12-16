@@ -3,9 +3,20 @@ http://localhost:8080/matchmaking/index.php
 http://127.0.0.1:8080/matchmaking/index.php
 -->
 
+
 <?php 
 	
 	session_start(); // Start the session to store variable between pages
+
+	require_once "php/auth/authCookieSessionValidate.php";
+	// SOURCE : https://phppot.com/php/secure-remember-me-for-login-using-php-session-and-cookies/ 
+
+	// if(!$isLoggedIn) { header("Location: ./"); }
+	if($isLoggedIn) {
+		echo "<script> snackbar('🤪 Connecté','white',2) </script>";
+	}
+
+
 	include 'php/input.php'; // pour la fonction clean_input qui évite les injections sql
 	include 'php/updateDropdowns.php';
 
@@ -60,13 +71,12 @@ http://127.0.0.1:8080/matchmaking/index.php
 	<link rel="stylesheet" href="css\style.css">
 	<link rel="stylesheet" href="css\header.css">
 	<link rel="stylesheet" href="css/footer.css">
-	<link rel="stylesheet" href="css\menu.css">
+	<link rel="stylesheet" href="css\menujoueur.css">
 	<link rel="stylesheet" href="css\animations.css">
 	<link rel="stylesheet" href="css\snackbar.css">
 	<link rel="stylesheet" href="css\zoom.css">
 	<link rel="stylesheet" href="css\loading.css">
-	<!-- <link rel="stylesheet" href="css\burger.css"> -->
-	<link rel="stylesheet" href="css\burger2.css">
+	<link rel="stylesheet" href="css\menuburger.css">
 	<link rel="stylesheet" href="css\menupop.css">
 	<link rel="stylesheet" href="css\tabteams.css">
 	<!-- <link rel="stylesheet" href="css\rotatingborder.css"> -->
@@ -113,6 +123,14 @@ http://127.0.0.1:8080/matchmaking/index.php
 		</div>
 
 	<!----------------- EQUIPES --------------->
+	<article>
+		<div id='containerForceMenuEquipes'>
+			<div id="forceEq1" class="forceEquipe" ></div>
+			<div id="forceEq3" class="forceEquipe" ></div>
+			<div id="forceEq2" class="forceEquipe" ></div>
+		</div>
+	</article>
+	
 	<section>
 		<div id ="containerEquipes" class="accueil">
 			<div id="div0" class="equipe"></div>
@@ -123,13 +141,7 @@ http://127.0.0.1:8080/matchmaking/index.php
 		</div>
 	</section>
 
-	<article>
-		<div id='containerForceMenuEquipes'>
-			<div id="forceEq1" class="forceEquipe" ></div>
-			<div id="forceEq3" class="forceEquipe" ></div>
-			<div id="forceEq2" class="forceEquipe" ></div>
-		</div>
-	</article>
+
 
 	<!-- https://codepen.io/Markshall/pen/ZEQBKpb?editors=1100 -->
 	<article id="tabteam_wrapper">
@@ -154,31 +166,32 @@ http://127.0.0.1:8080/matchmaking/index.php
 		<!-- document.getElementById('menu1').classList.remove('open') -->
 		<!-- https://codepen.io/barhatsor/pen/YzwxaQV?editors=1100	 -->
 
-		<!-- <input type="checkbox" id="active">
-		<label for="active" id="btchangeteam" class="sbutton menu-btn menudeco"></label>	
-		<div id="menu2wrapper" class="wrapper">
-			<ul><!?php echo displayTeams2($all_teams); ?></ul>
-		</div> -->
-
 		<input type="checkbox" id="burger-toggle">
 		<label for="burger-toggle" id="menu1" class="menuP menudeco burger-menu" onclick="this.classList.toggle('open')">
 		<!-- <div id="menu1" class="menuP menudeco burger-menu" onclick="this.classList.toggle('open')"> -->
 			<div class="line"></div>
 			<div class="line"></div>
 			<div class="line"></div>
+			<div class="background" onclick="document.getElementById('menu1').classList.toggle('open')"></div>
 			<div class="sbutton" id="btfullscreen" onclick="toggleFullscreen()"></div>
 			<!-- <label for="active" id="btchangeteam" class="sbutton"></label>	 -->
 			<div class="sbutton" id="btzoom" onclick='showZoom()'></div>
 			<div class="sbutton" id="btchangeteam" onclick="openTabteam()"></div>
 			<div class="sbutton" id="btsettings" onclick="openPageSettings()"></div>
+
+			<?php if($isLoggedIn) { ?>
+				<div class="sbutton connected" id="btlogin" onclick="logout()"></div>
+			<?php } else { ?>
+				<div class="sbutton disconnected" id="btlogin" onclick="openPageLogin()"></div>
+			<?php } ?>
 		</label>
 		
 
 		<!-- BOUTONS  🔙🎲➗  -->
 
 
-		<div style="position: absolute; left: 50%; bottom: 20px">
-			<div style="position: relative; left: -50%">
+		<div id="containerButton_MenuEquipes_container">
+			<!-- <div style="position: relative; left: -50%"> -->
 				<div id="containerButton_MenuEquipes">
 					<!--  🔙 BACK 🔄↺ -->
 					<div id="btBack" class="menudeco" onclick="btBack()"></div>
@@ -193,7 +206,7 @@ http://127.0.0.1:8080/matchmaking/index.php
 						<span id='icoRandom'>	🎲	</span> 
 					</button> -->
 				</div>
-			</div>
+			<!-- </div> -->
 		</div>		
 	</footer>
 	<!----------------- ASIDE: ZOOM + LOADING SPINNER + TEXT--------------->
@@ -254,6 +267,16 @@ http://127.0.0.1:8080/matchmaking/index.php
 			document.getElementById('loading-spinner-mask').classList.remove('invisible');
 			window.open('settings.php','_self');
 		}
+
+		function openPageLogin() {
+			document.getElementById('loading-spinner-mask').classList.remove('invisible');
+			window.open('php/auth/login.php','_self');
+		}
+		function logout(){
+			document.getElementById('loading-spinner-mask').classList.remove('invisible');
+			window.open('php/auth/logout.php','_self');
+		}
+
 		function openPageSettings_CreateTeam() {
 			var name = prompt("Nom de la nouvelle équipe ?")
 			if (name == "" || name == null) { return }

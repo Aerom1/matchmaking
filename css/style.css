@@ -12,17 +12,6 @@ CSS Image Centering – How to Center an Image in a Div : https://www.freecodeca
 Center without transform = fit-content-> https://levelup.gitconnected.com/dont-use-transform-to-center-element-b378587ad1db
 */
 
-/* AFFICHAGE PORTRAIT */
-@media screen and (min-height: 480px) {
-}
-
-/* AFFICHAGE PAYSAGE */
-@media screen and (max-height: 480px) {
-}
-
-/* Affichage PC ? */
-@media screen and (min-width: 800px) {
-}
 
 
 
@@ -50,6 +39,7 @@ html, .fullscreen {
   min-height:100%; */
   margin:0 auto;
   /* position:relative; */
+  /* background-color: aqua; */
 }
 
 .invisible {
@@ -81,8 +71,8 @@ html, .fullscreen {
   /* overflow: auto; */
   /* display: flex; */
   padding: 10px;
-  border-top: 1px solid lightgray;
-  border-bottom: 1px solid lightgray;
+  /* border-top: 1px solid lightgray; */
+  /* border-bottom: 1px solid lightgray; */
   box-sizing: border-box;
   /* justify-content: space-between; */
   /* align-content: stretch; */
@@ -122,7 +112,7 @@ html, .fullscreen {
   animation: bounce-in .3s linear;
   /* text-align: left; */
   padding:2px;
-  max-height: 20vh;
+  /* max-height: 20vh; */
   border-radius: 20px;
   overflow: hidden;
   flex-grow: 1;
@@ -309,4 +299,32 @@ div.span {
   width: 6vh;
   height: 6vh;
   border: 1px solid;
+}
+
+
+
+/* AFFICHAGE PORTRAIT */
+@media screen and (min-height: 480px) {
+}
+
+/* AFFICHAGE PAYSAGE */
+@media screen and (max-height: 480px) {
+
+
+  #containerEquipes.accueil{
+    top: 0;
+    /* bottom: 0; */
+    right: 50px;
+  }
+  #containerEquipes.equipes{
+    top: 5px;
+    bottom: 5px;
+    right: 53px;
+    left: 15px;
+  }
+
+}
+
+/* Affichage PC ? */
+@media screen and (min-width: 800px) {
 }

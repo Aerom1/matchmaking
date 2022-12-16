@@ -1,5 +1,9 @@
 /* ======= PreLoader CSS Start  ========*/
 
+
+/* OTHER LOADING SPINNERS : https://codepen.io/rajatkantinandi/pen/vdxzaV */
+
+
 /* 
 /*=== mask === */
 /*-- This code is for mask over all web content which will be 
@@ -12,7 +16,7 @@ fade out when your webpage get loaded.
   right: 0;
   bottom: 0;
   /* you can change color of mask here*/
-  background: linear-gradient(0deg, transparent, transparent, white, transparent,transparent);
+  /* background: linear-gradient(0deg, transparent, transparent, white, transparent,transparent); */
   z-index: 99;
   /* makes sure it stays on top */
 }c:\Users\romai\AppData\Local\Programs\Microsoft VS Code\resources\app\out\vs\code\electron-sandbox\workbench\workbench.html
@@ -46,7 +50,8 @@ fade out when your webpage get loaded.
   /* box-shadow: 0 0 10px #d62d20; */
   border-radius: 50%;
   -webkit-animation: spinner6 .5s linear infinite;
-  animation: spinner6 .5s linear infinite;
+  animation: spinner6 1s linear infinite;
+  /* box-shadow: 0 0 40px 5px white, inset 0 0 25px 5px white; */
 }
 
 #spinner6:after {

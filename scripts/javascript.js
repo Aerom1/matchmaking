@@ -381,17 +381,20 @@ function creerMenu(name, menu, force=0) {
         btClose.setAttribute("id", "btCloseMenu");
         btClose.setAttribute("onclick", "this.parentNode.remove()");
         menuContainer.append(btClose);
+
+
+    var labelXP = document.createElement('span')
+        labelXP.id = 'labelModifXP';
+        labelXP.innerText = '💡 Choisissez la force du joueur'
+        menuContainer.append(labelXP)
+
     var nom = document.createElement("button")       // AFFICHAGE NOM
         nom.innerText = name;
         nom.setAttribute("id", "btModifNom");
         menuContainer.append(nom);
  
-    if (menu == 'addplayer' || menu == 'modifplayer') {
+    // if (menu == 'addplayer' || menu == 'modifplayer') {
 
-        var labelXP = document.createElement('span')
-            labelXP.id = 'labelModifXP';
-            labelXP.innerText = '💡 Choisissez la force du joueur'
-            menuContainer.append(labelXP)
 
         var frameXP = document.createElement("div");
             frameXP.setAttribute("id", "frameBtXp");
@@ -428,7 +431,7 @@ function creerMenu(name, menu, force=0) {
                 btsupr.setAttribute("onclick", "supprPlayer(this)")
                 menuContainer.append(btsupr)
         }
-    }
+    // }
 
     // <><><><><><><><><><><><><><><><><><>   ON-CLICK   <><><><><><><><><><><><><><><><><><>
 

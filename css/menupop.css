@@ -1,10 +1,4 @@
-/* html {
-    background: #e8e8f3;
-    height: 100vh;
-    display: grid;
-    place-content: center;
-    -webkit-tap-highlight-color: transparent;
-} */
+
 
 .menudeco {
     /* padding: 21px; */
@@ -21,10 +15,6 @@
     position: fixed;
     bottom: 20px;
     right: 20px;
-    /* position:fixed; */
-    /* position: absolute; */
-    /* bottom: 70px; */
-    /* right:50px; */
 }
 /* .menuP.open {
     opacity: 0.9;
@@ -58,7 +48,7 @@
 .menuP.open .sbutton {
     opacity: 1;
     pointer-events: auto;
-    left: -20px;
+    /* left: -20px; */
 }
 
 /* .menuP.open .sbutton:nth-of-type(2) { */
@@ -92,6 +82,13 @@
     background: url("../img/svg/gear-solid.svg") no-repeat 50% 45%/50% 45% #e8e8f3;
     transition-delay: 0.15s;
 }
+.menuP.open #btlogin {
+    top: calc(-1em - calc(var(--ecart-buttons)*5));
+    /* top: -370px; */
+    transition-delay: 0.20s;
+}
+.menuP.open #btlogin.connected {        background: url("../img/svg/cadenas_opened.svg") no-repeat 50% 45%/50% 45% #e8e8f3;}
+.menuP.open #btlogin.disconnected {     background: url("../img/svg/cadenas_closed.svg") no-repeat 50% 45%/50% 45% #e8e8f3;}
 
 .sbutton {
     --ecart-buttons: 5em;
@@ -162,6 +159,34 @@
     box-shadow: rgb(0 0 0 / 40%) 0px 2px 4px 0px, rgb(0 0 0 / 30%) 0px 7px 13px -3px;
     padding: 15px;
 }
+.menuP.open #btlogin.connected::before {    content:"Déconnecter"; }
+.menuP.open #btlogin.disconnected::before { content:"S'identifier"; }
+.menuP.open #btlogin::before {
+    right: 130%;
+    top: 10px;
+    position: absolute;
+    width: max-content;
+    background-color: #e8e8f3;
+    border-radius: 20px;
+    box-shadow: rgb(0 0 0 / 40%) 0px 2px 4px 0px, rgb(0 0 0 / 30%) 0px 7px 13px -3px;
+    padding: 15px;
+}
+
+
+#menu1.open .background{
+    z-index: -23;
+    position:absolute;
+    /* left: 0; */
+    right: -1000px;
+    /* top: 0; */
+    bottom: -1000px;
+    width: 10000px;
+    height: 10000px;
+    background-color: rgba(0, 0, 0, 0.505);
+    content: "";
+    border:100px solid yellow;
+}
+
 
 @keyframes rotate {
     0%{
@@ -171,4 +196,39 @@
       filter: hue-rotate(360deg);
     }
   }
-  
+
+
+
+/* AFFICHAGE PAYSAGE */
+@media screen and (max-height: 480px) {
+    .menuP.open #btfullscreen {  left:none; right: 100px; top: calc(var(--ecart-buttons)*1);      }
+    .menuP.open #btzoom {        left:none; right: 100px; top: calc(var(--ecart-buttons)*2);}
+    .menuP.open #btchangeteam {  left:none; right: 100px; top: calc(var(--ecart-buttons)*3);      }
+    .menuP.open #btsettings {    left:none; right: 100px; top: calc(var(--ecart-buttons)*4);      }
+    .menuP.open #btlogin {       left:none; right: 100px; top: calc(var(--ecart-buttons)*5);      }
+
+    .sbutton {
+        --ecart-buttons: 3.2em;
+        /* padding: 30px; */
+        border-radius: var(--ecart-buttons);
+        cursor: pointer;
+        background: #e8e8f3;
+        position: absolute;
+        top: 0;
+        right: 0;
+        opacity: 0;
+        pointer-events: none;
+        /* box-shadow: inherit; */
+        box-shadow: rgb(0 0 0 / 40%) 0px 2px 4px 0px, rgb(0 0 0 / 30%) 0px 7px 13px -3px, rgb(0 0 0 / 17%) 0px -2px 25px 0px inset, rgb(0 0 0 / 20%) 0px -3px 1px 0px inset;
+        transition: 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28), 0.2s ease opacity, 0.2s cubic-bezier(0.08, 0.82, 0.17, 1) transform;
+        width: 70px;
+        height: 70px;
+    }
+    #menu1{
+        top: 0px;
+        right: 0px;
+        border-radius: 0 0 0 24px;
+      }
+
+
+  }

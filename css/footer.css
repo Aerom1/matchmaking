@@ -1,12 +1,6 @@
 /*  BOUTONS DE BAS DE PAGE : */
 
-/* AFFICHAGE PORTRAIT */
-@media screen and (min-height: 480px) {
-}
 
-/* AFFICHAGE PAYSAGE */
-@media screen and (max-height: 480px) {
-}
 
 #containerForceMenuEquipes.animate{
   opacity: 0.8;
@@ -35,6 +29,7 @@
   transform: rotateX(90deg) translateY(-245px);
   transition: 1s transform ease-out 1s, 1s opacity ease-out 1s, 1s box-shadow ease-out 1s;
   box-shadow: rgb(22 31 39 / 82%) 1px 5px 16px 0px, rgb(0 0 0 / 50%) 0px 20px 20px 20px;
+  z-index: 2;
 }
 
 
@@ -102,8 +97,15 @@
 #btRandom, #btForceEquipes  {grid-column: 2;}
 #btNbEquipes, #btSettings   {  grid-column: 3;  } */
 
+#containerButton_MenuEquipes_container {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+} 
 
 #containerButton_MenuEquipes {
+  position: relative;
+  left: -50%;
   /* position: fixed; */
   /* bottom: 20px; */
   /* left: 0; */
@@ -113,11 +115,12 @@
   display: grid;
   /* gap: 0; */
   /* grid-auto-columns: auto auto auto; */
-  /* justify-content: center; */
-  /* justify-items: stretch; */
-  /* align-items: center; */
+  justify-content: center;
+  justify-items: stretch;
   box-shadow: 7px 7px 15px rgb(55 84 170 / 23%), -7px -7px 20px rgb(255 255 255), inset 0px 0px 4px rgb(255 255 255 / 20%), inset 7px 7px 15px rgb(0 0 0 / 0%), inset -7px -7px 20px rgb(255 255 255 / 0%), 0px 0px 4px rgb(0 0 0 / 27%);
   border-radius: 100px;
+  align-items: center;
+  /* grid-auto-flow: column; */
 }
 
 #btBack, #btNbEquipes, #btRandom {
@@ -220,3 +223,49 @@
   overflow: hidden;
 }
 
+
+/* AFFICHAGE PORTRAIT */
+@media screen and (min-height: 480px) {
+}
+
+/* AFFICHAGE PAYSAGE */
+@media screen and (max-height: 480px) {
+  
+  #containerEquipes.accueil{
+    top: 0;
+    bottom: 0;
+    right: 50px;
+  }
+  #containerButton_MenuEquipes_container {
+  right: 0px;
+  /* bottom: 54px; */
+  width: 50px;
+  left: auto;
+  }
+  #containerButton_MenuEquipes {
+    top: 0px;
+    position: relative;
+    left: auto;
+    display: block;
+    border-radius: 100px 0 0 100px;
+  }
+  #btRandom{
+    width: 50px;
+    height: 50px;
+  }
+  #btBack {
+    border-radius: 100px 0 0 0;
+  }
+  #btNbEquipes {
+    border-radius: 0 0 0 100px;
+  }
+  #containerButton_MenuEquipes.extended #btRandom {
+    width: 60px;
+  }
+  #containerForceMenuEquipes{
+    top: auto;
+    border-radius: 100px 100px 0 0;
+    bottom: 0px;
+  }
+
+}

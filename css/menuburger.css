@@ -37,7 +37,7 @@
 }
  #burger-toggle:checked ~ .burger-menu .line::after {
 	 transform: translateX(0);
-	 background: rgb(0 0 255/ 65%);
+	 background: rgb(45, 45, 45);
 }
  #burger-toggle:checked ~ .burger-menu .line:nth-child(1) {
 	 transform: translateY(calc(var(--burger-menu-radius) / 5)) rotate(45deg);
@@ -65,7 +65,7 @@
 	 left: 25%;
 	 width: 50%;
 	 height: 3px;
-	 background: rgba(43, 61, 79, 0.3);
+	 background: rgb(43 61 79 / 75%);
 	 border-radius: 10px;
 	 overflow: hidden;
 	 transition: 0.5s;
