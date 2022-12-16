@@ -173,7 +173,7 @@
 }
 
 
-#menu1.open .background{
+.menuP.open .background{
     z-index: -23;
     position:absolute;
     /* left: 0; */
@@ -224,7 +224,7 @@
         width: 70px;
         height: 70px;
     }
-    #menu1{
+    .menuP{
         top: 0px;
         right: 0px;
         border-radius: 0 0 0 24px;

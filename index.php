@@ -172,7 +172,7 @@ http://127.0.0.1:8080/matchmaking/index.php
 			<div class="line"></div>
 			<div class="line"></div>
 			<div class="line"></div>
-			<div class="background" onclick="document.getElementById('menu1').classList.toggle('open')"></div>
+			<div class="background" onclick="document.getElementById('burger-toggle').classList.toggle('open')"></div>
 			<div class="sbutton" id="btfullscreen" onclick="toggleFullscreen()"></div>
 			<!-- <label for="active" id="btchangeteam" class="sbutton"></label>	 -->
 			<div class="sbutton" id="btzoom" onclick='showZoom()'></div>
