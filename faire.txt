@@ -1,4 +1,5 @@
 HOCKEY
+	- résoudre problème de fluidité des animations css sur mobile
 	- Dans CREATE_player.php j'ai ajouté la ligne include "check_connection_or_exit.php"; 
 		si pas connecté, affiche le snackbar "🔒 Vous n'êtes pas connecté"
 		-> Ajouter à tous les fichiers PHP

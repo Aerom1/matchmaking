@@ -180,7 +180,7 @@ if (! empty($_POST["login"])) {
                                 <label class="form-check-label" for="form2Example3">
                                 Un jour je paierai une bière à Romain 🤗
                                 </label>
-                            </div> --><<
+                            </div> -->
 
                             <div class="d-flex flex-row align-items-center mb-3">
                                 <div class="text-center form-outline flex-fill mx-2">

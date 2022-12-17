@@ -134,12 +134,10 @@
   height: 80px;
 }
 #containerButton_MenuEquipes.extended #btBack, #containerButton_MenuEquipes.extended #btNbEquipes{
-  width: 60px;
+  width: 50px;
   transition-delay: 0.1s;
   transition-duration: 500ms;
   transition-timing-function: ease-in;
-
-
 }
 #btBack, #btNbEquipes {
   width: 0;
@@ -260,7 +258,7 @@
     border-radius: 0 0 0 100px;
   }
   #containerButton_MenuEquipes.extended #btRandom {
-    width: 60px;
+    width: 50px;
   }
   #containerForceMenuEquipes{
     top: auto;

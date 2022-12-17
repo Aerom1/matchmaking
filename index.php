@@ -257,7 +257,7 @@ http://127.0.0.1:8080/matchmaking/index.php
 			return false;
 		}
 
-		function clicTitre(e) {	snackbar("🤪","white",2)		}
+		function clicTitre(e) {	snackbar("🤖 Détruire humain","white",2)		}
 		function clicLogo(e) {	
 			// document.getElementById('loading-spinner-mask').classList.remove('invisible');
 			// document.getElementById("formChgTeam").submit();

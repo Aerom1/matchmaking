@@ -12,7 +12,9 @@
 // include "functions.php"; 
 // $conn = connectToDB();
 
-include "check_connection_or_exit.php"; 
+// Désactiver cette ligne pour obliger à s'identifier pour accéder à la BDD
+// include "check_connection_or_exit.php"; 
+
 
 $conn = include 'connectToDB.php';
 include 'input.php'; // pour la fonction clean_input qui évite les injections sql
