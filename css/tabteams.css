@@ -12,16 +12,16 @@
     bottom: 0;
     right: 0;
     left: 0;
-    background-color: #ffffff96;
     z-index: 4;
     overflow-y: scroll;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 #tabteam {
     position: absolute;
-    max-width: 80%;
-    width: -moz-fit-content;
-    width: fit-content;
+    max-width: 93%;
+    /* width: -moz-fit-content; */
+    /* width: fit-content; */
     height: -moz-fit-content;
     height: fit-content;
     border-radius: 12px;
@@ -36,22 +36,26 @@
     left: 0;
     right: 0;
     /* width: fit-content; */
-    margin: auto;
+    margin: auto 30px;
 }
 #tabteam header {
-    --start: 22%;
-    height: 10vh;
-    background-image: repeating-radial-gradient(circle at var(--start), #ffffff85 0%, #ffffff36 10%, #879d888a 10%, rgb(214 214 214 / 16%) 17%), linear-gradient(to right, #ffffff, #cdb6b642);
+    --start: 38%;
+    height: 8vh;
+    background-image: repeating-radial-gradient(circle at var(--start), #ffffff85 -7%, #e8e8f3 7%, #879d880d 14%, rgb(214 214 214 / 22%) 14%), linear-gradient(to right, #e8e8f3 , transparent);
     color: #3f3f3f;
     position: relative;
     border-radius: 12px 12px 0 0;
-    overflow: hidden;
+    /* overflow: hidden; */
+    text-align: end;
 }
+
+
+
 #tabteam header .tabteam__title {
     position: absolute;
     z-index: 2;
     top: 50%;
-    right: calc(var(--start) * .75);
+    left: calc(var(--start) * 0.2);
     transform: translateY(-50%);
     text-transform: uppercase;
     margin: 0;
@@ -73,16 +77,26 @@
     transform: translateY(0px);
 }
 
-#tabteam #createTeam{
-    position: absolute;
+
+
+#tabteam header img {
+    padding: 5px;
+    /* z-index: 1; */
+    border: 1px solid lightgray;
+    border-radius: 100px;
+    margin: 1vh;
+    background-color: #ffffff66;
+    box-shadow: 0 0px 15px 5px #00000066;
+    width: 4.5vh;
+    min-width: 20px;
+
+    /* position: absolute;
     left: 0px;
     bottom: 0px;
     width: 20%;
     height: 33px;
     padding: 0 10px;
     color: #545454;
-    /* transform: scale(1.5); */
-    /* translate: 15px 15px; */
     background: linear-gradient(178deg, #d3d3dd, transparent);
     box-shadow: 0 0 10px rgb(0, 0, 0, 1);
     border-radius: 0 100px 0 0;
@@ -94,34 +108,15 @@
         transform 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98), 
         width 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98);
     cursor: pointer;
-    text-align: center;
+    text-align: center; */
 }
 
-#tabteam #createTeam:hover{
-    /* color: red; */
-    width: 100px;
-    /* transform: scale(1.2); */
-    /* transition: 2s; */
-    font-weight: bolder;
-}
+/* #tabteam header .tabteam__close {} */
+/* #tabteam header .tabteam__create{} */
+/* #tabteam header .tabteam__create:hover{    width: 100px;    font-weight: bolder;} */
 
-#tabteam header .tabteam__close {
-    /* font-size: 13px; */
-    /* font-weight: 500; */
-    /* letter-spacing: 3.55px; */
-    /* transform: translateY(-50px); */
-    position: absolute;
-    right: 0;
-    padding: 2px;
-    /* color: transparent; */
-    /* text-shadow: 0 0 white; */
-    z-index: 1;
-    border: 1px solid lightgray;
-    border-radius: 100px;
-    margin: 5px;
-    background-color: #ffffff66;
-    box-shadow: 0 0px 15px 5px #00000066;
-}
+
+
 #tabteam .tabteam__fav{
     /* width:20px; */
     height: 30px;
@@ -137,7 +132,7 @@
     transform: translate(-50%, -50%);
 }
 .tabteam__profiles {
-    background-color: #ffffff88;
+    background-color: #e8e8f3;
     border-radius: 0 0 12px 12px;
     padding: 15px 15px 20px;
     display: grid;
@@ -190,12 +185,12 @@
     max-width: 100%;
     width: 40px;
     border-radius: 50%;
-    box-shadow: 0 0 0 3px #3d3f43, 0 0 0 6px #61666c;
+    box-shadow: 0 0 0 3px #5c010191, 0 0 0 6px #efd1d1;
     max-height: 40px;
     background-color: white;
 }
 .tabteam__name {
-    color: #000000;
+    color: #a82929;
     font-weight: 600;
     font-size: 17px;
     letter-spacing: 0.64px;
@@ -227,4 +222,5 @@
 #tabteam {
     box-shadow: 0px 3px 20px 5px rgb(0 0 0 / 50%);
     /* border: 4px solid #e8e8f3; */
+    background-color: #fff;
 }

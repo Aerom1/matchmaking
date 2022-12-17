@@ -147,9 +147,13 @@ http://127.0.0.1:8080/matchmaking/index.php
 	<article id="tabteam_wrapper">
 		<section id="tabteam">
 		<header>
+			<img class="tabteam__create" src="img/svg/plus.svg" onclick="openPageSettings_CreateTeam()">
+			<!-- <span id="createTeam" onclick="openPageSettings_CreateTeam()">+</span> -->
+			<h1 class="tabteam__title">
+				<span class="tabteam__title--top">Equipes</span>
+				<span class="tabteam__title--bottom">Choisissez</span>
+			</h1>
 			<img class="tabteam__close" src="img/svg/close.svg" onclick="closeTabteam()">
-			<span id="createTeam" onclick="openPageSettings_CreateTeam()">+</span>
-			<h1 class="tabteam__title"><span class="tabteam__title--top">Equipes</span><span class="tabteam__title--bottom">Choisissez</span></h1>
 		</header>
 		<main class="tabteam__profiles">
 			<?php echo displayTeams3($all_teams); ?>

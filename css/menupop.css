@@ -10,6 +10,11 @@
     /* height: 50px; */
 }
 
+
+html.dark-theme .menudeco{
+    box-shadow: none;
+}
+
 .menuP {
     z-index: 3;
     position: fixed;
@@ -187,7 +192,7 @@
     bottom: -1000px;
     width: 10000px;
     height: 10000px;
-    background-color: rgba(0, 0, 0, 0.505);
+    background-color: rgba(0, 0, 0, 0.5);
     content: "";
     border:100px solid yellow;
 }
