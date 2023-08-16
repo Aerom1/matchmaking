@@ -1,0 +1,65 @@
+    ⚾ Balle de baseball
+    🚣 Personne ramant dans un bateau
+    🏃‍♀️ Coureuse
+    🤸 Personne qui fait la roue
+    🤼 Personnes qui luttent
+    🤽 Personne qui joue au water-polo
+    🤾 Personne qui joue au handball
+    ⛹ Personne Avec Ballon
+    🏀 Ballon de basket
+    🏈 Ballon de football américain
+    🏉 Ballon de rugby
+    🏏 Batte et balle de cricket
+    🏐 Ballon de volley
+    🏑 Crosse et balle de hockey sur gazon
+    🏒 Crosse et palet de hockey sur glace
+    🏸 Raquette de badminton et volant
+    🥅 Cage de but
+    🥌 Pierre de curling
+    🥍 Crosse et balle de crosse
+    🥎 Balle de softball
+    🥏 Disque volant
+    ⚽ Ballon de foot
+    ⛸ Patin à glace
+    🛶 Canoë
+    🤿 Masque de plongée
+
+
+
+    
+    Handball
+    Hockey
+    Rugby
+    Volley-ball
+    Water-polo
+    Baseball
+    Softball
+    Football
+    Basketball
+Balle à la main
+Balle aux prisonniers
+Balle au tamis
+Balle pelote
+Ballon au poing
+Bandy
+    Cricket
+Fistball
+Floorball
+    Football américain
+Football australien
+Football en salle
+Football gaélique
+Kayak-polo
+Kin-ball
+Korfball
+Netball
+    Polo
+Poull-Ball
+Rafroball
+Ringuette
+Roller Derby
+Sepak takraw
+Smolball
+Speed Corner
+Tchoukball
+    Ultimate Frisbee
