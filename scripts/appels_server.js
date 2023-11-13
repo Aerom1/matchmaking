@@ -270,16 +270,17 @@ function DB_CHANGE_player_xp(id, xp) {
 
 function DB_CHANGE_player_inactifs(players) {
 	console.log("==============> DB_CHANGE_player_inactifs");
-	
+
 	fetch('php/CHANGE_player_inactifs.php', {
 		method: 'POST',
 		mode: 'cors',
-		headers: {'Content-type': 'application/x-www-form-urlencoded'},
-		body: formEncode(players),
+		headers: {'Content-Type': 'application/json',},
+		body: JSON.stringify({donneesJoueurs: players}),
+		// body: formEncode(players),
 	})
 	.then(response => response.json())
 	.then(response => {
-		console.log("RESULTAT APPEL SERVEUR MODIF NOM JOUEUR");
+		console.log("RESULTAT APPEL SERVEUR : CHANGE PLAYERS INACTIFS");
 		console.log("DB -> " + response.result)
 		// snackbar_DB(response) // Affichage du pop (snackbar)
 	}).catch(error => console.log(error));

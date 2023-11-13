@@ -21,6 +21,13 @@ html.dark-theme .menudeco{
     bottom: 20px;
     right: 20px;
 }
+
+#btfullscreen {
+    z-index: 3;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+}
 /* .menuP.open {
     opacity: 0.9;
 } */
@@ -63,34 +70,33 @@ html.dark-theme .menudeco{
     background: url("../img/svg/zoom-out.svg") no-repeat 50%/50% #24f1f1;
 } */
 
-/* .menuP.open .sbutton:first-of-type { */
-.menuP.open #btfullscreen {
-    top: calc(-1em - var(--ecart-buttons));
+#btfullscreen {
     background: url("../img/svg/fullscreen.svg") no-repeat 50%/ 50% #e8e8f3;
+}
+
+/* .menuP.open .sbutton:first-of-type { */
+.menuP.open #btzoom {
+    top: calc(-1em - var(--ecart-buttons));    /* top: -190px; */
+    background: url("../img/svg/zoom-in.svg") no-repeat 50%/ 50% #e8e8f3;
     transition-delay: 0s;
 }
 /* .menuP.open .sbutton:nth-of-type(2) { */
-.menuP.open #btzoom {
-    top: calc(-1em - calc(var(--ecart-buttons)*2));    /* top: -190px; */
-    background: url("../img/svg/zoom-in.svg") no-repeat 50%/ 50% #e8e8f3;
+.menuP.open #btchangeteam {
+    top: calc(-1em - calc(var(--ecart-buttons)*2));    /* top: -280px; */
+    background: url("../img/svg/team.svg") no-repeat 50%/ 50% #e8e8f3;
     transition-delay: 0.05s;
 }
 /* .menuP.open .sbutton:nth-of-type(3) { */
-.menuP.open #btchangeteam {
-    top: calc(-1em - calc(var(--ecart-buttons)*3));    /* top: -280px; */
-    background: url("../img/svg/team.svg") no-repeat 50%/ 50% #e8e8f3;
-    transition-delay: 0.1s;
+.menuP.open #btsettings {
+    top: calc(-1em - calc(var(--ecart-buttons)*3));/* top: -370px; */
+    background: url("../img/svg/gear-solid.svg") no-repeat 50% 45%/50% 45% #e8e8f3;
+    transition-delay: 0.10s;
 }
 /* .menuP.open .sbutton:last-of-type { */
-.menuP.open #btsettings {
-    top: calc(-1em - calc(var(--ecart-buttons)*4));/* top: -370px; */
-    background: url("../img/svg/gear-solid.svg") no-repeat 50% 45%/50% 45% #e8e8f3;
-    transition-delay: 0.15s;
-}
 .menuP.open #btlogin {
-    top: calc(-1em - calc(var(--ecart-buttons)*5));
+    top: calc(-1em - calc(var(--ecart-buttons)*4));
     /* top: -370px; */
-    transition-delay: 0.20s;
+    transition-delay: 0.15;
 }
 .menuP.open #btlogin.connected {        background: url("../img/svg/cadenas_opened.svg") no-repeat 50% 45%/50% 45% #e8e8f3;}
 .menuP.open #btlogin.disconnected {     background: url("../img/svg/cadenas_closed.svg") no-repeat 50% 45%/50% 45% #e8e8f3;}
@@ -123,18 +129,6 @@ html.dark-theme .menudeco{
 }
 
 
-.menuP.open #btfullscreen::before {
-    content:"Plein écran";
-    right: 130%;
-    top: 10px;
-    /* top: calc( var(--ecart-buttons) / 7); */
-    position: absolute;
-    width: max-content;
-    background-color: #e8e8f3;
-    border-radius: 20px;
-    box-shadow: rgb(0 0 0 / 40%) 0px 2px 4px 0px, rgb(0 0 0 / 30%) 0px 7px 13px -3px;
-    padding: 15px;
-}
 .menuP.open #btzoom::before {
     content:"Taille des noms";
     right: 130%;
@@ -213,11 +207,10 @@ html.dark-theme .menudeco{
 
 /* AFFICHAGE PAYSAGE */
 @media screen and (max-height: 480px) {
-    .menuP.open #btfullscreen {  left:none; right: 100px; top: calc(var(--ecart-buttons)*1);      }
-    .menuP.open #btzoom {        left:none; right: 100px; top: calc(var(--ecart-buttons)*2);}
-    .menuP.open #btchangeteam {  left:none; right: 100px; top: calc(var(--ecart-buttons)*3);      }
-    .menuP.open #btsettings {    left:none; right: 100px; top: calc(var(--ecart-buttons)*4);      }
-    .menuP.open #btlogin {       left:none; right: 100px; top: calc(var(--ecart-buttons)*5);      }
+    .menuP.open #btzoom {        left:none; right: 100px; top: calc(var(--ecart-buttons)*1);      }
+    .menuP.open #btchangeteam {  left:none; right: 100px; top: calc(var(--ecart-buttons)*2);      }
+    .menuP.open #btsettings {    left:none; right: 100px; top: calc(var(--ecart-buttons)*3);      }
+    .menuP.open #btlogin {       left:none; right: 100px; top: calc(var(--ecart-buttons)*4);      }
 
     .sbutton {
         --ecart-buttons: 3.2em;

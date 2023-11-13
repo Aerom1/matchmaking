@@ -170,6 +170,8 @@ http://127.0.0.1:8080/matchmaking/index.php
 		<!-- document.getElementById('menu1').classList.remove('open') -->
 		<!-- https://codepen.io/barhatsor/pen/YzwxaQV?editors=1100	 -->
 
+		<div class="menudeco burger-menu" id="btfullscreen" onclick="toggleFullscreen()"></div>
+
 		<input type="checkbox" id="burger-toggle">
 		<label for="burger-toggle" id="menu1" class="menuP menudeco burger-menu" onclick="this.classList.toggle('open')">
 		<!-- <div id="menu1" class="menuP menudeco burger-menu" onclick="this.classList.toggle('open')"> -->
@@ -177,7 +179,6 @@ http://127.0.0.1:8080/matchmaking/index.php
 			<div class="line"></div>
 			<div class="line"></div>
 			<div class="background" onclick="document.getElementById('burger-toggle').classList.toggle('open')"></div>
-			<div class="sbutton" id="btfullscreen" onclick="toggleFullscreen()"></div>
 			<!-- <label for="active" id="btchangeteam" class="sbutton"></label>	 -->
 			<div class="sbutton" id="btzoom" onclick='showZoom()'></div>
 			<div class="sbutton" id="btchangeteam" onclick="openTabteam()"></div>
@@ -227,10 +228,10 @@ http://127.0.0.1:8080/matchmaking/index.php
 	<!-- 			 SCRIPTS			   -->
 	<!--===================================-->
 
+	<script src="scripts/appels_server.js"></script>
 	<script src="scripts/javascript.js"></script>
 	<script src="scripts/dragndrop.js"></script>
 	<script src="scripts/DragDropTouch.js"></script>
-	<script src="scripts/appels_server.js"></script>
 	<script src="scripts/burger.js"></script>
 
 	<script>

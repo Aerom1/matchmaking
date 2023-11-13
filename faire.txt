@@ -1,4 +1,10 @@
 HOCKEY
+
+	- Plein écran prend plus de place (pas besoin de l'accès a tous les boutons)
+	OK - Enregistrer le statut de présence/absence entre chaque entraînement.
+	OK - Bouton de plein écran accessible plus facilement (pas dans un sous-menu)
+	OK - Ajout raccourci sur écran d'accueil tél 
+
 	- résoudre problème de fluidité des animations css sur mobile
 	- Dans CREATE_player.php j'ai ajouté la ligne include "check_connection_or_exit.php"; 
 		si pas connecté, affiche le snackbar "🔒 Vous n'êtes pas connecté"

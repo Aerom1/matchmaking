@@ -86,6 +86,8 @@ html, .fullscreen {
   /* margin-top: 2vh; */
   /* margin-bottom: 4vh; */
   /* height: 63vh; */
+  max-width: 800px;
+  margin: auto;
 }
 
 #containerEquipes.equipes {
