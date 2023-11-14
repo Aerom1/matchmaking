@@ -249,8 +249,11 @@ img {
 }
 #div0>.player.inactif{
   color: white;
-  background-color: red;
+  background-color: orange;
 }
+#div0>.player.inactif.ponctuel{  background-color: darkorange; }
+#div0>.player.inactif.regulier{  background-color: orangered; }
+#div0>.player.inactif.habituel{  background-color: red; }
 
 
 #div0>.player.vu{

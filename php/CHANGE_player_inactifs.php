@@ -24,7 +24,8 @@ try{
         $valeur = $conn->real_escape_string($valeur);
 
         // Exécuter la requête SQL de mise à jour
-        $sql = "UPDATE tbplayer SET absent = '$valeur' WHERE id = '$idJoueur'";
+        // $sql = "UPDATE tbplayer SET absent = '$valeur' WHERE id = '$idJoueur'";
+        $sql = "UPDATE tbplayer SET absent = CASE WHEN '$valeur' = '0' THEN '0' ELSE absent + '$valeur' END WHERE id = '$idJoueur'";
 
         if ($conn->query($sql) !== TRUE) {
             // Gestion des erreurs si la mise à jour échoue
@@ -33,6 +34,8 @@ try{
             $result = "Error: $conn->error";
         }
     }    
+
+
 
     $conn->close();
 

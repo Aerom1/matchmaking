@@ -77,7 +77,7 @@ function loadData(team, players){
     console.log(players)
     var logPlayersCreated=[]
     players.forEach( function(player) {
-        logPlayersCreated.push(player.name + " (xp:" + player.xp +")" + (player.absent==1 ? " -> inactif":""))
+        logPlayersCreated.push(player.name + " (xp:" + player.xp +")" + (player.absent>0 ? " -> inactif":""))
         createPlayer_(Number(player.xp), player.name, Number(player.absent), Number(player.id))
     })
     console.log(logPlayersCreated)
@@ -187,11 +187,15 @@ function reinit_() {
     var equipe3 = document.getElementById('div3');
     var absents = document.getElementById('div9');
 
+    // Move all players to dispos
     while (equipe1.children.length) { dispos.appendChild(equipe1.firstChild); }
     while (equipe2.children.length) { dispos.appendChild(equipe2.firstChild); }
     while (equipe3.children.length) { dispos.appendChild(equipe3.firstChild); }
     while (absents.children.length) { dispos.appendChild(absents.firstChild); }
 
+    // Sort players within dispos based on 'abs' tag value
+    sortPlayersByAbs(dispos);
+    
     // Enlever la possibilité de glisser-déposer dans l'accueil
     for (let i = 0; i < dispos.children.length; i++) {
         dispos.children[i].setAttribute('draggable' , '')
@@ -199,6 +203,28 @@ function reinit_() {
     
     majForceEquipes_();
     majNbJoueurs_();
+}
+
+
+function sortPlayersByAbs(container) {
+    var players = Array.from(container.children);
+
+    players.sort(function (a, b) {
+        var absA = parseInt(a.getAttribute('abs')) || 0;
+        var absB = parseInt(b.getAttribute('abs')) || 0;
+
+        return absA - absB;
+    });
+
+    // Remove existing players from the container
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+
+    // Append sorted players to the container
+    players.forEach(function (player) {
+        container.appendChild(player);
+    });
 }
 
 function creerDivPlus_(){
@@ -561,8 +587,18 @@ function createPlayer_(force, name, absent, id) {
         p.setAttribute('id' , id)
         p.setAttribute('force' , force)
         p.setAttribute('name' , name)
+        p.setAttribute('abs' , absent)
         p.classList.add("player");
-        if (absent) { p.classList.add("inactif"); }
+        if (absent) { 
+            p.classList.add("inactif"); 
+            if (absent===1) {
+                p.classList.add("ponctuel"); 
+            } else if (absent<4) {
+                p.classList.add("regulier"); 
+            } else {
+                p.classList.add("habituel"); 
+            }
+        }
     var x = document.createElement('span')
         x.innerText = emo
         x.classList.add('emoforce')
@@ -587,10 +623,12 @@ function clickPlayerName(p){
         // SI ECRAN D'ACCUEIL : le joueur passe actif/inactif
         if (p.classList.contains("inactif")) {
             p.classList.remove('inactif')
+            p.setAttribute('abs' , 0)
             p.parentNode.insertBefore(p, p.parentNode.children[1]); // J'ajoute après le bouton '+'
             
         } else {
             p.classList.add('inactif')
+            p.setAttribute('abs' , 1)
             p.parentNode.appendChild(p);
             
         }

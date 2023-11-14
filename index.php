@@ -40,7 +40,7 @@ http://127.0.0.1:8080/matchmaking/index.php
 	}
 
 	// Récupérer la liste des joueurs de l'équipe
-	$stmt = $conn->prepare("SELECT * FROM tbplayer WHERE team = ?");
+	$stmt = $conn->prepare("SELECT * FROM tbplayer WHERE team = ? ORDER BY absent DESC, name ASC");
 		$stmt->bind_param('i',clean_input($team["id"]));
 		$stmt->execute();
 	$result = $stmt->get_result();

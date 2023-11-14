@@ -1,6 +1,7 @@
 HOCKEY
 
 	- Plein écran prend plus de place (pas besoin de l'accès a tous les boutons)
+	OK - Mettre des nuances de rouge selon la régularité d'absence des joueurs
 	OK - Enregistrer le statut de présence/absence entre chaque entraînement.
 	OK - Bouton de plein écran accessible plus facilement (pas dans un sous-menu)
 	OK - Ajout raccourci sur écran d'accueil tél 
