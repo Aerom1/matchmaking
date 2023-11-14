@@ -199,11 +199,11 @@ http://127.0.0.1:8080/matchmaking/index.php
 			<!-- <div style="position: relative; left: -50%"> -->
 				<div id="containerButton_MenuEquipes">
 					<!--  🔙 BACK 🔄↺ -->
-					<div id="btBack" class="menudeco" onclick="btBack()"></div>
+					<div id="btBack" class="menudeco" onclick="btBack()" style='background: url("../img/svg/back.svg") no-repeat 50%/ 50% #e8e8f3;'></div>
 					<!-- 🎲 RANDOM -->
 					<div id="btRandom" class="menudeco" onclick="btRandom()" style='background: url("img/svg/shuffle.svg") no-repeat 50%/ 50% #e8e8f3;' >	</div> 
 					<!-- ➗ NB ÷ -->
-					<div id="btNbEquipes" class="menudeco" nb=0 onclick="btModifNbEquipes()"></div>
+					<div id="btNbEquipes" class="menudeco" nb=0 onclick="btModifNbEquipes()" style='background: url("../img/svg/divide.svg") no-repeat 50%/ 50% #e8e8f3;'></div>
 					<!-- <span class="logo2"></span>	 -->
 				
 					<!--  RANDOM 🎲  🦾🥋🥇🏅🏆⚡-->

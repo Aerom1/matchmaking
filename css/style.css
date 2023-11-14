@@ -65,6 +65,7 @@ html, .fullscreen {
 
 #containerEquipes{
   position:absolute;
+  top: 5vh;
   bottom: 15vh;
   left: 0;
   right: 0;
@@ -91,7 +92,6 @@ html, .fullscreen {
 }
 
 #containerEquipes.equipes {
-  top: 5vh;
   /* margin-top: 5vh;
   margin-bottom: 2vh; */
   /* height: 67vh; */
@@ -254,6 +254,7 @@ img {
 #div0>.player.inactif.ponctuel{  background-color: darkorange; }
 #div0>.player.inactif.regulier{  background-color: orangered; }
 #div0>.player.inactif.habituel{  background-color: red; }
+#div0>.player.inactif.constant{  background-color: darkred; }
 
 
 #div0>.player.vu{

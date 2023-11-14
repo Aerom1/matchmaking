@@ -132,10 +132,17 @@ function btRandom(){
     document.getElementById('loading-spinner-mask').classList.remove('invisible');
 
     $('header.titre').hide();
-    // $('#btNbEquipes').show();
-    // $('#btBack').show();
+    $('#menu1').hide();
+    $('#btfullscreen').hide();
     $('#containerButton_MenuEquipes').addClass('extended')
 
+    $('#btBack').height(40)
+    $('#btRandom').height(40)
+    $('#btNbEquipes').height(40)
+    $('#containerEquipes').css({'top':'3vh','bottom':'7vh'})
+    $('#containerButton_MenuEquipes_container').css('bottom','7px')
+    
+    
     // indique aux conteneur de joueurs quelle mise en forme prendre
     document.getElementById('containerEquipes').className = 'equipes';   // "accueil","equipes"
     
@@ -158,15 +165,21 @@ function btRandom(){
 function btBack(){
     console.log("bouton BACK")
     enleveMenu_();
-
+    
     $('#containerButton_MenuEquipes').removeClass('extended')
     $('#containerForceMenuEquipes').removeClass('animate')
-
+    
     $('header.titre').show();
-    // $('#btNbEquipes').hide();
-    // $('#btBack').hide();
+    $('#menu1').show();
+    $('#btfullscreen').show();
     $("#containerForceMenuEquipes").hide();
-
+    
+    $('#btBack').height(80)
+    $('#btRandom').height(80)
+    $('#btNbEquipes').height(80)
+    $('#containerEquipes').css({'top':'5vh','bottom':'15vh'})
+    $('#containerButton_MenuEquipes_container').css('bottom','20px')
+    
     // indique aux conteneur de joueurs quelle mise en forme prendre
     document.getElementById('containerEquipes').className = 'accueil';   // "accueil","equipes"
     
@@ -174,6 +187,7 @@ function btBack(){
 
     reinit_();
     creerDivPlus_();
+    toggleFullscreen();
 }
 
 function reinit_() {
@@ -203,6 +217,7 @@ function reinit_() {
     
     majForceEquipes_();
     majNbJoueurs_();
+    toggleFullscreen();
 }
 
 
@@ -595,8 +610,10 @@ function createPlayer_(force, name, absent, id) {
                 p.classList.add("ponctuel"); 
             } else if (absent<4) {
                 p.classList.add("regulier"); 
-            } else {
+            } else if (absent<24) {
                 p.classList.add("habituel"); 
+            } else {
+                p.classList.add("constant"); 
             }
         }
     var x = document.createElement('span')

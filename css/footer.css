@@ -8,7 +8,7 @@
     perspective(110em) 
     rotateX(0deg) 
     translateY(0px);
-  box-shadow: black 0 0 15px 2px;
+  box-shadow: black 0 0 10px 0.5px;
 }
 
 #containerForceMenuEquipes{
@@ -26,7 +26,8 @@
   width: fit-content;
   /* box-shadow: black 0 0 8px 2px; */
   opacity: 0;
-  transform: rotateX(90deg) translateY(-245px);
+  transform: perspective(110em) rotateX(0deg) translateY(-100%);
+  /* transform: rotateX(90deg) translateY(-245px); */
   transition: 1s transform ease-out 1s, 1s opacity ease-out 1s, 1s box-shadow ease-out 1s;
   box-shadow: rgb(22 31 39 / 82%) 1px 5px 16px 0px, rgb(0 0 0 / 50%) 0px 20px 20px 20px;
   z-index: 2;
@@ -130,6 +131,7 @@ html.dark-theme #containerButton_MenuEquipes {
 #btBack, #btNbEquipes, #btRandom {
   height: 80px;
 } 
+
 #containerButton_MenuEquipes.extended #btRandom{
   transition-delay: 0ms;
   transition-duration: 0.2s;
@@ -152,12 +154,10 @@ html.dark-theme #containerButton_MenuEquipes {
 }
 #btBack {
   grid-column: 1;
-  background: url("../img/svg/back.svg") no-repeat 50%/ 50% #e8e8f3;
   border-radius: 100px 0 0 100px;
 }
 #btNbEquipes{
   grid-column: 3;
-  background: url("../img/svg/divide.svg") no-repeat 50%/ 50% #e8e8f3;
   border-radius: 0 100px 100px 0;
 }
 #btRandom {

@@ -96,7 +96,7 @@ html.dark-theme .menudeco{
 .menuP.open #btlogin {
     top: calc(-1em - calc(var(--ecart-buttons)*4));
     /* top: -370px; */
-    transition-delay: 0.15;
+    transition-delay: 0.15s;
 }
 .menuP.open #btlogin.connected {        background: url("../img/svg/cadenas_opened.svg") no-repeat 50% 45%/50% 45% #e8e8f3;}
 .menuP.open #btlogin.disconnected {     background: url("../img/svg/cadenas_closed.svg") no-repeat 50% 45%/50% 45% #e8e8f3;}
